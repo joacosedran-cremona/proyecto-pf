@@ -45,14 +45,14 @@ const opcionesMenu: OpcionMenu[] = [
 const opcionesBotones: OpcionBoton[] = [
     {
         id: 1,
-        path: "/datos_graficos",
-        text: "Cocinas",
+        path: "/cocinas",
+        text: "COCINAS",
         styleClass: "text-orange text-2xl"
     },
     {
         id: 2,
-        path: "/productividad",
-        text: "Enfriadores",
+        path: "/enfriadores",
+        text: "ENFRIADORES",
         styleClass: "text-blue text-2xl"
     },
 ];
@@ -70,7 +70,7 @@ return (
         className="flex flex-row w-full p-20 h-[65px] bg-white"
         >
             <div
-                className="flex flex-row h-full w-[40%] justify-start gap-30"
+                className="flex flex-row h-full w-[25%] justify-start gap-30"
             >
                 {opcionesIconos.map(({ id, url, icon }) => (
                     <div
@@ -82,7 +82,7 @@ return (
                                 href={url}
                             >
                                 <Image
-                                    className=""
+                                    className="h-full w-auto"
                                     src={icon}
                                     alt={`Icono ${id}`}
                                     width={25}
@@ -91,11 +91,11 @@ return (
                             </Link>
                         ) : (
                             <Image
-                                className=""
+                                className="h-full w-auto min-width-[100px]"
                                 src={icon}
                                 alt={`Icono ${id}`}
-                                width={25}
-                                height={25}
+                                width={500}
+                                height={500}
                             />
                         )}
                     </div>
@@ -103,16 +103,16 @@ return (
             </div>
 
             <p
-                className="flex w-[20%] justify-center"
+                className="flex w-[50%] justify-center"
             >
                 Planta Piloto - PF PROYECTO
             </p>
 
             <div
-                className="flex flex-row w-[40%] justify-end"
+                className="flex flex-row w-[25%] justify-end"
             >
                 <ul
-                    className="flex flex-row gap-60 h-full"
+                    className="flex flex-row gap-60 w-full h-full justify-between"
                 >
                     {opcionesMenu.map(({ id, url, text }) => (
                     <li
@@ -154,19 +154,19 @@ return (
         {/*Segundo Nav*/}
 
         <nav
-            className="flex flex-row w-full"
+            className="flex flex-row w-full bg-black p-3 h-40"
         >
             <ul
-                className="flex flex-row w-full"
+                className="flex flex-row w-full h-full align-middle"
             >
                 {opcionesBotones.map(({ id, path, text, styleClass }) => (
                 <li
                     key={id}
-                    className="flex flex-row w-full justify-center align-center"
+                    className="flex flex-row w-full h-full justify-center align-center"
                 >
                     <Link
                         href={path}
-                        className="flex justify-center gap-5 align-middle"
+                        className="flex justify-center gap-5 h-full align-middle"
                     >
                         <span
                             className={styleClass}

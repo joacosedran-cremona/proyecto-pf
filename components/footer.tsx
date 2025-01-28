@@ -55,10 +55,10 @@ return (
                     {opcionesIzq.map(({ id, icono, link, texto }) => (
                         <li 
                             key={id}
-                            className="flex flex-row align-middle justify-start h-1/2 py-[1vh] gap-[5px]"
+                            className="flex flex-row items-center justify-start h-1/2 py-[1vh] gap-[5px]"
                         >
                             <Link
-                                className="flex flex-row align-middle justify-start gap-[5px]"
+                                className="flex flex-row items-center h-full gap-[5px]"
                                 href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -66,20 +66,25 @@ return (
                                 <Image
                                     src={icono}
                                     alt={texto}
-                                    className="w-auto h-full"
+                                    className="w-auto h-full items-center"
                                     width={35}
                                     height={35}
                                 />
-                                {texto}
+                                <p
+                                    className="items-center"
+                                >
+                                    {texto}
+                                </p>
                             </Link>
                         </li>
                     ))}
                 </ul>
+
                 <div
                     className="flex justify-center align-middle h-full w-[40%]"
                 >
                     <Link 
-                        className="w-auto h-full p-0"
+                        className="w-auto h-full p-0 items-center "
                         href="https://creminox.com"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -93,25 +98,30 @@ return (
                         />
                     </Link>
                 </div>
+                
                 <ul
                     className="flex flex-col justify-center align-middle h-full w-30"
                 >
                     {opcionesDer.map(({ id, icono, link, texto }) => (
                         <li
                             key={id}
-                            className="flex flex-row align-middle justify-end h-1/2 py-[1vh] gap-[5px]"
+                            className="flex flex-row items-center justify-end h-1/2 py-[1vh] gap-[5px]"
                         >
                             <Link
-                                className="flex flex-row align-middle justify-end gap-[5px]"
+                                className="flex flex-row items-center h-full gap-[5px]"
                                 href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                {texto}
+                                <p
+                                    className="items-center"
+                                >
+                                    {texto}
+                                </p>
                                 <Image
                                     src={icono}
                                     alt={texto}
-                                    className="w-auto h-full"
+                                    className="w-auto h-full items-center"
                                     width={35}
                                     height={35}
                                 />
@@ -120,14 +130,16 @@ return (
                     ))}
                 </ul>
             </div>
+
             <hr
                 className="border-[#6668]"
             />
-                <p
-                    className="flex text-xs font-light text-[#666] py-[1px] w-full justify-center align-middle"
-                >
-                    ©2025 All Rights Reserved Cremona Inoxidable
-                </p>
+
+            <p
+                className="flex text-xs font-light text-[#666] py-[1px] w-full justify-center align-middle"
+            >
+                ©2025 All Rights Reserved Cremona Inoxidable
+            </p>
         </footer>
     );
 };

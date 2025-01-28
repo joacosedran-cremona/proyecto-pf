@@ -1,8 +1,10 @@
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <h1>
+    <section className="flex flex-col w-full items-center justify-center p-20">
+      <h1
+        className="flex justify-start w-full text-4xl"
+      >
         COCINAS & ENFRIADORES
       </h1>
     </section>
