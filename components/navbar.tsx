@@ -1,23 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, ReactElement, ReactNode } from "react";
+import React, { useEffect, ReactElement, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import {
-Navbar as HeroUINavbar,
-NavbarContent,
-NavbarMenu,
-NavbarBrand,
-NavbarItem,
-} from "@heroui/react"; // Asegúrate de que esta importación sea correcta
-import clsx from "clsx";
 
 interface OpcionIcono {
 id: number;
 url?: string;
 icon: string;
-onClick?: () => void;
 }
 
 interface OpcionMenu {
@@ -39,28 +30,31 @@ children?: ReactNode; // Hacer children opcional
 
 const Header: React.FC<CombinedProps> = ({ children }): ReactElement => {
 const pathname = usePathname();
-const [logoutVisible, setLogoutVisible] = useState<boolean>(false);
-
-const toggleLogout = () => {
-    setLogoutVisible(!logoutVisible);
-};
 
 const opcionesIconos: OpcionIcono[] = [
-    { id: 1, icon: "/usuario.png", onClick: toggleLogout },
-    { id: 2, url: "/alarma", icon: "/alarma.png" },
-    { id: 3, url: "/configuraciones", icon: "/configuracion.png" },
+    { id: 1, icon: "/usuario.png" },
+    { id: 2, url: "/alarma", icon: "/campana.png" },
 ];
 
 const opcionesMenu: OpcionMenu[] = [
-    { id: 1, url: "/camaras", text: "CAMARAS" },
-    { id: 2, url: "/completo", text: "HOME" },
+    { id: 1, url: "/", text: "Home" },
+    { id: 2, url: "/panel", text: "Panel" },
+    { id: 3, url: "/graficos", text: "Graficos" },
 ];
 
 const opcionesBotones: OpcionBoton[] = [
-    { id: 1, path: "/completo", text: "COMPLETO", styleClass: "text-white" },
-    { id: 2, path: "/desmoldeo", text: "DESMOLDEO", styleClass: "text-white" },
-    { id: 3, path: "/encajonado", text: "ENCAJONADO", styleClass: "text-gray" },
-    { id: 4, path: "/paletizado", text: "PALETIZADO", styleClass: "text-gray" },
+    {
+        id: 1,
+        path: "/datos_graficos",
+        text: "Cocinas",
+        styleClass: "text-orange text-2xl"
+    },
+    {
+        id: 2,
+        path: "/productividad",
+        text: "Enfriadores",
+        styleClass: "text-blue text-2xl"
+    },
 ];
 
 useEffect(() => {
@@ -69,76 +63,130 @@ useEffect(() => {
 }, [pathname]);
 
 return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
-    <NavbarContent justify="start">
-        <NavbarBrand>
-        <Link href="/" className="flex items-center gap-1">
-            <Image src="/creminox.png" alt="Creminox" width={40} height={40} />
-            <span className="font-bold">SDDA - EFA PROYECTO</span>
-        </Link>
-        </NavbarBrand>
-    </NavbarContent>
-
-    <NavbarContent justify="center">
-        {opcionesBotones.map(({ id, path, text, styleClass }) => (
-        <NavbarItem key={id}>
-            <Link
-            href={path}
-            className={clsx(
-                pathname === path ? "font-bold" : "",
-                styleClass,
-                "p-2.5 text-[#D9D9D9] transition-colors duration-300 ease-in-out relative"
-            )}
+    <header
+        className="flex flex-col text-black w-full"
+    >
+        <nav
+        className="flex flex-row w-full p-20 h-[65px] bg-white"
+        >
+            <div
+                className="flex flex-row h-full w-[40%] justify-start gap-30"
             >
-            <Image
-                className="max-w-[12px] max-h-[12px] mr-1"
-                src={pathname === path ? "/puntoVerde.png" : "/puntoGris.png"}
-                alt="Punto"
-                width={12}
-                height={12}
-            />
-            {text}
-            {pathname === path && (
-                <div className="w-[187px] h-[5px] bg-[#D9D9D9] rounded-[10px] absolute bottom-[-5px] left-1/2 transform -translate-x-1/2 transition-all duration-300 ease-in-out"></div>
-            )}
-            </Link>
-        </NavbarItem>
-        ))}
-    </NavbarContent>
-
-    <NavbarContent justify="end" className="gap-[30px]">
-        {opcionesIconos.map(({ id, url, icon, onClick }) => (
-        <NavbarItem key={id}>
-            {onClick ? (
-            <div onClick={onClick}>
-                <Image
-                className="w-[25px] h-full cursor-pointer transition-shadow duration-300 ease-in-out hover:shadow-md hover:scale-110"
-                src={icon}
-                alt={`Icono ${id}`}
-                width={25}
-                height={25}
-                />
+                {opcionesIconos.map(({ id, url, icon }) => (
+                    <div
+                        key={id}
+                        className="h-full w-auto"
+                    >
+                        {url ? (
+                            <Link
+                                href={url}
+                            >
+                                <Image
+                                    className=""
+                                    src={icon}
+                                    alt={`Icono ${id}`}
+                                    width={25}
+                                    height={25}
+                                />
+                            </Link>
+                        ) : (
+                            <Image
+                                className=""
+                                src={icon}
+                                alt={`Icono ${id}`}
+                                width={25}
+                                height={25}
+                            />
+                        )}
+                    </div>
+                ))}
             </div>
-            ) : (
-            <Link href={url!}>
-                <Image
-                className="w-[25px] h-full cursor-pointer transition-shadow duration-300 ease-in-out hover:shadow-md hover:scale-110"
-                src={icon}
-                alt={`Icono ${id}`}
-                width={25}
-                height={25}
-                />
-            </Link>
-            )}
-        </NavbarItem>
-        ))}
-    </NavbarContent>
 
-    <NavbarMenu>
-        <div className="w-full">{children}</div>
-    </NavbarMenu>
-    </HeroUINavbar>
-);
+            <p
+                className="flex w-[20%] justify-center"
+            >
+                Planta Piloto - PF PROYECTO
+            </p>
+
+            <div
+                className="flex flex-row w-[40%] justify-end"
+            >
+                <ul
+                    className="flex flex-row gap-60 h-full"
+                >
+                    {opcionesMenu.map(({ id, url, text }) => (
+                    <li
+                        key={id}
+                        className="h-full"
+                    >
+                        <Link 
+                            href={url}
+                            className={pathname === url ? "activeLink" : ''}
+                        >
+                            <span
+                                className=""
+                            >
+                                {text}
+                            </span>
+                        </Link>
+                    </li>
+                    ))}
+                    <div
+                        className="h-full w-auto"
+                    >
+                        <Link
+                            href="https://creminox.com"
+                            target="_blank" rel="noopener noreferrer"
+                        >
+                            <Image
+                                className="h-full w-auto"
+                                src="/creminox.png"
+                                alt="Creminox"
+                                width={1000}
+                                height={1000}
+                            />
+                        </Link>
+                    </div>
+                </ul>
+            </div>
+        </nav>
+
+        {/*Segundo Nav*/}
+
+        <nav
+            className="flex flex-row w-full"
+        >
+            <ul
+                className="flex flex-row w-full"
+            >
+                {opcionesBotones.map(({ id, path, text, styleClass }) => (
+                <li
+                    key={id}
+                    className="flex flex-row w-full justify-center align-center"
+                >
+                    <Link
+                        href={path}
+                        className="flex justify-center gap-5 align-middle"
+                    >
+                        <span
+                            className={styleClass}
+                        >
+                            {text}
+                        </span>
+                    </Link>
+                    {pathname === path && (
+                    <div
+                        className=""
+                    >
+
+                    </div>
+                    )}
+                </li>
+                ))}
+            </ul>
+        </nav>
+    </header>
+    );
 };
 
 export default Header;

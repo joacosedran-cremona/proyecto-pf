@@ -121,7 +121,7 @@ return (
                 </ul>
             </div>
             <hr
-                className="bg-gray"
+                className="border-[#6668]"
             />
                 <p
                     className="flex text-xs font-light text-[#666] py-[1px] w-full justify-center align-middle"
