@@ -47,7 +47,7 @@ return (
         className="flex flex-col align-middle bg-footerbg w-full text-white inset-x-0 bottom-0"
     >
             <div
-                className="flex flex-row w-full max-w-1920 h-[110px] justify-between align-middle p-20"
+                className="flex flex-row w-full max-w-1920 h-[165px] justify-between align-middle p-40"
             >
                 <ul
                     className="flex flex-col justify-center align-middle h-full w-30"
@@ -55,10 +55,10 @@ return (
                     {opcionesIzq.map(({ id, icono, link, texto }) => (
                         <li 
                             key={id}
-                            className="flex flex-row items-center justify-start h-1/2 py-[1vh] gap-[5px]"
+                            className="flex flex-row items-center justify-start h-1/2 py-[1vh] gap-10"
                         >
                             <Link
-                                className="flex flex-row items-center h-full gap-[5px]"
+                                className="flex flex-row items-center h-full gap-15"
                                 href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -84,7 +84,7 @@ return (
                     className="flex justify-center align-middle h-full w-[40%]"
                 >
                     <Link 
-                        className="w-auto h-full p-0 items-center "
+                        className="flex w-auto h-full p-0 justify-center items-center"
                         href="https://creminox.com"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -92,7 +92,7 @@ return (
                         <Image
                             src="/creminox-logo.png"
                             alt="Creminox logo"
-                            className="h-full w-auto"
+                            className="h-1/2 w-auto"
                             width={2000}
                             height={2000}
                         />
@@ -105,10 +105,10 @@ return (
                     {opcionesDer.map(({ id, icono, link, texto }) => (
                         <li
                             key={id}
-                            className="flex flex-row items-center justify-end h-1/2 py-[1vh] gap-[5px]"
+                            className="flex flex-row items-center justify-end h-1/2 py-[1vh] gap-10"
                         >
                             <Link
-                                className="flex flex-row items-center h-full gap-[5px]"
+                                className="flex flex-row items-center h-full gap-15"
                                 href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -136,7 +136,7 @@ return (
             />
 
             <p
-                className="flex text-xs font-light text-[#666] py-[1px] w-full justify-center align-middle"
+                className="flex text-xs font-light text-[#666] py-[5px] w-full justify-center align-middle"
             >
                 ©2025 All Rights Reserved Cremona Inoxidable
             </p>

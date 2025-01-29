@@ -1,0 +1,116 @@
+[
+    {
+        "num_cocina": 1,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "estado": "PRE-CALENTADO",
+        "cant_torres": 2,
+        "pasos": [
+            {
+                "id": 1,
+                "temp_Ing": 24,
+                "temp_Agua": 24,
+                "temp_Prod": 19,
+                "niv_Agua": 1702,
+                "tiempo": "2:50 m",
+                "tipo_Fin": "50°C"
+            }
+        ]
+    },
+    {
+        "num_cocina": 2,
+        "num_receta": 2,
+        "nom_receta": "Sopa de Tomate",
+        "estado": "COCINANDO",
+        "cant_torres": 3,
+        "pasos": [
+            {
+                "id": 1,
+                "temp_Ing": 21,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
+                "niv_Agua": 1500,
+                "tiempo": "1:30 m",
+                "tipo_Fin": "90°C"
+            },
+            {
+                "id": 2,
+                "temp_Ing": 25,
+                "temp_Agua": 95,
+                "temp_Prod": 85,
+                "niv_Agua": 1600,
+                "tiempo": "2:00 m",
+                "tipo_Fin": "100°C"
+            }
+        ]
+    },
+    {
+        "num_cocina": 3,
+        "num_receta": 3,
+        "nom_receta": "Pollo Asado",
+        "estado": "EN ESPERA",
+        "cant_torres": 1,
+        "pasos": [
+            {
+                "id": 1,
+                "temp_Ing": 18,
+                "temp_Agua": 45,
+                "temp_Prod": 30,
+                "niv_Agua": 1400,
+                "tiempo": "3:00 m",
+                "tipo_Fin": "80°C"
+            }
+        ]
+    },
+    {
+        "num_cocina": 4,
+        "num_receta": 4,
+        "nom_receta": "Arroz con Pollo",
+        "estado": "COCINANDO",
+        "cant_torres": 2,
+        "pasos": [
+            {
+                "id": 1,
+                "temp_Ing": 22,
+                "temp_Agua": 60,
+                "temp_Prod": 40,
+                "niv_Agua": 1550,
+                "tiempo": "2:10 m",
+                "tipo_Fin": "85°C"
+            },
+            {
+                "id": 2,
+                "temp_Ing": 28,
+                "temp_Agua": 95,
+                "temp_Prod": 90,
+                "niv_Agua": 1600,
+                "tiempo": "1:50 m",
+                "tipo_Fin": "100°C"
+            }
+        ]
+    },
+    {
+        "num_cocina": 5,
+        "num_receta": 5,
+        "nom_receta": "Pastel de Carne",
+        "estado": "PRE-CALENTADO",
+        "cant_torres": 1,
+        "pasos": [
+            {
+                "id": 1,
+                "temp_Ing": 26,
+                "temp_Agua": 35,
+                "temp_Prod": 25,
+                "niv_Agua": 1450,
+                "tiempo": "2:40 m",
+                "tipo_Fin": "60°C"
+            }
+        ]
+    },
+    {
+        "num_cocina": 5,
+        "num_receta": 5,
+        "nom_receta": "Pastel de Carne",
+        "estado": "INACTIVO"
+    }
+]

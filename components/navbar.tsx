@@ -156,8 +156,9 @@ return (
         <nav
             className="flex flex-row w-full bg-black p-3 h-40"
         >
+            <div className="w-1/4"></div>
             <ul
-                className="flex flex-row w-full h-full align-middle"
+                className="flex flex-row w-1/2 h-full align-middle"
             >
                 {opcionesBotones.map(({ id, path, text, styleClass }) => (
                 <li
@@ -178,12 +179,12 @@ return (
                     <div
                         className=""
                     >
-
                     </div>
                     )}
                 </li>
                 ))}
             </ul>
+            <div className="w-1/4"></div>
         </nav>
     </header>
     );

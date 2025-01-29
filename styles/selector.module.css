@@ -1,0 +1,17 @@
+/* Cambiar color del borde y fondo del selector */
+.custom-select {
+    border: 2px solid #FF8C00; /* Color del borde */
+    background-color: #333; /* Fondo oscuro */
+    color: #FFF; /* Texto blanco */
+}
+
+/* Cambiar color del texto de las opciones */
+.custom-select-item {
+    color: #FF8C00; /* Texto color naranja */
+}
+
+/* Efecto hover sobre las opciones */
+.custom-select-item:hover {
+    color: #FF6347; /* Cambiar color al pasar el ratón */
+    background-color: #555; /* Fondo oscuro */
+}
