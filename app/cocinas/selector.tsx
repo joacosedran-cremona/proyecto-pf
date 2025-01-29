@@ -9,6 +9,7 @@ interface CocinaData {
     tempAgua: string | number | null;
     tempProd: string | number | null;
     nivAgua: string | number | null;
+    nom_receta: string | null;
 }
 
 interface SelectorProps {
@@ -27,7 +28,6 @@ const Selector: React.FC<SelectorProps> = ({ cocinaId, setCocinaId, setCocinaDat
         { id: 6, name: "Cocina 6" }
     ];
 
-    // Función para obtener los datos de la cocina
     async function getData() {
         try {
             const response = await fetch("/data/cocinas.json");
@@ -39,7 +39,6 @@ const Selector: React.FC<SelectorProps> = ({ cocinaId, setCocinaId, setCocinaDat
         }
     }
 
-    // Fetch de datos cuando el `cocinaId` cambia
     useEffect(() => {
         async function fetchData() {
             const data = await getData();
@@ -47,60 +46,48 @@ const Selector: React.FC<SelectorProps> = ({ cocinaId, setCocinaId, setCocinaDat
                 const selectedCocina = data.find((item: { num_cocina: number }) => item.num_cocina === cocinaId);
                 if (selectedCocina) {
                     if (selectedCocina.estado === "INACTIVO") {
-                        // Si la cocina está INACTIVA, establecemos los valores como "N/A"
                         setCocinaData({
                             tempIng: "N/A",
                             tempAgua: "N/A",
                             tempProd: "N/A",
-                            nivAgua: "N/A"
+                            nivAgua: "N/A",
+                            nom_receta: null, // Asegurar que no sea undefined
                         });
                     } else {
-                        // Si la cocina está activa, tomamos los datos del primer paso
-                        const paso = selectedCocina.pasos[0];
+                        const paso = selectedCocina.pasos?.[0]; // Tomamos el primer paso
                         setCocinaData({
-                            tempIng: paso.temp_Ing,
-                            tempAgua: paso.temp_Agua,
-                            tempProd: paso.temp_Prod,
-                            nivAgua: paso.niv_Agua
+                            tempIng: paso?.temp_Ing ?? "N/A",
+                            tempAgua: paso?.temp_Agua ?? "N/A",
+                            tempProd: paso?.temp_Prod ?? "N/A",
+                            nivAgua: paso?.niv_Agua ?? "N/A",
+                            nom_receta: selectedCocina.nom_receta ?? null, // Evitamos undefined
                         });
                     }
                 } else {
-                    // Si no se encuentra la cocina, establecemos los valores como "N/A"
                     setCocinaData({
                         tempIng: "N/A",
                         tempAgua: "N/A",
                         tempProd: "N/A",
-                        nivAgua: "N/A"
+                        nivAgua: "N/A",
+                        nom_receta: null,
                     });
                 }
-            } else {
-                // Si no se pueden obtener los datos, establecemos los valores como "N/A"
-                setCocinaData({
-                    tempIng: "N/A",
-                    tempAgua: "N/A",
-                    tempProd: "N/A",
-                    nivAgua: "N/A"
-                });
             }
         }
         fetchData();
     }, [cocinaId, setCocinaData]);
 
     return (
-        <div
-            className="flex flex-col gap-4"
-        >
-            <div
-                className="flex justify-start w-1/4 h-[50px]"
-            >
+        <div className="flex flex-col gap-4">
+            <div className="flex justify-start w-1/4 h-[50px]">
                 <Select
                     size="lg"
                     items={cocinasList}
                     defaultSelectedKeys={String(cocinaId)}
-                    value={String(cocinaId)} // Sincronizamos el valor con `cocinaId`
+                    value={String(cocinaId)}
                     variant="underlined"
                     onChange={(e) => setCocinaId(Number(e.target.value))}
-                    aria-label="Select a kitchen"
+                    placeholder="Seleccione una cocina"
                     classNames={{
                         base: "h-full relative",
                         label: "group-data-[filled=true]:-translate-y-5",
