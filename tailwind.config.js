@@ -13,11 +13,15 @@ module.exports = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      screens: {
+        'custom': '1365px',  // Este es el nuevo breakpoint
+      },
       colors: {
         'orange': '#EF8225',
         'oranget': '#F826',
-        'blue': '#33A7FD',
-        'bluet': '#3AFA',
+        'blue': '#3AF',
+        'bluet': '#06E5',
+        'water': '#33A7FD',
         'green': '#54C42D',
         'white': '#D9D9D9',
         'lightGrey' : '#8C8C8C',

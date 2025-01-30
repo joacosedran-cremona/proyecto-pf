@@ -1,68 +1,164 @@
+"use client";
+
+import { useCocina } from "@/context/CocinaContext";
+import Selector from "./selector";
 
 export default function Home() {
+    const { cocinaData } = useCocina();
+
+    function displayData(data: string | number | null | boolean, unit?: string) {
+        if (data === "N/A" || data === null) return data;
+        if (typeof data === "boolean") return data ? "True" : "False"; // Para manejar booleanos
+        return unit ? `${data} ${unit}` : data;
+    }
+    
+
+    const getColorClass = (label: string, value: string | number | null) => {
+        if (value === "N/A") {
+            return "text-white"; // Si el valor es "N/A", se aplica color blanco
+        }
+        return label === "Nivel Agua" ? "text-water" : "text-blue";
+    };
+    
+    
+    const datosCocina = [
+        { label: "Temp. Ingreso", value: cocinaData.tempIng ?? "N/A", unit: "°C" },
+        {
+            label: "Temp. Agua",
+            value: cocinaData.ultimoPaso?.temp_Agua ?? "N/A", // Verificamos que `ultimoPaso` no sea null
+            unit: "°C"
+        },
+        { label: "Temp. Producto", value: cocinaData.tempProd ?? "N/A", unit: "°C" },
+        { label: "Nivel Agua", value: cocinaData.nivAgua ?? "N/A", unit: "mm" }
+    ];
+    
+    const datosCiclo = [
+        {
+            label: "Paso N°",
+            value: cocinaData.ultimoPaso?.id ?? "N/A" // Verificamos que `ultimoPaso` no sea null y obtenemos el id del paso
+        },
+        { label: "N° Receta", value: cocinaData.num_receta ?? "N/A" },
+        { label: "Cant. Torres", value: cocinaData.cant_torres ?? "N/A" },
+        { label: "Tiempo Transcurrido", value: cocinaData.tiempo ?? "N/A"},
+        { label: "Tipo Fin", value: cocinaData.tipo_Fin ?? "N/A" }
+    ];
+
+    const datosIO = [
+        { label: "Frio", value: cocinaData.sectorIO[0]?.frio ?? "N/A" },
+        { label: "Vapor Vivo", value: cocinaData.sectorIO[0]?.vapor_vivo ?? "N/A" },
+        { label: "IO YY EQ XX", value: cocinaData.sectorIO[0]?.io_yy_eq_xx ?? "N/A" },
+        { label: "Vapor Serp", value: cocinaData.sectorIO[0]?.vapor_serp ?? "N/A" },
+    ];
+
     return (
-    <section className="flex flex-col w-full justify-center gap-20">
-        <h1
-        className="flex justify-start w-full text-2xl"
-        >
-        ENFRIADORES
-        </h1>
-
-        <div
-            className="w-100 flex flex-row gap-20"
-            //Engloba Estado Equipo, Receta, Ciclo Activo, Temperaturas y Sector IO
-        >
+        <section className="flex flex-col w-full h-full gap-20">
+            <div className="flex flex-row w-full h-full gap-20">
+                <div className="w-1/3">
+                    <Selector />
+                </div>
+                <p className="bg-bluet flex justify-start items-center h-50 p-15 w-1/3 border-1 border-blue text-[20px] font-semibold rounded-md">
+                    Receta: {cocinaData.nom_receta ?? "N/A"}
+                </p>
+                <p className="bg-black flex justify-start items-center h-50 p-15 w-1/3 border-1 border-blue text-[20px] font-semibold rounded-md">
+                    Estado: {cocinaData.estado ?? "N/A"}
+                </p>
+            </div>
             <div
-                className="w-1/2 flex flex-col gap-20"
-                //Engloba Estado Equipo, Receta, Ciclo Activo y Sector IO
+                className="w-full flex flex-col h-full gap-20
+                    custom:flex-row"
             >
                 <div
-                    className="w-100 flex flex-row gap-20"
-                    //Engloba Estado Equipo, Receta y Ciclo Activo
+                    className="w-full flex flex-row h-full gap-20
+                    custom:w-1/3 custom:flex-col"
                 >
                     <div
-                        className="bg-black p-20 w-1/2"
-                        //Engloba Estado Equipo
+                        className="w-3/4 flex flex-row h-3/4 gap-20
+                        custom:w-full"
                     >
-                        Estado
+                        {/* Estado Equipo */}
+                        <div className="bg-black flex flex-col p-20 w-1/2 min-w-[210px] rounded-md flex-1">
+                            <h2 className="flex justify-start text-center w-full h-50 py-auto text-xl">
+                                Estado Equipo
+                            </h2>
+                            <ul className="flex flex-col h-full w-full gap-1h">
+                                {datosCocina.map((dato) => (
+                                    <li key={dato.label} className="bg-grey flex flex-col w-full h-full px-20 py-1h rounded-md items-center">
+                                        <p className="h-1/2 w-full mb-[1.5wv] text-[calc(0.6vw+1vh)]">
+                                            {dato.label}
+                                        </p>
+                                        <p
+                                            className={`h-1/2 w-full text-[calc(0.5vw+1vh)] ${getColorClass(dato.label, dato.value)}`}
+                                        >
+                                            {displayData(dato.value, dato.unit)}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Ciclo Activo */}
+                        <div className="flex flex-col w-1/2 min-w-[210px] gap-20 flex-1">
+                            <div className="bg-black flex flex-col p-20 w-full h-full rounded-md flex-1">
+                                <h2 className="flex justify-start text-center w-full h-50 py-auto text-xl">
+                                    Ciclo Activo
+                                </h2>
+                                <ul className="flex flex-col h-full w-full gap-1h">
+                                    {datosCiclo.map((dato) => (
+                                        <li key={dato.label} className="bg-grey flex flex-col w-full h-full px-20 py-1h rounded-md items-center">
+                                            <p
+                                                className="h-1/2 w-full mb-[1.5wv] text-[calc(0.5vw+1vh)]"
+                                            >
+                                                {dato.label}
+                                            </p>
+                                            <p
+                                                className="h-1/2 w-full text-[calc(0.5vw+1vh)]"
+                                            >
+                                                {displayData(dato.value)}
+                                            </p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                    
                     <div
-                        className="grid w-1/2 gap-20"
-                        //Engloba Receta y Ciclo Activo
+                        className="flex flex-col bg-black h-full p-20 w-1/3 rounded-md gap-20 flex-1
+                        custom:w-full custom:h-1/4"
                     >
-                        
-                        <div
-                            className="bg-bluet p-20"
-                            //Receta
+                        <h2 className="flex justify-start text-center w-full h-50 py-auto text-xl">
+                            Sector IO
+                        </h2>
+                        <ul className=" flex flex-col gap-4
+                            custom:grid custom:grid-cols-2"
                         >
-                            Receta
-                        </div>
+                            {datosIO.map((dato) => (
+                                <li key={dato.label} className="bg-grey flex flex-row w-full h-full px-20 py-1h rounded-md items-center">
+                                    <p
+                                        className="flex h-1/2 w-full text-[calc(0.5vw+1vh)] items-center"
+                                    >
+                                        {dato.label}
+                                    </p>
 
-                        <div
-                            className="bg-black p-20"
-                            //Ciclo Activo
-                        >
-                            Ciclo Activo
-                        </div>
-
+                                    <p
+                                        className="flex w-1/2 text-[calc(0.5vw+1vh)] justify-end"
+                                    >
+                                        {displayData(dato.value)}
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
-
                 <div
-                    className="bg-black p-20"
+                    className="bg-black p-20 w-full rounded-md
+                    custom:w-2/3"
                 >
-                    Sector IO
+                    <h2 className="flex justify-start text-center w-full h-50 py-auto text-xl">
+                        Gráfico
+                    </h2>
                 </div>
-
             </div>
-
-            <div
-                className="bg-black p-20 w-1/2"
-                //Temperaturas
-            >
-                Grafico
-            </div>
-        </div>
-    </section>
+        </section>
     );
 }

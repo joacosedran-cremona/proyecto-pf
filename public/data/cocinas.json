@@ -12,8 +12,16 @@
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
-                "tiempo": "2:50 m",
+                "tiempo": "2:50 min",
                 "tipo_Fin": "50°C"
+            }
+        ],
+        "sector_io": [
+            {
+                "frio": false,
+                "vapor_vivo": true,
+                "vapor_serp": false,
+                "io_yy_eq_xx": true
             }
         ]
     },
@@ -30,7 +38,7 @@
                 "temp_Agua": 80,
                 "temp_Prod": 75,
                 "niv_Agua": 1500,
-                "tiempo": "1:30 m",
+                "tiempo": "1:30 min",
                 "tipo_Fin": "90°C"
             },
             {
@@ -39,8 +47,16 @@
                 "temp_Agua": 95,
                 "temp_Prod": 85,
                 "niv_Agua": 1600,
-                "tiempo": "2:00 m",
+                "tiempo": "2:00 min",
                 "tipo_Fin": "100°C"
+            }
+        ],
+        "sector_io": [
+            {
+                "frio": true,
+                "vapor_vivo": false,
+                "vapor_serp": true,
+                "io_yy_eq_xx": false
             }
         ]
     },
@@ -57,8 +73,16 @@
                 "temp_Agua": 45,
                 "temp_Prod": 30,
                 "niv_Agua": 1400,
-                "tiempo": "3:00 m",
+                "tiempo": "3:00 min",
                 "tipo_Fin": "80°C"
+            }
+        ],
+        "sector_io": [
+            {
+                "frio": false,
+                "vapor_vivo": true,
+                "vapor_serp": false,
+                "io_yy_eq_xx": true
             }
         ]
     },
@@ -75,7 +99,7 @@
                 "temp_Agua": 60,
                 "temp_Prod": 40,
                 "niv_Agua": 1550,
-                "tiempo": "2:10 m",
+                "tiempo": "2:10 min",
                 "tipo_Fin": "85°C"
             },
             {
@@ -84,8 +108,16 @@
                 "temp_Agua": 95,
                 "temp_Prod": 90,
                 "niv_Agua": 1600,
-                "tiempo": "1:50 m",
+                "tiempo": "1:50 min",
                 "tipo_Fin": "100°C"
+            }
+        ],
+        "sector_io": [
+            {
+                "frio": true,
+                "vapor_vivo": false,
+                "vapor_serp": true,
+                "io_yy_eq_xx": true
             }
         ]
     },
@@ -102,8 +134,16 @@
                 "temp_Agua": 35,
                 "temp_Prod": 25,
                 "niv_Agua": 1450,
-                "tiempo": "2:40 m",
+                "tiempo": "2:40 min",
                 "tipo_Fin": "60°C"
+            }
+        ],
+        "sector_io": [
+            {
+                "frio": false,
+                "vapor_vivo": true,
+                "vapor_serp": true,
+                "io_yy_eq_xx": false
             }
         ]
     },

@@ -64,7 +64,7 @@ useEffect(() => {
 
 return (
     <header
-        className="flex flex-col text-black w-full"
+        className="flex flex-col text-black w-full sticky top-0"
     >
         <nav
         className="flex flex-row w-full p-20 h-[65px] bg-white"
