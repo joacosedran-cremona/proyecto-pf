@@ -64,7 +64,7 @@ export default function Home() {
                 </p>
             </div>
             <div
-                className="w-full flex flex-col h-full gap-20
+                className="w-full flex flex-col w-1/3 h-full gap-20
                     custom:flex-row"
             >
                 <div
