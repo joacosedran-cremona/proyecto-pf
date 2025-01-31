@@ -17,7 +17,7 @@ interface SectorIO {
     io_yy_eq_xx: boolean;
 }
 
-interface CocinaData {
+interface EnfriadorData {
     tempIng: string | number | null;
     tempAgua: string | number | null;
     tempProd: string | number | null;
@@ -33,18 +33,18 @@ interface CocinaData {
     sectorIO: SectorIO[];
 }
 
-interface CocinaContextType {
-    cocinaId: number;
-    setCocinaId: (id: number) => void;
-    cocinaData: CocinaData;
-    setCocinaData: (data: CocinaData) => void;
+interface EnfriadorContextType {
+    enfriadorId: number;
+    setEnfriadorId: (id: number) => void;
+    enfriadorData: EnfriadorData;
+    setEnfriadorData: (data: EnfriadorData) => void;
 }
 
-const CocinaContext = createContext<CocinaContextType | undefined>(undefined);
+const EnfriadorContext = createContext<EnfriadorContextType | undefined>(undefined);
 
-export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
-    const [cocinaId, setCocinaId] = useState<number>(1);
-    const [cocinaData, setCocinaData] = useState<CocinaData>({
+export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) => {
+    const [enfriadorId, setEnfriadorId] = useState<number>(1);
+    const [enfriadorData, setEnfriadorData] = useState<EnfriadorData>({
         tempIng: "N/A",
         tempAgua: "N/A",
         tempProd: "N/A",
@@ -63,33 +63,33 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch("/data/cocinas.json");
+                const response = await fetch("/data/enfriadores.json");
                 const data = await response.json();
-                const selectedCocina = data.find(
-                    (item: { num_cocina: number }) => item.num_cocina === cocinaId
+                const selectedEnfriador = data.find(
+                    (item: { num_enfriador: number }) => item.num_enfriador === enfriadorId
                 );
-    
-                if (selectedCocina) {
-                    const pasos = selectedCocina.pasos;
+
+                if (selectedEnfriador) {
+                    const pasos = selectedEnfriador.pasos;
                     const ultimoPaso = pasos ? pasos[pasos.length - 1] : null;
                     
-                    setCocinaData({
+                    setEnfriadorData({
                         tempIng: ultimoPaso?.temp_Ing ?? "N/A",
                         tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
                         tempProd: ultimoPaso?.temp_Prod ?? "N/A",
                         nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
-                        nom_receta: selectedCocina.nom_receta ?? null,
-                        num_receta: selectedCocina.num_receta ?? null,
-                        estado: selectedCocina.estado ?? null,
-                        cant_torres: selectedCocina.cant_torres ?? null,
+                        nom_receta: selectedEnfriador.nom_receta ?? null,
+                        num_receta: selectedEnfriador.num_receta ?? null,
+                        estado: selectedEnfriador.estado ?? null,
+                        cant_torres: selectedEnfriador.cant_torres ?? null,
                         tiempo: ultimoPaso?.tiempo ?? null,
                         tipo_Fin: ultimoPaso?.tipo_Fin ?? null,
                         pasos: pasos ?? [],
                         ultimoPaso: ultimoPaso,
-                        sectorIO: selectedCocina.sector_io ?? [], // Asignamos el nuevo campo
+                        sectorIO: selectedEnfriador.sector_io ?? [], // Aquí es importante asignar correctamente
                     });
                 } else {
-                    setCocinaData({
+                    setEnfriadorData({
                         tempIng: "N/A",
                         tempAgua: "N/A",
                         tempProd: "N/A",
@@ -106,23 +106,23 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
                     });
                 }
             } catch (error) {
-                console.error("Error fetching cocina data:", error);
+                console.error("Error fetching enfriador data:", error);
             }
         }
         fetchData();
-    }, [cocinaId]);
+    }, [enfriadorId]);
 
     return (
-        <CocinaContext.Provider value={{ cocinaId, setCocinaId, cocinaData, setCocinaData }}>
+        <EnfriadorContext.Provider value={{ enfriadorId, setEnfriadorId, enfriadorData, setEnfriadorData }}>
             {children}
-        </CocinaContext.Provider>
+        </EnfriadorContext.Provider>
     );
 };
 
-export const useCocina = () => {
-    const context = useContext(CocinaContext);
+export const useEnfriador = () => {
+    const context = useContext(EnfriadorContext);
     if (!context) {
-        throw new Error("useCocina debe ser usado dentro de un CocinaProvider");
+        throw new Error("useEnfriador debe ser usado dentro de un EnfriadorProvider");
     }
     return context;
 };

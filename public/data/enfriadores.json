@@ -1,6 +1,6 @@
 [
     {
-        "num_cocina": 1,
+        "num_enfriador": 1,
         "num_receta": 1,
         "nom_receta": "Pate",
         "estado": "PRE-CALENTADO",
@@ -26,7 +26,7 @@
         ]
     },
     {
-        "num_cocina": 2,
+        "num_enfriador": 2,
         "num_receta": 2,
         "nom_receta": "Sopa de Tomate",
         "estado": "COCINANDO",
@@ -61,7 +61,7 @@
         ]
     },
     {
-        "num_cocina": 3,
+        "num_enfriador": 3,
         "num_receta": 3,
         "nom_receta": "Pollo Asado",
         "estado": "EN ESPERA",
@@ -87,7 +87,7 @@
         ]
     },
     {
-        "num_cocina": 4,
+        "num_enfriador": 4,
         "num_receta": 4,
         "nom_receta": "Arroz con Pollo",
         "estado": "COCINANDO",
@@ -122,7 +122,7 @@
         ]
     },
     {
-        "num_cocina": 5,
+        "num_enfriador": 5,
         "num_receta": 5,
         "nom_receta": "Pastel de Carne",
         "estado": "PRE-CALENTADO",
@@ -148,9 +148,70 @@
         ]
     },
     {
-        "num_cocina": 6,
+        "num_enfriador": 6,
         "num_receta": 6,
         "nom_receta": "Pastel de Carne",
         "estado": "INACTIVO"
+    },
+    {
+        "num_enfriador": 7,
+        "num_receta": 7,
+        "nom_receta": "Estofado de Res",
+        "estado": "PRE-CALENTADO",
+        "cant_torres": 2,
+        "pasos": [
+            {
+                "id": 1,
+                "temp_Ing": 23,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
+                "niv_Agua": 1500,
+                "tiempo": "1:40 min",
+                "tipo_Fin": "75°C"
+            }
+        ],
+        "sector_io": [
+            {
+                "frio": true,
+                "vapor_vivo": false,
+                "vapor_serp": true,
+                "io_yy_eq_xx": true
+            }
+        ]
+    },
+    {
+        "num_enfriador": 8,
+        "num_receta": 8,
+        "nom_receta": "Guiso de Vegetales",
+        "estado": "COCINANDO",
+        "cant_torres": 3,
+        "pasos": [
+            {
+                "id": 1,
+                "temp_Ing": 24,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
+                "niv_Agua": 1400,
+                "tiempo": "2:20 min",
+                "tipo_Fin": "85°C"
+            },
+            {
+                "id": 2,
+                "temp_Ing": 27,
+                "temp_Agua": 90,
+                "temp_Prod": 80,
+                "niv_Agua": 1550,
+                "tiempo": "2:00 min",
+                "tipo_Fin": "95°C"
+            }
+        ],
+        "sector_io": [
+            {
+                "frio": false,
+                "vapor_vivo": true,
+                "vapor_serp": false,
+                "io_yy_eq_xx": false
+            }
+        ]
     }
 ]

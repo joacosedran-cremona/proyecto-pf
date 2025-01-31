@@ -14,6 +14,8 @@
 npm install @heroui/react
 
 heroui add --all
+
+npm install chart.js
 ```
 
 ## Licencia

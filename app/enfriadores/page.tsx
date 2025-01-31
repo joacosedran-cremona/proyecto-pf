@@ -1,10 +1,10 @@
 "use client";
 
-import { useCocina } from "@/context/CocinaContext";
+import { useEnfriador } from "@/context/EnfriadorContext";
 import Selector from "./selector";
 
 export default function Home() {
-    const { cocinaData } = useCocina();
+    const { enfriadorData } = useEnfriador();
 
     function displayData(data: string | number | null | boolean, unit?: string) {
         if (data === "N/A" || data === null) return data;
@@ -21,33 +21,33 @@ export default function Home() {
     };
     
     
-    const datosCocina = [
-        { label: "Temp. Ingreso", value: cocinaData.tempIng ?? "N/A", unit: "°C" },
+    const datosEnfriador = [
+        { label: "Temp. Ingreso", value: enfriadorData.tempIng ?? "N/A", unit: "°C" },
         {
             label: "Temp. Agua",
-            value: cocinaData.ultimoPaso?.temp_Agua ?? "N/A", // Verificamos que `ultimoPaso` no sea null
+            value: enfriadorData.ultimoPaso?.temp_Agua ?? "N/A", // Verificamos que `ultimoPaso` no sea null
             unit: "°C"
         },
-        { label: "Temp. Producto", value: cocinaData.tempProd ?? "N/A", unit: "°C" },
-        { label: "Nivel Agua", value: cocinaData.nivAgua ?? "N/A", unit: "mm" }
+        { label: "Temp. Producto", value: enfriadorData.tempProd ?? "N/A", unit: "°C" },
+        { label: "Nivel Agua", value: enfriadorData.nivAgua ?? "N/A", unit: "mm" }
     ];
     
     const datosCiclo = [
         {
             label: "Paso N°",
-            value: cocinaData.ultimoPaso?.id ?? "N/A" // Verificamos que `ultimoPaso` no sea null y obtenemos el id del paso
+            value: enfriadorData.ultimoPaso?.id ?? "N/A" // Verificamos que `ultimoPaso` no sea null y obtenemos el id del paso
         },
-        { label: "N° Receta", value: cocinaData.num_receta ?? "N/A" },
-        { label: "Cant. Torres", value: cocinaData.cant_torres ?? "N/A" },
-        { label: "Tiempo Transcurrido", value: cocinaData.tiempo ?? "N/A"},
-        { label: "Tipo Fin", value: cocinaData.tipo_Fin ?? "N/A" }
+        { label: "N° Receta", value: enfriadorData.num_receta ?? "N/A" },
+        { label: "Cant. Torres", value: enfriadorData.cant_torres ?? "N/A" },
+        { label: "Tiempo Transcurrido", value: enfriadorData.tiempo ?? "N/A"},
+        { label: "Tipo Fin", value: enfriadorData.tipo_Fin ?? "N/A" }
     ];
 
     const datosIO = [
-        { label: "Frio", value: cocinaData.sectorIO[0]?.frio ?? "N/A" },
-        { label: "Vapor Vivo", value: cocinaData.sectorIO[0]?.vapor_vivo ?? "N/A" },
-        { label: "IO YY EQ XX", value: cocinaData.sectorIO[0]?.io_yy_eq_xx ?? "N/A" },
-        { label: "Vapor Serp", value: cocinaData.sectorIO[0]?.vapor_serp ?? "N/A" },
+        { label: "Frio", value: enfriadorData.sectorIO[0]?.frio ?? "N/A" },
+        { label: "Vapor Vivo", value: enfriadorData.sectorIO[0]?.vapor_vivo ?? "N/A" },
+        { label: "IO YY EQ XX", value: enfriadorData.sectorIO[0]?.io_yy_eq_xx ?? "N/A" },
+        { label: "Vapor Serp", value: enfriadorData.sectorIO[0]?.vapor_serp ?? "N/A" },
     ];
 
     return (
@@ -57,10 +57,10 @@ export default function Home() {
                     <Selector />
                 </div>
                 <p className="bg-bluet flex justify-start items-center h-50 p-15 w-1/3 border-1 border-blue text-[20px] font-semibold rounded-md">
-                    Receta: {cocinaData.nom_receta ?? "N/A"}
+                    Receta: {enfriadorData.nom_receta ?? "N/A"}
                 </p>
                 <p className="bg-black flex justify-start items-center h-50 p-15 w-1/3 border-1 border-blue text-[20px] font-semibold rounded-md">
-                    Estado: {cocinaData.estado ?? "N/A"}
+                    Estado: {enfriadorData.estado ?? "N/A"}
                 </p>
             </div>
             <div
@@ -81,7 +81,7 @@ export default function Home() {
                                 Estado Equipo
                             </h2>
                             <ul className="flex flex-col h-full w-full gap-1h">
-                                {datosCocina.map((dato) => (
+                                {datosEnfriador.map((dato) => (
                                     <li key={dato.label} className="bg-grey flex flex-col w-full h-full px-20 py-1h rounded-md items-center">
                                         <p className="h-1/2 w-full mb-[1.5wv] text-[calc(0.6vw+1vh)]">
                                             {dato.label}

@@ -139,7 +139,7 @@ return (
                             target="_blank" rel="noopener noreferrer"
                         >
                             <Image
-                                className="h-full w-auto"
+                                className="h-full w-full"
                                 src="/creminox.png"
                                 alt="Creminox"
                                 width={1000}
