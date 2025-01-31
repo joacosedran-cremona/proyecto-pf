@@ -64,13 +64,13 @@ useEffect(() => {
 
 return (
     <header
-        className="flex flex-col text-black w-full sticky top-0"
+        className="flex flex-col text-black w-full sticky top-0 z-[999]"
     >
         <nav
         className="flex flex-row w-full p-20 h-[65px] bg-white"
         >
             <div
-                className="flex flex-row h-full w-[25%] justify-start gap-30"
+                className="flex flex-row h-full w-[30%] justify-start gap-30"
             >
                 {opcionesIconos.map(({ id, url, icon }) => (
                     <div
@@ -103,16 +103,16 @@ return (
             </div>
 
             <p
-                className="flex w-[50%] justify-center"
+                className="flex w-[40%] justify-center"
             >
                 Planta Piloto - PF PROYECTO
             </p>
 
             <div
-                className="flex flex-row w-[25%] justify-end"
+                className="flex flex-row w-[30%] justify-end"
             >
                 <ul
-                    className="flex flex-row gap-60 w-full h-full justify-between"
+                    className="flex flex-row w-full h-full gap-1w justify-end"
                 >
                     {opcionesMenu.map(({ id, url, text }) => (
                     <li
@@ -132,14 +132,14 @@ return (
                     </li>
                     ))}
                     <div
-                        className="h-full w-auto"
+                        className="h-full min-w-[105px] w-[105px]"
                     >
                         <Link
                             href="https://creminox.com"
                             target="_blank" rel="noopener noreferrer"
                         >
                             <Image
-                                className="h-full w-full"
+                                className="h-full w-[105px]"
                                 src="/creminox.png"
                                 alt="Creminox"
                                 width={1000}

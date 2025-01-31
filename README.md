@@ -16,6 +16,13 @@ npm install @heroui/react
 heroui add --all
 
 npm install chart.js
+
+npm install chartjs-adapter-date-fns
+
+npm install chartjs-plugin-zoom
+
+npm install date-fns
+
 ```
 
 ## Licencia
