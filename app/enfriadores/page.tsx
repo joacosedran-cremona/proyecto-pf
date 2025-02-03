@@ -56,7 +56,7 @@ export default function Home() {
                     </div>
                     <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, 'blue')} displayData={displayData} />
                 </div>
-                <Grafico />
+                <Grafico contextType="enfriadores" />
             </div>
         </section>
     );

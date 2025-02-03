@@ -2,10 +2,10 @@
 import React from 'react';
 import { useCocina } from "@/context/CocinaContext";
 import Selector from "./selector";
-import Grafico from "../../components/grafico";
-import CicloActivo from '../../components/cicloActivo';
-import EstadoEquipo from '../../components/estadoEquipo';
-import SectorIO from '../../components/sectorIO';
+import Grafico from "@/components/grafico";
+import CicloActivo from '@/components/cicloActivo';
+import EstadoEquipo from '@/components/estadoEquipo';
+import SectorIO from '@/components/sectorIO';
 import { getColorClass } from '@/utils/logicaColores';
 import { displayData } from '@/utils/displayData';
 
@@ -35,7 +35,7 @@ export default function Home() {
     ];
 
     return (
-        <section className="flex flex-col w-full h-full gap-20">
+        <section className="flex flex-col w-full h-full gap-20 flex-1">
             <div className="flex flex-row w-full h-full gap-20">
                 <div className="w-1/3 zIndex-0">
                     <Selector />
@@ -54,10 +54,11 @@ export default function Home() {
                         <EstadoEquipo datos={datosCocina} getColorClass={(label, value) => getColorClass(label, value, 'orange')} displayData={displayData} />
                         <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor='green' />
                     </div>
-                    <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, 'orange')} displayData={displayData} />
+                    <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, 'blue')} displayData={displayData} />
                 </div>
-                <Grafico />
+                <Grafico contextType="cocinas" />
             </div>
         </section>
     );
 }
+

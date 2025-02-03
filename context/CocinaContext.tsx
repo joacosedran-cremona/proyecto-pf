@@ -26,7 +26,7 @@ interface CocinaData {
     num_receta: number | null;
     estado: string | null;
     cant_torres: number | null;
-    tiempo: string | null;
+    tiempo: number | null;
     tipo_Fin: string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
@@ -57,7 +57,7 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
         tipo_Fin: null,
         pasos: [],
         ultimoPaso: null,
-        sectorIO: [], // Inicializamos con un array vacío
+        sectorIO: [],
     });
 
     useEffect(() => {
@@ -86,7 +86,7 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
                         tipo_Fin: ultimoPaso?.tipo_Fin ?? null,
                         pasos: pasos ?? [],
                         ultimoPaso: ultimoPaso,
-                        sectorIO: selectedCocina.sector_io ?? [], // Asignamos el nuevo campo
+                        sectorIO: selectedCocina.sector_io ?? [],
                     });
                 } else {
                     setCocinaData({
@@ -126,3 +126,5 @@ export const useCocina = () => {
     }
     return context;
 };
+
+export { CocinaContext };

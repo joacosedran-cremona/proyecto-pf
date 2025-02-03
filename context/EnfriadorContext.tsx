@@ -26,7 +26,7 @@ interface EnfriadorData {
     num_receta: number | null;
     estado: string | null;
     cant_torres: number | null;
-    tiempo: string | null;
+    tiempo: number | null;
     tipo_Fin: string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
@@ -57,7 +57,7 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
         tipo_Fin: null,
         pasos: [],
         ultimoPaso: null,
-        sectorIO: [], // Inicializamos con un array vacío
+        sectorIO: [],
     });
 
     useEffect(() => {
@@ -86,7 +86,7 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
                         tipo_Fin: ultimoPaso?.tipo_Fin ?? null,
                         pasos: pasos ?? [],
                         ultimoPaso: ultimoPaso,
-                        sectorIO: selectedEnfriador.sector_io ?? [], // Aquí es importante asignar correctamente
+                        sectorIO: selectedEnfriador.sector_io ?? [],
                     });
                 } else {
                     setEnfriadorData({
@@ -126,3 +126,5 @@ export const useEnfriador = () => {
     }
     return context;
 };
+
+export { EnfriadorContext };

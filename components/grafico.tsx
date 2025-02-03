@@ -1,55 +1,28 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
+import React, { useEffect, useRef } from 'react';
+import { Chart, registerables, ChartConfiguration } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import 'chartjs-adapter-date-fns';
-import { transformData, CocinaData } from '../utils/logicaGraficos';
-import { useCocina } from "@/context/CocinaContext";
-import { useEnfriador } from "@/context/EnfriadorContext";
+import { useCocina } from '@/context/CocinaContext';
+import { useEnfriador } from '@/context/EnfriadorContext';
+import { transformData } from '../utils/logicaGraficos';
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
-const image = new Image();
-image.src = '/creminox.png';
-
-const plugin: Plugin<'line'> = {
-    id: 'customCanvasBackgroundImage',
-    beforeDraw: (chart: Chart) => {
-        if (image.complete) {
-            const ctx = chart.ctx;
-            const { top, left, width, height } = chart.chartArea;
-            ctx.save();
-            ctx.globalAlpha = 0.2;
-            const x = left + width / 2 - image.width / 2;
-            const y = top + height / 2 - image.height / 2;
-            ctx.drawImage(image, x, y);
-            ctx.restore();
-        } else {
-            image.onload = () => chart.draw();
-        }
-    }
-};
-
-const BarChart: React.FC = () => {
+const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ contextType }) => {
     const chartRef = useRef<HTMLCanvasElement>(null);
+
     const { cocinaData } = useCocina();
     const { enfriadorData } = useEnfriador();
 
-    const [chartData, setChartData] = useState<ChartConfiguration<'line'>['data'] | null>(null);
-
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            // Solo ejecuta esto en el navegador
-            const transformedData = transformData([cocinaData, enfriadorData]);
-            setChartData(transformedData);
-        }
-    }, [cocinaData, enfriadorData]);
-
-    useEffect(() => {
-        if (!chartRef.current || !chartData) return;
+        const data = contextType === 'cocinas' ? cocinaData : enfriadorData;
+        if (!data || !chartRef.current) return;
 
         const ctx = chartRef.current.getContext('2d');
         if (!ctx) return;
+
+        const chartData = transformData([data]);
 
         const config: ChartConfiguration<'line'> = {
             type: 'line',
@@ -57,7 +30,6 @@ const BarChart: React.FC = () => {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-
                 plugins: {
                     legend: {
                         position: 'top',
@@ -136,14 +108,13 @@ const BarChart: React.FC = () => {
                         }
                     }
                 }
-            },
-            plugins: [plugin]
+            }
         };
 
         const chartInstance = new Chart(ctx, config);
 
         return () => chartInstance.destroy();
-    }, [chartData]);
+    }, [cocinaData, enfriadorData, contextType]);
 
     const canvasStyle: React.CSSProperties = {
         display: 'block',
@@ -158,4 +129,4 @@ const BarChart: React.FC = () => {
     );
 };
 
-export default BarChart;
+export default Grafico;

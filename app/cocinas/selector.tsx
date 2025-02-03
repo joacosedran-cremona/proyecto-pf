@@ -1,7 +1,6 @@
 "use client";
 
 import { useCocina } from "@/context/CocinaContext";
-import { Select, SelectItem } from "@heroui/react";
 
 const Selector: React.FC = () => {
     const { cocinaId, setCocinaId } = useCocina();
@@ -16,23 +15,47 @@ const Selector: React.FC = () => {
     ];
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
             <div className="flex justify-start w-full h-[50px]">
-                <Select
-                    size="lg"
-                    items={cocinasList}
-                    defaultSelectedKeys={String(cocinaId)}
-                    value={String(cocinaId)}
-                    variant="underlined"
+                <select
+                    value={cocinaId}
                     onChange={(e) => setCocinaId(Number(e.target.value))}
-                    placeholder="Seleccione una cocina"
+                    className="
+                        w-full
+                        bg-[#0001]
+                        px-20
+                        border-b-2
+                        border-orange
+                        focus:border-orange
+                        focus:outline-none
+                        text-lg
+                        text-orange
+                        hover:text-orange
+                        transition-colors
+                        cursor-pointer
+                    "
                 >
-                    {(cocina) => (
-                        <SelectItem key={cocina.id} className="p-10 text-orange hover:text-orange text-lg font-bold">
+                    <option value="" disabled
+                        className=""
+                    >
+                        Seleccione una cocina
+                    </option>
+                    {cocinasList.map((cocina) => (
+                        <option
+                            key={cocina.id}
+                            value={cocina.id}
+                            className="
+                                p-2
+                                text-orange
+                                hover:text-orange
+                                bg-black
+                                font-bold
+                            "
+                        >
                             {cocina.name}
-                        </SelectItem>
-                    )}
-                </Select>
+                        </option>
+                    ))}
+                </select>
             </div>
         </div>
     );
