@@ -1,4 +1,3 @@
-// home.tsx para Enfriadores
 "use client";
 import React from 'react';
 import { useEnfriador } from "@/context/EnfriadorContext";
@@ -8,15 +7,10 @@ import CicloActivo from '../../components/cicloActivo';
 import EstadoEquipo from '../../components/estadoEquipo';
 import SectorIO from '../../components/sectorIO';
 import { getColorClass } from '@/utils/logicaColores';
+import { displayData } from '../../utils/displayData';
 
 export default function Home() {
     const { enfriadorData } = useEnfriador();
-
-    function displayData(data: string | number | boolean | null, unit?: string): string | number | boolean {
-        if (data === "N/A" || data === null) return "N/A";
-        if (typeof data === "boolean") return data ? "True" : "False";
-        return unit ? `${data} ${unit}` : data;
-    }
 
     const datosEnfriador = [
         { label: "Temp. Ingreso", value: enfriadorData.tempIng ?? "N/A", unit: "°C" },

@@ -3,8 +3,8 @@ import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import 'chartjs-adapter-date-fns';
 import { transformData, CocinaData } from '../utils/logicaGraficos';
-import { useCocina } from "@/context/CocinaContext"; // Importa el contexto
-import { useEnfriador } from "@/context/EnfriadorContext"; // Importa el contexto
+import { useCocina } from "@/context/CocinaContext";
+import { useEnfriador } from "@/context/EnfriadorContext";
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -32,15 +32,15 @@ const plugin: Plugin<'line'> = {
 
 const BarChart: React.FC = () => {
     const chartRef = useRef<HTMLCanvasElement>(null);
-    const { cocinaData } = useCocina(); // Usa el contexto
-    const { enfriadorData } = useEnfriador(); // Usa el contexto
+    const { cocinaData } = useCocina();
+    const { enfriadorData } = useEnfriador();
 
     const [chartData, setChartData] = useState<ChartConfiguration<'line'>['data'] | null>(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             // Solo ejecuta esto en el navegador
-            const transformedData = transformData([cocinaData, enfriadorData]); // Transforma los datos de ambos contextos
+            const transformedData = transformData([cocinaData, enfriadorData]);
             setChartData(transformedData);
         }
     }, [cocinaData, enfriadorData]);

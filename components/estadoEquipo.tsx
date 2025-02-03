@@ -9,7 +9,7 @@ interface EstadoEquipoProps {
 const EstadoEquipo: React.FC<EstadoEquipoProps> = ({ datos, getColorClass, displayData }) => {
     return (
         <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
-            <h2 className="flex justify-start text-center w-full h-50 py-auto text-xl">Estado Equipo</h2>
+            <h2 className="flex justify-start text-center w-full h-50 py-auto text-[calc(0.7vw+1vh)]">Estado Equipo</h2>
             <ul className="flex flex-col h-full w-full gap-1h">
                 {datos.map((dato) => (
                     <li key={dato.label} className="bg-grey flex flex-col w-full h-full px-20 py-1h rounded-md items-center">

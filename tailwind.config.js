@@ -5,7 +5,8 @@ module.exports = {
   content: [
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./utils/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -19,15 +20,16 @@ module.exports = {
       colors: {
         'orange': '#EF8225',
         'oranget': '#F826',
-        'blue': '#3AF',
+        'blue': '#30A0F0',
         'bluet': '#06E5',
         'water': '#33A7FD',
+        'red': '#F00',
         'green': '#54C42D',
         'white': '#D9D9D9',
-        'lightGrey' : '#8C8C8C',
+        'lightGrey': '#8C8C8C',
         'grey': '#1F1F1F',
         'black': '#131313',
-        'footerbg': '#2C2C2C',
+        'footerbg': '#2C2C2C'
       },
       spacing: {
         '0' : '0px',
