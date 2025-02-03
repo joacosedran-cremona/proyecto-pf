@@ -152,7 +152,7 @@ const BarChart: React.FC = () => {
     };
 
     return (
-        <div className="bg-black relative p-20 h-full w-full rounded-md custom:w-2/3 custom:h-full">
+        <div className="bg-black p-20 h-full w-full rounded-md custom:w-2/3 custom:h-full">
             <canvas ref={chartRef} style={canvasStyle}></canvas>
         </div>
     );

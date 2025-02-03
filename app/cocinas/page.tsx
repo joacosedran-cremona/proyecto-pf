@@ -7,15 +7,10 @@ import CicloActivo from '../../components/cicloActivo';
 import EstadoEquipo from '../../components/estadoEquipo';
 import SectorIO from '../../components/sectorIO';
 import { getColorClass } from '@/utils/logicaColores';
+import { displayData } from '@/utils/displayData';
 
 export default function Home() {
     const { cocinaData } = useCocina();
-
-    function displayData(data: string | number | boolean | null, unit?: string): string | number | boolean {
-        if (data === "N/A" || data === null) return "N/A";
-        if (typeof data === "boolean") return data ? "True" : "False";
-        return unit ? `${data} ${unit}` : data;
-    }
 
     const datosCocina = [
         { label: "Temp. Ingreso", value: cocinaData.tempIng ?? "N/A", unit: "°C" },
@@ -40,7 +35,7 @@ export default function Home() {
     ];
 
     return (
-        <section className="flex flex-col w-full h-full gap-20 flex-1">
+        <section className="flex flex-col w-full h-full gap-20">
             <div className="flex flex-row w-full h-full gap-20">
                 <div className="w-1/3 zIndex-0">
                     <Selector />

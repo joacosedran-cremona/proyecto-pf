@@ -18,13 +18,6 @@ export const metadata = {
   },
 };
 
-export const viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -35,14 +28,15 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-grey font-sans antialiased",
-          fontSans.variable,
+          "min-h-screen flex flex-col bg-grey font-sans antialiased",
+          fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col min-h-screen">
+        <Providers>
+          {/* Estructura principal con flexbox */}
+          <div className="flex flex-col min-h-screen">
             <Navbar />
-            <main className="w-full flex-grow bg-grey p-20">
+            <main className="flex-grow bg-grey p-20">
               {children}
             </main>
             <Footer />

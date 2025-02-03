@@ -7,7 +7,7 @@ import CicloActivo from '../../components/cicloActivo';
 import EstadoEquipo from '../../components/estadoEquipo';
 import SectorIO from '../../components/sectorIO';
 import { getColorClass } from '@/utils/logicaColores';
-import { displayData } from '../../utils/displayData';
+import { displayData } from '@/utils/displayData';
 
 export default function Home() {
     const { enfriadorData } = useEnfriador();
