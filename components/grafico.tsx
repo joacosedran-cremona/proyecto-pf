@@ -2,10 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import 'chartjs-adapter-date-fns';
-import { format } from 'date-fns';
 import { transformData, CocinaData } from '../utils/logicaGraficos';
-import { useCocina } from '@/context/CocinaContext';
-import { useEnfriador } from '@/context/EnfriadorContext';
+import { useCocina } from "@/context/CocinaContext"; // Importa el contexto
+import { useEnfriador } from "@/context/EnfriadorContext"; // Importa el contexto
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -33,15 +32,18 @@ const plugin: Plugin<'line'> = {
 
 const BarChart: React.FC = () => {
     const chartRef = useRef<HTMLCanvasElement>(null);
+    const { cocinaData } = useCocina(); // Usa el contexto
+    const { enfriadorData } = useEnfriador(); // Usa el contexto
+
     const [chartData, setChartData] = useState<ChartConfiguration<'line'>['data'] | null>(null);
 
-    const { cocinaData } = useCocina();
-    const { enfriadorData } = useEnfriador();
-
     useEffect(() => {
-        const transformedData = transformData(cocinaData); // O usar enfriadorData según el contexto
-        setChartData(transformedData);
-    }, [cocinaData, enfriadorData]); // Cambia estos estados según lo que necesites
+        if (typeof window !== 'undefined') {
+            // Solo ejecuta esto en el navegador
+            const transformedData = transformData([cocinaData, enfriadorData]); // Transforma los datos de ambos contextos
+            setChartData(transformedData);
+        }
+    }, [cocinaData, enfriadorData]);
 
     useEffect(() => {
         if (!chartRef.current || !chartData) return;

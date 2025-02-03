@@ -1,22 +1,12 @@
 // utils.ts
 export interface Paso {
     id: number;
-    temp_Ing?: number | null;
-    temp_Agua?: number | null;
-    temp_Prod?: number | null;
-    niv_Agua?: number | null;
-    tiempo: string;
-    tipo_Fin?: string;
-}
-
-export interface CocinaData {
-    num_cocina: number;
-    num_receta: number;
-    nom_receta: string;
-    estado: string;
-    cant_torres: number;
-    pasos: Paso[];
-    sector_io: SectorIO[];
+    temp_Ing: string | number | null;
+    temp_Agua: string | number | null;
+    temp_Prod: string | number | null;
+    niv_Agua: string | number | null;
+    tiempo: string | null;
+    tipo_Fin: string | null;
 }
 
 export interface SectorIO {
@@ -24,6 +14,22 @@ export interface SectorIO {
     vapor_vivo: boolean;
     vapor_serp: boolean;
     io_yy_eq_xx: boolean;
+}
+
+export interface CocinaData {
+    tempIng: string | number | null;
+    tempAgua: string | number | null;
+    tempProd: string | number | null;
+    nivAgua: string | number | null;
+    nom_receta: string | null;
+    num_receta: number | null;
+    estado: string | null;
+    cant_torres: number | null;
+    tiempo: string | null;
+    tipo_Fin: string | null;
+    pasos: Paso[];
+    ultimoPaso: Paso | null;
+    sectorIO: SectorIO[];
 }
 
 export const transformData = (data: CocinaData[]) => {
@@ -34,15 +40,16 @@ export const transformData = (data: CocinaData[]) => {
 
     data.forEach(cocina => {
         cocina.pasos.forEach(paso => {
-            labels.push(paso.tiempo);
-            if (paso.temp_Ing !== undefined && paso.temp_Ing !== null) {
-                tempIngData.push({ x: new Date(paso.tiempo).getTime(), y: paso.temp_Ing });
+            if (paso.tiempo) labels.push(paso.tiempo);
+            const tiempo = paso.tiempo ? new Date(paso.tiempo).getTime() : NaN;
+            if (paso.temp_Ing !== null && paso.temp_Ing !== 'N/A' && typeof paso.temp_Ing === 'number') {
+                tempIngData.push({ x: tiempo, y: paso.temp_Ing });
             }
-            if (paso.temp_Agua !== undefined && paso.temp_Agua !== null) {
-                tempAguaData.push({ x: new Date(paso.tiempo).getTime(), y: paso.temp_Agua });
+            if (paso.temp_Agua !== null && paso.temp_Agua !== 'N/A' && typeof paso.temp_Agua === 'number') {
+                tempAguaData.push({ x: tiempo, y: paso.temp_Agua });
             }
-            if (paso.temp_Prod !== undefined && paso.temp_Prod !== null) {
-                tempProdData.push({ x: new Date(paso.tiempo).getTime(), y: paso.temp_Prod });
+            if (paso.temp_Prod !== null && paso.temp_Prod !== 'N/A' && typeof paso.temp_Prod === 'number') {
+                tempProdData.push({ x: tiempo, y: paso.temp_Prod });
             }
         });
     });

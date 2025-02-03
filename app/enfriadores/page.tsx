@@ -1,3 +1,4 @@
+// home.tsx para Enfriadores
 "use client";
 import React from 'react';
 import { useEnfriador } from "@/context/EnfriadorContext";
@@ -6,6 +7,7 @@ import Grafico from "../../components/grafico";
 import CicloActivo from '../../components/cicloActivo';
 import EstadoEquipo from '../../components/estadoEquipo';
 import SectorIO from '../../components/sectorIO';
+import { getColorClass } from '@/utils/logicaColores';
 
 export default function Home() {
     const { enfriadorData } = useEnfriador();
@@ -15,11 +17,6 @@ export default function Home() {
         if (typeof data === "boolean") return data ? "True" : "False";
         return unit ? `${data} ${unit}` : data;
     }
-
-    const getColorClass = (label: string, value: string | number | null) => {
-        if (value === "N/A") return "text-white";
-        return label === "Nivel Agua" ? "text-water" : "text-blue";
-    };
 
     const datosEnfriador = [
         { label: "Temp. Ingreso", value: enfriadorData.tempIng ?? "N/A", unit: "°C" },
@@ -60,10 +57,10 @@ export default function Home() {
             <div className="w-full flex flex-col h-[75vh] gap-20 custom:flex-row">
                 <div className="w-full flex flex-row h-full gap-20 custom:w-1/3 custom:flex-col">
                     <div className="w-3/4 flex flex-row gap-20 h-full custom:w-full custom:h-2/3">
-                        <EstadoEquipo datos={datosEnfriador} getColorClass={getColorClass} displayData={displayData} />
-                        <CicloActivo datosCiclo={datosCiclo} displayData={displayData} />
+                        <EstadoEquipo datos={datosEnfriador} getColorClass={(label, value) => getColorClass(label, value, 'blue')} displayData={displayData} />
+                        <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor='green' />
                     </div>
-                    <SectorIO datosIO={datosIO} displayData={displayData} />
+                    <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, 'blue')} displayData={displayData} />
                 </div>
                 <Grafico />
             </div>
