@@ -48,9 +48,9 @@ export default function Home() {
                 </p>
             </div>
 
-            <div className="w-full flex flex-col h-[75vh] gap-20 custom:flex-row">
-                <div className="w-full flex flex-row h-full gap-20 custom:w-1/3 custom:flex-col">
-                    <div className="w-3/4 flex flex-row gap-20 h-full custom:w-full custom:h-2/3">
+            <div className="w-full flex flex-col gap-20 1365:flex-row">
+                <div className="w-full flex flex-row h-full gap-20 1365:w-1/3 1365:flex-col">
+                    <div className="w-3/4 flex flex-row gap-20 h-full 1365:w-full 1365:h-2/3">
                         <EstadoEquipo datos={datosCocina} getColorClass={(label, value) => getColorClass(label, value, 'orange')} displayData={displayData} />
                         <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor='green' />
                     </div>

@@ -116,15 +116,9 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
         return () => chartInstance.destroy();
     }, [cocinaData, enfriadorData, contextType]);
 
-    const canvasStyle: React.CSSProperties = {
-        display: 'block',
-        width: '100%',
-        height: '100%'
-    };
-
     return (
-        <div className="bg-black p-20 h-full w-full rounded-md custom:w-2/3 custom:h-full">
-            <canvas ref={chartRef} style={canvasStyle}></canvas>
+        <div className="bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full">
+            <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
         </div>
     );
 };

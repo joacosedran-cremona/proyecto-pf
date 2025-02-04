@@ -15,7 +15,8 @@ module.exports = {
         mono: ["var(--font-mono)"],
       },
       screens: {
-        'custom': '1365px',  // Este es el nuevo breakpoint
+        '1365': '1365px',
+        '545' : '545px',
       },
       colors: {
         'orange': '#EF8225',

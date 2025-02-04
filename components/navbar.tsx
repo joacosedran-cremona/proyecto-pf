@@ -38,8 +38,6 @@ const opcionesIconos: OpcionIcono[] = [
 
 const opcionesMenu: OpcionMenu[] = [
     { id: 1, url: "/", text: "Home" },
-    { id: 2, url: "/panel", text: "Panel" },
-    { id: 3, url: "/graficos", text: "Graficos" },
 ];
 
 const opcionesBotones: OpcionBoton[] = [
@@ -152,7 +150,6 @@ return (
         </nav>
 
         {/*Segundo Nav*/}
-
         <nav
             className="flex flex-row w-full bg-black p-3 h-40"
         >
