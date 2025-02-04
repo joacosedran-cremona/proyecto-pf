@@ -13,7 +13,7 @@ const Selector: React.FC = () => {
         { id: 5, name: "Cocina 5" },
         { id: 6, name: "Cocina 6" }
     ];
-
+    
     return (
         <div className="flex flex-col">
             <div className="flex justify-start w-full h-[50px]">
