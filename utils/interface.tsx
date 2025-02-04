@@ -2,11 +2,10 @@
 
 export interface Paso {
     id: number;
-    temp_Ing: string | number | null;
     temp_Agua: string | number | null;
     temp_Prod: string | number | null;
     niv_Agua: string | number | null;
-    tiempo: string | null;
+    tiempo: number | null;
     tipo_Fin: string | null;
 }
 

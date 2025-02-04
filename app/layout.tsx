@@ -33,7 +33,6 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          {/* Estructura principal con flexbox */}
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow bg-grey p-20">

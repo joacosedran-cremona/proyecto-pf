@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Chart, registerables, ChartConfiguration } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import 'chartjs-adapter-date-fns';
 import { useCocina } from '@/context/CocinaContext';
 import { useEnfriador } from '@/context/EnfriadorContext';
 import { transformData } from '../utils/logicaGraficos';
@@ -69,11 +68,27 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                     tooltip: {
                         callbacks: {
                             label: (context) => {
-                                const label = context.dataset.label || '';
-                                return `${label}: ${context.parsed.y}`;
+                                const datasetLabel = context.dataset.label || 'Temperatura';
+                                const temperature = context.parsed.y; // Valor de temperatura
+                                const totalSeconds = Math.floor(context.parsed.x); // Tiempo sin decimales
+                    
+                                // Convertir segundos a formato hh:mm:ss
+                                const hours = Math.floor(totalSeconds / 3600);
+                                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                                const seconds = totalSeconds % 60;
+                                const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                                return [
+                                    `Tiempo transcurrido: ${timeFormatted}`,
+                                    `${datasetLabel}: ${temperature}°C`
+                                ];
+                            },
+                            title: () => {
+                                return ''; // No mostrar título, que es el valor del eje X (tiempo)
                             }
                         }
                     }
+                    
                 },
                 scales: {
                     y: {
@@ -91,13 +106,23 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         }
                     },
                     x: {
-                        type: 'time',
-                        time: {
-                            tooltipFormat: 'dd/MM/yyyy',
+                        type: 'linear',
+                        position: 'bottom',
+                        min: 0,
+                        ticks: {
+                            stepSize: 10,
+                            callback: (value) => {
+                                const totalSeconds = Math.floor(Number(value));
+                                const hours = Math.floor(totalSeconds / 3600);
+                                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                                const seconds = totalSeconds % 60;
+                    
+                                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                            }
                         },
                         title: {
                             display: true,
-                            text: 'Fecha y Hora'
+                            text: 'Tiempo (hh:mm:ss)',
                         },
                         border: {
                             color: '#D9D9D9'
@@ -107,6 +132,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                             tickColor: '#fff'
                         }
                     }
+                    
                 }
             }
         };

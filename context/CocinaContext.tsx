@@ -6,7 +6,7 @@ interface Paso {
     temp_Agua: string | number | null;
     temp_Prod: string | number | null;
     niv_Agua: string | number | null;
-    tiempo: string | null;
+    tiempo: number | null;  // Cambiado a number | null
     tipo_Fin: string | null;
 }
 
@@ -74,7 +74,7 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
                     const ultimoPaso = pasos ? pasos[pasos.length - 1] : null;
                     
                     setCocinaData({
-                        tempIng: ultimoPaso?.temp_Ing ?? "N/A",
+                        tempIng: selectedCocina.temp_Ing ?? "N/A",
                         tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
                         tempProd: ultimoPaso?.temp_Prod ?? "N/A",
                         nivAgua: ultimoPaso?.niv_Agua ?? "N/A",

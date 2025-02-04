@@ -5,10 +5,10 @@
         "nom_receta": "Pate",
         "estado": "PRE-CALENTADO",
         "cant_torres": 2,
+        "temp_Ing": 24,
         "pasos": [
             {
                 "id": 1,
-                "temp_Ing": 24,
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
@@ -17,63 +17,56 @@
             },
             {
                 "id": 2,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 30,
+                "temp_Prod": 25,
                 "niv_Agua": 1702,
                 "tiempo": 10,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 3,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 40,
+                "temp_Prod": 35,
                 "niv_Agua": 1702,
                 "tiempo": 20,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 4,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
                 "niv_Agua": 1702,
                 "tiempo": 30,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 5,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 60,
+                "temp_Prod": 55,
                 "niv_Agua": 1702,
                 "tiempo": 40,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 6,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
                 "niv_Agua": 1702,
                 "tiempo": 50,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 7,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
                 "niv_Agua": 1702,
                 "tiempo": 60,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 8,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 90,
+                "temp_Prod": 85,
                 "niv_Agua": 1702,
                 "tiempo": 70,
                 "tipo_Fin": "50°C"
@@ -97,7 +90,6 @@
         "pasos": [
             {
                 "id": 1,
-                "temp_Ing": 24,
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
@@ -106,63 +98,56 @@
             },
             {
                 "id": 2,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 30,
+                "temp_Prod": 25,
                 "niv_Agua": 1702,
                 "tiempo": 10,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 3,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 40,
+                "temp_Prod": 35,
                 "niv_Agua": 1702,
                 "tiempo": 20,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 4,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
                 "niv_Agua": 1702,
                 "tiempo": 30,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 5,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 60,
+                "temp_Prod": 55,
                 "niv_Agua": 1702,
                 "tiempo": 40,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 6,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
                 "niv_Agua": 1702,
                 "tiempo": 50,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 7,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
                 "niv_Agua": 1702,
                 "tiempo": 60,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 8,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 90,
+                "temp_Prod": 85,
                 "niv_Agua": 1702,
                 "tiempo": 70,
                 "tipo_Fin": "50°C"
@@ -183,10 +168,10 @@
         "nom_receta": "Pollo Asado",
         "estado": "EN ESPERA",
         "cant_torres": 1,
+        "temp_Ing": 21,
         "pasos": [
             {
                 "id": 1,
-                "temp_Ing": 24,
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
@@ -195,63 +180,56 @@
             },
             {
                 "id": 2,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 30,
+                "temp_Prod": 25,
                 "niv_Agua": 1702,
                 "tiempo": 10,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 3,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 40,
+                "temp_Prod": 35,
                 "niv_Agua": 1702,
                 "tiempo": 20,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 4,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
                 "niv_Agua": 1702,
                 "tiempo": 30,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 5,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 60,
+                "temp_Prod": 55,
                 "niv_Agua": 1702,
                 "tiempo": 40,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 6,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
                 "niv_Agua": 1702,
                 "tiempo": 50,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 7,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
                 "niv_Agua": 1702,
                 "tiempo": 60,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 8,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 90,
+                "temp_Prod": 85,
                 "niv_Agua": 1702,
                 "tiempo": 70,
                 "tipo_Fin": "50°C"
@@ -272,10 +250,10 @@
         "nom_receta": "Arroz con Pollo",
         "estado": "COCINANDO",
         "cant_torres": 2,
+        "temp_Ing": 24,
         "pasos": [
             {
                 "id": 1,
-                "temp_Ing": 24,
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
@@ -284,63 +262,56 @@
             },
             {
                 "id": 2,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 30,
+                "temp_Prod": 25,
                 "niv_Agua": 1702,
                 "tiempo": 10,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 3,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 40,
+                "temp_Prod": 35,
                 "niv_Agua": 1702,
                 "tiempo": 20,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 4,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
                 "niv_Agua": 1702,
                 "tiempo": 30,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 5,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 60,
+                "temp_Prod": 55,
                 "niv_Agua": 1702,
                 "tiempo": 40,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 6,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
                 "niv_Agua": 1702,
                 "tiempo": 50,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 7,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
                 "niv_Agua": 1702,
                 "tiempo": 60,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 8,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 90,
+                "temp_Prod": 85,
                 "niv_Agua": 1702,
                 "tiempo": 70,
                 "tipo_Fin": "50°C"
@@ -361,10 +332,10 @@
         "nom_receta": "Pastel de Carne",
         "estado": "PRE-CALENTADO",
         "cant_torres": 1,
+        "temp_Ing": 24,
         "pasos": [
             {
                 "id": 1,
-                "temp_Ing": 24,
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
@@ -373,63 +344,56 @@
             },
             {
                 "id": 2,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 30,
+                "temp_Prod": 25,
                 "niv_Agua": 1702,
                 "tiempo": 10,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 3,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 40,
+                "temp_Prod": 35,
                 "niv_Agua": 1702,
                 "tiempo": 20,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 4,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
                 "niv_Agua": 1702,
                 "tiempo": 30,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 5,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 60,
+                "temp_Prod": 55,
                 "niv_Agua": 1702,
                 "tiempo": 40,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 6,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
                 "niv_Agua": 1702,
                 "tiempo": 50,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 7,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
                 "niv_Agua": 1702,
                 "tiempo": 60,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 8,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 90,
+                "temp_Prod": 85,
                 "niv_Agua": 1702,
                 "tiempo": 70,
                 "tipo_Fin": "50°C"
@@ -456,10 +420,10 @@
         "nom_receta": "Estofado de Res",
         "estado": "PRE-CALENTADO",
         "cant_torres": 2,
+        "temp_Ing": 24,
         "pasos": [
             {
                 "id": 1,
-                "temp_Ing": 24,
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
@@ -468,63 +432,56 @@
             },
             {
                 "id": 2,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 30,
+                "temp_Prod": 25,
                 "niv_Agua": 1702,
                 "tiempo": 10,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 3,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 40,
+                "temp_Prod": 35,
                 "niv_Agua": 1702,
                 "tiempo": 20,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 4,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
                 "niv_Agua": 1702,
                 "tiempo": 30,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 5,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 60,
+                "temp_Prod": 55,
                 "niv_Agua": 1702,
                 "tiempo": 40,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 6,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
                 "niv_Agua": 1702,
                 "tiempo": 50,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 7,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
                 "niv_Agua": 1702,
                 "tiempo": 60,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 8,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 90,
+                "temp_Prod": 85,
                 "niv_Agua": 1702,
                 "tiempo": 70,
                 "tipo_Fin": "50°C"
@@ -545,10 +502,10 @@
         "nom_receta": "Guiso de Vegetales",
         "estado": "COCINANDO",
         "cant_torres": 3,
+        "temp_Ing": 24,
         "pasos": [
             {
                 "id": 1,
-                "temp_Ing": 24,
                 "temp_Agua": 24,
                 "temp_Prod": 19,
                 "niv_Agua": 1702,
@@ -557,63 +514,56 @@
             },
             {
                 "id": 2,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 30,
+                "temp_Prod": 25,
                 "niv_Agua": 1702,
                 "tiempo": 10,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 3,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 40,
+                "temp_Prod": 35,
                 "niv_Agua": 1702,
                 "tiempo": 20,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 4,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 50,
+                "temp_Prod": 45,
                 "niv_Agua": 1702,
                 "tiempo": 30,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 5,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 60,
+                "temp_Prod": 55,
                 "niv_Agua": 1702,
                 "tiempo": 40,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 6,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 70,
+                "temp_Prod": 65,
                 "niv_Agua": 1702,
                 "tiempo": 50,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 7,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 80,
+                "temp_Prod": 75,
                 "niv_Agua": 1702,
                 "tiempo": 60,
                 "tipo_Fin": "50°C"
             },
             {
                 "id": 8,
-                "temp_Ing": 24,
-                "temp_Agua": 24,
-                "temp_Prod": 19,
+                "temp_Agua": 90,
+                "temp_Prod": 85,
                 "niv_Agua": 1702,
                 "tiempo": 70,
                 "tipo_Fin": "50°C"

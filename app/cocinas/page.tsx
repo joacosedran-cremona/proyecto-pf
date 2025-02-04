@@ -35,28 +35,36 @@ export default function Home() {
     ];
 
     return (
-        <section className="flex flex-col w-full h-full gap-20 flex-1">
-            <div className="flex flex-row w-full h-full gap-20">
+        <section className="flex flex-col gap-20 min-h-[85vh]">
+            <div className="flex w-full h-full gap-20">
                 <div className="w-1/3 zIndex-0">
                     <Selector />
                 </div>
-                <p className="bg-oranget flex justify-start items-center h-50 p-15 w-1/3 border-1 border-orange text-[20px] font-semibold rounded-md">
+                <p className="bg-oranget flex justify-start items-center h-50 p-15 w-1/3 border-1 border-orange text-[calc(1vw+0.7vh)] font-semibold rounded-md">
                     Receta: {cocinaData.nom_receta ?? "N/A"}
                 </p>
-                <p className="bg-black flex justify-start items-center h-50 p-15 w-1/3 border-1 border-orange text-[20px] font-semibold rounded-md">
+                <p className="bg-black flex justify-start items-center h-50 p-15 w-1/3 border-1 border-orange text-[calc(1vw+0.7vh)] font-semibold rounded-md">
                     Estado: {cocinaData.estado ?? "N/A"}
                 </p>
             </div>
 
-            <div className="w-full flex flex-col gap-20 1365:flex-row">
-                <div className="w-full flex flex-row h-full gap-20 1365:w-1/3 1365:flex-col">
-                    <div className="w-3/4 flex flex-row gap-20 h-full 1365:w-full 1365:h-2/3">
-                        <EstadoEquipo datos={datosCocina} getColorClass={(label, value) => getColorClass(label, value, 'orange')} displayData={displayData} />
-                        <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor='green' />
+            <div className="flex flex-col w-full min-h-full gap-20 1365:flex-row flex-1">
+                <div className="flex w-full gap-20 1365:grid 1365:w-1/3">
+                    <div className="flex w-2/3 gap-20 1365:w-full">
+                        <div className="bg-black grid p-20 w-full h-full rounded-md">
+                            <EstadoEquipo datos={datosCocina} getColorClass={(label, value) => getColorClass(label, value, 'orange')} displayData={displayData} />
+                        </div>
+                        <div className="bg-black grid p-20 w-full h-full rounded-md">
+                            <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor='green' />
+                        </div>
                     </div>
-                    <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, 'blue')} displayData={displayData} />
+                    <div className="bg-black grid h-full p-20 w-1/3 flex-grow rounded-md 1365:w-full">
+                        <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, 'orange')} displayData={displayData} />
+                    </div>
                 </div>
-                <Grafico contextType="cocinas" />
+                <div className="w-full 1365:w-2/3">
+                    <Grafico contextType="enfriadores" />
+                </div>
             </div>
         </section>
     );
