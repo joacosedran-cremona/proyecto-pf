@@ -1,20 +1,25 @@
-"use client"
+"use client";
 import React, { useEffect, useRef } from 'react';
 import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { useLinea } from '@/context/LineaContext';
-import { transformData } from '../utils/logicaGraficos';
+import { transformData } from '../utils/logicaGraficosLinea';
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
 const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> = ({ contextType, id }) => {
     const chartRef = useRef<HTMLCanvasElement>(null);
-    const { lineaSeleccionada, lineasData } = useLinea(); // CORREGIDO: Usar lineasData
+    const { lineaSeleccionada, lineasData } = useLinea();
 
     useEffect(() => {
-        const equipo = lineasData[lineaSeleccionada]?.[contextType]?.find(e => e.id === id);
-        if (!equipo || !chartRef.current) return;
+        if (!lineasData) return;
+
+        const equipo = contextType === 'cocinas' ? 
+            lineasData.cocinas.find(e => e.num_cocina === id) : 
+            lineasData.enfriadores.find(e => e.num_enfriador === id);
+
+        if (!equipo || !equipo.pasos || !chartRef.current) return;
 
         const ctx = chartRef.current.getContext('2d');
         if (!ctx) return;
@@ -44,7 +49,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
             }
         };
 
-        const chartData = transformData(equipo.datos); // CORREGIDO: Usar equipo.datos
+        const chartData = transformData(equipo.pasos);
 
         const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
         const tituloColor = contextType === 'cocinas' ? '#EF8225' : '#3AF';
@@ -164,9 +169,24 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         const chartInstance = new Chart(ctx, config);
 
         return () => {
-            chartInstance.destroy(); // CORREGIDO: Función de limpieza válida
+            chartInstance.destroy();
         };
     }, [lineasData, lineaSeleccionada, contextType, id]);
+
+    // Verificar si el equipo está inactivo
+    const equipo = contextType === 'cocinas' ? 
+        lineasData?.cocinas.find(e => e.num_cocina === id) : 
+        lineasData?.enfriadores.find(e => e.num_enfriador === id);
+
+    if (equipo && equipo.estado === 'INACTIVO') {
+        // Mostrar mensaje de inactivo si el estado es 'INACTIVO'
+        const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
+        return (
+            <div className="bg-black p-20 h-full w-full rounded-md flex items-center justify-center text-white text-2xl">
+                {nombreEquipo} - INACTIVO
+            </div>
+        );
+    }
 
     return (
         <div className="bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full">

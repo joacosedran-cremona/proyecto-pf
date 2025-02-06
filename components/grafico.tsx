@@ -24,7 +24,6 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
         const image = new Image();
         image.src = '/creminox.png';
 
-        // Define el plugin directamente como tipo Plugin
         const plugin: Plugin = {
             id: 'customCanvasBackgroundImage',
             beforeDraw: (chart: Chart) => {

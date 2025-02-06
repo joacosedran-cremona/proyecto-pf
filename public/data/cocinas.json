@@ -167,7 +167,7 @@
         "num_cocina": 3,
         "num_receta": 3,
         "nom_receta": "Pollo Asado",
-        "estado": "EN ESPERA",
+        "estado": "PAUSADO",
         "cant_torres": 1,
         "temp_Ing": 24,
         "pasos": [
@@ -410,9 +410,7 @@
         ]
     },
     {
-        "num_enfriador": 6,
-        "num_receta": 6,
-        "nom_receta": "Pastel de Carne",
+        "num_cocina": 6,
         "estado": "INACTIVO"
     }
 ]
