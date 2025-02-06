@@ -9,7 +9,7 @@ import SectorIO from '@/components/sectorIO';
 import { getColorClass } from '@/utils/logicaColores';
 import { displayData } from '@/utils/displayData';
 
-export default function Cocinas() {
+export default function Home() {
     const { cocinaData } = useCocina();
 
     const datosCocina = [
@@ -69,3 +69,4 @@ export default function Cocinas() {
         </section>
     );
 }
+
