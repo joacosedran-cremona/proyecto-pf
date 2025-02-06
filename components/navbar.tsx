@@ -38,6 +38,8 @@ const opcionesIconos: OpcionIcono[] = [
 
 const opcionesMenu: OpcionMenu[] = [
     { id: 1, url: "/", text: "Home" },
+    { id: 2, url: "/historico", text: "Historico" },
+    { id: 3, url: "/monitoreo", text: "Monitoreo" },
 ];
 
 const opcionesBotones: OpcionBoton[] = [
@@ -130,7 +132,7 @@ return (
                     </li>
                     ))}
                     <div
-                        className="h-full min-w-[105px] w-[105px]"
+                        className="h-full min-w-[105px] w-[105px] hidden 1050:block"
                     >
                         <Link
                             href="https://creminox.com"

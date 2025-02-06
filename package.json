@@ -9,6 +9,7 @@
   "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
  },
  "dependencies": {
+  "@heroui/image": "^2.2.6",
   "@heroui/react": "^2.6.14",
   "@heroui/system": "2.4.6",
   "@heroui/theme": "2.4.5",

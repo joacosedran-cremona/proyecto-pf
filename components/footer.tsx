@@ -50,7 +50,7 @@ return (
                 className="flex flex-row w-full max-w-1920 h-[165px] justify-between align-middle p-40"
             >
                 <ul
-                    className="flex flex-col justify-center align-middle h-full w-30"
+                    className="flex flex-col justify-center align-middle h-full w-[30%]"
                 >
                     {opcionesIzq.map(({ id, icono, link, texto }) => (
                         <li 
@@ -100,7 +100,7 @@ return (
                 </div>
                 
                 <ul
-                    className="flex flex-col justify-center align-middle h-full w-30"
+                    className="flex flex-col justify-center align-middle h-full w-[30%]"
                 >
                     {opcionesDer.map(({ id, icono, link, texto }) => (
                         <li

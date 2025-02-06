@@ -2,13 +2,11 @@ import { CocinaData, EnfriadorData } from './interface';
 
 export const transformData = (data: (CocinaData | EnfriadorData)[]) => {
     const labels: string[] = [];
-    const tempIngData: { x: number, y: number }[] = [];
     const tempAguaData: { x: number, y: number }[] = [];
     const tempProdData: { x: number, y: number }[] = [];
 
     data.forEach(item => {
         item.pasos.forEach((paso) => {
-            // Verificar si el tiempo es un número válido
             const tiempo = paso.tiempo;
             if (tiempo !== null && !isNaN(tiempo)) {
                 if (paso.temp_Agua !== null && paso.temp_Agua !== 'N/A' && typeof paso.temp_Agua === 'number') {

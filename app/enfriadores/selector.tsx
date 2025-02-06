@@ -1,7 +1,6 @@
 "use client";
 
 import { useEnfriador } from "@/context/EnfriadorContext";
-import { Select, SelectItem } from "@heroui/react";
 
 const Selector: React.FC = () => {
     const { enfriadorId, setEnfriadorId } = useEnfriador();

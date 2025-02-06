@@ -9,7 +9,7 @@ import SectorIO from '../../components/sectorIO';
 import { getColorClass } from '@/utils/logicaColores';
 import { displayData } from '@/utils/displayData';
 
-export default function Home() {
+export default function Enfriadores() {
     const { enfriadorData } = useEnfriador();
 
     const datosEnfriador = [
