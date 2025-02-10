@@ -11,9 +11,9 @@ const CicloActivo: React.FC<CicloActivoProps> = ({ datosCiclo, displayData, defa
     return (
         <>
             <h2 className="text-xl">Ciclo Activo</h2>
-            <ul className="grid gap-1h">
+            <ul className="grid gap-[1vh]">
                 {datosCiclo.map((dato) => (
-                    <li key={dato.label} className="bg-grey grid px-20 py-1h rounded-md items-center">
+                    <li key={dato.label} className="bg-grey grid px-20 py-[1vh] rounded-md items-center">
                         <p className="text-[calc(0.4vw+0.9vh)]">
                             {dato.label}
                         </p>

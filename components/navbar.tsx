@@ -112,7 +112,7 @@ return (
                 className="flex flex-row w-[30%] justify-end"
             >
                 <ul
-                    className="flex flex-row w-full h-full gap-1w justify-end"
+                    className="flex flex-row w-full h-full gap-[1vw] justify-end"
                 >
                     {opcionesMenu.map(({ id, url, text }) => (
                     <li

@@ -11,9 +11,9 @@ const EstadoEquipo: React.FC<EstadoEquipoProps> = ({ datos, getColorClass, displ
     return (
         <>
             <h2 className="text-xl">Estado Equipo</h2>
-            <ul className="grid gap-1h">
+            <ul className="grid gap-[1vh]">
                 {datos.map((dato) => (
-                    <li key={dato.label} className="bg-grey grid px-20 py-1h rounded-md items-center">
+                    <li key={dato.label} className="bg-grey grid px-20 py-[1vh] rounded-md items-center">
                         <p className="text-[calc(0.6vw+1vh)]">
                             {dato.label}
                         </p>
