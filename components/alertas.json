@@ -1,0 +1,37 @@
+[
+    {
+        "key": "1",
+        "description": "Alarma de temperatura alta",
+        "type": "Temperatura",
+        "state": "Activo",
+        "time": "2025-02-10 14:30:00"
+    },
+    {
+        "key": "2",
+        "description": "Fallo en el sistema de refrigeración",
+        "type": "Sistema",
+        "state": "Inactivo",
+        "time": "2025-02-10 13:45:00"
+    },
+    {
+        "key": "3",
+        "description": "Intrusión detectada en la zona 3",
+        "type": "Seguridad",
+        "state": "Activo",
+        "time": "2025-02-10 12:15:00"
+    },
+    {
+        "key": "4",
+        "description": "Presión baja en tuberías",
+        "type": "Presión",
+        "state": "Crítico",
+        "time": "2025-02-10 11:30:00"
+    },
+    {
+        "key": "5",
+        "description": "Fallo en conexión de red",
+        "type": "Red",
+        "state": "Inactivo",
+        "time": "2025-02-10 10:20:00"
+    }
+]

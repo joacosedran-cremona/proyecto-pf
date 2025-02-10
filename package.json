@@ -15,6 +15,7 @@
   "@heroui/theme": "2.4.5",
   "@react-aria/ssr": "3.9.7",
   "@react-aria/visually-hidden": "3.8.18",
+  "@react-stately/data": "^3.12.1",
   "@types/chart.js": "^2.9.41",
   "@types/react-select": "^5.0.0",
   "chart.js": "^4.4.7",
