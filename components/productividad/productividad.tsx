@@ -65,7 +65,7 @@ const Productividad = () => {
   });
 
   return (
-    <div className="flex flex-row gap-20">
+    <div className="flex flex-row h-full gap-20">
       {/* Sección principal de productividad */}
       <div className="bg-black p-20 w-4/5 rounded-md">
         <Metrics data={data} dateRange={dateRange} />
@@ -76,7 +76,6 @@ const Productividad = () => {
       </div>
       {/* Sección de filtro de fechas */}
       <div className="bg-black p-20 w-1/5 rounded-md">
-        <h2 className="flex items-center justify-center text-xl">FILTRADO DE FECHAS</h2>
         <FiltroPeriodo />
       </div>
     </div>

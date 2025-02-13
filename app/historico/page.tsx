@@ -10,7 +10,7 @@ export default function Historico() {
       <div className="w-full h-[80vh]">
         <Grafico contextType="enfriadores" />
       </div>
-      <div className="w-full rounded-md ">
+      <div className="w-full h-auto rounded-md ">
         <Productividad />
       </div>
     </section>

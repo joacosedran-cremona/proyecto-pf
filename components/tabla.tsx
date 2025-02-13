@@ -60,9 +60,9 @@ const Tabla: React.FC = () => {
         aria-label="Tabla de alertas"
         classNames={{
           base: "max-h-screen overflow-scroll bg-black rounded-2xl",
-          table: "min-h-[59vh]",
-          thead: "bg-footerbg",
-          tr: "flex flex-row w-full justify-between items-center p-20",
+          table: "min-h-[59vh] items-center",
+          thead: "bg-footerbg py-auto items-center",
+          tr: "flex flex-row h-full w-full justify-between items-center p-20",
           th: "flex flex-row w-[15%] justify-start items-center cursor-pointer",
           td: "flex flex-row w-[15%] justify-start items-center"
         }}

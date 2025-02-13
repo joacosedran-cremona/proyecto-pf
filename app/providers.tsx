@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { CocinaProvider } from "@/context/CocinaContext";
 import { EnfriadorProvider } from "@/context/EnfriadorContext";
+import { LineaProvider } from "@/context/LineaContext";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -28,11 +29,13 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <HeroUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps}>
-        <CocinaProvider>
-          <EnfriadorProvider>
-            {children}
-          </EnfriadorProvider>
-        </CocinaProvider>
+        <LineaProvider>
+          <CocinaProvider>
+            <EnfriadorProvider>
+              {children}
+            </EnfriadorProvider>
+          </CocinaProvider>
+        </LineaProvider>
       </NextThemesProvider>
     </HeroUIProvider>
   );
