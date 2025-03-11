@@ -33,6 +33,13 @@ module.exports = {
         grey: "#1F1F1F",
         black: "#131313",
         footerbg: "#2C2C2C",
+        
+        redState: "#F00",
+        yellowState: "#FFFF66",
+        greenState: "#AAEE66",
+        blueState: "#44CCEE",
+        grayState: "#8D8D8D",
+
       },
       spacing: {
         0: "0px",

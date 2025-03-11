@@ -57,14 +57,15 @@ const Tabla: React.FC = () => {
   return (
     <div className="w-full h-full">
       <Table
+        removeWrapper 
         aria-label="Tabla de alertas"
         classNames={{
-          base: "max-h-screen overflow-scroll bg-black rounded-2xl",
+          base: "max-h-screen bg-black rounded-2xl",
           table: "min-h-[59vh] items-center",
-          thead: "bg-footerbg py-auto items-center",
-          tr: "flex flex-row h-full w-full justify-between items-center p-20",
-          th: "flex flex-row w-[15%] justify-start items-center cursor-pointer",
-          td: "flex flex-row w-[15%] justify-start items-center"
+          thead: "flex flex-row bg-footerbg py-auto items-center p-20 rounded-2xl",
+          th: "flex flex-row h-full w-[15%] justify-start items-center cursor-pointer bg-footerbg",
+          tr: "flex flex-row h-full w-full justify-between items-center",
+          td: "flex flex-row h-full w-[15%] justify-start items-center"
         }}
         sortDescriptor={list.sortDescriptor}
         onSortChange={list.sort}

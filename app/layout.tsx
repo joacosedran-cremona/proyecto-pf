@@ -27,7 +27,7 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen w-screen bg-grey font-mono antialiased"
+          "min-h-screen bg-grey font-mono antialiased"
         )}
       >
         <Providers>

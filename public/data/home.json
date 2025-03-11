@@ -1,0 +1,129 @@
+{ 
+    "lineas":
+    [ 
+        { 
+            "id": 1, 
+            "equipos":
+            [
+                { 
+                    "nombre": "C1L1", 
+                    "estado": "INACTIVO", 
+                    "tempAguaActual": 0, 
+                    "tempProductoActual": 0, 
+                    "receta": "STRING", 
+                    "tiempoTranscurrido": "HH:MM" 
+                }, 
+                {
+                    "nombre": "C2L1", 
+                    "estado": "COCINANDO", 
+                    "tempAguaActual": 0, 
+                    "tempProductoActual": 0, 
+                    "receta": "STRING", 
+                    "tiempoTranscurrido": "HH:MM"
+                }, 
+                {
+                    "nombre": "C3L1", 
+                    "estado": "PAUSA", 
+                    "tempAguaActual": 0, 
+                    "tempProductoActual": 0, 
+                    "receta": "STRING", 
+                    "tiempoTranscurrido": "HH:MM"
+                }, 
+                {
+                    "nombre": "E1L1", 
+                    "estado": "FALLA", 
+                    "tempAguaActual": 0, 
+                    "tempProductoActual": 0, 
+                    "receta": "STRING", 
+                    "tiempoTranscurrido": "HH:MM"
+                }, 
+                {
+                    "nombre": "E2L1", 
+                    "estado": "ENFRIANDO", 
+                    "tempAguaActual": 0, 
+                    "tempProductoActual": 0, 
+                    "receta": "STRING", 
+                    "tiempoTranscurrido": "HH:MM"
+                }, 
+                {
+                    "nombre": "E3L1", 
+                    "estado": "INACTIVO", 
+                    "tempAguaActual": 0, 
+                    "tempProductoActual": 0, 
+                    "receta": "STRING", 
+                    "tiempoTranscurrido": "HH:MM"
+                }, 
+                {
+                    "nombre": "E4L1", 
+                    "estado": "FALLA", 
+                    "tempAguaActual": 0, 
+                    "tempProductoActual": 0, 
+                    "receta": "STRING", 
+                    "tiempoTranscurrido": "HH:MM"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "equipos":
+            [
+                {
+                    "nombre": "C1L2",
+                    "estado": "FINALIZADO",
+                    "tempAguaActual": 0,
+                    "tempProductoActual": 0,
+                    "receta": "STRING",
+                    "tiempoTranscurrido": "HH:MM" 
+                },
+                {
+                    "nombre": "C2L2",
+                    "estado": "FALLA",
+                    "tempAguaActual": 0,
+                    "tempProductoActual": 0,
+                    "receta": "STRING",
+                    "tiempoTranscurrido": "HH:MM" 
+                },
+                {
+                    "nombre": "C3L2",
+                    "estado": "INACTIVO",
+                    "tempAguaActual": 0,
+                    "tempProductoActual": 0,
+                    "receta": "STRING",
+                    "tiempoTranscurrido": "HH:MM" 
+                },
+                {
+                    "nombre": "E1L2",
+                    "estado": "ENFRIANDO",
+                    "tempAguaActual": 0,
+                    "tempProductoActual": 0,
+                    "receta": "STRING",
+                    "tiempoTranscurrido": "HH:MM" 
+                },
+                {
+                    "nombre": "E2L2",
+                    "estado": "PRE-ENFRIADO",
+                    "tempAguaActual": 0,
+                    "tempProductoActual": 0,
+                    "receta": "STRING",
+                    "tiempoTranscurrido": "HH:MM" 
+                },
+                {
+                    "nombre": "E3L2",
+                    "estado": "INACTIVO",
+                    "tempAguaActual": 0,
+                    "tempProductoActual": 0,
+                    "receta": "STRING",
+                    "tiempoTranscurrido": "HH:MM" 
+                },
+                {
+                    "nombre": "E4L2",
+                    "estado": "PAUSA",
+                    "tempAguaActual": 0,
+                    "tempProductoActual": 0,
+                    "receta": "STRING",
+                    "tiempoTranscurrido": "HH:MM" 
+                }
+            ] 
+        } 
+    ]
+}
