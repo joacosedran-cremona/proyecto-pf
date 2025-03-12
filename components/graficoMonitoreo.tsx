@@ -182,7 +182,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         // Mostrar mensaje de inactivo si el estado es 'INACTIVO'
         const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
         return (
-            <div className="bg-black p-20 h-full w-full rounded-md flex items-center justify-center text-white text-2xl">
+            <div className="bg-white p-20 h-full w-full rounded-md flex items-center justify-center text-white text-2xl">
                 {nombreEquipo} - INACTIVO
             </div>
         );
