@@ -10,3 +10,9 @@
 :root {
     font-family: system-ui;
 }
+
+@layer utilities {
+    .text-stroke {
+        -webkit-text-stroke: 1px black;
+    }
+}

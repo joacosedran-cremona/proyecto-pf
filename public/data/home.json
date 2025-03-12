@@ -101,7 +101,7 @@
                 },
                 {
                     "nombre": "E2L2",
-                    "estado": "PRE-ENFRIADO",
+                    "estado": "ENFRIANDO",
                     "tempAguaActual": 0,
                     "tempProductoActual": 0,
                     "receta": "STRING",

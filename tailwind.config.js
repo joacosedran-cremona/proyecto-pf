@@ -35,14 +35,15 @@ module.exports = {
         footerbg: "#2C2C2C",
         
         redState: "#F00",
-        yellowState: "#FFFF66",
-        greenState: "#AAEE66",
-        blueState: "#44CCEE",
-        grayState: "#8D8D8D",
+        yellowState: "#bfbf8b",
+        greenState: "#9cbb97",
+        blueState: "#9db5bf",
+        grayState: "#6e6e6e",
 
       },
       spacing: {
         0: "0px",
+        1: "1px",
         2: "2px",
         3: "3px",
         4: "4px",
