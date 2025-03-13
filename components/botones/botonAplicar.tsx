@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import { Image } from "@heroui/image";
+import { FaSearch } from "react-icons/fa";
 
 interface BotonAplicarProps {
     selectClasses?: string;
@@ -13,7 +13,7 @@ export default function BotonAplicar({ selectClasses }: BotonAplicarProps) {
             variant="ghost"
             className={selectClasses}
         >
-            <Image src="SearchIcon.png" alt="Buscar" width={20} height={20} />
+            <FaSearch style={{ marginRight: "5px" }} />
             Aplicar
         </Button>
     );

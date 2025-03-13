@@ -15,12 +15,12 @@ const Selector: React.FC<SelectorProps> = ({
     value,
     onChange,
     items,
-    placeholder = "Seleccione un elemento",
-    selectClasses = "w-full bg-[#0001] px-20 border-b-2 focus:outline-none text-lg transition-colors cursor-pointer",
-    optionClasses = "p-2 bg-black font-bold",
+    placeholder,
+    selectClasses,
+    optionClasses,
 }) => {
     return (
-        <div className="flex justify-start w-full h-[50px]">
+        <div className="flex min-h-[50px]">
             <select
                 value={value}
                 onChange={(e) => onChange(Number(e.target.value))}

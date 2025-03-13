@@ -30,7 +30,7 @@ export default function DatePicker({ selectClasses }: DatePickerProps) {
             ],
           },
         }}
-        radius="md"
+        radius="sm"
         className="w-full h-full"
         label="Elija un rango de fechas"
         variant="bordered"

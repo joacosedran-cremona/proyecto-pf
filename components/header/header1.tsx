@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { VscAccount, VscBell  } from "react-icons/vsc";
 
 interface Header1Props {
   currentPath: string;
@@ -11,7 +12,7 @@ interface Header1Props {
 interface OpcionIcono {
   id: number;
   url?: string;
-  icon: string;
+  icon: JSX.Element;
 }
 
 interface OpcionMenu {
@@ -22,8 +23,8 @@ interface OpcionMenu {
 
 // Datos estáticos definidos fuera del componente
 const opcionesIconos: OpcionIcono[] = [
-  { id: 1, icon: "/usuario.png" },
-  { id: 2, url: "/alarmas", icon: "/campana.png" },
+  { id: 1, icon: <VscAccount className="w-auto h-full" /> },
+  { id: 2, url: "/alarmas", icon: <VscBell className="w-auto h-full" /> },
 ];
 
 const opcionesMenu: OpcionMenu[] = [
@@ -44,22 +45,10 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
           <div key={id} className="h-full w-auto">
             {url ? (
               <Link href={url}>
-                <Image
-                  className="h-full w-auto"
-                  src={icon}
-                  alt={`Icono ${id}`}
-                  width={25}
-                  height={25}
-                />
+                {icon}
               </Link>
             ) : (
-              <Image
-                className="h-full w-auto min-width-[100px]"
-                src={icon}
-                alt={`Icono ${id}`}
-                width={500}
-                height={500}
-              />
+              icon
             )}
           </div>
         ))}
@@ -74,7 +63,7 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
           {opcionesMenu.map(({ id, url, text }) => (
             <li key={id} className="h-full">
               <Link href={url} className={currentPath === url ? "activeLink" : ""}>
-                <span className="">{text}</span>
+                <span>{text}</span>
               </Link>
             </li>
           ))}

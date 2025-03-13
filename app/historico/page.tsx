@@ -61,25 +61,28 @@ export default function Historico() {
 
   return (
     <section className="flex flex-col w-full items-center justify-center gap-20">
-      <div className="flex flex-row w-full min-h-[40px] h-[5vh] items-bottom gap-20">
-        <h1 className="flex w-auto h-full text-3xl align-bottom">HISTORICO</h1>
-        <Selector
-          value={selectedId}
-          onChange={handleSelection}
-          items={itemsList}
-          placeholder={`Seleccione una ${selectedType === "cocina" ? "cocina" : "enfriador"}`}
-          selectClasses={`w-auto bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
-          optionClasses="p-2 bg-black font-bold"
-        />
-        <DatePicker />
-        <BotonAplicar selectClasses={`h-full w-1/2 text-lightGrey hover:text-white justify-center gap-5`}/>
-        <BotonExcel selectClasses={`h-full w-1/4`}/>
-        <BotonPDF selectClasses={`h-full w-1/4`}/>
+      <div className="flex flex-row w-full min-h-[50px] h-[5vh] items-bottom">
+        <h1 className="flex w-1/3 h-full text-3xl align-bottom">HISTORICO</h1>
+        <div className="flex flex-row w-2/3 justify-end gap-20">
+          <Selector
+            value={selectedId}
+            onChange={handleSelection}
+            items={itemsList}
+            placeholder="Seleccione un equipo"
+            selectClasses={`w-auto bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
+            optionClasses="p-2 bg-black font-bold"
+          />
+          <DatePicker />
+          <BotonAplicar selectClasses={`h-full w-1/6 text-lightGrey hover:text-white justify-center gap-5`}/>
+          <BotonExcel selectClasses={`h-full w-1/6`}/>
+          <BotonPDF selectClasses={`h-full w-1/6`}/>
+        </div>
       </div>
+
       <div className="w-full h-[80vh]">
         <Grafico contextType={selectedType === "cocina" ? "cocinas" : "enfriadores"} />
       </div>
-      <div className="w-full h-auto rounded-md ">
+      <div className="w-full h-auto">
         <Productividad />
       </div>
     </section>

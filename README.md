@@ -25,6 +25,10 @@ npm install date-fns
 
 ```
 
+Iconos
+https://react-icons.github.io/react-icons/
+
+
 ## Licencia
 
 Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
