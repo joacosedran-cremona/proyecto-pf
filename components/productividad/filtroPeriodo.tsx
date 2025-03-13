@@ -2,11 +2,11 @@
 "use client";
 
 import React from "react";
-import Selector from "./selector";
-import DatePicker from "./dateRangePicker";
-import ButtonAplicar from "./buttonAplicar";
-import ButtonPDF from "./buttonPDF";
-import ButtonExcel from "./buttonExcel";
+import Selector from "../selectores/selector";
+import DatePicker from "../dateRangePicker";
+import ButtonAplicar from "../botones/botonAplicar";
+import ButtonPDF from "../botones/botonPDF";
+import ButtonExcel from "../botones/botonExcel";
 
 const FiltroPeriodo: React.FC = () => {
   return (
@@ -18,10 +18,10 @@ const FiltroPeriodo: React.FC = () => {
       </div>
 
       <div className="flex flex-col w-full h-4/5 gap-20">
-        <DatePicker />
-        <ButtonAplicar />
-        <ButtonPDF />
-        <ButtonExcel />
+        <DatePicker selectClasses="h-1/4" />
+        <ButtonAplicar selectClasses="h-1/4" />
+        <ButtonPDF selectClasses="h-1/4" />
+        <ButtonExcel selectClasses="h-1/4" />
       </div>
 
       

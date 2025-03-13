@@ -2,11 +2,11 @@
 import React from "react";
 import { useCocina } from "@/context/CocinaContext";
 import { useEnfriador } from "@/context/EnfriadorContext";
-import Selector from "./selectorEquipos";
-import Grafico from "./grafico";
-import CicloActivo from "./cicloActivo";
-import EstadoEquipo from "./estadoEquipo";
-import SectorIO from "./sectorIO";
+import Selector from "./selectores/selectorEquipos";
+import Grafico from "./graficos/grafico";
+import CicloActivo from "./monitoreoIndividual/cicloActivo";
+import EstadoEquipo from "./monitoreoIndividual/estadoEquipo";
+import SectorIO from "./monitoreoIndividual/sectorIO";
 import { getColorClass } from "@/utils/logicaColores";
 import { displayData } from "@/utils/displayData";
 

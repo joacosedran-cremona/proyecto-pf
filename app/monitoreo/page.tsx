@@ -1,8 +1,8 @@
 "use client"
 
 import { useLinea } from "@/context/LineaContext";
-import Grafico from "@/components/graficoMonitoreo";
-import Selector from "./selector";
+import Grafico from "@/components/graficos/graficoMonitoreo";
+import Selector from "@/components/selectores/selector";
 
 const lineas = {
     1: { cocinas: [1, 2, 3], enfriadores: [1, 2, 3, 4] },
@@ -16,10 +16,10 @@ const Monitoreo = () => {
     const linea = lineas[lineaSeleccionada as keyof typeof lineas];
 
     return (
-        <section className="flex flex-col h-[85vh] w-full items-center justify-center gap-20">
+        <section className="flex flex-col min-h-[85vh] h-[90vh] w-full items-center justify-center gap-20">
             <div className="flex w-full justify-between">
-                <h1 className="text-4xl">MONITOREO DE EQUIPOS</h1>
-                <Selector />
+                <h1 className="text-3xl">MONITOREO DE EQUIPOS</h1>
+                <Selector selectClasses="bg-[#0001] h-full w-1/4 px-20 border-b-2 border-green focus:border-green focus:outline-none text-lg text-green hover:text-green transition-colors cursor-pointer"/>
             </div>
 
             <div className="grid grid-cols-3 gap-20 h-1/2 w-full">

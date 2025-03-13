@@ -1,25 +1,40 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { useCocina } from '@/context/CocinaContext';
 import { useEnfriador } from '@/context/EnfriadorContext';
-import { transformData } from '../utils/logicaGraficos';
+import { transformData } from '../../utils/logicaGraficos';
+
+import { Button, Spinner } from '@heroui/react';
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
 const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ contextType }) => {
     const chartRef = useRef<HTMLCanvasElement>(null);
+    const chartInstanceRef = useRef<Chart<'line'> | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const { cocinaData } = useCocina();
     const { enfriadorData } = useEnfriador();
 
     useEffect(() => {
         const data = contextType === 'cocinas' ? cocinaData : enfriadorData;
-        if (!data || !chartRef.current) return;
-
+        if (!data || !chartRef.current) {
+            setLoading(true);
+            return;
+        }
+        
+        // Destruir instancia previa, si existe
+        if (chartInstanceRef.current) {
+            chartInstanceRef.current.destroy();
+        }
+        
         const ctx = chartRef.current.getContext('2d');
-        if (!ctx) return;
+        if (!ctx) {
+            setLoading(true);
+            return;
+        }
 
         const image = new Image();
         image.src = '/creminox.png';
@@ -115,6 +130,13 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         }
                     }
                 },
+                transitions: {
+                    zoom: {
+                        animation: {
+                            duration: 0
+                        }
+                    }
+                },
                 scales: {
                     y: {
                         title: {
@@ -162,14 +184,46 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             plugins: [plugin]
         };
 
+        // Crear la instancia del gráfico
         const chartInstance = new Chart(ctx, config);
+        chartInstanceRef.current = chartInstance;
+        setLoading(false);
 
         return () => chartInstance.destroy();
     }, [cocinaData, enfriadorData, contextType]);
 
+    // Función para reiniciar el zoom
+    const resetZoom = () => {
+        if (chartInstanceRef.current) {
+            chartInstanceRef.current.resetZoom();
+        }
+    };
+
     return (
-        <div className="bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full">
+        <div className="bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full relative">
             <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
+            {loading && (
+                <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
+                    <Spinner label="Cargando..." />
+                </div>
+            )}
+            <Button
+                style={{
+                    backgroundColor: "#333",
+                    border: "1px solid #CCC",
+                    color: "#CCC",
+                    width: "15%",
+                    height: "35px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "17px",
+                }}
+                onClick={resetZoom}
+                className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"
+            >
+                Reiniciar Zoom
+            </Button>
         </div>
     );
 };

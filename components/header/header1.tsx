@@ -28,8 +28,8 @@ const opcionesIconos: OpcionIcono[] = [
 
 const opcionesMenu: OpcionMenu[] = [
   { id: 1, url: "/", text: "Home" },
-  { id: 2, url: "/historico", text: "Historico" },
-  { id: 3, url: "/monitoreo", text: "Monitoreo" },
+  { id: 2, url: "/monitoreo", text: "Monitoreo" },
+  { id: 3, url: "/historico", text: "Historico" },
 ];
 
 const Header1: React.FC<Header1Props> = ({ currentPath }) => {

@@ -1,13 +1,17 @@
-import {Button} from "@heroui/react";
+import { Button } from "@heroui/react";
 import { FaFilePdf } from "react-icons/fa";
 
-export default function App() {
+interface BotonPDFProps {
+    selectClasses?: string;
+}
+
+export default function BotonPDF({ selectClasses }: BotonPDFProps) {
     return (
         <Button
             radius="md"
             color="danger"
             variant="ghost"
-            className="h-1/5 text-danger"
+            className={`text-danger ${selectClasses || "h-1/5"}`}
         >
             <FaFilePdf style={{ marginRight: "8px" }} />
             Descargar PDF

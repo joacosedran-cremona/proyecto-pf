@@ -2,7 +2,11 @@
 
 import { useLinea } from "@/context/LineaContext";
 
-const Selector: React.FC = () => {
+interface SelectorProps {
+    selectClasses?: string;
+}
+
+const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
     const { lineaSeleccionada, setLineaSeleccionada } = useLinea();
 
     const lineaList = [
@@ -10,15 +14,14 @@ const Selector: React.FC = () => {
         { id: 2, name: "Línea 2" },
     ];
 
+    const defaultClasses =
+        "bg-[#0001] h-full w-full px-20 border-b-2 border-green focus:border-green focus:outline-none text-lg text-green hover:text-green transition-colors cursor-pointer";
+
     return (
         <select
             value={lineaSeleccionada}
             onChange={(e) => setLineaSeleccionada(Number(e.target.value))}
-            className="
-                bg-[#0001] h-full w-1/4 px-20 border-b-2 border-green 
-                focus:border-green focus:outline-none text-lg text-green 
-                hover:text-green transition-colors cursor-pointer
-            "
+            className={selectClasses || defaultClasses}
         >
             {lineaList.map((linea) => (
                 <option

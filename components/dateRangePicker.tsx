@@ -1,8 +1,12 @@
 import {DateRangePicker} from "@heroui/react";
 
-export default function App() {
+interface DatePickerProps {
+  selectClasses?: string;
+}
+
+export default function DatePicker({ selectClasses }: DatePickerProps) {
   return (
-    <div className="w-full h-1/4">
+    <div className={selectClasses}>
       <DateRangePicker
         calendarProps={{
           classNames: {

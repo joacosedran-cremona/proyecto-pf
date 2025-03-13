@@ -29,20 +29,20 @@ interface Section {
 }
 
 const sections: Section[] = [
-  { id: 1,  name: "C1L1", path: "/monitoreo", style: { top: "21%",   left: "15.35%", width: "9.3%", height: "18%" } },
-  { id: 2,  name: "C2L1", path: "/monitoreo", style: { top: "21%",   left: "25.2%",  width: "9.3%", height: "18%" } },
-  { id: 3,  name: "C3L1", path: "/monitoreo", style: { top: "21%",   left: "35.1%",  width: "9.2%", height: "18%" } },
-  { id: 4,  name: "C1L2", path: "/monitoreo", style: { top: "55.9%", left: "15.35%", width: "9.3%", height: "18%" } },
-  { id: 5,  name: "C2L2", path: "/monitoreo", style: { top: "55.9%", left: "25.2%",  width: "9.3%", height: "18%" } },
-  { id: 6,  name: "C3L2", path: "/monitoreo", style: { top: "55.9%", left: "35.1%",  width: "9.3%", height: "18%" } },
-  { id: 7,  name: "E1L1", path: "/monitoreo", style: { top: "21%",   left: "44.96%", width: "9.3%", height: "18%" } },
-  { id: 8,  name: "E2L1", path: "/monitoreo", style: { top: "21%",   left: "54.9%",  width: "9.2%", height: "18%" } },
-  { id: 9,  name: "E3L1", path: "/monitoreo", style: { top: "21%",   left: "64.75%", width: "9.3%", height: "18%" } },
-  { id: 10, name: "E4L1", path: "/monitoreo", style: { top: "21%",   left: "74.5%",  width: "9.3%", height: "18%" } },
-  { id: 11, name: "E1L2", path: "/monitoreo", style: { top: "55.9%", left: "44.96%", width: "9.3%", height: "18%" } },
-  { id: 12, name: "E2L2", path: "/monitoreo", style: { top: "55.9%", left: "54.9%",  width: "9.3%", height: "18%" } },
-  { id: 13, name: "E3L2", path: "/monitoreo", style: { top: "55.9%", left: "64.75%", width: "9.3%", height: "18%" } },
-  { id: 14, name: "E4L2", path: "/monitoreo", style: { top: "55.9%", left: "74.5%",  width: "9.3%", height: "18%" } }
+  { id: 1,  name: "C1L1", path: "/cocinas",     style: { top: "21%",   left: "15.35%", width: "9.3%", height: "18%" } },
+  { id: 2,  name: "C2L1", path: "/cocinas",     style: { top: "21%",   left: "25.2%",  width: "9.3%", height: "18%" } },
+  { id: 3,  name: "C3L1", path: "/cocinas",     style: { top: "21%",   left: "35.1%",  width: "9.2%", height: "18%" } },
+  { id: 4,  name: "C1L2", path: "/cocinas",     style: { top: "55.9%", left: "15.35%", width: "9.3%", height: "18%" } },
+  { id: 5,  name: "C2L2", path: "/cocinas",     style: { top: "55.9%", left: "25.2%",  width: "9.3%", height: "18%" } },
+  { id: 6,  name: "C3L2", path: "/cocinas",     style: { top: "55.9%", left: "35.1%",  width: "9.3%", height: "18%" } },
+  { id: 7,  name: "E1L1", path: "/enfriadores", style: { top: "21%",   left: "44.96%", width: "9.3%", height: "18%" } },
+  { id: 8,  name: "E2L1", path: "/enfriadores", style: { top: "21%",   left: "54.9%",  width: "9.2%", height: "18%" } },
+  { id: 9,  name: "E3L1", path: "/enfriadores", style: { top: "21%",   left: "64.75%", width: "9.3%", height: "18%" } },
+  { id: 10, name: "E4L1", path: "/enfriadores", style: { top: "21%",   left: "74.5%",  width: "9.3%", height: "18%" } },
+  { id: 11, name: "E1L2", path: "/enfriadores", style: { top: "55.9%", left: "44.96%", width: "9.3%", height: "18%" } },
+  { id: 12, name: "E2L2", path: "/enfriadores", style: { top: "55.9%", left: "54.9%",  width: "9.3%", height: "18%" } },
+  { id: 13, name: "E3L2", path: "/enfriadores", style: { top: "55.9%", left: "64.75%", width: "9.3%", height: "18%" } },
+  { id: 14, name: "E4L2", path: "/enfriadores", style: { top: "55.9%", left: "74.5%",  width: "9.3%", height: "18%" } }
 ];
 
 // Función que retorna el color de fondo según el estado del equipo
@@ -58,7 +58,7 @@ function getEstadoColor(estado: string): string {
     return "#9A5E";
   if (estadoUpper === "PAUSA") return "#BB4E";
   if (estadoUpper === "FINALIZADO") return "#2ACE";
-  if (estadoUpper === "INACTIVO") return "#888F";
+  if (estadoUpper === "INACTIVO") return "#888E";
   return "black";
 }
 
