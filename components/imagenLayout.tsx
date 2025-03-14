@@ -28,37 +28,53 @@ interface Section {
   style: React.CSSProperties;
 }
 
+const h = "27.5%";
+const topL1 = "9.3%";
+const topL2 = "63%";
+const width = "9.3%";
+
+const leftPositions = {
+  C1: "15.35%",
+  C2: "25.2%",
+  C3: "35.1%",
+  E1: "44.96%",
+  E2: "54.9%",
+  E3: "64.65%",
+  E4: "74.5%"
+};
+
 const sections: Section[] = [
-  { id: 1,  name: "C1L1", path: "/cocinas",     style: { top: "21%",   left: "15.35%", width: "9.3%", height: "18%" } },
-  { id: 2,  name: "C2L1", path: "/cocinas",     style: { top: "21%",   left: "25.2%",  width: "9.3%", height: "18%" } },
-  { id: 3,  name: "C3L1", path: "/cocinas",     style: { top: "21%",   left: "35.1%",  width: "9.2%", height: "18%" } },
-  { id: 4,  name: "C1L2", path: "/cocinas",     style: { top: "55.9%", left: "15.35%", width: "9.3%", height: "18%" } },
-  { id: 5,  name: "C2L2", path: "/cocinas",     style: { top: "55.9%", left: "25.2%",  width: "9.3%", height: "18%" } },
-  { id: 6,  name: "C3L2", path: "/cocinas",     style: { top: "55.9%", left: "35.1%",  width: "9.3%", height: "18%" } },
-  { id: 7,  name: "E1L1", path: "/enfriadores", style: { top: "21%",   left: "44.96%", width: "9.3%", height: "18%" } },
-  { id: 8,  name: "E2L1", path: "/enfriadores", style: { top: "21%",   left: "54.9%",  width: "9.2%", height: "18%" } },
-  { id: 9,  name: "E3L1", path: "/enfriadores", style: { top: "21%",   left: "64.75%", width: "9.3%", height: "18%" } },
-  { id: 10, name: "E4L1", path: "/enfriadores", style: { top: "21%",   left: "74.5%",  width: "9.3%", height: "18%" } },
-  { id: 11, name: "E1L2", path: "/enfriadores", style: { top: "55.9%", left: "44.96%", width: "9.3%", height: "18%" } },
-  { id: 12, name: "E2L2", path: "/enfriadores", style: { top: "55.9%", left: "54.9%",  width: "9.3%", height: "18%" } },
-  { id: 13, name: "E3L2", path: "/enfriadores", style: { top: "55.9%", left: "64.75%", width: "9.3%", height: "18%" } },
-  { id: 14, name: "E4L2", path: "/enfriadores", style: { top: "55.9%", left: "74.5%",  width: "9.3%", height: "18%" } }
+  { id: 1,  name: "C1L1", path: "/cocinas",     style: { top: topL1, left: leftPositions.C1, width, height: h } },
+  { id: 2,  name: "C2L1", path: "/cocinas",     style: { top: topL1, left: leftPositions.C2, width, height: h } },
+  { id: 3,  name: "C3L1", path: "/cocinas",     style: { top: topL1, left: leftPositions.C3, width, height: h } },
+  { id: 4,  name: "C1L2", path: "/cocinas",     style: { top: topL2, left: leftPositions.C1, width, height: h } },
+  { id: 5,  name: "C2L2", path: "/cocinas",     style: { top: topL2, left: leftPositions.C2, width, height: h } },
+  { id: 6,  name: "C3L2", path: "/cocinas",     style: { top: topL2, left: leftPositions.C3, width, height: h } },
+  { id: 7,  name: "E1L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E1, width, height: h } },
+  { id: 8,  name: "E2L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E2, width, height: h } },
+  { id: 9,  name: "E3L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E3, width, height: h } },
+  { id: 10, name: "E4L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E4, width, height: h } },
+  { id: 11, name: "E1L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E1, width, height: h } },
+  { id: 12, name: "E2L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E2, width, height: h } },
+  { id: 13, name: "E3L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E3, width, height: h } },
+  { id: 14, name: "E4L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E4, width, height: h } }
 ];
+
 
 // Función que retorna el color de fondo según el estado del equipo
 function getEstadoColor(estado: string): string {
   const estadoUpper = estado.toUpperCase();
-  if (estadoUpper === "FALLA") return "#F00";
+  if (estadoUpper === "FALLA") return "#C00";
   if (
     estadoUpper === "COCINANDO" ||
     estadoUpper === "PRE-CALENTADO" ||
     estadoUpper === "ENFRIANDO" ||
     estadoUpper === "PRE-ENFRIADO"
   )
-    return "#9A5E";
-  if (estadoUpper === "PAUSA") return "#BB4E";
-  if (estadoUpper === "FINALIZADO") return "#2ACE";
-  if (estadoUpper === "INACTIVO") return "#888E";
+    return "#9b9D";
+  if (estadoUpper === "PAUSA") return "#BB8D";
+  if (estadoUpper === "FINALIZADO") return "#9bbD";
+  if (estadoUpper === "INACTIVO") return "#666D";
   return "black";
 }
 
@@ -104,8 +120,7 @@ export function ImagenLayout() {
   return (
     <div className="w-auto h-full relative flex justify-center items-center">
       <Image
-        className="h-[82vh] w-full z-1"
-        radius="md"
+        className="h-[65vh] w-full z-1"
         src="/layout.png"
         alt="Imagen de prueba"
       />
@@ -124,7 +139,7 @@ export function ImagenLayout() {
               style={recuadroStyle}
             >
               {equipo && (
-                <div className="text-white text-[calc(0.6vw+0.5vh)] text-stroke width-full font-bold p-3">
+                <div className="text-white text-[calc(0.7vw+0.5vh)] text-stroke width-full font-bold p-3">
                   <div className="flex w-full justify-between">
                     <p>{section.name}</p>
                     <p>{equipo.estado}</p>
