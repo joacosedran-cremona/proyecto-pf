@@ -77,7 +77,7 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
     ];
 
     return (
-        <section className="flex flex-col gap-20 min-h-[85vh]">
+        <section className="flex flex-col gap-20 min-h-[85vh] pt-[40px]">
         {/* SELECCIÓN Y ESTADO */}
         <div className="flex w-full h-full gap-20">
             <div className="w-1/3">
@@ -100,16 +100,16 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
 
         {/* SECCIONES DE INFORMACIÓN */}
         <div className="flex flex-col w-full min-h-full gap-20 1365:flex-row flex-1">
-            <div className="flex w-full gap-20 1365:grid 1365:w-1/3">
+            <div className="flex w-full gap-20 1365:flex 1365:flex-col 1365:w-1/3">
             <div className="flex w-2/3 gap-20 1365:w-full">
-                <div className="bg-black grid p-20 w-full h-full rounded-md">
+                <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
                 <EstadoEquipo datos={datosEquipo} getColorClass={(label, value) => getColorClass(label, value, color)} displayData={displayData} />
                 </div>
-                <div className="bg-black grid p-20 w-full h-full rounded-md">
+                <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
                 <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor="green" />
                 </div>
             </div>
-            <div className="bg-black grid h-full p-20 w-1/3 flex-grow rounded-md 1365:w-full">
+            <div className="bg-black flex flex-col h-full p-20 w-1/3 flex-grow rounded-md 1365:w-full">
                 <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, color)} displayData={displayData} />
             </div>
             </div>

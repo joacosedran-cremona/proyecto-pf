@@ -27,13 +27,13 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-grey font-mono antialiased"
+          "min-h-screen bg-grey font-mono antialiased w-full"
         )}
       >
         <Providers>
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col w-full min-h-screen">
             <Navbar />
-            <main className="bg-grey p-20">
+            <main className="min-h-screen w-full bg-grey p-20 pt-[85px]">
               {children}
             </main>
             <Footer />

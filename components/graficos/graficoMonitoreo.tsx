@@ -5,6 +5,7 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 import { useLinea } from '@/context/LineaContext';
 import { transformData } from '../../utils/logicaGraficosLinea';
 import { Button, Spinner } from '@heroui/react';
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -194,12 +195,36 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         ? lineasData?.cocinas.find(e => e.num_cocina === id)
         : lineasData?.enfriadores.find(e => e.num_enfriador === id);
 
-    if (!equipo || equipo.estado === 'INACTIVO') {
+    // Primero, si no existe el equipo, retornamos un mensaje o un estado de carga.
+    if (!equipo) {
+        return (
+        <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+            <p className="text-3xl">Equipo no encontrado</p>
+        </div>
+        );
+    }
+    
+    // Luego, verificamos cada estado de manera separada.
+    if (equipo.estado === 'INACTIVO') {
         const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
         return (
-            <div className="bg-black p-20 h-full w-full rounded-md flex items-center justify-center text-white text-2xl">
-                <p>{nombreEquipo} - INACTIVO</p>
-            </div>
+        <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+            <p className="text-3xl">{nombreEquipo} - INACTIVO</p>
+            <p className="text-xl">Aguardando Conexion</p>
+        </div>
+        );
+    }
+    
+    if (equipo.estado === 'FALLA') {
+        const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
+        return (
+        <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+            <p className="text-3xl">{nombreEquipo} - FALLA</p>
+            <p className="w-full text-center text-3xl">SE DETECTO UNA FALLA EN EL EQUIPO</p>
+        </div>
         );
     }
 
@@ -211,8 +236,8 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
     };
 
     return (
-        <div className="bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full relative">
-            <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
+        <div className="flex bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full relative">
+            <canvas ref={chartRef} className="flex block w-full h-full max-h-screen"></canvas>
             {loading && (
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
                     <Spinner label="Cargando..." />
@@ -224,7 +249,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                     backgroundColor: "#333",
                     border: "1px solid #CCC",
                     color: "#CCC",
-                    width: "20%",
+                    width: "auto",
                     height: "25px",
                     display: "flex",
                     justifyContent: "center",

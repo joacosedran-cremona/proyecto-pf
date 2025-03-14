@@ -11,6 +11,11 @@ export default function Home() {
       >
         COCINAS & ENFRIADORES
       </h1>
+      <p
+        className="flex align-center justify-center w-full text-xl"
+      >
+        Paneo General
+      </p>
       <ImagenLayout />
     </section>
   );

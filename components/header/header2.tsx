@@ -36,13 +36,13 @@ const Header2: React.FC<Header2Props> = ({ currentPath }) => {
   }, [currentPath]);
 
   return (
-    <header className="flex flex-col text-black w-full sticky top-0 z-[999]">
+    <header className="fixed top-[65px] left-0 right-0 z-[999] flex flex-col text-black w-full">
       <nav className="flex flex-row w-full bg-black p-3 h-40">
         <div className="w-1/4"></div>
-        <ul className="flex flex-row w-1/2 h-full align-middle">
+        <ul className="flex flex-row w-1/2 h-full items-center justify-center">
           {opcionesBotones.map(({ id, path, text, styleClass }) => (
-            <li key={id} className="flex flex-row w-full h-full justify-center align-center">
-              <Link href={path} className="flex justify-center gap-5 h-full align-middle">
+            <li key={id} className="flex flex-row w-full h-full items-center justify-center">
+              <Link href={path} className="flex justify-center gap-5 h-full items-center">
                 <span className={styleClass}>{text}</span>
               </Link>
               {currentPath === path && <div className=""></div>}

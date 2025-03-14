@@ -10,7 +10,7 @@
                     "estado": "INACTIVO", 
                     "tempAguaActual": 0, 
                     "tempProductoActual": 0, 
-                    "receta": "STRING", 
+                    "receta": "Pate", 
                     "tiempoTranscurrido": "HH:MM" 
                 }, 
                 {
@@ -34,7 +34,7 @@
                     "estado": "FALLA", 
                     "tempAguaActual": 0, 
                     "tempProductoActual": 0, 
-                    "receta": "STRING", 
+                    "receta": "Pate", 
                     "tiempoTranscurrido": "HH:MM"
                 }, 
                 {

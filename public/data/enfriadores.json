@@ -3,7 +3,7 @@
         "num_enfriador": 1,
         "num_receta": 3,
         "nom_receta": "Pate",
-        "estado": "PAUSADO",
+        "estado": "FALLA",
         "cant_torres": 3,
         "temp_Ing": 24,
         "pasos": [
@@ -341,7 +341,7 @@
         "num_enfriador": 2,
         "num_receta": 1,
         "nom_receta": "Arroz con Pollo",
-        "estado": "PRE-CALENTADO",
+        "estado": "ENFRIANDO",
         "cant_torres": 1,
         "temp_Ing": 24,
         "pasos": [
@@ -679,7 +679,7 @@
         "num_enfriador": 3,
         "num_receta": 1,
         "nom_receta": "Arroz con Pollo",
-        "estado": "PAUSADO",
+        "estado": "INACTIVO",
         "cant_torres": 2,
         "temp_Ing": 24,
         "pasos": [
@@ -1017,7 +1017,7 @@
         "num_enfriador": 4,
         "num_receta": 3,
         "nom_receta": "Pollo Asado",
-        "estado": "COCINANDO",
+        "estado": "FALLA",
         "cant_torres": 2,
         "temp_Ing": 24,
         "pasos": [
@@ -1355,7 +1355,7 @@
         "num_enfriador": 5,
         "num_receta": 5,
         "nom_receta": "Pollo Asado",
-        "estado": "PAUSADO",
+        "estado": "ENFRIANDO",
         "cant_torres": 3,
         "temp_Ing": 24,
         "pasos": [
@@ -1693,7 +1693,7 @@
         "num_enfriador": 6,
         "num_receta": 5,
         "nom_receta": "Pollo Asado",
-        "estado": "PAUSADO",
+        "estado": "ENFRIANDO",
         "cant_torres": 3,
         "temp_Ing": 24,
         "pasos": [
@@ -2031,7 +2031,7 @@
         "num_enfriador": 7,
         "num_receta": 5,
         "nom_receta": "Pollo Asado",
-        "estado": "PAUSADO",
+        "estado": "INACTIVO",
         "cant_torres": 3,
         "temp_Ing": 24,
         "pasos": [
@@ -2369,7 +2369,7 @@
         "num_enfriador": 8,
         "num_receta": 5,
         "nom_receta": "Pollo Asado",
-        "estado": "PAUSADO",
+        "estado": "PAUSA",
         "cant_torres": 3,
         "temp_Ing": 24,
         "pasos": [
