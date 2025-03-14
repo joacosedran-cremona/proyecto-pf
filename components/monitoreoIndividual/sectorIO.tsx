@@ -21,7 +21,7 @@ const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass, displayData
                         <p className={`text-[calc(0.4vw+1vh)] ${getColorClass(dato.label, dato.value)}`}>
                             {typeof dato.value === "boolean" ? (
                                 <GoDotFill
-                                    className={`${dato.value ? "text-green-500" : "text-red-500"} text-[3rem]`}
+                                    className={`${dato.value ? "text-green" : "text-lightGrey"} text-[3rem]`}
                                 />
                             ) : (
                                 displayData(dato.value)

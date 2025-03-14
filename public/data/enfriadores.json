@@ -330,10 +330,10 @@
         ],
         "sector_io": [
             {
-                "frio": true,
-                "vapor_vivo": false,
-                "vapor_serp": true,
-                "io_yy_eq_xx": true
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     },
@@ -668,10 +668,10 @@
         ],
         "sector_io": [
             {
-                "frio": false,
-                "vapor_vivo": false,
-                "vapor_serp": true,
-                "io_yy_eq_xx": false
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     },
@@ -1006,10 +1006,10 @@
         ],
         "sector_io": [
             {
-                "frio": false,
-                "vapor_vivo": false,
-                "vapor_serp": true,
-                "io_yy_eq_xx": false
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     },
@@ -1344,10 +1344,10 @@
         ],
         "sector_io": [
             {
-                "frio": false,
-                "vapor_vivo": true,
-                "vapor_serp": false,
-                "io_yy_eq_xx": true
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     },
@@ -1682,10 +1682,10 @@
         ],
         "sector_io": [
             {
-                "frio": true,
-                "vapor_vivo": false,
-                "vapor_serp": false,
-                "io_yy_eq_xx": false
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     },
@@ -2020,10 +2020,10 @@
         ],
         "sector_io": [
             {
-                "frio": true,
-                "vapor_vivo": false,
-                "vapor_serp": false,
-                "io_yy_eq_xx": false
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     },
@@ -2358,10 +2358,10 @@
         ],
         "sector_io": [
             {
-                "frio": true,
-                "vapor_vivo": false,
-                "vapor_serp": false,
-                "io_yy_eq_xx": false
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     },
@@ -2696,10 +2696,10 @@
         ],
         "sector_io": [
             {
-                "frio": true,
-                "vapor_vivo": false,
-                "vapor_serp": false,
-                "io_yy_eq_xx": false
+                "valvula_amoniaco": true,
+                "bomba_recirculacion": false,
+                "filtro_succion_auga": false,
+                "entrada_agua": false
             }
         ]
     }

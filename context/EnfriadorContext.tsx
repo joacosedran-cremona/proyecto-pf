@@ -11,10 +11,10 @@ interface Paso {
 }
 
 interface SectorIO {
-    frio: boolean;
-    vapor_vivo: boolean;
-    vapor_serp: boolean;
-    io_yy_eq_xx: boolean;
+    entrada_agua: boolean;
+    bomba_recirculacion: boolean;
+    filtro_succion_agua: boolean;
+    valvula_amoniaco: boolean;
 }
 
 interface EnfriadorData {

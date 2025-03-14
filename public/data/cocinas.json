@@ -330,10 +330,11 @@
         ],
         "sector_io": [
             {
-                "frio": true,
+                "vapor_serpentina": false,
+                "bomba_recirculacion": false,
                 "vapor_vivo": false,
-                "vapor_serp": true,
-                "io_yy_eq_xx": true
+                "entrada_agua": false,
+                "filtro_succion_auga": false
             }
         ]
     },
@@ -668,10 +669,11 @@
         ],
         "sector_io": [
             {
-                "frio": false,
+                "vapor_serpentina": false,
+                "bomba_recirculacion": false,
                 "vapor_vivo": false,
-                "vapor_serp": true,
-                "io_yy_eq_xx": false
+                "entrada_agua": false,
+                "filtro_succion_auga": false
             }
         ]
     },
@@ -1006,10 +1008,11 @@
         ],
         "sector_io": [
             {
-                "frio": false,
+                "vapor_serpentina": false,
+                "bomba_recirculacion": false,
                 "vapor_vivo": false,
-                "vapor_serp": true,
-                "io_yy_eq_xx": false
+                "entrada_agua": false,
+                "filtro_succion_auga": false
             }
         ]
     },
@@ -1682,10 +1685,11 @@
         ],
         "sector_io": [
             {
-                "frio": true,
+                "vapor_serpentina": false,
+                "bomba_recirculacion": false,
                 "vapor_vivo": false,
-                "vapor_serp": false,
-                "io_yy_eq_xx": false
+                "entrada_agua": false,
+                "filtro_succion_auga": false
             }
         ]
     },
@@ -2020,10 +2024,11 @@
         ],
         "sector_io": [
             {
-                "frio": true,
+                "vapor_serpentina": false,
+                "bomba_recirculacion": false,
                 "vapor_vivo": false,
-                "vapor_serp": false,
-                "io_yy_eq_xx": false
+                "entrada_agua": false,
+                "filtro_succion_auga": false
             }
         ]
     }
