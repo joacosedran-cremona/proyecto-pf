@@ -4,9 +4,9 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 import { useCocina } from '@/context/CocinaContext';
 import { useEnfriador } from '@/context/EnfriadorContext';
 import { transformData } from '../../utils/logicaGraficos';
-
 import { Button, Spinner } from '@heroui/react';
 
+// Registrar plugins de Chart.js
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
@@ -15,27 +15,30 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+    // Obtener datos según el contexto (cocinas o enfriadores)
     const { cocinaData } = useCocina();
     const { enfriadorData } = useEnfriador();
 
     useEffect(() => {
+        // Seleccionar datos según el tipo de contexto
         const data = contextType === 'cocinas' ? cocinaData : enfriadorData;
         if (!data || !chartRef.current) {
             setLoading(true);
             return;
         }
-        
-        // Destruir instancia previa, si existe
+
+        // Destruir instancia previa del gráfico, si existe
         if (chartInstanceRef.current) {
             chartInstanceRef.current.destroy();
         }
-        
+
         const ctx = chartRef.current.getContext('2d');
         if (!ctx) {
             setLoading(true);
             return;
         }
 
+        // Personalización de la imagen de fondo
         const image = new Image();
         image.src = '/creminox.png';
 
@@ -48,7 +51,6 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                     ctx.save();
                     ctx.globalAlpha = 0.2;
 
-                    // Hacer la imagen responsive
                     const imageWidth = width * 0.5;
                     const imageHeight = (image.height / image.width) * imageWidth;
                     const x = left + (width - imageWidth) / 2;
@@ -62,6 +64,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             }
         };
 
+        // Transformar datos para el gráfico
         const chartData = transformData([data]);
 
         const config: ChartConfiguration<'line'> = {
@@ -75,7 +78,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         position: 'top',
                         labels: {
                             usePointStyle: true,
-                        }
+                        },
                     },
                     title: {
                         align: 'start',
@@ -84,12 +87,12 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         text: 'Temperaturas en tiempo real',
                         font: {
                             weight: 'normal',
-                            size: 20
+                            size: 20,
                         },
                         padding: {
                             top: 0,
-                            bottom: 15
-                        }
+                            bottom: 15,
+                        },
                     },
                     zoom: {
                         pan: {
@@ -101,10 +104,10 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 enabled: true,
                             },
                             pinch: {
-                                enabled: true
+                                enabled: true,
                             },
                             mode: 'x',
-                        }
+                        },
                     },
                     tooltip: {
                         callbacks: {
@@ -117,20 +120,19 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 const hours = Math.floor(totalSeconds / 3600);
                                 const minutes = Math.floor((totalSeconds % 3600) / 60);
                                 const seconds = totalSeconds % 60;
-                                const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                                const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes
+                                    .toString()
+                                    .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
                                 return [
                                     `Tiempo transcurrido: ${timeFormatted}`,
-                                    `${datasetLabel}: ${temperature}°C`
+                                    `${datasetLabel}: ${temperature}°C`,
                                 ];
                             },
-                            title: () => {
-                                return ''; // No mostrar título, que es el valor del eje X (tiempo)
-                            }
-                        }
-                    }
-                },
-                transitions: {
+                            title: () => '',
+                        },
+                    },
+                },transitions: {
                     zoom: {
                         animation: {
                             duration: 0
@@ -179,12 +181,11 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                             tickColor: '#fff'
                         }
                     }
-                }
+                },
             },
-            plugins: [plugin]
+            plugins: [plugin],
         };
 
-        // Crear la instancia del gráfico
         const chartInstance = new Chart(ctx, config);
         chartInstanceRef.current = chartInstance;
         setLoading(false);
@@ -200,7 +201,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
     };
 
     return (
-        <div className="bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full relative">
+        <div className="bg-black p-20 h-full w-full rounded-md relative">
             <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
             {loading && (
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
@@ -209,15 +210,15 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             )}
             <Button
                 style={{
-                    backgroundColor: "#333",
-                    border: "1px solid #CCC",
-                    color: "#CCC",
-                    width: "15%",
-                    height: "35px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "17px",
+                    backgroundColor: '#333',
+                    border: '1px solid #CCC',
+                    color: '#CCC',
+                    width: '15%',
+                    height: '35px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    fontSize: '17px',
                 }}
                 onClick={resetZoom}
                 className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"

@@ -1,7 +1,6 @@
-// utils.ts
-
 export interface Paso {
     id: number;
+    temp_Ing: string | number | null;
     temp_Agua: string | number | null;
     temp_Prod: string | number | null;
     niv_Agua: string | number | null;
@@ -9,11 +8,19 @@ export interface Paso {
     tipo_Fin: string | null;
 }
 
-export interface SectorIO {
-    frio: boolean;
+export interface SectorIOBase {
+    entrada_agua: boolean;
+    bomba_recirculacion: boolean;
+    filtro_succion_agua: boolean;
+}
+
+export interface SectorIOEnfriador extends SectorIOBase {
+    valvula_amoniaco: boolean;
+}
+
+export interface SectorIOCocina extends SectorIOBase {
+    vapor_serpentina: boolean;
     vapor_vivo: boolean;
-    vapor_serp: boolean;
-    io_yy_eq_xx: boolean;
 }
 
 export interface CocinaData {
@@ -29,7 +36,7 @@ export interface CocinaData {
     tipo_Fin: number | string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
-    sectorIO: SectorIO[];
+    sectorIO: SectorIOCocina[];
 }
 
 export interface EnfriadorData {
@@ -45,5 +52,5 @@ export interface EnfriadorData {
     tipo_Fin: number | string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
-    sectorIO: SectorIO[];
+    sectorIO: SectorIOEnfriador[];
 }
