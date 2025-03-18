@@ -329,11 +329,11 @@
             }
         ],
         "sector_io": [
-            {
-                "valvula_amoniaco": true,
+            {   
+                "entrada_agua": true,
                 "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "filtro_succion_agua": false,
+                "valvula_amoniaco": true
             }
         ]
     },
@@ -668,10 +668,10 @@
         ],
         "sector_io": [
             {
-                "valvula_amoniaco": true,
-                "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "entrada_agua": false,
+                "bomba_recirculacion": true,
+                "filtro_succion_agua": true,
+                "valvula_amoniaco": true
             }
         ]
     },
@@ -1006,10 +1006,10 @@
         ],
         "sector_io": [
             {
-                "valvula_amoniaco": true,
-                "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "entrada_agua": true,
+                "bomba_recirculacion": true,
+                "filtro_succion_agua": true,
+                "valvula_amoniaco": true
             }
         ]
     },
@@ -1344,10 +1344,10 @@
         ],
         "sector_io": [
             {
-                "valvula_amoniaco": true,
+                "entrada_agua": false,
                 "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "filtro_succion_agua": false,
+                "valvula_amoniaco": false
             }
         ]
     },
@@ -1682,10 +1682,10 @@
         ],
         "sector_io": [
             {
-                "valvula_amoniaco": true,
+                "entrada_agua": false,
                 "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "filtro_succion_agua": true,
+                "valvula_amoniaco": false
             }
         ]
     },
@@ -2020,10 +2020,10 @@
         ],
         "sector_io": [
             {
-                "valvula_amoniaco": true,
+                "entrada_agua": false,
                 "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "filtro_succion_agua": true,
+                "valvula_amoniaco": true
             }
         ]
     },
@@ -2358,10 +2358,10 @@
         ],
         "sector_io": [
             {
-                "valvula_amoniaco": true,
+                "entrada_agua": false,
                 "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "filtro_succion_agua": true,
+                "valvula_amoniaco": true
             }
         ]
     },
@@ -2696,10 +2696,10 @@
         ],
         "sector_io": [
             {
-                "valvula_amoniaco": true,
+                "entrada_agua": false,
                 "bomba_recirculacion": false,
-                "filtro_succion_auga": false,
-                "entrada_agua": false
+                "filtro_succion_agua": true,
+                "valvula_amoniaco": true
             }
         ]
     }

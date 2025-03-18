@@ -1,20 +1,12 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  getKeyValue,
-  Spinner,
-} from "@heroui/react";
-import { useAsyncList } from "@react-stately/data";
+import React, { useMemo, useState, useEffect } from "react";
+import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row } from "material-react-table";
+import { Box, Button } from "@mui/material";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 import alertas from "./alertas.json";
 
-type Alerta = {
+export type Alerta = {
   key: string;
   description: string;
   type: string;
@@ -23,71 +15,99 @@ type Alerta = {
 };
 
 const Tabla: React.FC = () => {
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-
-  let list = useAsyncList<Alerta>({
-    async load() {
-      setIsLoading(true);
-      setPage(1);
-      return { items: alertas };
-    },
-    async sort({ items, sortDescriptor }) {
-      return {
-        items: items.sort((a, b) => {
-          let first = a[sortDescriptor.column as keyof Alerta];
-          let second = b[sortDescriptor.column as keyof Alerta];
-          let cmp = (parseInt(first) || first) < (parseInt(second) || second) ? -1 : 1;
-
-          if (sortDescriptor.direction === "descending") {
-            cmp *= -1;
-          }
-
-          return cmp;
-        }),
-      };
-    },
-  });
+  const [data, setData] = useState<Alerta[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    list.reload();
-    setIsLoading(false);
+    const loadData = async () => {
+      const convertedData = alertas.map((alerta) => ({
+        ...alerta,
+        key: alerta.key.toString(),
+      }));
+      setData(convertedData);
+      setIsLoading(false);
+    };
+
+    loadData();
   }, []);
 
-  return (
-    <div className="w-full h-full">
-      <Table
-        removeWrapper 
-        aria-label="Tabla de alertas"
-        classNames={{
-          base: "max-h-screen bg-black rounded-2xl",
-          table: "min-h-[59vh] items-center",
-          thead: "flex flex-row bg-footerbg py-auto items-center p-20 rounded-2xl",
-          th: "flex flex-row h-full w-[15%] justify-start items-center cursor-pointer bg-footerbg",
-          tr: "flex flex-row h-full w-full justify-between items-center",
-          td: "flex flex-row h-full w-[15%] justify-start items-center"
+  const columns = useMemo<MRT_ColumnDef<Alerta>[]>(
+    () => [
+      {
+        accessorKey: "description",
+        header: "DESCRIPCIÓN",
+        grow: 1
+      },
+      {
+        accessorKey: "type",
+        header: "TIPO",
+        grow: 1
+      },
+      {
+        accessorKey: "state",
+        header: "ESTADO",
+        grow: 1
+      },
+      {
+        accessorKey: "time",
+        header: "HORA",
+        grow: 1
+      },
+    ],
+    []
+  );
+
+  const handleExportRows = (rows: MRT_Row<Alerta>[]) => {
+    const doc = new jsPDF();
+    const tableData = rows.map((row) => Object.values(row.original));
+    const tableHeaders = columns.map((c) => c.header);
+
+    autoTable(doc, {
+      head: [tableHeaders],
+      body: tableData,
+    });
+
+    doc.save("tabla_alertas.pdf");
+  };
+
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    state: { isLoading },
+    enableSorting: true,
+    enableColumnResizing: true,
+    columnResizeMode: "onChange",
+    layoutMode: "semantic",
+    renderTopToolbarCustomActions: ({ table }) => (
+      <Box
+        sx={{
+          display: "flex",
+          gap: "16px",
+          padding: "8px",
+          flexWrap: "wrap",
         }}
-        sortDescriptor={list.sortDescriptor}
-        onSortChange={list.sort}
       >
-        <TableHeader>
-          <TableColumn key="description" allowsSorting> DESCRIPCIÓN </TableColumn>
-          <TableColumn    key="type"     allowsSorting>    TIPO     </TableColumn>
-          <TableColumn   key="state"     allowsSorting>   ESTADO    </TableColumn>
-          <TableColumn    key="time"     allowsSorting>    HORA     </TableColumn>
-        </TableHeader>
-        <TableBody
-          isLoading={isLoading}
-          items={list.items}
-          loadingContent={<Spinner label="Cargando..." />}
+        <Button
+          disabled={table.getPrePaginationRowModel().rows.length === 0}
+          onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
+          startIcon={<FileDownloadIcon />}
         >
-          {(item) => (
-            <TableRow key={item.key}>
-              {(columnKey) => <TableCell>{getKeyValue(item, columnKey as keyof Alerta)}</TableCell>}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+          Exportar Todas las Filas
+        </Button>
+        <Button
+          disabled={table.getRowModel().rows.length === 0}
+          onClick={() => handleExportRows(table.getRowModel().rows)}
+          startIcon={<FileDownloadIcon />}
+        >
+          Exportar Filas Visibles
+        </Button>
+      </Box>
+    ),
+  });
+
+  return (
+    <div style={{ width: "100%", overflowX: "auto" }}>
+      <MaterialReactTable table={table} />
     </div>
   );
 };

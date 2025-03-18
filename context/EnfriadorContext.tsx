@@ -10,14 +10,14 @@ interface Paso {
     tipo_Fin: string | null;
 }
 
-interface SectorIO {
+interface SectorIOEnfriador {
     entrada_agua: boolean;
     bomba_recirculacion: boolean;
     filtro_succion_agua: boolean;
     valvula_amoniaco: boolean;
 }
 
-interface EnfriadorData {
+export interface EnfriadorData {
     tempIng: string | number | null;
     tempAgua: string | number | null;
     tempProd: string | number | null;
@@ -30,7 +30,7 @@ interface EnfriadorData {
     tipo_Fin: string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
-    sectorIO: SectorIO[];
+    sectorIO: SectorIOEnfriador[];
 }
 
 interface EnfriadorContextType {

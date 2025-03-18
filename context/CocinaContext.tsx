@@ -10,15 +10,16 @@ interface Paso {
     tipo_Fin: string | null;
 }
 
-interface SectorIO {
+interface SectorIOCocina {
     entrada_agua: boolean;
     bomba_recirculacion: boolean;
     filtro_succion_agua: boolean;
-    vapor_serp: boolean;
+    vapor_serpentina: boolean;
     vapor_vivo: boolean;
 }
 
-interface CocinaData {
+
+export interface CocinaData {
     tempIng: string | number | null;
     tempAgua: string | number | null;
     tempProd: string | number | null;
@@ -31,7 +32,7 @@ interface CocinaData {
     tipo_Fin: string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
-    sectorIO: SectorIO[];
+    sectorIO: SectorIOCocina[];
 }
 
 interface CocinaContextType {

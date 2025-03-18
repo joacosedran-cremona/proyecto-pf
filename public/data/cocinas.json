@@ -330,11 +330,11 @@
         ],
         "sector_io": [
             {
-                "vapor_serpentina": false,
+                "vapor_serpentina": true,
                 "bomba_recirculacion": false,
-                "vapor_vivo": false,
-                "entrada_agua": false,
-                "filtro_succion_auga": false
+                "vapor_vivo": true,
+                "entrada_agua": true,
+                "filtro_succion_agua": false
             }
         ]
     },
@@ -669,11 +669,11 @@
         ],
         "sector_io": [
             {
-                "vapor_serpentina": false,
-                "bomba_recirculacion": false,
-                "vapor_vivo": false,
+                "vapor_serpentina": true,
+                "bomba_recirculacion": true,
+                "vapor_vivo": true,
                 "entrada_agua": false,
-                "filtro_succion_auga": false
+                "filtro_succion_agua": false
             }
         ]
     },
@@ -1009,10 +1009,10 @@
         "sector_io": [
             {
                 "vapor_serpentina": false,
-                "bomba_recirculacion": false,
+                "bomba_recirculacion": true,
                 "vapor_vivo": false,
-                "entrada_agua": false,
-                "filtro_succion_auga": false
+                "entrada_agua": true,
+                "filtro_succion_agua": true
             }
         ]
     },
@@ -1347,10 +1347,11 @@
         ],
         "sector_io": [
             {
-                "frio": false,
-                "vapor_vivo": true,
-                "vapor_serp": false,
-                "io_yy_eq_xx": true
+                "vapor_serpentina": false,
+                "bomba_recirculacion": true,
+                "vapor_vivo": false,
+                "entrada_agua": true,
+                "filtro_succion_agua": true
             }
         ]
     },
@@ -1687,9 +1688,9 @@
             {
                 "vapor_serpentina": false,
                 "bomba_recirculacion": false,
-                "vapor_vivo": false,
+                "vapor_vivo": true,
                 "entrada_agua": false,
-                "filtro_succion_auga": false
+                "filtro_succion_agua": false
             }
         ]
     },
@@ -2024,11 +2025,11 @@
         ],
         "sector_io": [
             {
-                "vapor_serpentina": false,
-                "bomba_recirculacion": false,
+                "vapor_serpentina": true,
+                "bomba_recirculacion": true,
                 "vapor_vivo": false,
                 "entrada_agua": false,
-                "filtro_succion_auga": false
+                "filtro_succion_agua": false
             }
         ]
     }

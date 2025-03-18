@@ -24,7 +24,7 @@ interface OpcionMenu {
 // Datos estáticos definidos fuera del componente
 const opcionesIconos: OpcionIcono[] = [
   { id: 1, icon: <VscAccount className="w-auto h-full" /> },
-  { id: 2, url: "/alarmas", icon: <VscBell className="w-auto h-full" /> },
+  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-full" /> },
 ];
 
 const opcionesMenu: OpcionMenu[] = [

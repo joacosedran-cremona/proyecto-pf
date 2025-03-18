@@ -9,6 +9,8 @@ import EstadoEquipo from "./monitoreoIndividual/estadoEquipo";
 import SectorIO from "./monitoreoIndividual/sectorIO";
 import { getColorClass } from "@/utils/logicaColores";
 import { displayData } from "@/utils/displayData";
+import { CocinaData } from "@/context/CocinaContext";
+import { EnfriadorData } from "@/context/EnfriadorContext";
 
 interface EquipoPageProps {
 type: "cocina" | "enfriador";
@@ -68,13 +70,25 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
         { label: "Tipo Fin", value: data.tipo_Fin ?? "N/A" }
     ];
 
-    // Datos de Sector IO
-    const datosIO = [
-        { label: "Frio", value: data.sectorIO?.[0]?.frio ?? "N/A" },
-        { label: "Vapor Vivo", value: data.sectorIO?.[0]?.vapor_vivo ?? "N/A" },
-        { label: "IO YY EQ XX", value: data.sectorIO?.[0]?.io_yy_eq_xx ?? "N/A" },
-        { label: "Vapor Serp", value: data.sectorIO?.[0]?.vapor_serp ?? "N/A" }
-    ];
+    const datosIO = isCocina
+    ? (data as CocinaData).sectorIO?.[0]
+    ? [
+        { label: "Bomba Recirculacion", value: (data as CocinaData).sectorIO[0].bomba_recirculacion },
+        { label: "Entrada Agua", value: (data as CocinaData).sectorIO[0].entrada_agua },
+        { label: "Filtro Succion Agua", value: (data as CocinaData).sectorIO[0].filtro_succion_agua },
+        { label: "Vapor Serpentina", value: (data as CocinaData).sectorIO[0].vapor_serpentina },
+        { label: "Vapor Vivo", value: (data as CocinaData).sectorIO[0].vapor_vivo }
+        ]
+    : []
+    : (data as EnfriadorData).sectorIO?.[0]
+    ? [
+        { label: "Bomba Recirculacion", value: (data as EnfriadorData).sectorIO[0].bomba_recirculacion },
+        { label: "Entrada Agua", value: (data as EnfriadorData).sectorIO[0].entrada_agua },
+        { label: "Filtro Succion Agua", value: (data as EnfriadorData).sectorIO[0].filtro_succion_agua },
+        { label: "Valvula Amoniaco", value: (data as EnfriadorData).sectorIO[0].valvula_amoniaco }
+        ]
+    : [];
+
 
     return (
         <section className="flex flex-col gap-20 min-h-[85vh] pt-[40px]">
