@@ -10,14 +10,14 @@ interface SectorIOProps {
 const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass, displayData }) => {
     return (
         <>
-            <h2 className="text-xl">Sector IO</h2>
+            <h2 className="text-xl text-white">Sector IO</h2>
             <ul className="grid gap-[1vh] h-full 1365:grid-cols-2">
                 {datosIO.map((dato) => (
                     <li
                         key={dato.label}
                         className="bg-grey flex justify-between px-20 py-[1vh] rounded-md items-center"
                     >
-                        <p className="text-[calc(0.4vw+1vh)]">{dato.label}</p>
+                        <p className="text-[calc(0.4vw+1vh)] text-white">{dato.label}</p>
                         <p className={`text-[calc(0.4vw+1vh)] ${getColorClass(dato.label, dato.value)}`}>
                             
                                 <GoDotFill

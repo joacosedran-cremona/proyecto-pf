@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <section className="flex flex-col w-full min-h-[70vh] justify-center gap-20">
       <h1
-        className="flex w-full text-4xl"
+        className="flex w-full text-4xl text-white"
       >
         ALERTAS
       </h1>

@@ -10,11 +10,11 @@ interface EstadoEquipoProps {
 const EstadoEquipo: React.FC<EstadoEquipoProps> = ({ datos, getColorClass, displayData }) => {
     return (
         <>
-            <h2 className="text-xl">Estado Equipo</h2>
+            <h2 className="text-xl text-white">Estado Equipo</h2>
             <ul className="flex flex-col gap-[1vh]">
                 {datos.map((dato) => (
                     <li key={dato.label} className="bg-grey flex flex-col px-20 py-[1vh] rounded-md">
-                        <p className="text-[calc(0.6vw+1vh)]">
+                        <p className="text-[calc(0.6vw+1vh)] text-white">
                             {dato.label}
                         </p>
                         <p className={`text-[calc(0.5vw+1vh)] ${getColorClass(dato.label, dato.value)}`}>

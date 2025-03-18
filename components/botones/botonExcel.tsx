@@ -11,7 +11,7 @@ export default function BotonExcel({ selectClasses }: BotonExcelProps) {
             radius="md"
             color="success"
             variant="ghost"
-            className={`text-success ${selectClasses || "h-1/5"}`}
+            className={`text-success ${selectClasses || "h-1/5"} min-w-[130px]`}
         >
             <FaFileExcel style={{ marginRight: "8px" }} />
             Descargar Excel

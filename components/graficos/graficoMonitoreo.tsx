@@ -200,7 +200,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         return (
         <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
             <AiOutlineExclamationCircle className="w-auto h-1/4"/>
-            <p className="text-3xl">Equipo no encontrado</p>
+            <p className="text-3xl text-white">Equipo no encontrado</p>
         </div>
         );
     }
@@ -211,8 +211,8 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         return (
         <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
             <AiOutlineExclamationCircle className="w-auto h-1/4"/>
-            <p className="text-3xl">{nombreEquipo} - INACTIVO</p>
-            <p className="text-xl">Aguardando Conexion</p>
+            <p className="text-3xl text-white">{nombreEquipo} - INACTIVO</p>
+            <p className="text-xl text-white">Aguardando Conexion</p>
         </div>
         );
     }
@@ -222,8 +222,8 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         return (
         <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
             <AiOutlineExclamationCircle className="w-auto h-1/4"/>
-            <p className="text-3xl">{nombreEquipo} - FALLA</p>
-            <p className="w-full text-center text-3xl">SE DETECTO UNA FALLA EN EL EQUIPO</p>
+            <p className="text-3xl text-white">{nombreEquipo} - FALLA</p>
+            <p className="w-full text-center text-3xl text-white">SE DETECTO UNA FALLA EN EL EQUIPO</p>
         </div>
         );
     }

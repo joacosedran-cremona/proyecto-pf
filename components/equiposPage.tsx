@@ -104,10 +104,10 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
                 optionClasses="p-2 bg-black font-bold"
             />
             </div>
-            <p className={`${bgColor} flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md`}>
+            <p className={`${bgColor} flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
             Receta: {data.nom_receta ?? "N/A"}
             </p>
-            <p className={`bg-black flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md`}>
+            <p className={`bg-black flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
             Estado: {data.estado ?? "N/A"}
             </p>
         </div>

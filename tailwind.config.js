@@ -2,6 +2,7 @@ import { heroui } from "@heroui/theme";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -29,7 +30,7 @@ module.exports = {
         red: "#F43",
         redChill: "#3b1616",
         green: "#56C35C ",
-        white: "#D9D9D9",
+        white: "#EEE",
         lightGrey: "#8C8C8C",
         midGrey: "#3F3F3F",
         grey: "#1F1F1F",

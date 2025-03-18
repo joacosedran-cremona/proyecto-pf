@@ -48,7 +48,7 @@ const Metrics: React.FC<MetricsProps> = ({ data, dateRange }) => {
 
   return (
     <div>
-      <h2 className="text-2xl">PRODUCTIVIDAD</h2>
+      <h2 className="text-2xl text-white">PRODUCTIVIDAD</h2>
       <div>
         <span className="text-xl text-orange">{dateRange.start}</span>
         <span className="text-xl text-blue"> - </span>
@@ -57,8 +57,8 @@ const Metrics: React.FC<MetricsProps> = ({ data, dateRange }) => {
       <div className="w-full flex items-center justify-evenly">
         {metrics.map((m) => (
           <div key={m.id}>
-            <p className="flex items-center justify-center text-4xl">{m.dato}</p>
-            <p className="flex items-center justify-center text-2xl">{m.titulo}</p>
+            <p className="flex items-center justify-center text-4xl text-white">{m.dato}</p>
+            <p className="flex items-center justify-center text-2xl text-white">{m.titulo}</p>
           </div>
         ))}
       </div>

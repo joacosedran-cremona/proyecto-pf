@@ -9,6 +9,7 @@
 
 :root {
     font-family: system-ui;
+    color: #EEE,
 }
 
 @layer utilities {

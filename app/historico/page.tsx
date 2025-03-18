@@ -62,7 +62,7 @@ export default function Historico() {
   return (
     <section className="flex flex-col w-full items-center justify-center gap-20">
       <div className="flex flex-row w-full min-h-[50px] h-[5vh] items-bottom">
-        <h1 className="flex w-1/3 h-full text-3xl align-bottom">HISTORICO</h1>
+        <h1 className="flex w-1/3 h-full text-3xl align-bottom text-white">HISTORICO</h1>
         <div className="flex flex-row w-2/3 justify-end gap-20">
           <Selector
             value={selectedId}

@@ -18,7 +18,7 @@ const Monitoreo = () => {
     return (
         <section className="flex flex-col min-h-[650px] h-[90vh] w-full min-w-[720px] items-center justify-center gap-20">
             <div className="flex w-full justify-between">
-                <h1 className="text-3xl">MONITOREO DE EQUIPOS</h1>
+                <h1 className="text-3xl text-white">MONITOREO DE EQUIPOS</h1>
                 <Selector selectClasses="bg-[#0001] h-full w-1/4 px-20 border-b-2 border-green focus:border-green focus:outline-none text-lg text-green hover:text-green transition-colors cursor-pointer"/>
             </div>
 

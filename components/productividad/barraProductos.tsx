@@ -65,7 +65,7 @@ const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
               className="w-[15px] h-[15px] rounded-[3px] mr-[5px]"
               style={{ backgroundColor: producto.color }}
             ></span>
-            <p>{`${producto.nombre} - ${producto.porcentaje}% (${producto.peso})`}</p>
+            <p className="text-white">{`${producto.nombre} - ${producto.porcentaje}% (${producto.peso})`}</p>
           </div>
         ))}
       </div>

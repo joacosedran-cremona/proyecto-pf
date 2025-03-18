@@ -141,13 +141,13 @@ export function ImagenLayout() {
               {equipo && (
                 <div className="text-white text-[calc(0.7vw+0.5vh)] text-stroke width-full font-bold p-3">
                   <div className="flex w-full justify-between">
-                    <p>{section.name}</p>
-                    <p>{equipo.estado}</p>
+                    <p className= "text-white">{section.name}</p>
+                    <p className= "text-white">{equipo.estado}</p>
                   </div>
-                  <p>Temp Agua: {equipo.tempAguaActual}</p>
-                  <p>Temp Prod: {equipo.tempProductoActual}</p>
-                  <p>Receta: {equipo.receta}</p>
-                  <p>Tiempo: {equipo.tiempoTranscurrido}</p>
+                  <p className= "text-white">Temp Agua: {equipo.tempAguaActual}</p>
+                  <p className= "text-white">Temp Prod: {equipo.tempProductoActual}</p>
+                  <p className= "text-white">Receta: {equipo.receta}</p>
+                  <p className= "text-white">Tiempo: {equipo.tiempoTranscurrido}</p>
                 </div>
               )}
             </span>

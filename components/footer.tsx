@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
                         rel="noopener noreferrer"
                     >
                         {icono}
-                        <p className="items-center">{texto}</p>
+                        <p className="items-center text-white">{texto}</p>
                     </Link>
                     </li>
                 ))}
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <p className="items-center">{texto}</p>
+                        <p className="items-center text-white">{texto}</p>
                         {icono}
                     </Link>
                     </li>

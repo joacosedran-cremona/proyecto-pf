@@ -76,7 +76,7 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
                     const ultimoPaso = pasos ? pasos[pasos.length - 1] : null;
                     
                     setCocinaData({
-                        tempIng: selectedCocina.temp_Ing ?? "N/A",
+                        tempIng: ultimoPaso?.temp_Ing ?? "N/A",  // Ahora se obtiene del último paso
                         tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
                         tempProd: ultimoPaso?.temp_Prod ?? "N/A",
                         nivAgua: ultimoPaso?.niv_Agua ?? "N/A",

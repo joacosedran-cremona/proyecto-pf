@@ -11,7 +11,7 @@ export default function BotonPDF({ selectClasses }: BotonPDFProps) {
             radius="md"
             color="danger"
             variant="ghost"
-            className={`text-danger ${selectClasses || "h-1/5"}`}
+            className={`text-danger ${selectClasses || "h-1/5"} min-w-[130px]`}
         >
             <FaFilePdf style={{ marginRight: "8px" }} />
             Descargar PDF

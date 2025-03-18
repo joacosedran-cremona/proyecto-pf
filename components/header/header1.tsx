@@ -39,7 +39,7 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
   }, [currentPath]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex flex-row w-full p-20 h-[65px] bg-white">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex flex-row w-full p-20 h-[65px] bg-[#EEE]">
       <div className="flex flex-row h-full w-[30%] justify-start gap-30">
         {opcionesIconos.map(({ id, url, icon }) => (
           <div key={id} className="h-full w-auto">
@@ -54,7 +54,7 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
         ))}
       </div>
 
-      <p className="flex w-[40%] justify-center">
+      <p className="flex w-[40%] justify-center text-[#000]">
         Planta Piloto - PF PROYECTO
       </p>
 
