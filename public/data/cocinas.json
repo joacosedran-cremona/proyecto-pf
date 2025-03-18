@@ -1,352 +1,404 @@
 [
     {
         "num_cocina": 1,
-        "num_receta": 3,
+        "num_receta": 4,
         "nom_receta": "Pate",
-        "estado": "FALLA",
+        "estado": "COCINANDO",
         "cant_torres": 3,
+        "tipo_Fin": "50°C",
         "pasos": [
             {
                 "id": 1,
-                "temp_Agua": 58,
-                "temp_Prod": 35,
-                "temp_Ing": 20,
-                "niv_Agua": 1701,
                 "tiempo": 0,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 23,
+                "niv_Agua": 1896
             },
             {
                 "id": 2,
-                "temp_Agua": 73,
-                "temp_Prod": 26,
-                "temp_Ing": 30,
-                "niv_Agua": 1755,
                 "tiempo": 5,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 30,
+                "niv_Agua": 1891
             },
             {
                 "id": 3,
-                "temp_Agua": 77,
-                "temp_Prod": 20,
-                "temp_Ing": 23,
-                "niv_Agua": 1797,
                 "tiempo": 10,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 30,
+                "niv_Agua": 1734
             },
             {
                 "id": 4,
-                "temp_Agua": 96,
-                "temp_Prod": 85,
-                "temp_Ing": 25,
-                "niv_Agua": 1707,
                 "tiempo": 15,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 30,
+                "niv_Agua": 1711
             },
             {
                 "id": 5,
-                "temp_Agua": 60,
-                "temp_Prod": 53,
-                "temp_Ing": 29,
-                "niv_Agua": 1714,
                 "tiempo": 20,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 27,
+                "niv_Agua": 1894
             },
             {
                 "id": 6,
-                "temp_Agua": 30,
-                "temp_Prod": 75,
-                "temp_Ing": 25,
-                "niv_Agua": 1815,
                 "tiempo": 25,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 26,
+                "niv_Agua": 1836
             },
             {
                 "id": 7,
-                "temp_Agua": 80,
-                "temp_Prod": 65,
-                "temp_Ing": 21,
-                "niv_Agua": 1714,
                 "tiempo": 30,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 28,
+                "niv_Agua": 1701
             },
             {
                 "id": 8,
-                "temp_Agua": 82,
-                "temp_Prod": 80,
-                "temp_Ing": 20,
-                "niv_Agua": 1834,
                 "tiempo": 35,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 28,
+                "niv_Agua": 1817
             },
             {
                 "id": 9,
-                "temp_Agua": 54,
-                "temp_Prod": 49,
-                "temp_Ing": 25,
-                "niv_Agua": 1833,
                 "tiempo": 40,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 27,
+                "niv_Agua": 1761
             },
             {
                 "id": 10,
-                "temp_Agua": 53,
-                "temp_Prod": 72,
-                "temp_Ing": 29,
-                "niv_Agua": 1895,
                 "tiempo": 45,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 20,
+                "niv_Agua": 1846
             },
             {
                 "id": 11,
-                "temp_Agua": 85,
-                "temp_Prod": 79,
-                "temp_Ing": 21,
-                "niv_Agua": 1749,
                 "tiempo": 50,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 23,
+                "niv_Agua": 1846
             },
             {
                 "id": 12,
-                "temp_Agua": 40,
-                "temp_Prod": 51,
-                "temp_Ing": 20,
-                "niv_Agua": 1708,
                 "tiempo": 55,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 21,
+                "niv_Agua": 1743
             },
             {
                 "id": 13,
-                "temp_Agua": 66,
-                "temp_Prod": 67,
-                "temp_Ing": 26,
-                "niv_Agua": 1877,
                 "tiempo": 60,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 27,
+                "niv_Agua": 1752
             },
             {
                 "id": 14,
-                "temp_Agua": 84,
-                "temp_Prod": 74,
-                "temp_Ing": 22,
-                "niv_Agua": 1739,
                 "tiempo": 65,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 30,
+                "niv_Agua": 1838
             },
             {
                 "id": 15,
-                "temp_Agua": 59,
-                "temp_Prod": 79,
-                "temp_Ing": 30,
-                "niv_Agua": 1796,
                 "tiempo": 70,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 27,
+                "niv_Agua": 1863
             },
             {
                 "id": 16,
-                "temp_Agua": 60,
-                "temp_Prod": 59,
-                "temp_Ing": 23,
-                "niv_Agua": 1838,
                 "tiempo": 75,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 29,
+                "niv_Agua": 1774
             },
             {
                 "id": 17,
-                "temp_Agua": 91,
-                "temp_Prod": 74,
-                "temp_Ing": 28,
-                "niv_Agua": 1856,
                 "tiempo": 80,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 22,
+                "niv_Agua": 1841
             },
             {
                 "id": 18,
-                "temp_Agua": 44,
-                "temp_Prod": 25,
-                "temp_Ing": 20,
-                "niv_Agua": 1715,
                 "tiempo": 85,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 23,
+                "niv_Agua": 1836
             },
             {
                 "id": 19,
-                "temp_Agua": 65,
-                "temp_Prod": 31,
-                "temp_Ing": 28,
-                "niv_Agua": 1774,
                 "tiempo": 90,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 22,
+                "niv_Agua": 1743
             },
             {
                 "id": 20,
-                "temp_Agua": 89,
-                "temp_Prod": 76,
-                "temp_Ing": 20,
-                "niv_Agua": 1811,
                 "tiempo": 95,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 22,
+                "niv_Agua": 1869
             },
             {
                 "id": 21,
-                "temp_Agua": 88,
-                "temp_Prod": 23,
-                "temp_Ing": 27,
-                "niv_Agua": 1851,
                 "tiempo": 100,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 24,
+                "niv_Agua": 1837
             },
             {
                 "id": 22,
-                "temp_Agua": 93,
-                "temp_Prod": 54,
-                "temp_Ing": 25,
-                "niv_Agua": 1786,
                 "tiempo": 105,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 23,
+                "niv_Agua": 1740
             },
             {
                 "id": 23,
-                "temp_Agua": 44,
-                "temp_Prod": 37,
-                "temp_Ing": 24,
-                "niv_Agua": 1711,
                 "tiempo": 110,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 27,
+                "niv_Agua": 1860
             },
             {
                 "id": 24,
-                "temp_Agua": 90,
-                "temp_Prod": 27,
-                "temp_Ing": 23,
-                "niv_Agua": 1786,
                 "tiempo": 115,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 21,
+                "niv_Agua": 1863
             },
             {
                 "id": 25,
-                "temp_Agua": 69,
-                "temp_Prod": 75,
-                "temp_Ing": 29,
-                "niv_Agua": 1762,
                 "tiempo": 120,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 23,
+                "niv_Agua": 1880
             },
             {
                 "id": 26,
-                "temp_Agua": 33,
-                "temp_Prod": 66,
-                "temp_Ing": 21,
-                "niv_Agua": 1731,
                 "tiempo": 125,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 20,
+                "niv_Agua": 1877
             },
             {
                 "id": 27,
-                "temp_Agua": 59,
-                "temp_Prod": 79,
-                "temp_Ing": 22,
-                "niv_Agua": 1763,
                 "tiempo": 130,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 27,
+                "niv_Agua": 1837
             },
             {
                 "id": 28,
-                "temp_Agua": 75,
-                "temp_Prod": 43,
-                "temp_Ing": 26,
-                "niv_Agua": 1879,
                 "tiempo": 135,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
+                "temp_Ing": 30,
+                "niv_Agua": 1894
             },
             {
                 "id": 29,
-                "temp_Agua": 91,
-                "temp_Prod": 51,
-                "temp_Ing": 20,
-                "niv_Agua": 1763,
                 "tiempo": 140,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 62.94,
+                "temp_Prod": 69.93,
+                "temp_Ing": 20,
+                "niv_Agua": 1822
             },
             {
                 "id": 30,
-                "temp_Agua": 96,
-                "temp_Prod": 41,
-                "temp_Ing": 29,
-                "niv_Agua": 1792,
                 "tiempo": 145,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 65.82,
+                "temp_Prod": 73.13,
+                "temp_Ing": 28,
+                "niv_Agua": 1739
             },
             {
                 "id": 31,
-                "temp_Agua": 36,
-                "temp_Prod": 65,
-                "temp_Ing": 22,
-                "niv_Agua": 1884,
                 "tiempo": 150,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 68.83,
+                "temp_Prod": 76.47,
+                "temp_Ing": 25,
+                "niv_Agua": 1802
             },
             {
                 "id": 32,
-                "temp_Agua": 79,
-                "temp_Prod": 32,
-                "temp_Ing": 25,
-                "niv_Agua": 1812,
                 "tiempo": 155,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 71.97,
+                "temp_Prod": 79.97,
+                "temp_Ing": 26,
+                "niv_Agua": 1810
             },
             {
                 "id": 33,
-                "temp_Agua": 55,
-                "temp_Prod": 88,
-                "temp_Ing": 30,
-                "niv_Agua": 1730,
                 "tiempo": 160,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 75.26,
+                "temp_Prod": 83.63,
+                "temp_Ing": 20,
+                "niv_Agua": 1822
             },
             {
                 "id": 34,
-                "temp_Agua": 37,
-                "temp_Prod": 27,
-                "temp_Ing": 26,
-                "niv_Agua": 1758,
                 "tiempo": 165,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 78.7,
+                "temp_Prod": 87.45,
+                "temp_Ing": 25,
+                "niv_Agua": 1763
             },
             {
                 "id": 35,
-                "temp_Agua": 38,
-                "temp_Prod": 35,
-                "temp_Ing": 29,
-                "niv_Agua": 1719,
                 "tiempo": 170,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 82.3,
+                "temp_Prod": 91.45,
+                "temp_Ing": 25,
+                "niv_Agua": 1735
             },
             {
                 "id": 36,
-                "temp_Agua": 81,
-                "temp_Prod": 54,
-                "temp_Ing": 27,
-                "niv_Agua": 1858,
                 "tiempo": 175,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 86.07,
+                "temp_Prod": 95.63,
+                "temp_Ing": 25,
+                "niv_Agua": 1880
             },
             {
                 "id": 37,
-                "temp_Agua": 43,
-                "temp_Prod": 35,
-                "temp_Ing": 29,
-                "niv_Agua": 1769,
                 "tiempo": 180,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 90,
+                "temp_Prod": 100,
+                "temp_Ing": 24,
+                "niv_Agua": 1877
+            },
+            {
+                "id": 38,
+                "tiempo": 185,
+                "temp_Agua": 94.11,
+                "temp_Prod": 104.57,
+                "temp_Ing": 25,
+                "niv_Agua": 1774
+            },
+            {
+                "id": 39,
+                "tiempo": 190,
+                "temp_Agua": 98.42,
+                "temp_Prod": 109.35,
+                "temp_Ing": 20,
+                "niv_Agua": 1703
+            },
+            {
+                "id": 40,
+                "tiempo": 195,
+                "temp_Agua": 102.92,
+                "temp_Prod": 114.35,
+                "temp_Ing": 24,
+                "niv_Agua": 1896
+            },
+            {
+                "id": 41,
+                "tiempo": 200,
+                "temp_Agua": 107.62,
+                "temp_Prod": 119.58,
+                "temp_Ing": 25,
+                "niv_Agua": 1852
+            },
+            {
+                "id": 42,
+                "tiempo": 205,
+                "temp_Agua": 112.54,
+                "temp_Prod": 125.05,
+                "temp_Ing": 25,
+                "niv_Agua": 1831
+            },
+            {
+                "id": 43,
+                "tiempo": 210,
+                "temp_Agua": 117.69,
+                "temp_Prod": 130.77,
+                "temp_Ing": 21,
+                "niv_Agua": 1740
+            },
+            {
+                "id": 44,
+                "tiempo": 215,
+                "temp_Agua": 123.07,
+                "temp_Prod": 136.74,
+                "temp_Ing": 25,
+                "niv_Agua": 1785
+            },
+            {
+                "id": 45,
+                "tiempo": 220,
+                "temp_Agua": 128.7,
+                "temp_Prod": 143,
+                "temp_Ing": 26,
+                "niv_Agua": 1884
+            },
+            {
+                "id": 46,
+                "tiempo": 225,
+                "temp_Agua": 134.58,
+                "temp_Prod": 149.53,
+                "temp_Ing": 29,
+                "niv_Agua": 1769
+            },
+            {
+                "id": 47,
+                "tiempo": 230,
+                "temp_Agua": 140.73,
+                "temp_Prod": 156.37,
+                "temp_Ing": 23,
+                "niv_Agua": 1706
+            },
+            {
+                "id": 48,
+                "tiempo": 235,
+                "temp_Agua": 147.17,
+                "temp_Prod": 163.52,
+                "temp_Ing": 23,
+                "niv_Agua": 1838
             }
         ],
         "sector_io": [
             {
-                "filtro_succion_agua": false,
+                "filtro_succion_agua": true,
                 "entrada_agua": true,
                 "bomba_recirculacion": false,
                 "vapor_serpentina": true,
-                "vapor_vivo": false
+                "vapor_vivo": true
             }
         ]
     },
@@ -356,210 +408,277 @@
         "nom_receta": "Arroz con Pollo",
         "estado": "INACTIVO",
         "cant_torres": 3,
+        "tipo_Fin": "50°C",
         "pasos": [
             {
                 "id": 1,
-                "temp_Agua": 34,
-                "temp_Prod": 24,
-                "temp_Ing": 20,
-                "niv_Agua": 1770,
                 "tiempo": 0,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 29,
+                "niv_Agua": 1862
             },
             {
                 "id": 2,
-                "temp_Agua": 93,
-                "temp_Prod": 31,
-                "temp_Ing": 20,
-                "niv_Agua": 1890,
                 "tiempo": 5,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 23,
+                "niv_Agua": 1720
             },
             {
                 "id": 3,
-                "temp_Agua": 41,
-                "temp_Prod": 50,
-                "temp_Ing": 23,
-                "niv_Agua": 1883,
                 "tiempo": 10,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 27,
+                "niv_Agua": 1879
             },
             {
                 "id": 4,
-                "temp_Agua": 93,
-                "temp_Prod": 65,
-                "temp_Ing": 30,
-                "niv_Agua": 1856,
                 "tiempo": 15,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 22,
+                "niv_Agua": 1744
             },
             {
                 "id": 5,
-                "temp_Agua": 29,
-                "temp_Prod": 57,
-                "temp_Ing": 20,
-                "niv_Agua": 1763,
                 "tiempo": 20,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 22,
+                "niv_Agua": 1742
             },
             {
                 "id": 6,
-                "temp_Agua": 80,
-                "temp_Prod": 51,
-                "temp_Ing": 26,
-                "niv_Agua": 1800,
                 "tiempo": 25,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 29,
+                "niv_Agua": 1814
             },
             {
                 "id": 7,
-                "temp_Agua": 47,
-                "temp_Prod": 51,
-                "temp_Ing": 29,
-                "niv_Agua": 1884,
                 "tiempo": 30,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 28,
+                "niv_Agua": 1855
             },
             {
                 "id": 8,
-                "temp_Agua": 55,
-                "temp_Prod": 70,
-                "temp_Ing": 28,
-                "niv_Agua": 1701,
                 "tiempo": 35,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 25,
+                "niv_Agua": 1727
             },
             {
                 "id": 9,
-                "temp_Agua": 75,
-                "temp_Prod": 64,
-                "temp_Ing": 23,
-                "niv_Agua": 1743,
                 "tiempo": 40,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 27,
+                "niv_Agua": 1841
             },
             {
                 "id": 10,
-                "temp_Agua": 92,
-                "temp_Prod": 78,
-                "temp_Ing": 26,
-                "niv_Agua": 1731,
                 "tiempo": 45,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 30,
+                "niv_Agua": 1837
             },
             {
                 "id": 11,
-                "temp_Agua": 29,
-                "temp_Prod": 71,
-                "temp_Ing": 26,
-                "niv_Agua": 1722,
                 "tiempo": 50,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 29,
+                "niv_Agua": 1752
             },
             {
                 "id": 12,
-                "temp_Agua": 55,
-                "temp_Prod": 77,
-                "temp_Ing": 26,
-                "niv_Agua": 1764,
                 "tiempo": 55,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 25,
+                "niv_Agua": 1727
             },
             {
                 "id": 13,
-                "temp_Agua": 39,
-                "temp_Prod": 66,
-                "temp_Ing": 24,
-                "niv_Agua": 1759,
                 "tiempo": 60,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 20,
+                "niv_Agua": 1789
             },
             {
                 "id": 14,
-                "temp_Agua": 76,
-                "temp_Prod": 64,
-                "temp_Ing": 23,
-                "niv_Agua": 1888,
                 "tiempo": 65,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 24,
+                "niv_Agua": 1881
             },
             {
                 "id": 15,
-                "temp_Agua": 99,
-                "temp_Prod": 56,
-                "temp_Ing": 21,
-                "niv_Agua": 1872,
                 "tiempo": 70,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 23,
+                "niv_Agua": 1874
             },
             {
                 "id": 16,
-                "temp_Agua": 53,
-                "temp_Prod": 70,
-                "temp_Ing": 30,
-                "niv_Agua": 1788,
                 "tiempo": 75,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 27,
+                "niv_Agua": 1877
             },
             {
                 "id": 17,
-                "temp_Agua": 72,
-                "temp_Prod": 71,
-                "temp_Ing": 22,
-                "niv_Agua": 1799,
                 "tiempo": 80,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 27,
+                "niv_Agua": 1772
             },
             {
                 "id": 18,
-                "temp_Agua": 58,
-                "temp_Prod": 46,
-                "temp_Ing": 26,
-                "niv_Agua": 1701,
                 "tiempo": 85,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 24,
+                "niv_Agua": 1870
             },
             {
                 "id": 19,
-                "temp_Agua": 67,
-                "temp_Prod": 32,
-                "temp_Ing": 27,
-                "niv_Agua": 1794,
                 "tiempo": 90,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 25,
+                "niv_Agua": 1787
             },
             {
                 "id": 20,
-                "temp_Agua": 87,
-                "temp_Prod": 25,
-                "temp_Ing": 25,
-                "niv_Agua": 1859,
                 "tiempo": 95,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 24,
+                "niv_Agua": 1852
             },
             {
                 "id": 21,
-                "temp_Agua": 90,
-                "temp_Prod": 41,
-                "temp_Ing": 21,
-                "niv_Agua": 1766,
                 "tiempo": 100,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 28,
+                "niv_Agua": 1842
             },
             {
                 "id": 22,
-                "temp_Agua": 59,
-                "temp_Prod": 55,
-                "temp_Ing": 24,
-                "niv_Agua": 1746,
                 "tiempo": 105,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 24,
+                "niv_Agua": 1849
+            },
+            {
+                "id": 23,
+                "tiempo": 110,
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 28,
+                "niv_Agua": 1834
+            },
+            {
+                "id": 24,
+                "tiempo": 115,
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 29,
+                "niv_Agua": 1833
+            },
+            {
+                "id": 25,
+                "tiempo": 120,
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 28,
+                "niv_Agua": 1878
+            },
+            {
+                "id": 26,
+                "tiempo": 125,
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 30,
+                "niv_Agua": 1876
+            },
+            {
+                "id": 27,
+                "tiempo": 130,
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 30,
+                "niv_Agua": 1785
+            },
+            {
+                "id": 28,
+                "tiempo": 135,
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
+                "temp_Ing": 24,
+                "niv_Agua": 1719
+            },
+            {
+                "id": 29,
+                "tiempo": 140,
+                "temp_Agua": 62.94,
+                "temp_Prod": 69.93,
+                "temp_Ing": 27,
+                "niv_Agua": 1834
+            },
+            {
+                "id": 30,
+                "tiempo": 145,
+                "temp_Agua": 65.82,
+                "temp_Prod": 73.13,
+                "temp_Ing": 24,
+                "niv_Agua": 1784
+            },
+            {
+                "id": 31,
+                "tiempo": 150,
+                "temp_Agua": 68.83,
+                "temp_Prod": 76.47,
+                "temp_Ing": 29,
+                "niv_Agua": 1870
+            },
+            {
+                "id": 32,
+                "tiempo": 155,
+                "temp_Agua": 71.97,
+                "temp_Prod": 79.97,
+                "temp_Ing": 30,
+                "niv_Agua": 1774
+            },
+            {
+                "id": 33,
+                "tiempo": 160,
+                "temp_Agua": 75.26,
+                "temp_Prod": 83.63,
+                "temp_Ing": 20,
+                "niv_Agua": 1832
             }
         ],
         "sector_io": [
             {
                 "filtro_succion_agua": false,
-                "entrada_agua": true,
+                "entrada_agua": false,
                 "bomba_recirculacion": false,
                 "vapor_serpentina": true,
                 "vapor_vivo": false
@@ -569,351 +688,306 @@
     {
         "num_cocina": 3,
         "num_receta": 2,
-        "nom_receta": "Arroz con Pollo",
-        "estado": "FALLA",
+        "nom_receta": "Pollo Asado",
+        "estado": "FINALIZADO",
         "cant_torres": 3,
+        "tipo_Fin": "50°C",
         "pasos": [
             {
                 "id": 1,
-                "temp_Agua": 92,
-                "temp_Prod": 72,
-                "temp_Ing": 26,
-                "niv_Agua": 1735,
                 "tiempo": 0,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 26,
+                "niv_Agua": 1888
             },
             {
                 "id": 2,
-                "temp_Agua": 35,
-                "temp_Prod": 42,
-                "temp_Ing": 22,
-                "niv_Agua": 1814,
                 "tiempo": 5,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 20,
+                "niv_Agua": 1726
             },
             {
                 "id": 3,
-                "temp_Agua": 67,
-                "temp_Prod": 27,
-                "temp_Ing": 20,
-                "niv_Agua": 1850,
                 "tiempo": 10,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 22,
+                "niv_Agua": 1800
             },
             {
                 "id": 4,
-                "temp_Agua": 36,
-                "temp_Prod": 86,
-                "temp_Ing": 26,
-                "niv_Agua": 1768,
                 "tiempo": 15,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 24,
+                "niv_Agua": 1741
             },
             {
                 "id": 5,
-                "temp_Agua": 59,
-                "temp_Prod": 50,
-                "temp_Ing": 21,
-                "niv_Agua": 1815,
                 "tiempo": 20,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 30,
+                "niv_Agua": 1833
             },
             {
                 "id": 6,
-                "temp_Agua": 88,
-                "temp_Prod": 51,
-                "temp_Ing": 22,
-                "niv_Agua": 1875,
                 "tiempo": 25,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 28,
+                "niv_Agua": 1872
             },
             {
                 "id": 7,
-                "temp_Agua": 79,
-                "temp_Prod": 34,
-                "temp_Ing": 30,
-                "niv_Agua": 1702,
                 "tiempo": 30,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 30,
+                "niv_Agua": 1826
             },
             {
                 "id": 8,
-                "temp_Agua": 38,
-                "temp_Prod": 71,
-                "temp_Ing": 30,
-                "niv_Agua": 1746,
                 "tiempo": 35,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 20,
+                "niv_Agua": 1787
             },
             {
                 "id": 9,
-                "temp_Agua": 28,
-                "temp_Prod": 43,
-                "temp_Ing": 27,
-                "niv_Agua": 1848,
                 "tiempo": 40,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 20,
+                "niv_Agua": 1832
             },
             {
                 "id": 10,
-                "temp_Agua": 75,
-                "temp_Prod": 73,
-                "temp_Ing": 21,
-                "niv_Agua": 1791,
                 "tiempo": 45,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 28,
+                "niv_Agua": 1738
             },
             {
                 "id": 11,
-                "temp_Agua": 28,
-                "temp_Prod": 32,
-                "temp_Ing": 29,
-                "niv_Agua": 1738,
                 "tiempo": 50,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 21,
+                "niv_Agua": 1871
             },
             {
                 "id": 12,
-                "temp_Agua": 56,
-                "temp_Prod": 47,
-                "temp_Ing": 27,
-                "niv_Agua": 1768,
                 "tiempo": 55,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 28,
+                "niv_Agua": 1855
             },
             {
                 "id": 13,
-                "temp_Agua": 47,
-                "temp_Prod": 32,
-                "temp_Ing": 30,
-                "niv_Agua": 1892,
                 "tiempo": 60,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 30,
+                "niv_Agua": 1715
             },
             {
                 "id": 14,
-                "temp_Agua": 91,
-                "temp_Prod": 75,
-                "temp_Ing": 28,
-                "niv_Agua": 1865,
                 "tiempo": 65,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 27,
+                "niv_Agua": 1731
             },
             {
                 "id": 15,
-                "temp_Agua": 56,
-                "temp_Prod": 71,
-                "temp_Ing": 20,
-                "niv_Agua": 1871,
                 "tiempo": 70,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 30,
+                "niv_Agua": 1838
             },
             {
                 "id": 16,
-                "temp_Agua": 95,
-                "temp_Prod": 28,
-                "temp_Ing": 30,
-                "niv_Agua": 1765,
                 "tiempo": 75,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 20,
+                "niv_Agua": 1835
             },
             {
                 "id": 17,
-                "temp_Agua": 93,
-                "temp_Prod": 44,
-                "temp_Ing": 30,
-                "niv_Agua": 1897,
                 "tiempo": 80,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 27,
+                "niv_Agua": 1817
             },
             {
                 "id": 18,
-                "temp_Agua": 55,
-                "temp_Prod": 46,
-                "temp_Ing": 25,
-                "niv_Agua": 1830,
                 "tiempo": 85,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 25,
+                "niv_Agua": 1837
             },
             {
                 "id": 19,
-                "temp_Agua": 44,
-                "temp_Prod": 60,
-                "temp_Ing": 25,
-                "niv_Agua": 1715,
                 "tiempo": 90,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 24,
+                "niv_Agua": 1827
             },
             {
                 "id": 20,
-                "temp_Agua": 25,
-                "temp_Prod": 28,
-                "temp_Ing": 21,
-                "niv_Agua": 1723,
                 "tiempo": 95,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 27,
+                "niv_Agua": 1871
             },
             {
                 "id": 21,
-                "temp_Agua": 48,
-                "temp_Prod": 75,
-                "temp_Ing": 22,
-                "niv_Agua": 1882,
                 "tiempo": 100,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 26,
+                "niv_Agua": 1772
             },
             {
                 "id": 22,
-                "temp_Agua": 37,
-                "temp_Prod": 83,
-                "temp_Ing": 26,
-                "niv_Agua": 1852,
                 "tiempo": 105,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 27,
+                "niv_Agua": 1705
             },
             {
                 "id": 23,
-                "temp_Agua": 68,
-                "temp_Prod": 89,
-                "temp_Ing": 20,
-                "niv_Agua": 1783,
                 "tiempo": 110,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 24,
+                "niv_Agua": 1817
             },
             {
                 "id": 24,
-                "temp_Agua": 100,
-                "temp_Prod": 55,
-                "temp_Ing": 26,
-                "niv_Agua": 1828,
                 "tiempo": 115,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 28,
+                "niv_Agua": 1717
             },
             {
                 "id": 25,
-                "temp_Agua": 74,
-                "temp_Prod": 79,
-                "temp_Ing": 30,
-                "niv_Agua": 1789,
                 "tiempo": 120,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 20,
+                "niv_Agua": 1844
             },
             {
                 "id": 26,
-                "temp_Agua": 40,
-                "temp_Prod": 76,
-                "temp_Ing": 27,
-                "niv_Agua": 1795,
                 "tiempo": 125,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 23,
+                "niv_Agua": 1831
             },
             {
                 "id": 27,
-                "temp_Agua": 100,
-                "temp_Prod": 56,
-                "temp_Ing": 26,
-                "niv_Agua": 1800,
                 "tiempo": 130,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 28,
+                "niv_Agua": 1702
             },
             {
                 "id": 28,
-                "temp_Agua": 55,
-                "temp_Prod": 28,
-                "temp_Ing": 26,
-                "niv_Agua": 1753,
                 "tiempo": 135,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
+                "temp_Ing": 28,
+                "niv_Agua": 1860
             },
             {
                 "id": 29,
-                "temp_Agua": 36,
-                "temp_Prod": 65,
-                "temp_Ing": 24,
-                "niv_Agua": 1793,
                 "tiempo": 140,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 62.94,
+                "temp_Prod": 69.93,
+                "temp_Ing": 20,
+                "niv_Agua": 1702
             },
             {
                 "id": 30,
-                "temp_Agua": 71,
-                "temp_Prod": 31,
-                "temp_Ing": 27,
-                "niv_Agua": 1841,
                 "tiempo": 145,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 65.82,
+                "temp_Prod": 73.13,
+                "temp_Ing": 27,
+                "niv_Agua": 1847
             },
             {
                 "id": 31,
-                "temp_Agua": 41,
-                "temp_Prod": 36,
-                "temp_Ing": 20,
-                "niv_Agua": 1898,
                 "tiempo": 150,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 68.83,
+                "temp_Prod": 76.47,
+                "temp_Ing": 24,
+                "niv_Agua": 1723
             },
             {
                 "id": 32,
-                "temp_Agua": 34,
-                "temp_Prod": 52,
-                "temp_Ing": 28,
-                "niv_Agua": 1733,
                 "tiempo": 155,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 71.97,
+                "temp_Prod": 79.97,
+                "temp_Ing": 25,
+                "niv_Agua": 1880
             },
             {
                 "id": 33,
-                "temp_Agua": 61,
-                "temp_Prod": 34,
-                "temp_Ing": 22,
-                "niv_Agua": 1722,
                 "tiempo": 160,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 75.26,
+                "temp_Prod": 83.63,
+                "temp_Ing": 27,
+                "niv_Agua": 1735
             },
             {
                 "id": 34,
-                "temp_Agua": 62,
-                "temp_Prod": 77,
-                "temp_Ing": 27,
-                "niv_Agua": 1703,
                 "tiempo": 165,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 78.7,
+                "temp_Prod": 87.45,
+                "temp_Ing": 23,
+                "niv_Agua": 1795
             },
             {
                 "id": 35,
-                "temp_Agua": 70,
-                "temp_Prod": 56,
-                "temp_Ing": 21,
-                "niv_Agua": 1853,
                 "tiempo": 170,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 82.3,
+                "temp_Prod": 91.45,
+                "temp_Ing": 23,
+                "niv_Agua": 1751
             },
             {
                 "id": 36,
-                "temp_Agua": 64,
-                "temp_Prod": 25,
-                "temp_Ing": 29,
-                "niv_Agua": 1738,
                 "tiempo": 175,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 86.07,
+                "temp_Prod": 95.63,
+                "temp_Ing": 23,
+                "niv_Agua": 1749
             },
             {
                 "id": 37,
-                "temp_Agua": 75,
-                "temp_Prod": 50,
-                "temp_Ing": 20,
-                "niv_Agua": 1711,
                 "tiempo": 180,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 38,
-                "temp_Agua": 61,
-                "temp_Prod": 60,
-                "temp_Ing": 20,
-                "niv_Agua": 1837,
-                "tiempo": 185,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 90,
+                "temp_Prod": 100,
+                "temp_Ing": 27,
+                "niv_Agua": 1706
             }
         ],
         "sector_io": [
@@ -921,197 +995,386 @@
                 "filtro_succion_agua": false,
                 "entrada_agua": false,
                 "bomba_recirculacion": false,
-                "vapor_serpentina": false,
+                "vapor_serpentina": true,
                 "vapor_vivo": false
             }
         ]
     },
     {
         "num_cocina": 4,
-        "num_receta": 4,
-        "nom_receta": "Pate",
-        "estado": "FALLA",
+        "num_receta": 5,
+        "nom_receta": "Pollo Asado",
+        "estado": "FINALIZADO",
         "cant_torres": 1,
+        "tipo_Fin": "50°C",
         "pasos": [
             {
                 "id": 1,
-                "temp_Agua": 52,
-                "temp_Prod": 70,
-                "temp_Ing": 25,
-                "niv_Agua": 1897,
                 "tiempo": 0,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 27,
+                "niv_Agua": 1871
             },
             {
                 "id": 2,
-                "temp_Agua": 84,
-                "temp_Prod": 80,
-                "temp_Ing": 25,
-                "niv_Agua": 1898,
                 "tiempo": 5,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 21,
+                "niv_Agua": 1825
             },
             {
                 "id": 3,
-                "temp_Agua": 52,
-                "temp_Prod": 35,
-                "temp_Ing": 27,
-                "niv_Agua": 1764,
                 "tiempo": 10,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 21,
+                "niv_Agua": 1846
             },
             {
                 "id": 4,
-                "temp_Agua": 38,
-                "temp_Prod": 85,
-                "temp_Ing": 22,
-                "niv_Agua": 1732,
                 "tiempo": 15,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 29,
+                "niv_Agua": 1738
             },
             {
                 "id": 5,
-                "temp_Agua": 43,
-                "temp_Prod": 76,
-                "temp_Ing": 20,
-                "niv_Agua": 1781,
                 "tiempo": 20,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 28,
+                "niv_Agua": 1729
             },
             {
                 "id": 6,
-                "temp_Agua": 66,
-                "temp_Prod": 34,
-                "temp_Ing": 29,
-                "niv_Agua": 1744,
                 "tiempo": 25,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 27,
+                "niv_Agua": 1816
             },
             {
                 "id": 7,
-                "temp_Agua": 66,
-                "temp_Prod": 75,
-                "temp_Ing": 30,
-                "niv_Agua": 1808,
                 "tiempo": 30,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 22,
+                "niv_Agua": 1797
             },
             {
                 "id": 8,
-                "temp_Agua": 25,
-                "temp_Prod": 74,
-                "temp_Ing": 26,
-                "niv_Agua": 1771,
                 "tiempo": 35,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 23,
+                "niv_Agua": 1757
             },
             {
                 "id": 9,
-                "temp_Agua": 35,
-                "temp_Prod": 63,
-                "temp_Ing": 27,
-                "niv_Agua": 1886,
                 "tiempo": 40,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 29,
+                "niv_Agua": 1787
             },
             {
                 "id": 10,
-                "temp_Agua": 32,
-                "temp_Prod": 64,
-                "temp_Ing": 30,
-                "niv_Agua": 1824,
                 "tiempo": 45,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 26,
+                "niv_Agua": 1824
             },
             {
                 "id": 11,
-                "temp_Agua": 48,
-                "temp_Prod": 69,
-                "temp_Ing": 28,
-                "niv_Agua": 1760,
                 "tiempo": 50,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 27,
+                "niv_Agua": 1844
             },
             {
                 "id": 12,
-                "temp_Agua": 66,
-                "temp_Prod": 36,
-                "temp_Ing": 26,
-                "niv_Agua": 1791,
                 "tiempo": 55,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 27,
+                "niv_Agua": 1842
             },
             {
                 "id": 13,
-                "temp_Agua": 70,
-                "temp_Prod": 84,
-                "temp_Ing": 29,
-                "niv_Agua": 1896,
                 "tiempo": 60,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 28,
+                "niv_Agua": 1700
             },
             {
                 "id": 14,
-                "temp_Agua": 53,
-                "temp_Prod": 67,
-                "temp_Ing": 26,
-                "niv_Agua": 1819,
                 "tiempo": 65,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 26,
+                "niv_Agua": 1755
             },
             {
                 "id": 15,
-                "temp_Agua": 70,
-                "temp_Prod": 74,
-                "temp_Ing": 23,
-                "niv_Agua": 1727,
                 "tiempo": 70,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 24,
+                "niv_Agua": 1746
             },
             {
                 "id": 16,
-                "temp_Agua": 91,
-                "temp_Prod": 66,
-                "temp_Ing": 27,
-                "niv_Agua": 1851,
                 "tiempo": 75,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 21,
+                "niv_Agua": 1773
             },
             {
                 "id": 17,
-                "temp_Agua": 97,
-                "temp_Prod": 29,
-                "temp_Ing": 23,
-                "niv_Agua": 1748,
                 "tiempo": 80,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 30,
+                "niv_Agua": 1896
             },
             {
                 "id": 18,
-                "temp_Agua": 75,
-                "temp_Prod": 76,
-                "temp_Ing": 20,
-                "niv_Agua": 1785,
                 "tiempo": 85,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 24,
+                "niv_Agua": 1723
             },
             {
                 "id": 19,
-                "temp_Agua": 64,
-                "temp_Prod": 70,
-                "temp_Ing": 22,
-                "niv_Agua": 1712,
                 "tiempo": 90,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 22,
+                "niv_Agua": 1720
             },
             {
                 "id": 20,
-                "temp_Agua": 57,
-                "temp_Prod": 63,
-                "temp_Ing": 27,
-                "niv_Agua": 1745,
                 "tiempo": 95,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 26,
+                "niv_Agua": 1821
+            },
+            {
+                "id": 21,
+                "tiempo": 100,
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 25,
+                "niv_Agua": 1862
+            },
+            {
+                "id": 22,
+                "tiempo": 105,
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 24,
+                "niv_Agua": 1718
+            },
+            {
+                "id": 23,
+                "tiempo": 110,
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 24,
+                "niv_Agua": 1769
+            },
+            {
+                "id": 24,
+                "tiempo": 115,
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 24,
+                "niv_Agua": 1798
+            },
+            {
+                "id": 25,
+                "tiempo": 120,
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 29,
+                "niv_Agua": 1850
+            },
+            {
+                "id": 26,
+                "tiempo": 125,
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 24,
+                "niv_Agua": 1700
+            },
+            {
+                "id": 27,
+                "tiempo": 130,
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 20,
+                "niv_Agua": 1864
+            },
+            {
+                "id": 28,
+                "tiempo": 135,
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
+                "temp_Ing": 26,
+                "niv_Agua": 1825
+            },
+            {
+                "id": 29,
+                "tiempo": 140,
+                "temp_Agua": 62.94,
+                "temp_Prod": 69.93,
+                "temp_Ing": 29,
+                "niv_Agua": 1884
+            },
+            {
+                "id": 30,
+                "tiempo": 145,
+                "temp_Agua": 65.82,
+                "temp_Prod": 73.13,
+                "temp_Ing": 29,
+                "niv_Agua": 1844
+            },
+            {
+                "id": 31,
+                "tiempo": 150,
+                "temp_Agua": 68.83,
+                "temp_Prod": 76.47,
+                "temp_Ing": 26,
+                "niv_Agua": 1791
+            },
+            {
+                "id": 32,
+                "tiempo": 155,
+                "temp_Agua": 71.97,
+                "temp_Prod": 79.97,
+                "temp_Ing": 30,
+                "niv_Agua": 1762
+            },
+            {
+                "id": 33,
+                "tiempo": 160,
+                "temp_Agua": 75.26,
+                "temp_Prod": 83.63,
+                "temp_Ing": 26,
+                "niv_Agua": 1755
+            },
+            {
+                "id": 34,
+                "tiempo": 165,
+                "temp_Agua": 78.7,
+                "temp_Prod": 87.45,
+                "temp_Ing": 29,
+                "niv_Agua": 1763
+            },
+            {
+                "id": 35,
+                "tiempo": 170,
+                "temp_Agua": 82.3,
+                "temp_Prod": 91.45,
+                "temp_Ing": 27,
+                "niv_Agua": 1831
+            },
+            {
+                "id": 36,
+                "tiempo": 175,
+                "temp_Agua": 86.07,
+                "temp_Prod": 95.63,
+                "temp_Ing": 27,
+                "niv_Agua": 1794
+            },
+            {
+                "id": 37,
+                "tiempo": 180,
+                "temp_Agua": 90,
+                "temp_Prod": 100,
+                "temp_Ing": 24,
+                "niv_Agua": 1740
+            },
+            {
+                "id": 38,
+                "tiempo": 185,
+                "temp_Agua": 94.11,
+                "temp_Prod": 104.57,
+                "temp_Ing": 30,
+                "niv_Agua": 1707
+            },
+            {
+                "id": 39,
+                "tiempo": 190,
+                "temp_Agua": 98.42,
+                "temp_Prod": 109.35,
+                "temp_Ing": 20,
+                "niv_Agua": 1792
+            },
+            {
+                "id": 40,
+                "tiempo": 195,
+                "temp_Agua": 102.92,
+                "temp_Prod": 114.35,
+                "temp_Ing": 25,
+                "niv_Agua": 1722
+            },
+            {
+                "id": 41,
+                "tiempo": 200,
+                "temp_Agua": 107.62,
+                "temp_Prod": 119.58,
+                "temp_Ing": 22,
+                "niv_Agua": 1862
+            },
+            {
+                "id": 42,
+                "tiempo": 205,
+                "temp_Agua": 112.54,
+                "temp_Prod": 125.05,
+                "temp_Ing": 21,
+                "niv_Agua": 1769
+            },
+            {
+                "id": 43,
+                "tiempo": 210,
+                "temp_Agua": 117.69,
+                "temp_Prod": 130.77,
+                "temp_Ing": 29,
+                "niv_Agua": 1714
+            },
+            {
+                "id": 44,
+                "tiempo": 215,
+                "temp_Agua": 123.07,
+                "temp_Prod": 136.74,
+                "temp_Ing": 30,
+                "niv_Agua": 1870
+            },
+            {
+                "id": 45,
+                "tiempo": 220,
+                "temp_Agua": 128.7,
+                "temp_Prod": 143,
+                "temp_Ing": 30,
+                "niv_Agua": 1752
+            },
+            {
+                "id": 46,
+                "tiempo": 225,
+                "temp_Agua": 134.58,
+                "temp_Prod": 149.53,
+                "temp_Ing": 20,
+                "niv_Agua": 1726
             }
         ],
         "sector_io": [
@@ -1126,289 +1389,1033 @@
     },
     {
         "num_cocina": 5,
-        "num_receta": 1,
-        "nom_receta": "Pate",
-        "estado": "INACTIVO",
+        "num_receta": 4,
+        "nom_receta": "Pollo Asado",
+        "estado": "FINALIZADO",
         "cant_torres": 1,
+        "tipo_Fin": "50°C",
         "pasos": [
             {
                 "id": 1,
-                "temp_Agua": 68,
-                "temp_Prod": 22,
-                "temp_Ing": 29,
-                "niv_Agua": 1854,
                 "tiempo": 0,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 20,
+                "niv_Agua": 1770
             },
             {
                 "id": 2,
-                "temp_Agua": 76,
-                "temp_Prod": 52,
-                "temp_Ing": 26,
-                "niv_Agua": 1884,
                 "tiempo": 5,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 29,
+                "niv_Agua": 1776
             },
             {
                 "id": 3,
-                "temp_Agua": 90,
-                "temp_Prod": 28,
-                "temp_Ing": 23,
-                "niv_Agua": 1700,
                 "tiempo": 10,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 28,
+                "niv_Agua": 1804
             },
             {
                 "id": 4,
-                "temp_Agua": 67,
-                "temp_Prod": 32,
-                "temp_Ing": 24,
-                "niv_Agua": 1807,
                 "tiempo": 15,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 30,
+                "niv_Agua": 1882
             },
             {
                 "id": 5,
-                "temp_Agua": 85,
-                "temp_Prod": 54,
-                "temp_Ing": 28,
-                "niv_Agua": 1718,
                 "tiempo": 20,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 30,
+                "niv_Agua": 1856
             },
             {
                 "id": 6,
-                "temp_Agua": 26,
-                "temp_Prod": 51,
-                "temp_Ing": 23,
-                "niv_Agua": 1794,
                 "tiempo": 25,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 26,
+                "niv_Agua": 1771
             },
             {
                 "id": 7,
-                "temp_Agua": 50,
-                "temp_Prod": 44,
-                "temp_Ing": 24,
-                "niv_Agua": 1866,
                 "tiempo": 30,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 28,
+                "niv_Agua": 1704
             },
             {
                 "id": 8,
-                "temp_Agua": 85,
-                "temp_Prod": 81,
-                "temp_Ing": 22,
-                "niv_Agua": 1743,
                 "tiempo": 35,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 26,
+                "niv_Agua": 1716
             },
             {
                 "id": 9,
-                "temp_Agua": 46,
-                "temp_Prod": 71,
-                "temp_Ing": 26,
-                "niv_Agua": 1786,
                 "tiempo": 40,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 20,
+                "niv_Agua": 1814
             },
             {
                 "id": 10,
-                "temp_Agua": 90,
-                "temp_Prod": 64,
-                "temp_Ing": 27,
-                "niv_Agua": 1796,
                 "tiempo": 45,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 28,
+                "niv_Agua": 1869
             },
             {
                 "id": 11,
-                "temp_Agua": 58,
-                "temp_Prod": 86,
-                "temp_Ing": 29,
-                "niv_Agua": 1752,
                 "tiempo": 50,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 28,
+                "niv_Agua": 1729
             },
             {
                 "id": 12,
-                "temp_Agua": 85,
-                "temp_Prod": 38,
-                "temp_Ing": 22,
-                "niv_Agua": 1883,
                 "tiempo": 55,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 27,
+                "niv_Agua": 1705
             },
             {
                 "id": 13,
-                "temp_Agua": 31,
-                "temp_Prod": 74,
-                "temp_Ing": 25,
-                "niv_Agua": 1899,
                 "tiempo": 60,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 26,
+                "niv_Agua": 1827
             },
             {
                 "id": 14,
-                "temp_Agua": 42,
-                "temp_Prod": 68,
-                "temp_Ing": 29,
-                "niv_Agua": 1871,
                 "tiempo": 65,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 30,
+                "niv_Agua": 1742
             },
             {
                 "id": 15,
-                "temp_Agua": 88,
-                "temp_Prod": 70,
-                "temp_Ing": 21,
-                "niv_Agua": 1781,
                 "tiempo": 70,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 30,
+                "niv_Agua": 1710
             },
             {
                 "id": 16,
-                "temp_Agua": 99,
-                "temp_Prod": 22,
-                "temp_Ing": 25,
-                "niv_Agua": 1757,
                 "tiempo": 75,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 20,
+                "niv_Agua": 1829
             },
             {
                 "id": 17,
-                "temp_Agua": 27,
-                "temp_Prod": 81,
-                "temp_Ing": 24,
-                "niv_Agua": 1757,
                 "tiempo": 80,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 27,
+                "niv_Agua": 1758
             },
             {
                 "id": 18,
-                "temp_Agua": 80,
-                "temp_Prod": 31,
-                "temp_Ing": 30,
-                "niv_Agua": 1771,
                 "tiempo": 85,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 24,
+                "niv_Agua": 1812
             },
             {
                 "id": 19,
-                "temp_Agua": 99,
-                "temp_Prod": 49,
-                "temp_Ing": 29,
-                "niv_Agua": 1873,
                 "tiempo": 90,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 27,
+                "niv_Agua": 1785
             },
             {
                 "id": 20,
-                "temp_Agua": 46,
-                "temp_Prod": 63,
-                "temp_Ing": 21,
-                "niv_Agua": 1711,
                 "tiempo": 95,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 26,
+                "niv_Agua": 1874
             },
             {
                 "id": 21,
-                "temp_Agua": 80,
-                "temp_Prod": 48,
-                "temp_Ing": 24,
-                "niv_Agua": 1703,
                 "tiempo": 100,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 28,
+                "niv_Agua": 1776
             },
             {
                 "id": 22,
-                "temp_Agua": 30,
-                "temp_Prod": 56,
-                "temp_Ing": 27,
-                "niv_Agua": 1833,
                 "tiempo": 105,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 22,
+                "niv_Agua": 1747
             },
             {
                 "id": 23,
-                "temp_Agua": 58,
-                "temp_Prod": 57,
-                "temp_Ing": 28,
-                "niv_Agua": 1792,
                 "tiempo": 110,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 24,
+                "niv_Agua": 1839
             },
             {
                 "id": 24,
-                "temp_Agua": 52,
-                "temp_Prod": 56,
-                "temp_Ing": 27,
-                "niv_Agua": 1888,
                 "tiempo": 115,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 27,
+                "niv_Agua": 1871
             },
             {
                 "id": 25,
-                "temp_Agua": 85,
-                "temp_Prod": 74,
-                "temp_Ing": 27,
-                "niv_Agua": 1875,
                 "tiempo": 120,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 21,
+                "niv_Agua": 1832
             },
             {
                 "id": 26,
-                "temp_Agua": 59,
-                "temp_Prod": 89,
-                "temp_Ing": 30,
-                "niv_Agua": 1734,
                 "tiempo": 125,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 22,
+                "niv_Agua": 1833
             },
             {
                 "id": 27,
-                "temp_Agua": 55,
-                "temp_Prod": 81,
-                "temp_Ing": 21,
-                "niv_Agua": 1763,
                 "tiempo": 130,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 27,
+                "niv_Agua": 1815
             },
             {
                 "id": 28,
-                "temp_Agua": 67,
-                "temp_Prod": 82,
-                "temp_Ing": 26,
-                "niv_Agua": 1736,
                 "tiempo": 135,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
+                "temp_Ing": 23,
+                "niv_Agua": 1802
             },
             {
                 "id": 29,
-                "temp_Agua": 92,
-                "temp_Prod": 61,
-                "temp_Ing": 27,
-                "niv_Agua": 1862,
                 "tiempo": 140,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 62.94,
+                "temp_Prod": 69.93,
+                "temp_Ing": 23,
+                "niv_Agua": 1841
             },
             {
                 "id": 30,
-                "temp_Agua": 48,
-                "temp_Prod": 58,
-                "temp_Ing": 29,
-                "niv_Agua": 1712,
                 "tiempo": 145,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 65.82,
+                "temp_Prod": 73.13,
+                "temp_Ing": 30,
+                "niv_Agua": 1873
             },
             {
                 "id": 31,
-                "temp_Agua": 44,
-                "temp_Prod": 46,
-                "temp_Ing": 25,
-                "niv_Agua": 1757,
                 "tiempo": 150,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 68.83,
+                "temp_Prod": 76.47,
+                "temp_Ing": 30,
+                "niv_Agua": 1739
+            },
+            {
+                "id": 32,
+                "tiempo": 155,
+                "temp_Agua": 71.97,
+                "temp_Prod": 79.97,
+                "temp_Ing": 22,
+                "niv_Agua": 1813
+            },
+            {
+                "id": 33,
+                "tiempo": 160,
+                "temp_Agua": 75.26,
+                "temp_Prod": 83.63,
+                "temp_Ing": 24,
+                "niv_Agua": 1721
+            },
+            {
+                "id": 34,
+                "tiempo": 165,
+                "temp_Agua": 78.7,
+                "temp_Prod": 87.45,
+                "temp_Ing": 28,
+                "niv_Agua": 1794
+            },
+            {
+                "id": 35,
+                "tiempo": 170,
+                "temp_Agua": 82.3,
+                "temp_Prod": 91.45,
+                "temp_Ing": 28,
+                "niv_Agua": 1734
+            },
+            {
+                "id": 36,
+                "tiempo": 175,
+                "temp_Agua": 86.07,
+                "temp_Prod": 95.63,
+                "temp_Ing": 20,
+                "niv_Agua": 1812
+            },
+            {
+                "id": 37,
+                "tiempo": 180,
+                "temp_Agua": 90,
+                "temp_Prod": 100,
+                "temp_Ing": 29,
+                "niv_Agua": 1848
+            },
+            {
+                "id": 38,
+                "tiempo": 185,
+                "temp_Agua": 94.11,
+                "temp_Prod": 104.57,
+                "temp_Ing": 27,
+                "niv_Agua": 1726
+            },
+            {
+                "id": 39,
+                "tiempo": 190,
+                "temp_Agua": 98.42,
+                "temp_Prod": 109.35,
+                "temp_Ing": 29,
+                "niv_Agua": 1726
+            },
+            {
+                "id": 40,
+                "tiempo": 195,
+                "temp_Agua": 102.92,
+                "temp_Prod": 114.35,
+                "temp_Ing": 25,
+                "niv_Agua": 1859
+            },
+            {
+                "id": 41,
+                "tiempo": 200,
+                "temp_Agua": 107.62,
+                "temp_Prod": 119.58,
+                "temp_Ing": 30,
+                "niv_Agua": 1793
+            },
+            {
+                "id": 42,
+                "tiempo": 205,
+                "temp_Agua": 112.54,
+                "temp_Prod": 125.05,
+                "temp_Ing": 26,
+                "niv_Agua": 1858
+            },
+            {
+                "id": 43,
+                "tiempo": 210,
+                "temp_Agua": 117.69,
+                "temp_Prod": 130.77,
+                "temp_Ing": 23,
+                "niv_Agua": 1794
+            },
+            {
+                "id": 44,
+                "tiempo": 215,
+                "temp_Agua": 123.07,
+                "temp_Prod": 136.74,
+                "temp_Ing": 25,
+                "niv_Agua": 1853
+            }
+        ],
+        "sector_io": [
+            {
+                "filtro_succion_agua": true,
+                "entrada_agua": true,
+                "bomba_recirculacion": false,
+                "vapor_serpentina": true,
+                "vapor_vivo": true
+            }
+        ]
+    },
+    {
+        "num_cocina": 6,
+        "num_receta": 1,
+        "nom_receta": "Arroz con Pollo",
+        "estado": "PAUSA",
+        "cant_torres": 1,
+        "tipo_Fin": "50°C",
+        "pasos": [
+            {
+                "id": 1,
+                "tiempo": 0,
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 30,
+                "niv_Agua": 1720
+            },
+            {
+                "id": 2,
+                "tiempo": 5,
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 25,
+                "niv_Agua": 1838
+            },
+            {
+                "id": 3,
+                "tiempo": 10,
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 21,
+                "niv_Agua": 1817
+            },
+            {
+                "id": 4,
+                "tiempo": 15,
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 21,
+                "niv_Agua": 1888
+            },
+            {
+                "id": 5,
+                "tiempo": 20,
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 25,
+                "niv_Agua": 1793
+            },
+            {
+                "id": 6,
+                "tiempo": 25,
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 27,
+                "niv_Agua": 1739
+            },
+            {
+                "id": 7,
+                "tiempo": 30,
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 24,
+                "niv_Agua": 1735
+            },
+            {
+                "id": 8,
+                "tiempo": 35,
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 27,
+                "niv_Agua": 1857
+            },
+            {
+                "id": 9,
+                "tiempo": 40,
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 22,
+                "niv_Agua": 1764
+            },
+            {
+                "id": 10,
+                "tiempo": 45,
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 30,
+                "niv_Agua": 1787
+            },
+            {
+                "id": 11,
+                "tiempo": 50,
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 24,
+                "niv_Agua": 1736
+            },
+            {
+                "id": 12,
+                "tiempo": 55,
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 22,
+                "niv_Agua": 1743
+            },
+            {
+                "id": 13,
+                "tiempo": 60,
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 21,
+                "niv_Agua": 1725
+            },
+            {
+                "id": 14,
+                "tiempo": 65,
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 30,
+                "niv_Agua": 1767
+            },
+            {
+                "id": 15,
+                "tiempo": 70,
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 20,
+                "niv_Agua": 1859
+            },
+            {
+                "id": 16,
+                "tiempo": 75,
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 28,
+                "niv_Agua": 1873
+            },
+            {
+                "id": 17,
+                "tiempo": 80,
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 28,
+                "niv_Agua": 1764
+            },
+            {
+                "id": 18,
+                "tiempo": 85,
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 30,
+                "niv_Agua": 1710
+            },
+            {
+                "id": 19,
+                "tiempo": 90,
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 20,
+                "niv_Agua": 1849
+            },
+            {
+                "id": 20,
+                "tiempo": 95,
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 23,
+                "niv_Agua": 1722
+            },
+            {
+                "id": 21,
+                "tiempo": 100,
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 26,
+                "niv_Agua": 1733
+            },
+            {
+                "id": 22,
+                "tiempo": 105,
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 21,
+                "niv_Agua": 1704
+            },
+            {
+                "id": 23,
+                "tiempo": 110,
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 20,
+                "niv_Agua": 1728
+            },
+            {
+                "id": 24,
+                "tiempo": 115,
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 28,
+                "niv_Agua": 1868
+            },
+            {
+                "id": 25,
+                "tiempo": 120,
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 22,
+                "niv_Agua": 1852
+            },
+            {
+                "id": 26,
+                "tiempo": 125,
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 30,
+                "niv_Agua": 1719
+            },
+            {
+                "id": 27,
+                "tiempo": 130,
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 24,
+                "niv_Agua": 1832
+            },
+            {
+                "id": 28,
+                "tiempo": 135,
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
+                "temp_Ing": 20,
+                "niv_Agua": 1745
+            },
+            {
+                "id": 29,
+                "tiempo": 140,
+                "temp_Agua": 62.94,
+                "temp_Prod": 69.93,
+                "temp_Ing": 24,
+                "niv_Agua": 1845
+            },
+            {
+                "id": 30,
+                "tiempo": 145,
+                "temp_Agua": 65.82,
+                "temp_Prod": 73.13,
+                "temp_Ing": 30,
+                "niv_Agua": 1806
+            }
+        ],
+        "sector_io": [
+            {
+                "filtro_succion_agua": false,
+                "entrada_agua": true,
+                "bomba_recirculacion": false,
+                "vapor_serpentina": false,
+                "vapor_vivo": false
+            }
+        ]
+    },
+    {
+        "num_cocina": 7,
+        "num_receta": 1,
+        "nom_receta": "Pollo Asado",
+        "estado": "COCINANDO",
+        "cant_torres": 3,
+        "tipo_Fin": "50°C",
+        "pasos": [
+            {
+                "id": 1,
+                "tiempo": 0,
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 20,
+                "niv_Agua": 1770
+            },
+            {
+                "id": 2,
+                "tiempo": 5,
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 21,
+                "niv_Agua": 1701
+            },
+            {
+                "id": 3,
+                "tiempo": 10,
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 28,
+                "niv_Agua": 1714
+            },
+            {
+                "id": 4,
+                "tiempo": 15,
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 30,
+                "niv_Agua": 1817
+            },
+            {
+                "id": 5,
+                "tiempo": 20,
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 29,
+                "niv_Agua": 1745
+            },
+            {
+                "id": 6,
+                "tiempo": 25,
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 23,
+                "niv_Agua": 1718
+            },
+            {
+                "id": 7,
+                "tiempo": 30,
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 30,
+                "niv_Agua": 1728
+            },
+            {
+                "id": 8,
+                "tiempo": 35,
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 23,
+                "niv_Agua": 1736
+            },
+            {
+                "id": 9,
+                "tiempo": 40,
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 28,
+                "niv_Agua": 1778
+            },
+            {
+                "id": 10,
+                "tiempo": 45,
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 20,
+                "niv_Agua": 1727
+            },
+            {
+                "id": 11,
+                "tiempo": 50,
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 28,
+                "niv_Agua": 1843
+            },
+            {
+                "id": 12,
+                "tiempo": 55,
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 24,
+                "niv_Agua": 1707
+            },
+            {
+                "id": 13,
+                "tiempo": 60,
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 22,
+                "niv_Agua": 1715
+            },
+            {
+                "id": 14,
+                "tiempo": 65,
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 26,
+                "niv_Agua": 1704
+            },
+            {
+                "id": 15,
+                "tiempo": 70,
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 29,
+                "niv_Agua": 1867
+            },
+            {
+                "id": 16,
+                "tiempo": 75,
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 27,
+                "niv_Agua": 1734
+            },
+            {
+                "id": 17,
+                "tiempo": 80,
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 30,
+                "niv_Agua": 1837
+            },
+            {
+                "id": 18,
+                "tiempo": 85,
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 22,
+                "niv_Agua": 1807
+            },
+            {
+                "id": 19,
+                "tiempo": 90,
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 24,
+                "niv_Agua": 1828
+            },
+            {
+                "id": 20,
+                "tiempo": 95,
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 30,
+                "niv_Agua": 1814
+            },
+            {
+                "id": 21,
+                "tiempo": 100,
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 26,
+                "niv_Agua": 1713
+            },
+            {
+                "id": 22,
+                "tiempo": 105,
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 27,
+                "niv_Agua": 1838
+            },
+            {
+                "id": 23,
+                "tiempo": 110,
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 21,
+                "niv_Agua": 1713
+            },
+            {
+                "id": 24,
+                "tiempo": 115,
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 23,
+                "niv_Agua": 1889
+            },
+            {
+                "id": 25,
+                "tiempo": 120,
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 24,
+                "niv_Agua": 1871
+            },
+            {
+                "id": 26,
+                "tiempo": 125,
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 23,
+                "niv_Agua": 1853
+            },
+            {
+                "id": 27,
+                "tiempo": 130,
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 29,
+                "niv_Agua": 1867
+            },
+            {
+                "id": 28,
+                "tiempo": 135,
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
+                "temp_Ing": 23,
+                "niv_Agua": 1873
+            },
+            {
+                "id": 29,
+                "tiempo": 140,
+                "temp_Agua": 62.94,
+                "temp_Prod": 69.93,
+                "temp_Ing": 27,
+                "niv_Agua": 1842
+            },
+            {
+                "id": 30,
+                "tiempo": 145,
+                "temp_Agua": 65.82,
+                "temp_Prod": 73.13,
+                "temp_Ing": 26,
+                "niv_Agua": 1817
+            },
+            {
+                "id": 31,
+                "tiempo": 150,
+                "temp_Agua": 68.83,
+                "temp_Prod": 76.47,
+                "temp_Ing": 30,
+                "niv_Agua": 1875
+            },
+            {
+                "id": 32,
+                "tiempo": 155,
+                "temp_Agua": 71.97,
+                "temp_Prod": 79.97,
+                "temp_Ing": 21,
+                "niv_Agua": 1877
+            },
+            {
+                "id": 33,
+                "tiempo": 160,
+                "temp_Agua": 75.26,
+                "temp_Prod": 83.63,
+                "temp_Ing": 23,
+                "niv_Agua": 1806
+            },
+            {
+                "id": 34,
+                "tiempo": 165,
+                "temp_Agua": 78.7,
+                "temp_Prod": 87.45,
+                "temp_Ing": 28,
+                "niv_Agua": 1744
+            },
+            {
+                "id": 35,
+                "tiempo": 170,
+                "temp_Agua": 82.3,
+                "temp_Prod": 91.45,
+                "temp_Ing": 24,
+                "niv_Agua": 1870
+            },
+            {
+                "id": 36,
+                "tiempo": 175,
+                "temp_Agua": 86.07,
+                "temp_Prod": 95.63,
+                "temp_Ing": 21,
+                "niv_Agua": 1737
+            },
+            {
+                "id": 37,
+                "tiempo": 180,
+                "temp_Agua": 90,
+                "temp_Prod": 100,
+                "temp_Ing": 25,
+                "niv_Agua": 1739
+            },
+            {
+                "id": 38,
+                "tiempo": 185,
+                "temp_Agua": 94.11,
+                "temp_Prod": 104.57,
+                "temp_Ing": 24,
+                "niv_Agua": 1795
+            },
+            {
+                "id": 39,
+                "tiempo": 190,
+                "temp_Agua": 98.42,
+                "temp_Prod": 109.35,
+                "temp_Ing": 29,
+                "niv_Agua": 1713
+            },
+            {
+                "id": 40,
+                "tiempo": 195,
+                "temp_Agua": 102.92,
+                "temp_Prod": 114.35,
+                "temp_Ing": 22,
+                "niv_Agua": 1773
+            },
+            {
+                "id": 41,
+                "tiempo": 200,
+                "temp_Agua": 107.62,
+                "temp_Prod": 119.58,
+                "temp_Ing": 29,
+                "niv_Agua": 1711
+            },
+            {
+                "id": 42,
+                "tiempo": 205,
+                "temp_Agua": 112.54,
+                "temp_Prod": 125.05,
+                "temp_Ing": 28,
+                "niv_Agua": 1850
+            },
+            {
+                "id": 43,
+                "tiempo": 210,
+                "temp_Agua": 117.69,
+                "temp_Prod": 130.77,
+                "temp_Ing": 27,
+                "niv_Agua": 1762
+            },
+            {
+                "id": 44,
+                "tiempo": 215,
+                "temp_Agua": 123.07,
+                "temp_Prod": 136.74,
+                "temp_Ing": 29,
+                "niv_Agua": 1709
+            },
+            {
+                "id": 45,
+                "tiempo": 220,
+                "temp_Agua": 128.7,
+                "temp_Prod": 143,
+                "temp_Ing": 26,
+                "niv_Agua": 1808
+            },
+            {
+                "id": 46,
+                "tiempo": 225,
+                "temp_Agua": 134.58,
+                "temp_Prod": 149.53,
+                "temp_Ing": 26,
+                "niv_Agua": 1764
+            },
+            {
+                "id": 47,
+                "tiempo": 230,
+                "temp_Agua": 140.73,
+                "temp_Prod": 156.37,
+                "temp_Ing": 30,
+                "niv_Agua": 1739
+            },
+            {
+                "id": 48,
+                "tiempo": 235,
+                "temp_Agua": 147.17,
+                "temp_Prod": 163.52,
+                "temp_Ing": 30,
+                "niv_Agua": 1790
+            },
+            {
+                "id": 49,
+                "tiempo": 240,
+                "temp_Agua": 153.9,
+                "temp_Prod": 171,
+                "temp_Ing": 22,
+                "niv_Agua": 1797
             }
         ],
         "sector_io": [
@@ -1416,789 +2423,6 @@
                 "filtro_succion_agua": false,
                 "entrada_agua": true,
                 "bomba_recirculacion": true,
-                "vapor_serpentina": true,
-                "vapor_vivo": false
-            }
-        ]
-    },
-    {
-        "num_cocina": 6,
-        "num_receta": 2,
-        "nom_receta": "Pollo Asado",
-        "estado": "FINALIZADO",
-        "cant_torres": 3,
-        "pasos": [
-            {
-                "id": 1,
-                "temp_Agua": 80,
-                "temp_Prod": 39,
-                "temp_Ing": 22,
-                "niv_Agua": 1736,
-                "tiempo": 0,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 2,
-                "temp_Agua": 40,
-                "temp_Prod": 64,
-                "temp_Ing": 25,
-                "niv_Agua": 1808,
-                "tiempo": 5,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 3,
-                "temp_Agua": 54,
-                "temp_Prod": 84,
-                "temp_Ing": 26,
-                "niv_Agua": 1759,
-                "tiempo": 10,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 4,
-                "temp_Agua": 45,
-                "temp_Prod": 47,
-                "temp_Ing": 29,
-                "niv_Agua": 1900,
-                "tiempo": 15,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 5,
-                "temp_Agua": 48,
-                "temp_Prod": 63,
-                "temp_Ing": 22,
-                "niv_Agua": 1740,
-                "tiempo": 20,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 6,
-                "temp_Agua": 44,
-                "temp_Prod": 51,
-                "temp_Ing": 24,
-                "niv_Agua": 1823,
-                "tiempo": 25,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 7,
-                "temp_Agua": 94,
-                "temp_Prod": 44,
-                "temp_Ing": 28,
-                "niv_Agua": 1749,
-                "tiempo": 30,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 8,
-                "temp_Agua": 94,
-                "temp_Prod": 46,
-                "temp_Ing": 26,
-                "niv_Agua": 1895,
-                "tiempo": 35,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 9,
-                "temp_Agua": 77,
-                "temp_Prod": 81,
-                "temp_Ing": 28,
-                "niv_Agua": 1743,
-                "tiempo": 40,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 10,
-                "temp_Agua": 76,
-                "temp_Prod": 73,
-                "temp_Ing": 22,
-                "niv_Agua": 1813,
-                "tiempo": 45,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 11,
-                "temp_Agua": 32,
-                "temp_Prod": 74,
-                "temp_Ing": 24,
-                "niv_Agua": 1743,
-                "tiempo": 50,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 12,
-                "temp_Agua": 61,
-                "temp_Prod": 79,
-                "temp_Ing": 20,
-                "niv_Agua": 1776,
-                "tiempo": 55,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 13,
-                "temp_Agua": 81,
-                "temp_Prod": 24,
-                "temp_Ing": 28,
-                "niv_Agua": 1778,
-                "tiempo": 60,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 14,
-                "temp_Agua": 42,
-                "temp_Prod": 59,
-                "temp_Ing": 28,
-                "niv_Agua": 1768,
-                "tiempo": 65,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 15,
-                "temp_Agua": 69,
-                "temp_Prod": 82,
-                "temp_Ing": 22,
-                "niv_Agua": 1781,
-                "tiempo": 70,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 16,
-                "temp_Agua": 60,
-                "temp_Prod": 87,
-                "temp_Ing": 21,
-                "niv_Agua": 1866,
-                "tiempo": 75,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 17,
-                "temp_Agua": 96,
-                "temp_Prod": 90,
-                "temp_Ing": 21,
-                "niv_Agua": 1770,
-                "tiempo": 80,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 18,
-                "temp_Agua": 77,
-                "temp_Prod": 73,
-                "temp_Ing": 21,
-                "niv_Agua": 1739,
-                "tiempo": 85,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 19,
-                "temp_Agua": 69,
-                "temp_Prod": 40,
-                "temp_Ing": 22,
-                "niv_Agua": 1855,
-                "tiempo": 90,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 20,
-                "temp_Agua": 70,
-                "temp_Prod": 75,
-                "temp_Ing": 21,
-                "niv_Agua": 1811,
-                "tiempo": 95,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 21,
-                "temp_Agua": 57,
-                "temp_Prod": 82,
-                "temp_Ing": 23,
-                "niv_Agua": 1818,
-                "tiempo": 100,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 22,
-                "temp_Agua": 52,
-                "temp_Prod": 41,
-                "temp_Ing": 23,
-                "niv_Agua": 1834,
-                "tiempo": 105,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 23,
-                "temp_Agua": 49,
-                "temp_Prod": 64,
-                "temp_Ing": 20,
-                "niv_Agua": 1879,
-                "tiempo": 110,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 24,
-                "temp_Agua": 75,
-                "temp_Prod": 27,
-                "temp_Ing": 20,
-                "niv_Agua": 1803,
-                "tiempo": 115,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 25,
-                "temp_Agua": 85,
-                "temp_Prod": 35,
-                "temp_Ing": 20,
-                "niv_Agua": 1816,
-                "tiempo": 120,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 26,
-                "temp_Agua": 88,
-                "temp_Prod": 89,
-                "temp_Ing": 30,
-                "niv_Agua": 1839,
-                "tiempo": 125,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 27,
-                "temp_Agua": 81,
-                "temp_Prod": 31,
-                "temp_Ing": 28,
-                "niv_Agua": 1820,
-                "tiempo": 130,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 28,
-                "temp_Agua": 42,
-                "temp_Prod": 84,
-                "temp_Ing": 25,
-                "niv_Agua": 1828,
-                "tiempo": 135,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 29,
-                "temp_Agua": 48,
-                "temp_Prod": 43,
-                "temp_Ing": 24,
-                "niv_Agua": 1788,
-                "tiempo": 140,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 30,
-                "temp_Agua": 87,
-                "temp_Prod": 36,
-                "temp_Ing": 24,
-                "niv_Agua": 1824,
-                "tiempo": 145,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 31,
-                "temp_Agua": 50,
-                "temp_Prod": 46,
-                "temp_Ing": 21,
-                "niv_Agua": 1874,
-                "tiempo": 150,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 32,
-                "temp_Agua": 93,
-                "temp_Prod": 41,
-                "temp_Ing": 25,
-                "niv_Agua": 1791,
-                "tiempo": 155,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 33,
-                "temp_Agua": 91,
-                "temp_Prod": 50,
-                "temp_Ing": 26,
-                "niv_Agua": 1778,
-                "tiempo": 160,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 34,
-                "temp_Agua": 96,
-                "temp_Prod": 28,
-                "temp_Ing": 29,
-                "niv_Agua": 1722,
-                "tiempo": 165,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 35,
-                "temp_Agua": 42,
-                "temp_Prod": 70,
-                "temp_Ing": 20,
-                "niv_Agua": 1733,
-                "tiempo": 170,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 36,
-                "temp_Agua": 89,
-                "temp_Prod": 78,
-                "temp_Ing": 29,
-                "niv_Agua": 1795,
-                "tiempo": 175,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 37,
-                "temp_Agua": 57,
-                "temp_Prod": 29,
-                "temp_Ing": 23,
-                "niv_Agua": 1750,
-                "tiempo": 180,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 38,
-                "temp_Agua": 80,
-                "temp_Prod": 25,
-                "temp_Ing": 20,
-                "niv_Agua": 1826,
-                "tiempo": 185,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 39,
-                "temp_Agua": 34,
-                "temp_Prod": 50,
-                "temp_Ing": 26,
-                "niv_Agua": 1796,
-                "tiempo": 190,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 40,
-                "temp_Agua": 89,
-                "temp_Prod": 80,
-                "temp_Ing": 22,
-                "niv_Agua": 1843,
-                "tiempo": 195,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 41,
-                "temp_Agua": 49,
-                "temp_Prod": 37,
-                "temp_Ing": 21,
-                "niv_Agua": 1700,
-                "tiempo": 200,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 42,
-                "temp_Agua": 99,
-                "temp_Prod": 50,
-                "temp_Ing": 25,
-                "niv_Agua": 1767,
-                "tiempo": 205,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 43,
-                "temp_Agua": 78,
-                "temp_Prod": 75,
-                "temp_Ing": 30,
-                "niv_Agua": 1888,
-                "tiempo": 210,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 44,
-                "temp_Agua": 73,
-                "temp_Prod": 30,
-                "temp_Ing": 27,
-                "niv_Agua": 1866,
-                "tiempo": 215,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 45,
-                "temp_Agua": 93,
-                "temp_Prod": 75,
-                "temp_Ing": 27,
-                "niv_Agua": 1738,
-                "tiempo": 220,
-                "tipo_Fin": "50°C"
-            }
-        ],
-        "sector_io": [
-            {
-                "filtro_succion_agua": true,
-                "entrada_agua": true,
-                "bomba_recirculacion": false,
-                "vapor_serpentina": false,
-                "vapor_vivo": true
-            }
-        ]
-    },
-    {
-        "num_cocina": 7,
-        "num_receta": 5,
-        "nom_receta": "Pollo Asado",
-        "estado": "INACTIVO",
-        "cant_torres": 2,
-        "pasos": [
-            {
-                "id": 1,
-                "temp_Agua": 36,
-                "temp_Prod": 42,
-                "temp_Ing": 24,
-                "niv_Agua": 1704,
-                "tiempo": 0,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 2,
-                "temp_Agua": 42,
-                "temp_Prod": 84,
-                "temp_Ing": 21,
-                "niv_Agua": 1759,
-                "tiempo": 5,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 3,
-                "temp_Agua": 56,
-                "temp_Prod": 56,
-                "temp_Ing": 28,
-                "niv_Agua": 1737,
-                "tiempo": 10,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 4,
-                "temp_Agua": 42,
-                "temp_Prod": 75,
-                "temp_Ing": 26,
-                "niv_Agua": 1703,
-                "tiempo": 15,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 5,
-                "temp_Agua": 99,
-                "temp_Prod": 57,
-                "temp_Ing": 29,
-                "niv_Agua": 1703,
-                "tiempo": 20,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 6,
-                "temp_Agua": 83,
-                "temp_Prod": 29,
-                "temp_Ing": 22,
-                "niv_Agua": 1862,
-                "tiempo": 25,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 7,
-                "temp_Agua": 52,
-                "temp_Prod": 34,
-                "temp_Ing": 21,
-                "niv_Agua": 1870,
-                "tiempo": 30,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 8,
-                "temp_Agua": 30,
-                "temp_Prod": 87,
-                "temp_Ing": 26,
-                "niv_Agua": 1760,
-                "tiempo": 35,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 9,
-                "temp_Agua": 76,
-                "temp_Prod": 40,
-                "temp_Ing": 30,
-                "niv_Agua": 1783,
-                "tiempo": 40,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 10,
-                "temp_Agua": 46,
-                "temp_Prod": 46,
-                "temp_Ing": 29,
-                "niv_Agua": 1846,
-                "tiempo": 45,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 11,
-                "temp_Agua": 76,
-                "temp_Prod": 38,
-                "temp_Ing": 28,
-                "niv_Agua": 1702,
-                "tiempo": 50,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 12,
-                "temp_Agua": 69,
-                "temp_Prod": 22,
-                "temp_Ing": 30,
-                "niv_Agua": 1870,
-                "tiempo": 55,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 13,
-                "temp_Agua": 42,
-                "temp_Prod": 90,
-                "temp_Ing": 22,
-                "niv_Agua": 1885,
-                "tiempo": 60,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 14,
-                "temp_Agua": 64,
-                "temp_Prod": 23,
-                "temp_Ing": 23,
-                "niv_Agua": 1752,
-                "tiempo": 65,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 15,
-                "temp_Agua": 31,
-                "temp_Prod": 53,
-                "temp_Ing": 29,
-                "niv_Agua": 1871,
-                "tiempo": 70,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 16,
-                "temp_Agua": 56,
-                "temp_Prod": 47,
-                "temp_Ing": 21,
-                "niv_Agua": 1854,
-                "tiempo": 75,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 17,
-                "temp_Agua": 29,
-                "temp_Prod": 46,
-                "temp_Ing": 28,
-                "niv_Agua": 1884,
-                "tiempo": 80,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 18,
-                "temp_Agua": 33,
-                "temp_Prod": 73,
-                "temp_Ing": 26,
-                "niv_Agua": 1731,
-                "tiempo": 85,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 19,
-                "temp_Agua": 99,
-                "temp_Prod": 80,
-                "temp_Ing": 29,
-                "niv_Agua": 1712,
-                "tiempo": 90,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 20,
-                "temp_Agua": 32,
-                "temp_Prod": 34,
-                "temp_Ing": 25,
-                "niv_Agua": 1737,
-                "tiempo": 95,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 21,
-                "temp_Agua": 79,
-                "temp_Prod": 33,
-                "temp_Ing": 24,
-                "niv_Agua": 1882,
-                "tiempo": 100,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 22,
-                "temp_Agua": 50,
-                "temp_Prod": 43,
-                "temp_Ing": 21,
-                "niv_Agua": 1843,
-                "tiempo": 105,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 23,
-                "temp_Agua": 53,
-                "temp_Prod": 58,
-                "temp_Ing": 27,
-                "niv_Agua": 1885,
-                "tiempo": 110,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 24,
-                "temp_Agua": 92,
-                "temp_Prod": 76,
-                "temp_Ing": 28,
-                "niv_Agua": 1893,
-                "tiempo": 115,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 25,
-                "temp_Agua": 40,
-                "temp_Prod": 27,
-                "temp_Ing": 23,
-                "niv_Agua": 1876,
-                "tiempo": 120,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 26,
-                "temp_Agua": 28,
-                "temp_Prod": 61,
-                "temp_Ing": 28,
-                "niv_Agua": 1834,
-                "tiempo": 125,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 27,
-                "temp_Agua": 92,
-                "temp_Prod": 35,
-                "temp_Ing": 24,
-                "niv_Agua": 1734,
-                "tiempo": 130,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 28,
-                "temp_Agua": 66,
-                "temp_Prod": 76,
-                "temp_Ing": 20,
-                "niv_Agua": 1753,
-                "tiempo": 135,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 29,
-                "temp_Agua": 94,
-                "temp_Prod": 59,
-                "temp_Ing": 23,
-                "niv_Agua": 1764,
-                "tiempo": 140,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 30,
-                "temp_Agua": 88,
-                "temp_Prod": 20,
-                "temp_Ing": 26,
-                "niv_Agua": 1800,
-                "tiempo": 145,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 31,
-                "temp_Agua": 48,
-                "temp_Prod": 87,
-                "temp_Ing": 25,
-                "niv_Agua": 1854,
-                "tiempo": 150,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 32,
-                "temp_Agua": 34,
-                "temp_Prod": 50,
-                "temp_Ing": 23,
-                "niv_Agua": 1727,
-                "tiempo": 155,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 33,
-                "temp_Agua": 28,
-                "temp_Prod": 23,
-                "temp_Ing": 26,
-                "niv_Agua": 1752,
-                "tiempo": 160,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 34,
-                "temp_Agua": 52,
-                "temp_Prod": 46,
-                "temp_Ing": 22,
-                "niv_Agua": 1760,
-                "tiempo": 165,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 35,
-                "temp_Agua": 72,
-                "temp_Prod": 37,
-                "temp_Ing": 30,
-                "niv_Agua": 1822,
-                "tiempo": 170,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 36,
-                "temp_Agua": 65,
-                "temp_Prod": 41,
-                "temp_Ing": 28,
-                "niv_Agua": 1840,
-                "tiempo": 175,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 37,
-                "temp_Agua": 73,
-                "temp_Prod": 51,
-                "temp_Ing": 26,
-                "niv_Agua": 1735,
-                "tiempo": 180,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 38,
-                "temp_Agua": 51,
-                "temp_Prod": 90,
-                "temp_Ing": 29,
-                "niv_Agua": 1804,
-                "tiempo": 185,
-                "tipo_Fin": "50°C"
-            }
-        ],
-        "sector_io": [
-            {
-                "filtro_succion_agua": true,
-                "entrada_agua": false,
-                "bomba_recirculacion": false,
                 "vapor_serpentina": false,
                 "vapor_vivo": true
             }
@@ -2206,421 +2430,241 @@
     },
     {
         "num_cocina": 8,
-        "num_receta": 4,
-        "nom_receta": "Pollo Asado",
+        "num_receta": 2,
+        "nom_receta": "Pate",
         "estado": "FALLA",
         "cant_torres": 3,
+        "tipo_Fin": "50°C",
         "pasos": [
             {
                 "id": 1,
-                "temp_Agua": 63,
-                "temp_Prod": 28,
-                "temp_Ing": 24,
-                "niv_Agua": 1780,
                 "tiempo": 0,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18,
+                "temp_Prod": 20,
+                "temp_Ing": 29,
+                "niv_Agua": 1777
             },
             {
                 "id": 2,
-                "temp_Agua": 82,
-                "temp_Prod": 79,
-                "temp_Ing": 21,
-                "niv_Agua": 1721,
                 "tiempo": 5,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 18.82,
+                "temp_Prod": 20.91,
+                "temp_Ing": 28,
+                "niv_Agua": 1749
             },
             {
                 "id": 3,
-                "temp_Agua": 90,
-                "temp_Prod": 83,
-                "temp_Ing": 22,
-                "niv_Agua": 1875,
                 "tiempo": 10,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 19.68,
+                "temp_Prod": 21.87,
+                "temp_Ing": 24,
+                "niv_Agua": 1757
             },
             {
                 "id": 4,
-                "temp_Agua": 70,
-                "temp_Prod": 73,
-                "temp_Ing": 28,
-                "niv_Agua": 1737,
                 "tiempo": 15,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 20.58,
+                "temp_Prod": 22.87,
+                "temp_Ing": 26,
+                "niv_Agua": 1784
             },
             {
                 "id": 5,
-                "temp_Agua": 40,
-                "temp_Prod": 31,
-                "temp_Ing": 28,
-                "niv_Agua": 1710,
                 "tiempo": 20,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 21.52,
+                "temp_Prod": 23.92,
+                "temp_Ing": 29,
+                "niv_Agua": 1896
             },
             {
                 "id": 6,
-                "temp_Agua": 63,
-                "temp_Prod": 82,
-                "temp_Ing": 24,
-                "niv_Agua": 1850,
                 "tiempo": 25,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 22.51,
+                "temp_Prod": 25.01,
+                "temp_Ing": 26,
+                "niv_Agua": 1703
             },
             {
                 "id": 7,
-                "temp_Agua": 61,
-                "temp_Prod": 74,
-                "temp_Ing": 30,
-                "niv_Agua": 1782,
                 "tiempo": 30,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 23.54,
+                "temp_Prod": 26.15,
+                "temp_Ing": 30,
+                "niv_Agua": 1836
             },
             {
                 "id": 8,
-                "temp_Agua": 98,
-                "temp_Prod": 40,
-                "temp_Ing": 25,
-                "niv_Agua": 1868,
                 "tiempo": 35,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 24.61,
+                "temp_Prod": 27.35,
+                "temp_Ing": 20,
+                "niv_Agua": 1781
             },
             {
                 "id": 9,
-                "temp_Agua": 93,
-                "temp_Prod": 51,
-                "temp_Ing": 26,
-                "niv_Agua": 1854,
                 "tiempo": 40,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 25.74,
+                "temp_Prod": 28.6,
+                "temp_Ing": 23,
+                "niv_Agua": 1824
             },
             {
                 "id": 10,
-                "temp_Agua": 47,
-                "temp_Prod": 81,
-                "temp_Ing": 27,
-                "niv_Agua": 1818,
                 "tiempo": 45,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 26.92,
+                "temp_Prod": 29.91,
+                "temp_Ing": 27,
+                "niv_Agua": 1708
             },
             {
                 "id": 11,
-                "temp_Agua": 59,
-                "temp_Prod": 21,
-                "temp_Ing": 30,
-                "niv_Agua": 1812,
                 "tiempo": 50,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 28.15,
+                "temp_Prod": 31.27,
+                "temp_Ing": 29,
+                "niv_Agua": 1792
             },
             {
                 "id": 12,
-                "temp_Agua": 100,
-                "temp_Prod": 83,
-                "temp_Ing": 24,
-                "niv_Agua": 1896,
                 "tiempo": 55,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 29.43,
+                "temp_Prod": 32.7,
+                "temp_Ing": 24,
+                "niv_Agua": 1726
             },
             {
                 "id": 13,
-                "temp_Agua": 88,
-                "temp_Prod": 48,
-                "temp_Ing": 26,
-                "niv_Agua": 1822,
                 "tiempo": 60,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 30.78,
+                "temp_Prod": 34.2,
+                "temp_Ing": 30,
+                "niv_Agua": 1752
             },
             {
                 "id": 14,
-                "temp_Agua": 92,
-                "temp_Prod": 39,
-                "temp_Ing": 26,
-                "niv_Agua": 1813,
                 "tiempo": 65,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 32.19,
+                "temp_Prod": 35.76,
+                "temp_Ing": 21,
+                "niv_Agua": 1897
             },
             {
                 "id": 15,
-                "temp_Agua": 76,
-                "temp_Prod": 29,
-                "temp_Ing": 24,
-                "niv_Agua": 1868,
                 "tiempo": 70,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 33.66,
+                "temp_Prod": 37.4,
+                "temp_Ing": 30,
+                "niv_Agua": 1722
             },
             {
                 "id": 16,
-                "temp_Agua": 66,
-                "temp_Prod": 90,
-                "temp_Ing": 25,
-                "niv_Agua": 1844,
                 "tiempo": 75,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 35.2,
+                "temp_Prod": 39.11,
+                "temp_Ing": 20,
+                "niv_Agua": 1714
             },
             {
                 "id": 17,
-                "temp_Agua": 51,
-                "temp_Prod": 83,
-                "temp_Ing": 21,
-                "niv_Agua": 1755,
                 "tiempo": 80,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 36.81,
+                "temp_Prod": 40.9,
+                "temp_Ing": 30,
+                "niv_Agua": 1839
             },
             {
                 "id": 18,
-                "temp_Agua": 86,
-                "temp_Prod": 77,
-                "temp_Ing": 28,
-                "niv_Agua": 1888,
                 "tiempo": 85,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 38.49,
+                "temp_Prod": 42.77,
+                "temp_Ing": 30,
+                "niv_Agua": 1867
             },
             {
                 "id": 19,
-                "temp_Agua": 36,
-                "temp_Prod": 29,
-                "temp_Ing": 30,
-                "niv_Agua": 1768,
                 "tiempo": 90,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 40.25,
+                "temp_Prod": 44.72,
+                "temp_Ing": 23,
+                "niv_Agua": 1707
             },
             {
                 "id": 20,
-                "temp_Agua": 84,
-                "temp_Prod": 60,
-                "temp_Ing": 21,
-                "niv_Agua": 1721,
                 "tiempo": 95,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 42.09,
+                "temp_Prod": 46.77,
+                "temp_Ing": 23,
+                "niv_Agua": 1759
             },
             {
                 "id": 21,
-                "temp_Agua": 46,
-                "temp_Prod": 36,
-                "temp_Ing": 29,
-                "niv_Agua": 1876,
                 "tiempo": 100,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 44.01,
+                "temp_Prod": 48.9,
+                "temp_Ing": 26,
+                "niv_Agua": 1844
             },
             {
                 "id": 22,
-                "temp_Agua": 76,
-                "temp_Prod": 75,
-                "temp_Ing": 21,
-                "niv_Agua": 1735,
                 "tiempo": 105,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 46.03,
+                "temp_Prod": 51.14,
+                "temp_Ing": 22,
+                "niv_Agua": 1737
             },
             {
                 "id": 23,
-                "temp_Agua": 33,
-                "temp_Prod": 75,
-                "temp_Ing": 23,
-                "niv_Agua": 1713,
                 "tiempo": 110,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 48.13,
+                "temp_Prod": 53.48,
+                "temp_Ing": 30,
+                "niv_Agua": 1896
             },
             {
                 "id": 24,
-                "temp_Agua": 75,
-                "temp_Prod": 51,
-                "temp_Ing": 20,
-                "niv_Agua": 1874,
                 "tiempo": 115,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 50.33,
+                "temp_Prod": 55.92,
+                "temp_Ing": 23,
+                "niv_Agua": 1789
             },
             {
                 "id": 25,
-                "temp_Agua": 41,
-                "temp_Prod": 51,
-                "temp_Ing": 30,
-                "niv_Agua": 1833,
                 "tiempo": 120,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 52.63,
+                "temp_Prod": 58.48,
+                "temp_Ing": 22,
+                "niv_Agua": 1776
             },
             {
                 "id": 26,
-                "temp_Agua": 26,
-                "temp_Prod": 52,
-                "temp_Ing": 24,
-                "niv_Agua": 1811,
                 "tiempo": 125,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 55.04,
+                "temp_Prod": 61.15,
+                "temp_Ing": 20,
+                "niv_Agua": 1791
             },
             {
                 "id": 27,
-                "temp_Agua": 94,
-                "temp_Prod": 72,
-                "temp_Ing": 29,
-                "niv_Agua": 1815,
                 "tiempo": 130,
-                "tipo_Fin": "50°C"
+                "temp_Agua": 57.56,
+                "temp_Prod": 63.95,
+                "temp_Ing": 25,
+                "niv_Agua": 1758
             },
             {
                 "id": 28,
-                "temp_Agua": 35,
-                "temp_Prod": 76,
-                "temp_Ing": 29,
-                "niv_Agua": 1795,
                 "tiempo": 135,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 29,
-                "temp_Agua": 73,
-                "temp_Prod": 51,
-                "temp_Ing": 22,
-                "niv_Agua": 1880,
-                "tiempo": 140,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 30,
-                "temp_Agua": 33,
-                "temp_Prod": 45,
-                "temp_Ing": 22,
-                "niv_Agua": 1703,
-                "tiempo": 145,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 31,
-                "temp_Agua": 63,
-                "temp_Prod": 90,
-                "temp_Ing": 27,
-                "niv_Agua": 1853,
-                "tiempo": 150,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 32,
-                "temp_Agua": 35,
-                "temp_Prod": 55,
-                "temp_Ing": 24,
-                "niv_Agua": 1788,
-                "tiempo": 155,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 33,
-                "temp_Agua": 40,
-                "temp_Prod": 49,
-                "temp_Ing": 27,
-                "niv_Agua": 1727,
-                "tiempo": 160,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 34,
-                "temp_Agua": 95,
-                "temp_Prod": 67,
-                "temp_Ing": 22,
-                "niv_Agua": 1871,
-                "tiempo": 165,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 35,
-                "temp_Agua": 100,
-                "temp_Prod": 52,
-                "temp_Ing": 20,
-                "niv_Agua": 1736,
-                "tiempo": 170,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 36,
-                "temp_Agua": 49,
-                "temp_Prod": 81,
+                "temp_Agua": 60.19,
+                "temp_Prod": 66.87,
                 "temp_Ing": 26,
-                "niv_Agua": 1873,
-                "tiempo": 175,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 37,
-                "temp_Agua": 91,
-                "temp_Prod": 69,
-                "temp_Ing": 29,
-                "niv_Agua": 1709,
-                "tiempo": 180,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 38,
-                "temp_Agua": 52,
-                "temp_Prod": 38,
-                "temp_Ing": 29,
-                "niv_Agua": 1834,
-                "tiempo": 185,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 39,
-                "temp_Agua": 92,
-                "temp_Prod": 38,
-                "temp_Ing": 28,
-                "niv_Agua": 1798,
-                "tiempo": 190,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 40,
-                "temp_Agua": 60,
-                "temp_Prod": 79,
-                "temp_Ing": 22,
-                "niv_Agua": 1788,
-                "tiempo": 195,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 41,
-                "temp_Agua": 33,
-                "temp_Prod": 27,
-                "temp_Ing": 28,
-                "niv_Agua": 1867,
-                "tiempo": 200,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 42,
-                "temp_Agua": 32,
-                "temp_Prod": 26,
-                "temp_Ing": 21,
-                "niv_Agua": 1779,
-                "tiempo": 205,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 43,
-                "temp_Agua": 31,
-                "temp_Prod": 87,
-                "temp_Ing": 26,
-                "niv_Agua": 1805,
-                "tiempo": 210,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 44,
-                "temp_Agua": 56,
-                "temp_Prod": 55,
-                "temp_Ing": 30,
-                "niv_Agua": 1799,
-                "tiempo": 215,
-                "tipo_Fin": "50°C"
-            },
-            {
-                "id": 45,
-                "temp_Agua": 100,
-                "temp_Prod": 65,
-                "temp_Ing": 21,
-                "niv_Agua": 1812,
-                "tiempo": 220,
-                "tipo_Fin": "50°C"
+                "niv_Agua": 1704
             }
         ],
         "sector_io": [
             {
                 "filtro_succion_agua": true,
-                "entrada_agua": false,
+                "entrada_agua": true,
                 "bomba_recirculacion": true,
                 "vapor_serpentina": false,
                 "vapor_vivo": false

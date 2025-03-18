@@ -4,7 +4,7 @@ import { getColorClass } from '@/utils/logicaColores';
 interface CicloActivoProps {
     datosCiclo: { label: string, value: string | number | null }[];
     displayData: (data: string | number | null | boolean) => string | number | boolean;
-    defaultColor: 'orange' | 'blue' | 'green';
+    defaultColor: 'orange' | 'blue' | 'lightRed';
 }
 
 const CicloActivo: React.FC<CicloActivoProps> = ({ datosCiclo, displayData, defaultColor }) => {

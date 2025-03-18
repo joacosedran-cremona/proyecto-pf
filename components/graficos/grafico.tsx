@@ -5,6 +5,7 @@ import { useCocina } from '@/context/CocinaContext';
 import { useEnfriador } from '@/context/EnfriadorContext';
 import { transformData } from '../../utils/logicaGraficos';
 import { Button, Spinner } from '@heroui/react';
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 // Registrar plugins de Chart.js
 Chart.register(...registerables);
@@ -199,6 +200,55 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             chartInstanceRef.current.resetZoom();
         }
     };
+
+    // Verificar si el equipo existe y manejar estados
+    const equipo = contextType === 'cocinas'
+    ? cocinaData // Obtener datos del contexto de cocina
+    : enfriadorData; // Obtener datos del contexto de enfriador
+
+    // Si no existe el equipo, retornar un mensaje de "Equipo no encontrado"
+    if (!equipo) {
+        return (
+            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+                <AiOutlineExclamationCircle className="w-auto h-1/4" />
+                <p className="text-3xl text-white">Equipo no encontrado</p>
+            </div>
+        );
+    }
+
+    // Verificar si el equipo está inactivo
+    if (equipo.estado === 'INACTIVO') {
+        const nombreEquipo =
+            contextType === 'cocinas' && 'num_cocina' in equipo
+                ? `Cocina ${equipo.num_cocina}` // Usar num_cocina si es una cocina
+                : contextType === 'enfriadores' && 'num_enfriador' in equipo
+                ? `Enfriador ${equipo.num_enfriador}` // Usar num_enfriador si es un enfriador
+                : "Equipo desconocido"; // Fallback en caso de error
+        return (
+            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+                <AiOutlineExclamationCircle className="w-auto h-1/4" />
+                <p className="text-3xl text-white">{nombreEquipo} - INACTIVO</p>
+                <p className="text-xl text-white">Aguardando Conexión</p>
+            </div>
+        );
+    }
+
+    // Verificar si el equipo está en estado de falla
+    if (equipo.estado === 'FALLA') {
+        const nombreEquipo =
+            contextType === 'cocinas' && 'num_cocina' in equipo
+                ? `Cocina ${equipo.num_cocina}` // Usar num_cocina si es una cocina
+                : contextType === 'enfriadores' && 'num_enfriador' in equipo
+                ? `Enfriador ${equipo.num_enfriador}` // Usar num_enfriador si es un enfriador
+                : "Equipo desconocido"; // Fallback en caso de error
+        return (
+            <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+                <AiOutlineExclamationCircle className="w-auto h-1/4" />
+                <p className="text-3xl text-white">{nombreEquipo} - FALLA</p>
+                <p className="w-full text-center text-3xl text-white">SE DETECTÓ UNA FALLA EN EL EQUIPO</p>
+            </div>
+        );
+    }
 
     return (
         <div className="bg-black p-20 h-full w-full rounded-md relative">

@@ -7,7 +7,6 @@ interface Paso {
     temp_Prod: string | number | null;
     niv_Agua: string | number | null;
     tiempo: number | null;
-    tipo_Fin: string | null;
 }
 
 interface SectorIOEnfriador {
@@ -18,6 +17,7 @@ interface SectorIOEnfriador {
 }
 
 export interface EnfriadorData {
+    num_enfriador: number;
     tempIng: string | number | null;
     tempAgua: string | number | null;
     tempProd: string | number | null;
@@ -45,6 +45,7 @@ const EnfriadorContext = createContext<EnfriadorContextType | undefined>(undefin
 export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) => {
     const [enfriadorId, setEnfriadorId] = useState<number>(1);
     const [enfriadorData, setEnfriadorData] = useState<EnfriadorData>({
+        num_enfriador: 0,
         tempIng: "N/A",
         tempAgua: "N/A",
         tempProd: "N/A",
@@ -65,16 +66,20 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
             try {
                 const response = await fetch("/data/enfriadores.json");
                 const data = await response.json();
+    
+                // Buscar el enfriador correspondiente
                 const selectedEnfriador = data.find(
                     (item: { num_enfriador: number }) => item.num_enfriador === enfriadorId
                 );
-
+    
                 if (selectedEnfriador) {
-                    const pasos = selectedEnfriador.pasos;
-                    const ultimoPaso = pasos ? pasos[pasos.length - 1] : null;
-                    
+                    // Asegurarse de que pasos no sea undefined
+                    const pasos = selectedEnfriador.pasos || [];
+                    const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
+    
                     setEnfriadorData({
-                        tempIng: ultimoPaso.temp_Ing ?? "N/A",
+                        num_enfriador: selectedEnfriador.num_enfriador,
+                        tempIng: ultimoPaso?.temp_Ing ?? "N/A",
                         tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
                         tempProd: ultimoPaso?.temp_Prod ?? "N/A",
                         nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
@@ -83,13 +88,15 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
                         estado: selectedEnfriador.estado ?? null,
                         cant_torres: selectedEnfriador.cant_torres ?? null,
                         tiempo: ultimoPaso?.tiempo ?? null,
-                        tipo_Fin: ultimoPaso?.tipo_Fin ?? null,
-                        pasos: pasos ?? [],
+                        tipo_Fin: selectedEnfriador.tipo_Fin ?? null,
+                        pasos: pasos,
                         ultimoPaso: ultimoPaso,
                         sectorIO: selectedEnfriador.sector_io ?? [],
                     });
                 } else {
+                    // Si no se encuentra un enfriador, establecer valores predeterminados
                     setEnfriadorData({
+                        num_enfriador: 0,
                         tempIng: "N/A",
                         tempAgua: "N/A",
                         tempProd: "N/A",
@@ -109,8 +116,10 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
                 console.error("Error fetching enfriador data:", error);
             }
         }
+    
         fetchData();
     }, [enfriadorId]);
+    
 
     return (
         <EnfriadorContext.Provider value={{ enfriadorId, setEnfriadorId, enfriadorData, setEnfriadorData }}>

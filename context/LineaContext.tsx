@@ -9,7 +9,6 @@ interface Paso {
     temp_Prod: string | number | null;
     niv_Agua: string | number | null;
     tiempo: number | null;
-    tipo_Fin: string | null;
 }
 
 interface SectorIO {

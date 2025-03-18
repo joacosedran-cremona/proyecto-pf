@@ -75,19 +75,29 @@ Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template
   {
     num_cocina: '{{index(1)}}',
     num_receta: '{{integer(1, 5)}}',
-    nom_receta: '{{random('Pate', 'Arroz con Pollo', 'Pollo Asado')}}',
-    estado: '{{random('INACTIVO', 'COCINANDO', 'PAUSA', 'FINALIZADO', 'FALLA')}}',
+    nom_receta: '{{random("Pate", "Arroz con Pollo", "Pollo Asado")}}',
+    estado: '{{random("INACTIVO", "COCINANDO", "PAUSA", "FINALIZADO", "FALLA")}}',
     cant_torres: '{{integer(1, 3)}}',
+    tipo_Fin: "50°C",
     pasos: [
       '{{repeat(20, 50)}}',
       {
         id: '{{index() + 1}}',
-        temp_Agua: '{{integer(25, 100)}}',
-        temp_Prod: '{{integer(20, 90)}}',
-        temp_Ing: '{{integer(20,30)}}',
-        niv_Agua: '{{integer(1700,1900)}}',
         tiempo: '{{5 * index()}}',
-        tipo_Fin: '50°C'
+        temp_Agua: function() {
+          var x = this.tiempo;
+          var a = 20;
+          var b = Math.log(5) / 180;
+          return parseFloat((a * Math.exp(b * x)).toFixed(2));
+        },
+        temp_Prod: function() {
+          var x = this.tiempo;
+          var a = 20;
+          var b = Math.log(5) / 180;
+          return parseFloat((a * Math.exp(b * x)).toFixed(2));
+        },
+        temp_Ing: '{{integer(20, 30)}}',
+        niv_Agua: '{{integer(1700, 1900)}}'
       }
     ],
     sector_io: [
@@ -101,6 +111,7 @@ Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template
     ]
   }
 ]
+
 ```
 
 # Enfriadores
@@ -110,19 +121,29 @@ Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template
   {
     num_enfriador: '{{index(1)}}',
     num_receta: '{{integer(1, 5)}}',
-    nom_receta: '{{random('Pate', 'Arroz con Pollo', 'Pollo Asado')}}',
-    estado: '{{random('INACTIVO', 'COCINANDO', 'PAUSA', 'FINALIZADO', 'FALLA')}}',
+    nom_receta: '{{random("Pate", "Arroz con Pollo", "Pollo Asado")}}',
+    estado: '{{random("INACTIVO", "ENFRIANDO", "PAUSA", "FINALIZADO", "FALLA")}}',
     cant_torres: '{{integer(1, 3)}}',
+    tipo_Fin: '0°C',
     pasos: [
       '{{repeat(20, 50)}}',
       {
         id: '{{index() + 1}}',
-        temp_Agua: '{{integer(25, 100)}}',
-        temp_Prod: '{{integer(20, 90)}}',
-        temp_Ing: '{{integer(20,30)}}',
-        niv_Agua: '{{integer(1700,1900)}}',
         tiempo: '{{5 * index()}}',
-        tipo_Fin: '50°C'
+        temp_Agua: function() {
+          var x = this.tiempo;
+          var a = 98;
+          var b = Math.log(100) / 180;
+          return parseFloat((a * Math.exp(-b * x)).toFixed(2));
+        },
+        temp_Prod: function() {
+          var x = this.tiempo;
+          var a = 100;
+          var b = Math.log(100) / 180;
+          return parseFloat((a * Math.exp(-b * x)).toFixed(2));
+        },
+        temp_Ing: '{{integer(20, 30)}}',
+        niv_Agua: '{{integer(1700, 1900)}}'
       }
     ],
     sector_io: [

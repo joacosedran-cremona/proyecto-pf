@@ -28,6 +28,7 @@ module.exports = {
         bluet: "#06E5",
         water: "#33A7FD",
         red: "#F43",
+        lightRed: "#FF5045",
         redChill: "#3b1616",
         green: "#56C35C ",
         white: "#EEE",
@@ -36,6 +37,10 @@ module.exports = {
         grey: "#1F1F1F",
         black: "#131313",
         footerbg: "#2C2C2C",
+
+        yellowGraph:"#FFA500",
+        blueGraph:"#36A2EB",
+        greenGraph:"#4BC04B",
         
         redState: "#F00",
         yellowState: "#bfbf8b",

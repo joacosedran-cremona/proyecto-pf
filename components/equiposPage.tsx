@@ -120,7 +120,7 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
                 <EstadoEquipo datos={datosEquipo} getColorClass={(label, value) => getColorClass(label, value, color)} displayData={displayData} />
                 </div>
                 <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
-                <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor="green" />
+                <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor="lightRed" />
                 </div>
             </div>
             <div className="bg-black flex flex-col h-full p-20 w-1/3 flex-grow rounded-md 1365:w-full">

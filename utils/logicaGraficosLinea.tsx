@@ -2,15 +2,23 @@ import { Paso } from './interface';
 
 export const transformData = (data: Paso[]) => {
     const labels: string[] = [];
+    const tempIngrData: { x: number, y: number }[] = [];
     const tempAguaData: { x: number, y: number }[] = [];
     const tempProdData: { x: number, y: number }[] = [];
 
+    // Iterar directamente sobre los pasos
     data.forEach(item => {
         const tiempo = item.tiempo;
         if (tiempo !== null && !isNaN(tiempo)) {
+            // Agregar temp_Ing a los datos
+            if (item.temp_Ing !== null && item.temp_Ing !== 'N/A' && typeof item.temp_Ing === 'number') {
+                tempIngrData.push({ x: tiempo, y: item.temp_Ing });
+            }
+            // Agregar temp_Agua a los datos
             if (item.temp_Agua !== null && item.temp_Agua !== 'N/A' && typeof item.temp_Agua === 'number') {
                 tempAguaData.push({ x: tiempo, y: item.temp_Agua });
             }
+            // Agregar temp_Prod a los datos
             if (item.temp_Prod !== null && item.temp_Prod !== 'N/A' && typeof item.temp_Prod === 'number') {
                 tempProdData.push({ x: tiempo, y: item.temp_Prod });
             }
@@ -21,16 +29,23 @@ export const transformData = (data: Paso[]) => {
         labels,
         datasets: [
             {
+                label: 'Temperatura de Ingreso',
+                backgroundColor: 'rgba(255, 165, 0, 0.5)', // Naranja/amarillo
+                borderColor: 'rgb(255, 165, 0)',
+                fill: false,
+                data: tempIngrData
+            },
+            {
                 label: 'Temperatura de Agua',
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                backgroundColor: 'rgba(54, 162, 235, 0.5)', // Azul
                 borderColor: 'rgb(54, 162, 235)',
                 fill: false,
                 data: tempAguaData
             },
             {
                 label: 'Temperatura de Producto',
-                backgroundColor: 'rgba(192, 75, 75, 0.5)',
-                borderColor: 'rgb(192, 75, 75)',
+                backgroundColor: 'rgba(75, 192, 75, 0.5)', // Verde
+                borderColor: 'rgb(75, 192, 75)',
                 fill: false,
                 data: tempProdData
             }
