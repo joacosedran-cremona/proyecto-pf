@@ -130,19 +130,14 @@ Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template
       {
         id: '{{index() + 1}}',
         tiempo: '{{5 * index()}}',
-        temp_Agua: function() {
-          var x = this.tiempo;
-          var a = 98;
-          var b = Math.log(100) / 180;
-          return parseFloat((a * Math.exp(-b * x)).toFixed(2));
-        },
+        temp_Agua: '{{integer(0, 5)}}',
         temp_Prod: function() {
           var x = this.tiempo;
           var a = 100;
           var b = Math.log(100) / 180;
           return parseFloat((a * Math.exp(-b * x)).toFixed(2));
         },
-        temp_Ing: '{{integer(20, 30)}}',
+        temp_Ing: '{{integer(5, 10)}}',
         niv_Agua: '{{integer(1700, 1900)}}'
       }
     ],
