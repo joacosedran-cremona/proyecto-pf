@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { Image } from '@heroui/image';
 import Link from 'next/link';
@@ -79,6 +80,8 @@ function getEstadoColor(estado: string): string {
 }
 
 export function ImagenLayout() {
+  const { t } = useTranslation('layout');
+
   const [equiposData, setEquiposData] = useState<EquiposData | null>(null);
 
   useEffect(() => {
@@ -170,10 +173,10 @@ export function ImagenLayout() {
                     <p className= "text-white">{section.name}</p>
                     <p className= "text-white">{equipo.estado}</p>
                   </div>
-                  <p className= "text-white">Temp Agua: {equipo.tempAguaActual}</p>
-                  <p className= "text-white">Temp Prod: {equipo.tempProductoActual}</p>
-                  <p className= "text-white">Receta: {equipo.receta}</p>
-                  <p className= "text-white">Tiempo: {equipo.tiempoTranscurrido}</p>
+                  <p className= "text-white">{t('datos.tempAgua')}: {equipo.tempAguaActual}</p>
+                  <p className= "text-white">{t('datos.tempProd')}: {equipo.tempProductoActual}</p>
+                  <p className= "text-white">{t('datos.receta')}: {equipo.receta}</p>
+                  <p className= "text-white">{t('datos.tiempo')}: {equipo.tiempoTranscurrido}</p>
                 </div>
               )}
             </span>

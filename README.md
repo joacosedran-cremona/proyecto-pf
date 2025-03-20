@@ -50,6 +50,15 @@ import { HiOutlineSwitchVertical } from 'react-icons/hi';                 //Flec
 
 Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
 
+---------
+## Traducciones
+```bash
+npm install i18next react-i18next
+```
+
+Como usar?
+import { useTranslation } from 'react-i18next';
+Colocar dentro de la funcion "const { t } = useTranslation('NombreDelArchivo');" y en donde hay un texto colocaremos {t("objeto.atributo")}.
 
 ---------
 ## Json Generator
@@ -276,3 +285,35 @@ Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template
   }
 ]
 ```
+[
+  '{{repeat(8)}}',
+  {
+    num_enfriador: '{{index(1)}}',
+    num_receta: '{{integer(1, 5)}}',
+    nom_receta: '{{random("Pate", "Paleta", "Panceta")}}',
+    estado: '{{random("INACTIVO", "ENFRIANDO", "PAUSA", "FINALIZADO", "FALLA")}}',
+    cant_torres: '{{integer(1, 3)}}', tipo_Fin: '0°C',
+    pasos: [
+      '{{repeat(20, 50)}}',
+      {
+        id: '{{index() + 1}}',
+        tiempo: '{{5 * index()}}',
+        temp_Agua: '{{integer(0, 5)}}',
+        temp_Prod: function() {
+          var x = this.tiempo;
+          var a = 100;
+          var b = Math.log(100) / 180; return parseFloat((a * Math.exp(-b * x)).toFixed(2));
+        },
+        temp_Ing: '{{integer(5, 10)}}',
+        niv_Agua: '{{integer(1700, 1900)}}'
+      }
+    ],
+    sector_io: [
+      { filtro_succion_agua: '{{bool()}}',
+        entrada_agua: '{{bool()}}',
+        bomba_recirculacion: '{{bool()}}',
+        valvula_amoniaco: '{{bool()}}'
+      }
+    ]
+  }
+] 

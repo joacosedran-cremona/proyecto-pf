@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import Link from "next/link";
 import Image from "next/image";
 import { VscAccount, VscBell  } from "react-icons/vsc";
@@ -21,22 +21,28 @@ interface OpcionMenu {
   text: string;
 }
 
-// Datos estáticos definidos fuera del componente
+
 const opcionesIconos: OpcionIcono[] = [
   { id: 1, icon: <VscAccount className="w-auto h-full" /> },
   { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-full" /> },
 ];
 
-const opcionesMenu: OpcionMenu[] = [
-  { id: 1, url: "/", text: "Home" },
-  { id: 2, url: "/monitoreo", text: "Monitoreo" },
-  { id: 3, url: "/historico", text: "Historico" },
-];
-
 const Header1: React.FC<Header1Props> = ({ currentPath }) => {
-  useEffect(() => {
-    console.log("Ruta actual:", currentPath);
-  }, [currentPath]);
+
+  const { t } = useTranslation('header');
+
+  const opcionesMenu: OpcionMenu[] = [
+    { id: 1, url: "/", text: t('menu.home') },
+    { id: 2, url: "/monitoreo", text: t('menu.monitoreo') },
+    { id: 3, url: "/historico", text: t('menu.historico') },
+  ];
+
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng);
+  }; 
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex flex-row w-full p-20 h-[65px] bg-[#EEE]">
@@ -55,10 +61,14 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
       </div>
 
       <p className="flex w-[40%] justify-center text-[#000]">
-        Planta Piloto - PF PROYECTO
+        {t("header1.titulo")}
       </p>
 
       <div className="flex flex-row w-[30%] justify-end">
+        <div className="flex gap-2">
+          <button onClick={() => changeLanguage('es')}>🇪🇸</button>
+          <button onClick={() => changeLanguage('en')}>🇺🇸</button>
+        </div>
         <ul className="flex flex-row w-full h-full gap-[1vw] justify-end">
           {opcionesMenu.map(({ id, url, text }) => (
             <li key={id} className="h-full">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import Link from "next/link";
 
 interface Header2Props {
@@ -14,26 +14,23 @@ interface OpcionBoton {
   styleClass: string;
 }
 
-// Datos estáticos definidos fuera del componente
-const opcionesBotones: OpcionBoton[] = [
-  {
-    id: 1,
-    path: "/cocinas",
-    text: "COCINAS",
-    styleClass: "text-orange text-2xl",
-  },
-  {
-    id: 2,
-    path: "/enfriadores",
-    text: "ENFRIADORES",
-    styleClass: "text-blue text-2xl",
-  },
-];
-
 const Header2: React.FC<Header2Props> = ({ currentPath }) => {
-  useEffect(() => {
-    console.log("Ruta actual:", currentPath);
-  }, [currentPath]);
+  const { t } = useTranslation('header');
+
+  const opcionesBotones: OpcionBoton[] = [
+    {
+      id: 1,
+      path: "/cocinas",
+      text: t('header2.botones.cocinas'),
+      styleClass: "text-orange text-2xl",
+    },
+    {
+      id: 2,
+      path: "/enfriadores",
+      text: t('header2.botones.enfriadores'),
+      styleClass: "text-blue text-2xl",
+    },
+  ];
 
   return (
     <header className="fixed top-[65px] left-0 right-0 z-[999] flex flex-col text-black w-full">

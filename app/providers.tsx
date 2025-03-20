@@ -9,6 +9,8 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { CocinaProvider } from "@/context/CocinaContext";
 import { EnfriadorProvider } from "@/context/EnfriadorContext";
 import { LineaProvider } from "@/context/LineaContext";
+import { I18nextProvider } from 'react-i18next';
+import i18n from '@/i18n';
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -29,13 +31,15 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <HeroUIProvider navigate={router.push}>
       <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
-        <LineaProvider>
-          <CocinaProvider>
-            <EnfriadorProvider>
-              {children}
-            </EnfriadorProvider>
-          </CocinaProvider>
-        </LineaProvider>
+        <I18nextProvider i18n={i18n}>
+          <LineaProvider>
+            <CocinaProvider>
+              <EnfriadorProvider>
+                {children}
+              </EnfriadorProvider>
+            </CocinaProvider>
+          </LineaProvider>
+        </I18nextProvider>
       </NextThemesProvider>
     </HeroUIProvider>
   );

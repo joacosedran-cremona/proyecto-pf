@@ -11,6 +11,7 @@ import { getColorClass } from "@/utils/logicaColores";
 import { displayData } from "@/utils/displayData";
 import { CocinaData } from "@/context/CocinaContext";
 import { EnfriadorData } from "@/context/EnfriadorContext";
+import { useTranslation } from 'react-i18next';
 
 interface EquipoPageProps {
     type: "cocina" | "enfriador";
@@ -18,6 +19,7 @@ interface EquipoPageProps {
 }
 
 const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
+    const { t } = useTranslation('monitoreo');
     // Seleccionamos el contexto adecuado según el tipo de equipo
     const { cocinaId, setCocinaId, cocinaData } = useCocina();
     const { enfriadorId, setEnfriadorId, enfriadorData } = useEnfriador();
@@ -66,37 +68,45 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
 
     // Datos de estado del equipo
     const datosEquipo = [
-        { label: "Temp. Ingreso", value: data.tempIng ?? "N/A", unit: "°C" },
-        { label: "Temp. Agua", value: data.ultimoPaso?.temp_Agua ?? "N/A", unit: "°C" },
-        { label: "Temp. Producto", value: data.tempProd ?? "N/A", unit: "°C" },
-        { label: "Nivel Agua", value: data.nivAgua ?? "N/A", unit: "mm" }
+        { label: t('estadoEquipo.tempIngreso'), value: data.tempIng ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.tempAgua'), value: data.ultimoPaso?.temp_Agua ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.tempProd'), value: data.tempProd ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.nivelAgua'), value: data.nivAgua ?? "N/A", unit: "mm" }
     ];
+
+    const labelToKeyMap: Record<string, string> = {
+        [t('estadoEquipo.tempIngreso')]: 'tempIngreso',
+        [t('estadoEquipo.tempAgua')]: 'tempAgua',
+        [t('estadoEquipo.tempProd')]: 'tempProd',
+        [t('estadoEquipo.nivelAgua')]: 'nivelAgua',
+    };
+    
 
     // Datos del ciclo activo
     const datosCiclo = [
-        { label: "Paso N°", value: data.ultimoPaso?.id ?? "N/A" },
-        { label: "N° Receta", value: data.num_receta ?? "N/A" },
-        { label: "Cant. Torres", value: data.cant_torres ?? "N/A" },
-        { label: "Tiempo Transcurrido", value: data.tiempo ?? "N/A" },
-        { label: "Tipo Fin", value: data.tipo_Fin ?? "N/A" }
+        { label: t('cicloActivo.paso'), value: data.ultimoPaso?.id ?? "N/A" },
+        { label: t('cicloActivo.receta'), value: data.num_receta ?? "N/A" },
+        { label: t('cicloActivo.cantTorres'), value: data.cant_torres ?? "N/A" },
+        { label: t('cicloActivo.tiempo'), value: data.tiempo ?? "N/A" },
+        { label: t('cicloActivo.tipoFin'), value: data.tipo_Fin ?? "N/A" }
     ];
 
     const datosIO = isCocina
     ? (data as CocinaData).sectorIO?.[0]
     ? [
-        { label: "Bomba Recirculacion", value: (data as CocinaData).sectorIO[0].bomba_recirculacion },
-        { label: "Entrada Agua", value: (data as CocinaData).sectorIO[0].entrada_agua },
-        { label: "Filtro Succion Agua", value: (data as CocinaData).sectorIO[0].filtro_succion_agua },
-        { label: "Vapor Serpentina", value: (data as CocinaData).sectorIO[0].vapor_serpentina },
-        { label: "Vapor Vivo", value: (data as CocinaData).sectorIO[0].vapor_vivo }
+        { label: t('sectorIO.bomba'), value: (data as CocinaData).sectorIO[0].bomba_recirculacion },
+        { label: t('sectorIO.entradaAgua'), value: (data as CocinaData).sectorIO[0].entrada_agua },
+        { label: t('sectorIO.filtroSuccion'), value: (data as CocinaData).sectorIO[0].filtro_succion_agua },
+        { label: t('sectorIO.vaporSerp'), value: (data as CocinaData).sectorIO[0].vapor_serpentina },
+        { label: t('sectorIO.vaporVivo'), value: (data as CocinaData).sectorIO[0].vapor_vivo }
         ]
     : []
     : (data as EnfriadorData).sectorIO?.[0]
     ? [
-        { label: "Bomba Recirculacion", value: (data as EnfriadorData).sectorIO[0].bomba_recirculacion },
-        { label: "Entrada Agua", value: (data as EnfriadorData).sectorIO[0].entrada_agua },
-        { label: "Filtro Succion Agua", value: (data as EnfriadorData).sectorIO[0].filtro_succion_agua },
-        { label: "Valvula Amoniaco", value: (data as EnfriadorData).sectorIO[0].valvula_amoniaco }
+        { label: t('sectorIO.bomba'), value: (data as EnfriadorData).sectorIO[0].bomba_recirculacion },
+        { label: t('sectorIO.entradaAgua'), value: (data as EnfriadorData).sectorIO[0].entrada_agua },
+        { label: t('sectorIO.filtroSuccion'), value: (data as EnfriadorData).sectorIO[0].filtro_succion_agua },
+        { label: t('sectorIO.valvulaAmoniaco'), value: (data as EnfriadorData).sectorIO[0].valvula_amoniaco }
         ]
     : [];
 
@@ -116,10 +126,10 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
             />
             </div>
             <p className={`${bgColor} flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
-            Receta: {data.nom_receta ?? "N/A"}
+            {t('titulo.receta')}: {data.nom_receta ?? "N/A"}
             </p>
             <p className={`bg-black flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
-            Estado: {data.estado ?? "N/A"}
+            {t('titulo.estado')}: {data.estado ?? "N/A"}
             </p>
         </div>
 
@@ -128,14 +138,22 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
             <div className="flex w-full gap-20 1365:flex 1365:flex-col 1365:w-1/3">
             <div className="flex w-2/3 gap-20 1365:w-full">
                 <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
-                <EstadoEquipo datos={datosEquipo} getColorClass={(label, value) => getColorClass(label, value, color)} displayData={displayData} />
+                <EstadoEquipo 
+                    datos={datosEquipo} 
+                    getColorClass={(label, value) => getColorClass(labelToKeyMap[label] || '', value, color)} 
+                    displayData={(value, unit) => displayData(value, unit)} 
+                />
+
                 </div>
                 <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
                 <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor="lightRed" />
                 </div>
             </div>
             <div className="bg-black flex flex-col h-full p-20 w-1/3 flex-grow rounded-md 1365:w-full">
-                <SectorIO datosIO={datosIO} getColorClass={(label, value) => getColorClass(label, value, color)} displayData={displayData} />
+            <SectorIO 
+                datosIO={datosIO} 
+                getColorClass={(label, value) => getColorClass(label, value, color)}
+            />
             </div>
             </div>
             <div className="w-full 1365:w-2/3">

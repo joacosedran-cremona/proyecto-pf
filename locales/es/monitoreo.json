@@ -1,0 +1,35 @@
+{
+    "estadoEquipo":
+    {
+        "titulo": "Estado Equipo",
+        "tempIngreso": "Temp. Ingreso",
+        "tempAgua": "Temp. Agua",
+        "tempProd": "Temp. Producto",
+        "nivelAgua": "Nivel Agua"
+    },
+    "cicloActivo":
+    {
+        "titulo": "Ciclo Activo",
+        "paso": "Paso N°",
+        "receta": "N° Receta",
+        "cantTorres": "Cantidad Torres",
+        "tiempo": "Tiempo Transcurrido",
+        "tipoFin": "Tipo Fin"
+    },
+    "sectorIO":
+    {
+        "titulo": "Sector IO",
+        "bomba": "Bomba Recirculacion",
+        "entradaAgua": "Entrada Agua",
+        "filtroSuccion": "Filtro Succion Agua",
+
+        "valvulaAmoniaco": "Valvula Amoniaco",
+        "vaporSerp": "Vapor Serpentina",
+        "vaporVivo": "Vapor Vivo"
+    },
+    "titulo":
+    {
+        "receta": "Receta",
+        "estado": "Estado"
+    }
+}

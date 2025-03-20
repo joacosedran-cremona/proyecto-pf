@@ -4,10 +4,9 @@ import { GoDotFill } from "react-icons/go";
 interface SectorIOProps {
     datosIO: { label: string, value: string | number | boolean | null }[];
     getColorClass: (label: string, value: string | number | null | boolean) => string;
-    displayData: (data: string | number | boolean | null) => string | number | boolean;
 }
 
-const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass, displayData }) => {
+const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass }) => {
     return (
         <>
             <h2 className="text-xl text-white">Sector IO</h2>

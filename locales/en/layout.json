@@ -1,0 +1,9 @@
+{
+    "datos":
+    {
+        "tempAgua": "Water Temp.",
+        "tempProd": "Product Temp.",
+        "receta": "Recipe",
+        "tiempo": "Time"
+    }
+}

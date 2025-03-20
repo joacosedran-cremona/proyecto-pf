@@ -1,0 +1,20 @@
+{
+    "header1":
+    {
+        "titulo": "Planta Piloto - PF PROYECTO"
+    },
+    "header2":
+    {
+        "botones":
+        {
+            "cocinas": "COCINAS",
+            "enfriadores": "ENFRIADORES"
+        }
+    },
+    "menu":
+    {
+        "home": "Home",
+        "monitoreo": "Monitoreo",
+        "historico": "Histórico"
+    }
+}

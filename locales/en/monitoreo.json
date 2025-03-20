@@ -1,0 +1,34 @@
+{
+    "estadoEquipo":
+    {
+        "titulo": "Equipment Status",
+        "tempIngreso": "Inlet Temp.",
+        "tempAgua": "Water Temp.",
+        "tempProd": "Product Temp.",
+        "nivelAgua": "Water Level"
+    },
+    "cicloActivo":
+    {
+        "titulo": "Active Cycle",
+        "paso": "Step N°",
+        "receta": "Recipe N°",
+        "cantTorres": "Number of Towers",
+        "tiempo": "Elapsed Time",
+        "tipoFin": "End Type"
+    },
+    "sectorIO":
+    {
+        "titulo": "IO Sector",
+        "bomba": "Recirculation Pump",
+        "entradaAgua": "Water Inlet",
+        "filtroSuccion": "Water Suction Filter",
+        "valvulaAmoniaco": "Ammonia Valve",
+        "vaporSerp": "Coil Steam",
+        "vaporVivo": "Live Steam"
+    },
+    "titulo":
+    {
+        "receta": "Recipe",
+        "estado": "Status"
+    }
+}
