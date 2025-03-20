@@ -6,11 +6,13 @@ import { useLinea } from '@/context/LineaContext';
 import { transformData } from '../../utils/logicaGraficosLinea';
 import { Button, Spinner } from '@heroui/react';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { useTranslation } from 'react-i18next';
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
 const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> = ({ contextType, id }) => {
+    const { t } = useTranslation('grafico');
     const chartRef = useRef<HTMLCanvasElement>(null);
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -68,7 +70,10 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
 
         const chartData = transformData(equipo.pasos);
 
-        const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
+        const nombreEquipo = contextType === 'cocinas' 
+            ? `${t('equipo.cocina')} ${id}`
+            : `${t('equipo.enfriador')} ${id}`;
+
         const tituloColor = contextType === 'cocinas' ? '#EF8225' : '#3AF';
 
         const config: ChartConfiguration<'line'> = {
@@ -116,7 +121,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                     tooltip: {
                         callbacks: {
                             label: (context) => {
-                                const datasetLabel = context.dataset.label || 'Temperatura';
+                                const datasetLabel = context.dataset.label || t('datos.temperatura');
                                 const temperature = context.parsed.y;
                                 const totalSeconds = Math.floor(context.parsed.x);
                                 const hours = Math.floor(totalSeconds / 3600);
@@ -124,7 +129,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                                 const seconds = totalSeconds % 60;
                                 const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                                 return [
-                                    `Tiempo transcurrido: ${timeFormatted}`,
+                                    `${t('tooltip')}: ${timeFormatted}`,
                                     `${datasetLabel}: ${temperature}°C`
                                 ];
                             },
@@ -143,7 +148,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                     y: {
                         title: {
                             display: true,
-                            text: 'Temperatura (°C)',
+                            text: t('ejes.y'),
                         },
                         beginAtZero: true,
                         border: {
@@ -169,7 +174,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                         },
                         title: {
                             display: true,
-                            text: 'Tiempo (hh:mm)',
+                            text: t('ejes.xLinea'),
                         },
                         border: {
                             color: '#D9D9D9'
@@ -188,7 +193,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         setLoading(false);
 
         return () => chartInstanceRef.current?.destroy();
-    }, [lineasData, lineaSeleccionada, contextType, id]);
+    }, [lineasData, lineaSeleccionada, contextType, id, t]);
 
     // Si el equipo está inactivo se muestra un mensaje
     const equipo = contextType === 'cocinas'
@@ -198,33 +203,38 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
     // Primero, si no existe el equipo, retornamos un mensaje o un estado de carga.
     if (!equipo) {
         return (
-        <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
-            <AiOutlineExclamationCircle className="w-auto h-1/4"/>
-            <p className="text-3xl text-white">Equipo no encontrado</p>
-        </div>
+            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+                <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+                <p className="text-3xl text-white">{t('equipoNoEncontrado')}</p>
+            </div>
         );
     }
     
-    // Luego, verificamos cada estado de manera separada.
     if (equipo.estado === 'INACTIVO') {
-        const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
+        const nombreEquipo = contextType === 'cocinas' 
+            ? `${t('equipo.cocina')} ${id}`
+            : `${t('equipo.enfriador')} ${id}`;
+            
         return (
-        <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
-            <AiOutlineExclamationCircle className="w-auto h-1/4"/>
-            <p className="text-3xl text-white">{nombreEquipo} - INACTIVO</p>
-            <p className="text-xl text-white">Aguardando Conexion</p>
-        </div>
+            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+                <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+                <p className="text-3xl text-white">{nombreEquipo} - {t('inactividad.titulo')}</p>
+                <p className="text-xl text-white">{t('inactividad.mensaje')}</p>
+            </div>
         );
     }
-    
+
     if (equipo.estado === 'FALLA') {
-        const nombreEquipo = contextType === 'cocinas' ? `Cocina ${id}` : `Enfriador ${id}`;
+        const nombreEquipo = contextType === 'cocinas' 
+            ? `${t('equipo.cocina')} ${id}`
+            : `${t('equipo.enfriador')} ${id}`;
+
         return (
-        <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
-            <AiOutlineExclamationCircle className="w-auto h-1/4"/>
-            <p className="text-3xl text-white">{nombreEquipo} - FALLA</p>
-            <p className="w-full text-center text-3xl text-white">SE DETECTO UNA FALLA EN EL EQUIPO</p>
-        </div>
+            <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+                <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+                <p className="text-3xl text-white">{nombreEquipo} - {t('error.titulo')}</p>
+                <p className="w-full text-center text-3xl text-white">{t('error.mensaje')}</p>
+            </div>
         );
     }
 
@@ -240,7 +250,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
             <canvas ref={chartRef} className="flex block w-full h-full max-h-screen"></canvas>
             {loading && (
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
-                    <Spinner label="Cargando..." />
+                    <Spinner label={t('cargando')} />
                 </div>
             )}
             <Button
@@ -258,7 +268,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                 }}
                 className="absolute bottom-[15px] left-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"
             >
-                Reiniciar Zoom
+                {t('reiniciarZoom')}
             </Button>
         </div>
     );

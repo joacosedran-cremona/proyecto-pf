@@ -6,29 +6,27 @@ import { useEnfriador } from '@/context/EnfriadorContext';
 import { transformData } from '../../utils/logicaGraficos';
 import { Button, Spinner } from '@heroui/react';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { useTranslation } from 'react-i18next';
 
-// Registrar plugins de Chart.js
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
 const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ contextType }) => {
+    const { t } = useTranslation('grafico');
     const chartRef = useRef<HTMLCanvasElement>(null);
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // Obtener datos según el contexto (cocinas o enfriadores)
     const { cocinaData } = useCocina();
     const { enfriadorData } = useEnfriador();
 
     useEffect(() => {
-        // Seleccionar datos según el tipo de contexto
         const data = contextType === 'cocinas' ? cocinaData : enfriadorData;
         if (!data || !chartRef.current) {
             setLoading(true);
             return;
         }
 
-        // Destruir instancia previa del gráfico, si existe
         if (chartInstanceRef.current) {
             chartInstanceRef.current.destroy();
         }
@@ -39,7 +37,6 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             return;
         }
 
-        // Personalización de la imagen de fondo
         const image = new Image();
         image.src = '/creminox.png';
 
@@ -65,7 +62,6 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             }
         };
 
-        // Transformar datos para el gráfico
         const chartData = transformData([data]);
 
         const config: ChartConfiguration<'line'> = {
@@ -85,7 +81,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         align: 'start',
                         color: '#D9D9D9',
                         display: true,
-                        text: 'Temperaturas en tiempo real',
+                        text: t('tituloGrafico'), // Nueva clave en JSON
                         font: {
                             weight: 'normal',
                             size: 20,
@@ -113,11 +109,10 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                     tooltip: {
                         callbacks: {
                             label: (context) => {
-                                const datasetLabel = context.dataset.label || 'Temperatura';
+                                const datasetLabel = context.dataset.label || t('datos.temperatura'); // Nueva clave en JSON
                                 const temperature = context.parsed.y;
                                 const totalSeconds = Math.floor(context.parsed.x);
 
-                                // Convertir segundos a formato hh:mm:ss
                                 const hours = Math.floor(totalSeconds / 3600);
                                 const minutes = Math.floor((totalSeconds % 3600) / 60);
                                 const seconds = totalSeconds % 60;
@@ -126,14 +121,14 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                     .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
                                 return [
-                                    `Tiempo transcurrido: ${timeFormatted}`,
+                                    `${t('tooltip')}: ${timeFormatted}`,
                                     `${datasetLabel}: ${temperature}°C`,
                                 ];
                             },
                             title: () => '',
                         },
                     },
-                },transitions: {
+                }, transitions: {
                     zoom: {
                         animation: {
                             duration: 0
@@ -144,7 +139,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                     y: {
                         title: {
                             display: true,
-                            text: 'Temperatura (°C)',
+                            text: t('ejes.y'),
                         },
                         beginAtZero: true,
                         border: {
@@ -172,7 +167,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         },
                         title: {
                             display: true,
-                            text: 'Tiempo (hh:mm:ss)',
+                            text: t('ejes.x'),
                         },
                         border: {
                             color: '#D9D9D9'
@@ -192,60 +187,53 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
         setLoading(false);
 
         return () => chartInstance.destroy();
-    }, [cocinaData, enfriadorData, contextType]);
+    }, [cocinaData, enfriadorData, contextType, t]);
 
-    // Función para reiniciar el zoom
     const resetZoom = () => {
         if (chartInstanceRef.current) {
             chartInstanceRef.current.resetZoom();
         }
     };
 
-    // Verificar si el equipo existe y manejar estados
-    const equipo = contextType === 'cocinas'
-    ? cocinaData // Obtener datos del contexto de cocina
-    : enfriadorData; // Obtener datos del contexto de enfriador
+    const equipo = contextType === 'cocinas' ? cocinaData : enfriadorData;
 
-    // Si no existe el equipo, retornar un mensaje de "Equipo no encontrado"
     if (!equipo) {
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">Equipo no encontrado</p>
+                <p className="text-3xl text-white">{t('equipoNoEncontrado')}</p> {/* Nueva clave en JSON */}
             </div>
         );
     }
 
-    // Verificar si el equipo está inactivo
     if (equipo.estado === 'INACTIVO') {
-        const nombreEquipo =
-            contextType === 'cocinas' && 'num_cocina' in equipo
-                ? `Cocina ${equipo.num_cocina}` // Usar num_cocina si es una cocina
-                : contextType === 'enfriadores' && 'num_enfriador' in equipo
-                ? `Enfriador ${equipo.num_enfriador}` // Usar num_enfriador si es un enfriador
-                : "Equipo desconocido"; // Fallback en caso de error
+        const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
+            ? `${t('equipo.cocina')} ${equipo.num_cocina}`
+            : contextType === 'enfriadores' && 'num_enfriador' in equipo
+            ? `${t('equipo.enfriador')} ${equipo.num_enfriador}`
+            : t('equipo.desconocido'); // Nueva clave en JSON
+
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">{nombreEquipo} - INACTIVO</p>
-                <p className="text-xl text-white">Aguardando Conexión</p>
+                <p className="text-3xl text-white">{nombreEquipo} - {t('inactividad.titulo')}</p>
+                <p className="text-xl text-white">{t('inactividad.mensaje')}</p>
             </div>
         );
     }
 
-    // Verificar si el equipo está en estado de falla
     if (equipo.estado === 'FALLA') {
-        const nombreEquipo =
-            contextType === 'cocinas' && 'num_cocina' in equipo
-                ? `Cocina ${equipo.num_cocina}` // Usar num_cocina si es una cocina
-                : contextType === 'enfriadores' && 'num_enfriador' in equipo
-                ? `Enfriador ${equipo.num_enfriador}` // Usar num_enfriador si es un enfriador
-                : "Equipo desconocido"; // Fallback en caso de error
+        const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
+            ? `${t('equipo.cocina')} ${equipo.num_cocina}`
+            : contextType === 'enfriadores' && 'num_enfriador' in equipo
+            ? `${t('equipo.enfriador')} ${equipo.num_enfriador}`
+            : t('equipo.desconocido');
+
         return (
             <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">{nombreEquipo} - FALLA</p>
-                <p className="w-full text-center text-3xl text-white">SE DETECTÓ UNA FALLA EN EL EQUIPO</p>
+                <p className="text-3xl text-white">{nombreEquipo} - {t('error.titulo')}</p>
+                <p className="w-full text-center text-3xl text-white">{t('error.mensaje')}</p>
             </div>
         );
     }
@@ -255,7 +243,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
             {loading && (
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
-                    <Spinner label="Cargando..." />
+                    <Spinner label={t('cargando')} /> {/* Nueva clave en JSON */}
                 </div>
             )}
             <Button
@@ -273,7 +261,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                 onClick={resetZoom}
                 className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"
             >
-                Reiniciar Zoom
+                {t('reiniciarZoom')} {/* Nueva clave en JSON */}
             </Button>
         </div>
     );

@@ -1,0 +1,35 @@
+{
+    "datos":
+    {
+        "tempIngreso": "Inlet Temperature",
+        "tempAgua": "Water Temperature",
+        "tempProd": "Product Temperature",
+        "temperatura": "Temperature"
+    },
+    "ejes":
+    {
+        "x": "Time (hh:mm:ss)",
+        "y": "Temperature (°C)"
+    },
+    "error":
+    {
+        "titulo": "FAULT",
+        "mensaje": "A FAULT HAS BEEN DETECTED IN THE EQUIPMENT"
+    },
+    "inactividad":
+    {
+        "titulo": "INACTIVE",
+        "mensaje": "The equipment is inactive, waiting for connection"
+    },
+    "equipo":
+    {
+        "cocina": "Cooking Unit",
+        "enfriador": "Cooler",
+        "desconocido": "Unknown Equipment"
+    },
+    "tooltip": "Elapsed Time",
+    "tituloGrafico": "Real-Time Temperatures",
+    "reiniciarZoom": "Reset Zoom",
+    "cargando": "Loading...",
+    "equipoNoEncontrado": "Equipment not found"
+}

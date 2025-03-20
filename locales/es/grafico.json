@@ -1,0 +1,36 @@
+{
+    "datos":
+    {
+        "tempIngreso": "Temperatura de Ingreso",
+        "tempAgua": "Temperatura del Agua",
+        "tempProd": "Temperatura del Producto",
+        "temperatura": "Temperatura"
+    },
+    "ejes":
+    {
+        "x": "Tiempo (hh:mm:ss)",
+        "xLinea": "Tiempo (hh:mm)",
+        "y": "Temperatura (°C)"
+    },
+    "error":
+    {
+        "titulo": "FALLA",
+        "mensaje": "SE DETECTÓ UNA FALLA EN EL EQUIPO"
+    },
+    "inactividad":
+    {
+        "titulo": "INACTIVO",
+        "mensaje": "El equipo está inactivo, esperando conexión"
+    },
+    "equipo":
+    {
+        "cocina": "Cocina",
+        "enfriador": "Enfriador",
+        "desconocido": "Equipo desconocido"
+    },
+    "tooltip": "Tiempo Transcurrido",
+    "tituloGrafico": "Temperaturas en tiempo real",
+    "reiniciarZoom": "Reiniciar Zoom",
+    "cargando": "Cargando...",
+    "equipoNoEncontrado": "Equipo no encontrado"
+}
