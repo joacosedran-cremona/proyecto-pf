@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import Selector from "../selectores/selector";
+import Selector from "../selectores/selectorLineas";
 import DatePicker from "../dateRangePicker";
 import ButtonAplicar from "../botones/botonAplicar";
 import ButtonPDF from "../botones/botonPDF";

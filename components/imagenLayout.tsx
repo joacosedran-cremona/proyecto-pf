@@ -94,6 +94,23 @@ export function ImagenLayout() {
     fetchData();
   }, []);
 
+  function getEquipmentId(sectionName: string): number {
+    const match = sectionName.match(/^([CE])(\d+)L(\d+)$/);
+    if (!match) return 1;
+  
+    const type = match[1];
+    const num = parseInt(match[2], 10);
+    const line = parseInt(match[3], 10);
+  
+    // Cocinas: 3 por línea
+    if (type === "C") return (line - 1) * 3 + num;
+    
+    // Enfriadores: 4 por línea
+    if (type === "E") return (line - 1) * 4 + num;
+  
+    return 1;
+  }
+
   function getEquipoData(sectionName: string): Equipo | undefined {
     if (!equiposData) return undefined;
   
@@ -130,8 +147,9 @@ export function ImagenLayout() {
         if (match) {
             extractedId = parseInt(match[2], 10);
         }
-        const href = `${section.path}?id=${extractedId}`
-        
+        const equipmentId = getEquipmentId(section.name);
+        const href = `${section.path}?id=${equipmentId}`;
+
         const equipo = getEquipoData(section.name);
         
         // Se combinan los estilos de posición de la sección con el color de fondo según el estado del equipo.

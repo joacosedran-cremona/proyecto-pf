@@ -46,22 +46,22 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
     // Lista de opciones para el selector
     const itemsList = isCocina
         ? [
-            { id: 1, name: "Cocina 1" },
-            { id: 2, name: "Cocina 2" },
-            { id: 3, name: "Cocina 3" },
-            { id: 4, name: "Cocina 4" },
-            { id: 5, name: "Cocina 5" },
-            { id: 6, name: "Cocina 6" }
+            { id: 1, name: "C1L1" },
+            { id: 2, name: "C2L1" },
+            { id: 3, name: "C3L1" },
+            { id: 4, name: "C1L2" },
+            { id: 5, name: "C2L2" },
+            { id: 6, name: "C3L2" }
         ]
         : [
-            { id: 1, name: "Enfriador 1" },
-            { id: 2, name: "Enfriador 2" },
-            { id: 3, name: "Enfriador 3" },
-            { id: 4, name: "Enfriador 4" },
-            { id: 5, name: "Enfriador 5" },
-            { id: 6, name: "Enfriador 6" },
-            { id: 7, name: "Enfriador 7" },
-            { id: 8, name: "Enfriador 8" }
+            { id: 1, name: "E1L1" },
+            { id: 2, name: "E2L1" },
+            { id: 3, name: "E3L1" },
+            { id: 4, name: "E4L1" },
+            { id: 5, name: "E1L2" },
+            { id: 6, name: "E2L2" },
+            { id: 7, name: "E3L2" },
+            { id: 8, name: "E4L2" }
         ];
 
     // Datos de estado del equipo

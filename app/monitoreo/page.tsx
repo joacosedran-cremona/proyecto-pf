@@ -2,7 +2,7 @@
 
 import { useLinea } from "@/context/LineaContext";
 import Grafico from "@/components/graficos/graficoMonitoreo";
-import Selector from "@/components/selectores/selector";
+import Selector from "@/components/selectores/selectorLineas";
 
 const lineas = {
     1: { cocinas: [1, 2, 3], enfriadores: [1, 2, 3, 4] },

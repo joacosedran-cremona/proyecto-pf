@@ -333,7 +333,7 @@
         "num_enfriador": 2,
         "num_receta": 2,
         "nom_receta": "Arroz con Pollo",
-        "estado": "INACTIVO",
+        "estado": "PAUSA",
         "cant_torres": 3,
         "tipo_Fin": "180 min",
         "pasos": [
@@ -647,7 +647,7 @@
         "num_enfriador": 3,
         "num_receta": 4,
         "nom_receta": "Arroz con Pollo",
-        "estado": "INACTIVO",
+        "estado": "ENFRIANDO",
         "cant_torres": 2,
         "tipo_Fin": "180 min",
         "pasos": [
@@ -1227,7 +1227,7 @@
         "num_enfriador": 5,
         "num_receta": 5,
         "nom_receta": "Pate",
-        "estado": "FALLA",
+        "estado": "PAUSA",
         "cant_torres": 3,
         "tipo_Fin": "10°C",
         "pasos": [
