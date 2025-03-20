@@ -59,44 +59,169 @@ Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template
 [
   '{{repeat(200)}}',
   {
-    'key': '{{index(1)}}',
-    'description': '{{random('Fallo en conexión de red','Presión baja en tuberías','Fallo en el sistema de refrigeración','Ciclo Finalizado','Ciclo Iniciado')}}',
-    'type': '{{random('Seguridad','Sistema','Falla')}}',
-    'state': '{{random('Activo','Inactivo','Critico')}}',
-    'time': '{{date(new Date(2025, 1, 1, 0, 0, 0), new Date(2025, 1, 28, 23, 59, 59), 'YYYY-MM-DD HH:mm:ss')}}'
+    key: '{{index(1)}}',
+    description: '{{random("Fallo en conexión de red","Presión baja en tuberías","Fallo en el sistema de refrigeración","Ciclo Finalizado","Ciclo Iniciado")}}',
+    type: '{{random("Seguridad","Sistema","Falla")}}',
+    state: '{{random("Activo","Inactivo","Critico")}}',
+    time: '{{date(new Date(2025, 1, 1, 0, 0, 0), new Date(2025, 1, 28, 23, 59, 59), "YYYY-MM-DD HH:mm:ss")}}'
   }
 ]
+```
+
+# Home
+```json
+{
+  "lineas": [
+    {
+      "id": 1,
+      "equipos": [
+        {
+          "nombre": "C1L1",
+          "estado": "{{random('INACTIVO', 'COCINANDO', 'PAUSA')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "C2L1",
+          "estado": "{{random('INACTIVO', 'COCINANDO', 'PAUSA')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "C3L1",
+          "estado": "{{random('INACTIVO', 'COCINANDO', 'PAUSA')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E1L1",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E2L1",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E3L1",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0, 
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E4L1",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "equipos": [
+        {
+          "nombre": "C1L2",
+          "estado": "{{random('INACTIVO', 'COCINANDO', 'PAUSA')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "C2L2",
+          "estado": "{{random('INACTIVO', 'COCINANDO', 'PAUSA')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "C3L2",
+          "estado": "{{random('INACTIVO', 'COCINANDO', 'PAUSA')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E1L2",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E2L2",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E3L2",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        },
+        {
+          "nombre": "E4L2",
+          "estado": "{{random('FALLA', 'ENFRIANDO', 'FINALIZADO')}}",
+          "tempAguaActual": 0,
+          "tempProductoActual": 0,
+          "receta": "{{random('Pate', 'STRING')}}",
+          "tiempoTranscurrido": "{{integer(0,2)}}:{{integer(0,59)}}"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 # Cocinas
 ```json
 [
-  '{{repeat(8)}}',
+  '{{repeat(6)}}',
   {
     num_cocina: '{{index(1)}}',
     num_receta: '{{integer(1, 5)}}',
     nom_receta: '{{random("Pate", "Arroz con Pollo", "Pollo Asado")}}',
     estado: '{{random("INACTIVO", "COCINANDO", "PAUSA", "FINALIZADO", "FALLA")}}',
     cant_torres: '{{integer(1, 3)}}',
-    tipo_Fin: "50°C",
+	tipo_Fin: '{{random("100°C", "90°C", "60 min", "120 min")}}',
     pasos: [
       '{{repeat(20, 50)}}',
       {
         id: '{{index() + 1}}',
         tiempo: '{{5 * index()}}',
-        temp_Agua: function() {
-          var x = this.tiempo;
-          var a = 20;
-          var b = Math.log(5) / 180;
-          return parseFloat((a * Math.exp(b * x)).toFixed(2));
-        },
+        temp_Agua: '{{integer(90, 95)}}',
         temp_Prod: function() {
           var x = this.tiempo;
           var a = 20;
           var b = Math.log(5) / 180;
           return parseFloat((a * Math.exp(b * x)).toFixed(2));
         },
-        temp_Ing: '{{integer(20, 30)}}',
+        temp_Ing: '{{integer(85, 90)}}',
         niv_Agua: '{{integer(1700, 1900)}}'
       }
     ],
@@ -111,7 +236,6 @@ Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template
     ]
   }
 ]
-
 ```
 
 # Enfriadores

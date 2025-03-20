@@ -125,7 +125,15 @@ export function ImagenLayout() {
         alt="Imagen de prueba"
       />
       {sections.map((section) => {
+        const match = section.name.match(/^([CE])(\d+)L/);
+        let extractedId = 1;
+        if (match) {
+            extractedId = parseInt(match[2], 10);
+        }
+        const href = `${section.path}?id=${extractedId}`
+        
         const equipo = getEquipoData(section.name);
+        
         // Se combinan los estilos de posición de la sección con el color de fondo según el estado del equipo.
         const recuadroStyle: React.CSSProperties = {
           ...section.style,
@@ -133,7 +141,7 @@ export function ImagenLayout() {
         };
 
         return (
-          <Link key={section.id} href={section.path} className="z-999">
+          <Link key={section.id} href={href} className="z-999">
             <span
               className="absolute shadow border z-999"
               style={recuadroStyle}

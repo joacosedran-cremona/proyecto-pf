@@ -13,13 +13,24 @@ import { CocinaData } from "@/context/CocinaContext";
 import { EnfriadorData } from "@/context/EnfriadorContext";
 
 interface EquipoPageProps {
-type: "cocina" | "enfriador";
+    type: "cocina" | "enfriador";
+    initialId?: number; 
 }
 
-const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
+const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
     // Seleccionamos el contexto adecuado según el tipo de equipo
     const { cocinaId, setCocinaId, cocinaData } = useCocina();
     const { enfriadorId, setEnfriadorId, enfriadorData } = useEnfriador();
+
+    React.useEffect(() => {
+        if (initialId !== undefined) {
+            if (type === "cocina") {
+                setCocinaId(initialId);
+            } else {
+                setEnfriadorId(initialId);
+            }
+        }
+    }, [initialId, type, setCocinaId, setEnfriadorId]);
 
     // Determinar qué datos usar
     const isCocina = type === "cocina";
