@@ -16,6 +16,9 @@ import enGrafico from './locales/en/grafico.json';
 import esSelectores from './locales/es/selectores.json';
 import enSelectores from './locales/en/selectores.json';
 
+import esBotones from './locales/es/botones.json';
+import enBotones from './locales/en/botones.json';
+
 const resources = {
     es: { 
         header: esHeader,
@@ -23,6 +26,7 @@ const resources = {
         monitoreo: esMonitoreo,
         grafico: esGrafico,
         selectores: esSelectores,
+        botones: esBotones,
     },
     en: { 
         header: enHeader,
@@ -30,6 +34,7 @@ const resources = {
         monitoreo: enMonitoreo,
         grafico: enGrafico,
         selectores: enSelectores,
+        botones: enBotones,
     },
 };
 
@@ -37,7 +42,7 @@ i18n.use(initReactI18next).init({
     resources,
     lng: 'es',
     fallbackLng: 'es',
-    ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores'],
+    ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones'],
     interpolation: { 
         escapeValue: false,
         skipOnVariables: false,

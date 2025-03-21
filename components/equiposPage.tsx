@@ -17,10 +17,9 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 interface EquipoPageProps {
     type: "cocina" | "enfriador";
-    initialId?: number; 
 }
 
-const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
+const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
     const { t } = useTranslation('monitoreo');
     const router = useRouter();
     const pathname = usePathname();
@@ -101,7 +100,6 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
                     value={validatedId}
                     onChange={handleSelectionChange}
                     isCocina={isCocina} // Nueva prop
-                    placeholder={`Seleccione una ${isCocina ? "cocina" : "enfriador"}`}
                     selectClasses={`w-full bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
                     optionClasses="p-2 bg-black font-bold"
                 />

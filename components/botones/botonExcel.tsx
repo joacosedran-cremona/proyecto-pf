@@ -1,11 +1,13 @@
 import { Button } from "@heroui/react";
 import { FaFileExcel } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
 
 interface BotonExcelProps {
     selectClasses?: string;
 }
 
 export default function BotonExcel({ selectClasses }: BotonExcelProps) {
+    const { t } = useTranslation('botones');
     return (
         <Button
             radius="md"
@@ -14,7 +16,7 @@ export default function BotonExcel({ selectClasses }: BotonExcelProps) {
             className={`text-success ${selectClasses || "h-1/5"} min-w-[130px]`}
         >
             <FaFileExcel style={{ marginRight: "8px" }} />
-            Descargar Excel
+            {t('excel')}
         </Button>
     );
 }

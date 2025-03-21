@@ -172,6 +172,9 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                                 return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
                             }
                         },
+                        afterBuildTicks: (axis) => {
+                            axis.ticks = axis.ticks.filter(t => t.value >= 0);
+                        },
                         title: {
                             display: true,
                             text: t('ejes.xLinea'),

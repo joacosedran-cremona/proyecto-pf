@@ -23,5 +23,6 @@
     {
         "linea1": "Line 1",
         "linea2": "Line 2"
-    }
+    },
+    "select": "Select equipment"
 }

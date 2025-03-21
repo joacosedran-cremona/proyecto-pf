@@ -7,7 +7,6 @@ interface SelectorProps {
     value: number;
     onChange: (value: number) => void;
     isCocina: boolean;
-    placeholder?: string;
     selectClasses?: string;
     optionClasses?: string;
 }
@@ -16,7 +15,6 @@ const Selector: React.FC<SelectorProps> = ({
     value,
     onChange,
     isCocina,
-    placeholder,
     selectClasses,
     optionClasses,
 }) => {
@@ -36,7 +34,7 @@ const Selector: React.FC<SelectorProps> = ({
                 className={selectClasses}
             >
                 <option value={0} disabled>
-                    {placeholder}
+                    {t('select')}
                 </option>
                 {items.map((item) => (
                     <option key={item.id} value={item.id} className={optionClasses}>

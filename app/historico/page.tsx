@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 export default function Historico() {
   const [selectedId, setSelectedId] = useState<number>(0);
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">("cocina");
-  const [data, setData] = useState<any>(null);
+  const [setData] = useState<any>(null);
 
   const { t } = useTranslation('selectores');
 
@@ -67,7 +67,6 @@ export default function Historico() {
             value={selectedId}
             onChange={handleSelection}
             items={itemsList}
-            placeholder="Seleccione un equipo"
             selectClasses={`w-auto bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
             optionClasses="p-2 bg-black font-bold"
           />

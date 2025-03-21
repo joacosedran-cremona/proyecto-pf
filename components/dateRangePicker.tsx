@@ -1,10 +1,12 @@
 import {DateRangePicker} from "@heroui/react";
+import { useTranslation } from 'react-i18next';
 
 interface DatePickerProps {
   selectClasses?: string;
 }
 
 export default function DatePicker({ selectClasses }: DatePickerProps) {
+  const { t } = useTranslation('botones');
   return (
     <div className={selectClasses}>
       <DateRangePicker
@@ -32,7 +34,7 @@ export default function DatePicker({ selectClasses }: DatePickerProps) {
         }}
         radius="sm"
         className="w-full h-full"
-        label="Elija un rango de fechas"
+        label={t('fecha')}
         variant="bordered"
       />
     </div>

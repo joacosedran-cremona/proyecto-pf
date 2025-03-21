@@ -165,6 +165,9 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                             }
                         },
+                        afterBuildTicks: (axis) => {
+                            axis.ticks = axis.ticks.filter(t => t.value >= 0);
+                        },
                         title: {
                             display: true,
                             text: t('ejes.x'),
@@ -175,7 +178,9 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         grid: {
                             color: '#1F1F1F',
                             tickColor: '#fff'
-                        }
+                        },
+                        bounds: 'ticks',
+                        grace: '5%',
                     }
                 },
             },
@@ -211,7 +216,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             ? `${t('equipo.cocina')} ${equipo.num_cocina}`
             : contextType === 'enfriadores' && 'num_enfriador' in equipo
             ? `${t('equipo.enfriador')} ${equipo.num_enfriador}`
-            : t('equipo.desconocido'); // Nueva clave en JSON
+            : t('equipo.desconocido');
 
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
@@ -243,7 +248,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
             {loading && (
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
-                    <Spinner label={t('cargando')} /> {/* Nueva clave en JSON */}
+                    <Spinner label={t('cargando')} />
                 </div>
             )}
             <Button
@@ -261,7 +266,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                 onClick={resetZoom}
                 className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"
             >
-                {t('reiniciarZoom')} {/* Nueva clave en JSON */}
+                {t('reiniciarZoom')}
             </Button>
         </div>
     );
