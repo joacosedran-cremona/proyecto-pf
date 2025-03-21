@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Image } from '@heroui/image';
 import Link from 'next/link';
+import {Tooltip} from "@heroui/tooltip";
 
-// Definición de interfaces para tipar los datos
 interface Equipo {
+  id: string;
   nombre: string;
   estado: string;
   tempAguaActual: number;
@@ -25,6 +26,7 @@ interface EquiposData {
 interface Section {
   id: number;
   name: string;
+  equipmentId: string;
   path: string;
   style: React.CSSProperties;
 }
@@ -44,35 +46,31 @@ const leftPositions = {
   E4: "74.5%"
 };
 
-const sections: Section[] = [
-  { id: 1,  name: "C1L1", path: "/cocinas",     style: { top: topL1, left: leftPositions.C1, width, height: h } },
-  { id: 2,  name: "C2L1", path: "/cocinas",     style: { top: topL1, left: leftPositions.C2, width, height: h } },
-  { id: 3,  name: "C3L1", path: "/cocinas",     style: { top: topL1, left: leftPositions.C3, width, height: h } },
-  { id: 4,  name: "C1L2", path: "/cocinas",     style: { top: topL2, left: leftPositions.C1, width, height: h } },
-  { id: 5,  name: "C2L2", path: "/cocinas",     style: { top: topL2, left: leftPositions.C2, width, height: h } },
-  { id: 6,  name: "C3L2", path: "/cocinas",     style: { top: topL2, left: leftPositions.C3, width, height: h } },
-  { id: 7,  name: "E1L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E1, width, height: h } },
-  { id: 8,  name: "E2L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E2, width, height: h } },
-  { id: 9,  name: "E3L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E3, width, height: h } },
-  { id: 10, name: "E4L1", path: "/enfriadores", style: { top: topL1, left: leftPositions.E4, width, height: h } },
-  { id: 11, name: "E1L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E1, width, height: h } },
-  { id: 12, name: "E2L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E2, width, height: h } },
-  { id: 13, name: "E3L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E3, width, height: h } },
-  { id: 14, name: "E4L2", path: "/enfriadores", style: { top: topL2, left: leftPositions.E4, width, height: h } }
-];
+const sectionConfig = {
+  cocinas: [
+    { id: 1, key: 'cocina1', line: 1, position: 'C1', equipmentId: 'C1L1' },
+    { id: 2, key: 'cocina2', line: 1, position: 'C2', equipmentId: 'C2L1' },
+    { id: 3, key: 'cocina3', line: 1, position: 'C3', equipmentId: 'C3L1' },
+    { id: 4, key: 'cocina4', line: 2, position: 'C1', equipmentId: 'C1L2' },
+    { id: 5, key: 'cocina5', line: 2, position: 'C2', equipmentId: 'C2L2' },
+    { id: 6, key: 'cocina6', line: 2, position: 'C3', equipmentId: 'C3L2' },
+  ],
+  enfriadores: [
+    { id: 1, key: 'enfriador1', line: 1, position: 'E1', equipmentId: 'E1L1' },
+    { id: 2, key: 'enfriador2', line: 1, position: 'E2', equipmentId: 'E2L1' },
+    { id: 3, key: 'enfriador3', line: 1, position: 'E3', equipmentId: 'E3L1' },
+    { id: 4, key: 'enfriador4', line: 1, position: 'E4', equipmentId: 'E4L1' },
+    { id: 5, key: 'enfriador5', line: 2, position: 'E1', equipmentId: 'E1L2' },
+    { id: 6, key: 'enfriador6', line: 2, position: 'E2', equipmentId: 'E2L2' },
+    { id: 7, key: 'enfriador7', line: 2, position: 'E3', equipmentId: 'E3L2' },
+    { id: 8, key: 'enfriador8', line: 2, position: 'E4', equipmentId: 'E4L2' },
+  ]
+};
 
-
-// Función que retorna el color de fondo según el estado del equipo
 function getEstadoColor(estado: string): string {
   const estadoUpper = estado.toUpperCase();
   if (estadoUpper === "FALLA") return "#C00";
-  if (
-    estadoUpper === "COCINANDO" ||
-    estadoUpper === "PRE-CALENTADO" ||
-    estadoUpper === "ENFRIANDO" ||
-    estadoUpper === "PRE-ENFRIADO"
-  )
-    return "#9b9D";
+  if (["COCINANDO", "PRE-CALENTADO", "ENFRIANDO", "PRE-ENFRIADO"].includes(estadoUpper)) return "#9b9D";
   if (estadoUpper === "PAUSA") return "#BB8D";
   if (estadoUpper === "FINALIZADO") return "#9bbD";
   if (estadoUpper === "INACTIVO") return "#666D";
@@ -81,11 +79,37 @@ function getEstadoColor(estado: string): string {
 
 export function ImagenLayout() {
   const { t } = useTranslation('layout');
-
   const [equiposData, setEquiposData] = useState<EquiposData | null>(null);
 
+  const sections: Section[] = useMemo(() => [
+    ...sectionConfig.cocinas.map(({ id, key, position, line, equipmentId }) => ({
+      id,
+      name: t(`cocinas.${key}`),
+      equipmentId,
+      path: "/cocinas",
+      style: { 
+        top: line === 1 ? topL1 : topL2,
+        left: leftPositions[position as keyof typeof leftPositions],
+        width,
+        height: h
+      }
+    })),
+    ...sectionConfig.enfriadores.map(({ id, key, position, line, equipmentId }) => ({
+      id: id + 6,
+      name: t(`enfriadores.${key}`),
+      equipmentId,
+      path: "/enfriadores",
+      style: { 
+        top: line === 1 ? topL1 : topL2,
+        left: leftPositions[position as keyof typeof leftPositions],
+        width,
+        height: h
+      }
+    }))
+  ], [t]);
+
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       try {
         const response = await fetch('/data/home.json');
         const data: EquiposData = await response.json();
@@ -93,49 +117,18 @@ export function ImagenLayout() {
       } catch (error) {
         console.error("Error al cargar el archivo JSON:", error);
       }
-    }
+    };
     fetchData();
   }, []);
 
-  function getEquipmentId(sectionName: string): number {
-    const match = sectionName.match(/^([CE])(\d+)L(\d+)$/);
-    if (!match) return 1;
-  
-    const type = match[1];
-    const num = parseInt(match[2], 10);
-    const line = parseInt(match[3], 10);
-  
-    // Cocinas: 3 por línea
-    if (type === "C") return (line - 1) * 3 + num;
-    
-    // Enfriadores: 4 por línea
-    if (type === "E") return (line - 1) * 4 + num;
-  
-    return 1;
-  }
-
-  function getEquipoData(sectionName: string): Equipo | undefined {
+  const getEquipoData = (equipmentId: string): Equipo | undefined => {
     if (!equiposData) return undefined;
-  
-    // Coincide con formatos: C<number>L<number> o E<number>L<number>
-    const match = sectionName.match(/^([CE])(\d+)L(\d+)$/);
-    if (match) {
-      const [, letra, numStr, lineaStr] = match;
-      const numero = parseInt(numStr, 10);
-      const linea = parseInt(lineaStr, 10);
-  
-      if (letra === 'C') {
-        // Busca en la línea correspondiente para cocina
-        return equiposData.lineas.find((l: Linea) => l.id === linea)?.equipos.find(e => e.nombre === `C${numero}L${linea}`);
-      } else if (letra === 'E') {
-        // Busca en la línea correspondiente para enfriador
-        return equiposData.lineas.find((l: Linea) => l.id === linea)?.equipos.find(e => e.nombre === `E${numero}L${linea}`);
-      }
+    for (const linea of equiposData.lineas) {
+      const equipo = linea.equipos.find(e => e.id === equipmentId);
+      if (equipo) return equipo;
     }
-  
     return undefined;
-  }
-  
+  };
 
   return (
     <div className="w-auto h-full relative flex justify-center items-center">
@@ -145,41 +138,41 @@ export function ImagenLayout() {
         alt="Imagen de prueba"
       />
       {sections.map((section) => {
-        const match = section.name.match(/^([CE])(\d+)L/);
-        let extractedId = 1;
-        if (match) {
-            extractedId = parseInt(match[2], 10);
-        }
-        const equipmentId = getEquipmentId(section.name);
-        const href = `${section.path}?id=${equipmentId}`;
-
-        const equipo = getEquipoData(section.name);
-        
-        // Se combinan los estilos de posición de la sección con el color de fondo según el estado del equipo.
+        const equipo = getEquipoData(section.equipmentId);
+        const href = `${section.path}?id=${section.equipmentId}`;
         const recuadroStyle: React.CSSProperties = {
           ...section.style,
           backgroundColor: equipo ? getEstadoColor(equipo.estado) : "black",
         };
-
+        const match = section.equipmentId.match(/^([CE])(\d+)L(\d+)$/i);
+        const tipoEquipo = match?.[1] === 'C' ? 'cocina' : 'enfriador';
+        const numeroEquipo = match?.[2] || '1';
+        const lineaEquipo = match?.[3] || '1';
+        
         return (
           <Link key={section.id} href={href} className="z-999">
-            <span
-              className="absolute shadow border z-999"
-              style={recuadroStyle}
+            <Tooltip
+              placement="top"
+              content={t(`tooltip.${tipoEquipo}`, {
+                number: numeroEquipo,
+                line: lineaEquipo
+              })}
             >
-              {equipo && (
-                <div className="text-white text-[calc(0.7vw+0.5vh)] text-stroke width-full font-bold p-3">
-                  <div className="flex w-full justify-between">
-                    <p className= "text-white">{section.name}</p>
-                    <p className= "text-white">{equipo.estado}</p>
+              <span className="absolute shadow border z-999" style={recuadroStyle}>
+                {equipo && (
+                  <div className="text-white text-[calc(0.7vw+0.5vh)] text-stroke width-full font-bold p-3">
+                    <div className="flex w-full justify-between">
+                      <p className="text-white">{section.name}</p>
+                      <p className="text-white">{equipo.estado}</p>
+                    </div>
+                    <p className="text-white">{t('datos.tempAgua')}: {equipo.tempAguaActual}</p>
+                    <p className="text-white">{t('datos.tempProd')}: {equipo.tempProductoActual}</p>
+                    <p className="text-white">{t('datos.receta')}: {equipo.receta}</p>
+                    <p className="text-white">{t('datos.tiempo')}: {equipo.tiempoTranscurrido}</p>
                   </div>
-                  <p className= "text-white">{t('datos.tempAgua')}: {equipo.tempAguaActual}</p>
-                  <p className= "text-white">{t('datos.tempProd')}: {equipo.tempProductoActual}</p>
-                  <p className= "text-white">{t('datos.receta')}: {equipo.receta}</p>
-                  <p className= "text-white">{t('datos.tiempo')}: {equipo.tiempoTranscurrido}</p>
-                </div>
-              )}
-            </span>
+                )}
+              </span>
+            </Tooltip>
           </Link>
         );
       })}
