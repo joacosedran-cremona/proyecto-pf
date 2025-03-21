@@ -219,7 +219,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4"/>
                 <p className="text-3xl text-white">{nombreEquipo} - {t('inactividad.titulo')}</p>
-                <p className="text-xl text-white">{t('inactividad.mensaje')}</p>
+                <p className="w-full text-center text-xl text-white">{t('inactividad.mensaje')}</p>
             </div>
         );
     }

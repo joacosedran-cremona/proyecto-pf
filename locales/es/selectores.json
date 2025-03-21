@@ -1,0 +1,27 @@
+{
+    "cocinas":
+    {
+        "cocina1": "C1L1",
+        "cocina2": "C2L1",
+        "cocina3": "C3L1",
+        "cocina4": "C1L2",
+        "cocina5": "C2L2",
+        "cocina6": "C3L2"
+    },
+    "enfriadores":
+    {
+        "enfriador1": "E1L1",
+        "enfriador2": "E2L1",
+        "enfriador3": "E3L1",
+        "enfriador4": "E4L1",
+        "enfriador5": "E1L2",
+        "enfriador6": "E2L2",
+        "enfriador7": "E3L2",
+        "enfriador8": "E4L2"
+    },
+    "lineas":
+    {
+        "linea1": "Linea 1",
+        "linea2": "Linea 2"
+    }
+}

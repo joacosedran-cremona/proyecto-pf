@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { useCocina } from "@/context/CocinaContext";
 import { useEnfriador } from "@/context/EnfriadorContext";
@@ -19,7 +20,7 @@ interface EquipoPageProps {
 }
 
 const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
-    const { t } = useTranslation('monitoreo');
+    const { t } = useTranslation('selectores');
     // Seleccionamos el contexto adecuado según el tipo de equipo
     const { cocinaId, setCocinaId, cocinaData } = useCocina();
     const { enfriadorId, setEnfriadorId, enfriadorData } = useEnfriador();
@@ -48,22 +49,22 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
     // Lista de opciones para el selector
     const itemsList = isCocina
         ? [
-            { id: 1, name: "C1L1" },
-            { id: 2, name: "C2L1" },
-            { id: 3, name: "C3L1" },
-            { id: 4, name: "C1L2" },
-            { id: 5, name: "C2L2" },
-            { id: 6, name: "C3L2" }
+            { id: 1, name: t('cocinas.cocina1') },
+            { id: 2, name: t('cocinas.cocina2') },
+            { id: 3, name: t('cocinas.cocina3') },
+            { id: 4, name: t('cocinas.cocina4') },
+            { id: 5, name: t('cocinas.cocina5') },
+            { id: 6, name: t('cocinas.cocina6') },
         ]
         : [
-            { id: 1, name: "E1L1" },
-            { id: 2, name: "E2L1" },
-            { id: 3, name: "E3L1" },
-            { id: 4, name: "E4L1" },
-            { id: 5, name: "E1L2" },
-            { id: 6, name: "E2L2" },
-            { id: 7, name: "E3L2" },
-            { id: 8, name: "E4L2" }
+            { id: 1, name: t('enfriadores.enfriador1') },
+            { id: 2, name: t('enfriadores.enfriador2') },
+            { id: 3, name: t('enfriadores.enfriador3') },
+            { id: 4, name: t('enfriadores.enfriador4') },
+            { id: 5, name: t('enfriadores.enfriador5') },
+            { id: 6, name: t('enfriadores.enfriador6') },
+            { id: 7, name: t('enfriadores.enfriador7') },
+            { id: 8, name: t('enfriadores.enfriador8') }
         ];
 
     // Datos de estado del equipo

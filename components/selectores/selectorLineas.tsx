@@ -1,6 +1,7 @@
 "use client";
 
 import { useLinea } from "@/context/LineaContext";
+import { useTranslation } from 'react-i18next';
 
 interface SelectorProps {
     selectClasses?: string;
@@ -9,9 +10,11 @@ interface SelectorProps {
 const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
     const { lineaSeleccionada, setLineaSeleccionada } = useLinea();
 
+    const { t } = useTranslation('selectores');
+
     const lineaList = [
-        { id: 1, name: "Línea 1" },
-        { id: 2, name: "Línea 2" },
+        { id: 1, name: t('lineas.linea1') },
+        { id: 2, name: t('lineas.linea2') },
     ];
 
     const defaultClasses =

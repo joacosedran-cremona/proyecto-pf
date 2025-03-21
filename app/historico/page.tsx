@@ -8,29 +8,32 @@ import DatePicker from "@/components/dateRangePicker"
 import BotonExcel from "@/components/botones/botonExcel";
 import BotonPDF from "@/components/botones/botonPDF";
 import BotonAplicar from "@/components/botones/botonAplicar";
-
-const itemsList = [
-  { id: 1,  name: "Cocina 1" },
-  { id: 2,  name: "Cocina 2" },
-  { id: 3,  name: "Cocina 3" },
-  { id: 4,  name: "Cocina 4" },
-  { id: 5,  name: "Cocina 5" },
-  { id: 6,  name: "Cocina 6" },
-  { id: 7,  name: "Enfriador 1" },
-  { id: 8,  name: "Enfriador 2" },
-  { id: 9,  name: "Enfriador 3" },
-  { id: 10, name: "Enfriador 4" },
-  { id: 11, name: "Enfriador 5" },
-  { id: 12, name: "Enfriador 6" },
-  { id: 13, name: "Enfriador 7" },
-  { id: 14, name: "Enfriador 8" }
-];
+import { useTranslation } from 'react-i18next';
 
 export default function Historico() {
   // Se inicializa con 0 para indicar "ninguna selección"
   const [selectedId, setSelectedId] = useState<number>(0);
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">("cocina");
   const [data, setData] = useState<any>(null);
+
+  const { t } = useTranslation('selectores');
+
+  const itemsList = [
+    { id: 1,  name: t('cocinas.cocina1') },
+    { id: 2,  name: t('cocinas.cocina2') },
+    { id: 3,  name: t('cocinas.cocina3') },
+    { id: 4,  name: t('cocinas.cocina4') },
+    { id: 5,  name: t('cocinas.cocina5') },
+    { id: 6,  name: t('cocinas.cocina6') },
+    { id: 7,  name: t('enfriadores.enfriador1') },
+    { id: 8,  name: t('enfriadores.enfriador2') },
+    { id: 9,  name: t('enfriadores.enfriador3') },
+    { id: 10, name: t('enfriadores.enfriador4') },
+    { id: 11, name: t('enfriadores.enfriador5') },
+    { id: 12, name: t('enfriadores.enfriador6') },
+    { id: 13, name: t('enfriadores.enfriador7') },
+    { id: 14, name: t('enfriadores.enfriador8') }
+  ];
 
   // Función que se ejecuta al cambiar la selección.
   const handleSelection = async (id: number) => {
