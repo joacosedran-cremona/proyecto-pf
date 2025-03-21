@@ -19,6 +19,12 @@ import enSelectores from './locales/en/selectores.json';
 import esBotones from './locales/es/botones.json';
 import enBotones from './locales/en/botones.json';
 
+import esHistAlert from './locales/es/hist_alert_tit.json';
+import enHistAlert from './locales/en/hist_alert_tit.json';
+
+import esTabla from './locales/es/tabla.json';
+import enTabla from './locales/en/tabla.json';
+
 const resources = {
     es: { 
         header: esHeader,
@@ -27,6 +33,8 @@ const resources = {
         grafico: esGrafico,
         selectores: esSelectores,
         botones: esBotones,
+        hist_alert_tit: esHistAlert,
+        tabla: esTabla,
     },
     en: { 
         header: enHeader,
@@ -35,6 +43,8 @@ const resources = {
         grafico: enGrafico,
         selectores: enSelectores,
         botones: enBotones,
+        hist_alert_tit: enHistAlert,
+        tabla: enTabla,
     },
 };
 
@@ -42,7 +52,7 @@ i18n.use(initReactI18next).init({
     resources,
     lng: 'es',
     fallbackLng: 'es',
-    ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones'],
+    ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones', 'hist_alert_tit', 'tabla'],
     interpolation: { 
         escapeValue: false,
         skipOnVariables: false,

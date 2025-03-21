@@ -1,0 +1,8 @@
+{
+    "descripcion": "DESCRIPCIÓN",
+    "tipo": "TIPO",
+    "estado": "ESTADO",
+    "hora": "HORA",
+    "exptodas": "EXPORTAR TODAS LAS FILAS",
+    "expvisibles": "EXPORTAR FILAS VISIBLES"
+}

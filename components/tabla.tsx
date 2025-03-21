@@ -5,6 +5,7 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import alertas from "./alertas.json";
+import { useTranslation } from "react-i18next";
 
 export type Alerta = {
   key: string;
@@ -15,6 +16,7 @@ export type Alerta = {
 };
 
 const Tabla: React.FC = () => {
+  const { t } = useTranslation("tabla");
   const [data, setData] = useState<Alerta[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -35,26 +37,26 @@ const Tabla: React.FC = () => {
     () => [
       {
         accessorKey: "description",
-        header: "DESCRIPCIÓN",
+        header: t('descripcion'),
         grow: 1
       },
       {
         accessorKey: "type",
-        header: "TIPO",
+        header: t('tipo'),
         grow: 1
       },
       {
         accessorKey: "state",
-        header: "ESTADO",
+        header: t('estado'),
         grow: 1
       },
       {
         accessorKey: "time",
-        header: "HORA",
+        header: t('hora'),
         grow: 1
       },
     ],
-    []
+    [t]
   );
 
   const handleExportRows = (rows: MRT_Row<Alerta>[]) => {
@@ -92,14 +94,14 @@ const Tabla: React.FC = () => {
           onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
           startIcon={<FileDownloadIcon />}
         >
-          Exportar Todas las Filas
+          {t('exptodas')}
         </Button>
         <Button
           disabled={table.getRowModel().rows.length === 0}
           onClick={() => handleExportRows(table.getRowModel().rows)}
           startIcon={<FileDownloadIcon />}
         >
-          Exportar Filas Visibles
+          {t('expvisibles')}
         </Button>
       </Box>
     ),
