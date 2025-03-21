@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from 'react-i18next';
 
 interface SelectorProps {
     value: number;
     onChange: (value: number) => void;
-    isCocina: boolean;
+    items: { id: number; name: string }[];
     placeholder?: string;
     selectClasses?: string;
     optionClasses?: string;
@@ -15,19 +14,12 @@ interface SelectorProps {
 const Selector: React.FC<SelectorProps> = ({
     value,
     onChange,
-    isCocina,
+    items,
     placeholder,
     selectClasses,
     optionClasses,
 }) => {
-    const { t } = useTranslation('selectores');
     
-    // Generar items basado en el tipo de equipo
-    const items = Array.from({ length: isCocina ? 6 : 8 }, (_, i) => ({
-        id: i + 1,
-        name: t(isCocina ? `cocinas.cocina${i + 1}` : `enfriadores.enfriador${i + 1}`)
-    }));
-
     return (
         <div className="flex min-h-[50px]">
             <select

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Grafico from "@/components/graficos/graficoHistorico";
 import Productividad from "@/components/productividad/productividad";
-import Selector from "@/components/selectores/selectorEquipos";
+import Selector from "@/components/selectores/selectorHistorico";
 import DatePicker from "@/components/dateRangePicker"
 import BotonExcel from "@/components/botones/botonExcel";
 import BotonPDF from "@/components/botones/botonPDF";
@@ -11,7 +11,6 @@ import BotonAplicar from "@/components/botones/botonAplicar";
 import { useTranslation } from 'react-i18next';
 
 export default function Historico() {
-  // Se inicializa con 0 para indicar "ninguna selección"
   const [selectedId, setSelectedId] = useState<number>(0);
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">("cocina");
   const [data, setData] = useState<any>(null);
@@ -35,10 +34,8 @@ export default function Historico() {
     { id: 14, name: t('enfriadores.enfriador8') }
   ];
 
-  // Función que se ejecuta al cambiar la selección.
   const handleSelection = async (id: number) => {
     setSelectedId(id);
-    // Si no se selecciona un equipo válido (id = 0), no se realiza la consulta.
     if (id === 0) return;
     const type = id <= 6 ? "cocina" : "enfriador";
     setSelectedType(type);
@@ -58,7 +55,6 @@ export default function Historico() {
     }
   };
 
-  // Definir clases de estilos según el tipo de equipo seleccionado.
   const borderColor = selectedType === "cocina" ? "border-orange" : "border-blue";
   const color = selectedType === "cocina" ? "orange" : "blue";
 

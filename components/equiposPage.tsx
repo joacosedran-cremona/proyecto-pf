@@ -13,6 +13,7 @@ import { displayData } from "@/utils/displayData";
 import { CocinaData } from "@/context/CocinaContext";
 import { EnfriadorData } from "@/context/EnfriadorContext";
 import { useTranslation } from 'react-i18next';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 interface EquipoPageProps {
     type: "cocina" | "enfriador";
@@ -20,54 +21,22 @@ interface EquipoPageProps {
 }
 
 const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
-    const { t } = useTranslation('selectores');
-    // Seleccionamos el contexto adecuado según el tipo de equipo
+    const { t } = useTranslation('monitoreo');
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const { cocinaId, setCocinaId, cocinaData } = useCocina();
     const { enfriadorId, setEnfriadorId, enfriadorData } = useEnfriador();
-
-    React.useEffect(() => {
-        if (initialId !== undefined) {
-            if (type === "cocina") {
-                setCocinaId(initialId);
-            } else {
-                setEnfriadorId(initialId);
-            }
-        }
-    }, [initialId, type, setCocinaId, setEnfriadorId]);
-
-    // Determinar qué datos usar
     const isCocina = type === "cocina";
     const data = isCocina ? cocinaData : enfriadorData;
-    const selectedId = isCocina ? cocinaId : enfriadorId;
-    const setSelectedId = isCocina ? setCocinaId : setEnfriadorId;
-
-    // Configuración de colores y estilos según el tipo de equipo
     const color = isCocina ? "orange" : "blue";
     const borderColor = isCocina ? "border-orange" : "border-blue";
     const bgColor = isCocina ? "bg-oranget" : "bg-bluet";
+    const idParam = searchParams.get('id');
+    const maxId = isCocina ? 6 : 8;
+    const currentId = idParam ? parseInt(idParam) : (isCocina ? cocinaId : enfriadorId);
+    const validatedId = Math.max(1, Math.min(currentId, maxId));
 
-    // Lista de opciones para el selector
-    const itemsList = isCocina
-        ? [
-            { id: 1, name: t('cocinas.cocina1') },
-            { id: 2, name: t('cocinas.cocina2') },
-            { id: 3, name: t('cocinas.cocina3') },
-            { id: 4, name: t('cocinas.cocina4') },
-            { id: 5, name: t('cocinas.cocina5') },
-            { id: 6, name: t('cocinas.cocina6') },
-        ]
-        : [
-            { id: 1, name: t('enfriadores.enfriador1') },
-            { id: 2, name: t('enfriadores.enfriador2') },
-            { id: 3, name: t('enfriadores.enfriador3') },
-            { id: 4, name: t('enfriadores.enfriador4') },
-            { id: 5, name: t('enfriadores.enfriador5') },
-            { id: 6, name: t('enfriadores.enfriador6') },
-            { id: 7, name: t('enfriadores.enfriador7') },
-            { id: 8, name: t('enfriadores.enfriador8') }
-        ];
-
-    // Datos de estado del equipo
     const datosEquipo = [
         { label: t('estadoEquipo.tempIngreso'), value: data.tempIng ?? "N/A", unit: "°C" },
         { label: t('estadoEquipo.tempAgua'), value: data.ultimoPaso?.temp_Agua ?? "N/A", unit: "°C" },
@@ -81,9 +50,7 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
         [t('estadoEquipo.tempProd')]: 'tempProd',
         [t('estadoEquipo.nivelAgua')]: 'nivelAgua',
     };
-    
 
-    // Datos del ciclo activo
     const datosCiclo = [
         { label: t('cicloActivo.paso'), value: data.ultimoPaso?.id ?? "N/A" },
         { label: t('cicloActivo.receta'), value: data.num_receta ?? "N/A" },
@@ -111,20 +78,33 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type, initialId }) => {
         ]
     : [];
 
+    React.useEffect(() => {
+        if (isCocina) {
+            setCocinaId(validatedId);
+        } else {
+            setEnfriadorId(validatedId);
+        }
+    }, [validatedId, isCocina]);
+
+    const handleSelectionChange = (newId: number) => {
+        const params = new URLSearchParams(searchParams);
+        params.set('id', newId.toString());
+        router.replace(`${pathname}?${params.toString()}`);
+    };
 
     return (
         <section className="flex flex-col gap-20 min-h-[85vh] pt-[40px]">
         {/* SELECCIÓN Y ESTADO */}
         <div className="flex w-full h-full gap-20">
             <div className="w-1/3">
-            <Selector
-                value={selectedId}
-                onChange={setSelectedId}
-                items={itemsList}
-                placeholder={`Seleccione una ${isCocina ? "cocina" : "enfriador"}`}
-                selectClasses={`w-full bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
-                optionClasses="p-2 bg-black font-bold"
-            />
+                <Selector
+                    value={validatedId}
+                    onChange={handleSelectionChange}
+                    isCocina={isCocina} // Nueva prop
+                    placeholder={`Seleccione una ${isCocina ? "cocina" : "enfriador"}`}
+                    selectClasses={`w-full bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
+                    optionClasses="p-2 bg-black font-bold"
+                />
             </div>
             <p className={`${bgColor} flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
             {t('titulo.receta')}: {data.nom_receta ?? "N/A"}
