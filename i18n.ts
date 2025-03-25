@@ -48,9 +48,13 @@ const resources = {
     },
 };
 
+const savedLanguage = typeof window !== 'undefined' 
+    ? localStorage.getItem('selectedLanguage') 
+    : 'es';
+
 i18n.use(initReactI18next).init({
     resources,
-    lng: 'es',
+    lng: savedLanguage || 'es',
     fallbackLng: 'es',
     ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones', 'hist_alert_tit', 'tabla'],
     interpolation: { 

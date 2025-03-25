@@ -26,5 +26,7 @@
     "tooltip": {
       "cocina": "Cocina {{number}} Línea {{line}}",
       "enfriador": "Enfriador {{number}} Línea {{line}}"
-    }
+    },
+    "titulo": "COCINAS & ENFRIADORES",
+    "subtitulo": "Paneo General"
   }

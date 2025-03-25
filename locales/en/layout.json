@@ -26,5 +26,7 @@
     "tooltip": {
     "cocina": "Kitchen {{number}} Line {{line}}",
     "enfriador": "Chiller {{number}} Line {{line}}"
-    }
+    },
+    "titulo": "KITCHENS & CHILLERS",
+    "subtitulo": "General Panel"
 }

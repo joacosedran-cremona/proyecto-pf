@@ -24,7 +24,7 @@
     "equipo":
     {
         "cocina": "Cooking Unit",
-        "enfriador": "Cooler",
+        "enfriador": "Chiller",
         "desconocido": "Unknown Equipment"
     },
     "tooltip": "Elapsed Time",
