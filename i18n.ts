@@ -48,13 +48,17 @@ const resources = {
     },
 };
 
-const savedLanguage = typeof window !== 'undefined' 
-    ? localStorage.getItem('selectedLanguage') 
-    : 'es';
+const getInitialLanguage = () => {
+    if (typeof window === 'undefined') {
+        const cookies = require('next/headers').cookies();
+        return cookies.get('selectedLanguage')?.value || 'es';
+    }
+    return localStorage.getItem('selectedLanguage') || document.cookie.replace(/(?:(?:^|.*;\s*)selectedLanguage\s*=\s*([^;]*).*$)|^.*$/, '$1') || 'es';
+};
 
 i18n.use(initReactI18next).init({
     resources,
-    lng: savedLanguage || 'es',
+    lng: getInitialLanguage(),
     fallbackLng: 'es',
     ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones', 'hist_alert_tit', 'tabla'],
     interpolation: { 

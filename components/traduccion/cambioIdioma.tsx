@@ -5,8 +5,8 @@ export const CambioIdioma = () => {
 
     const changeLanguage = (lng: string) => {
         i18n.changeLanguage(lng);
-        document.cookie = `selectedLanguage=${lng}; path=/; max-age=31536000`; // 1 año
-        localStorage.setItem('selectedLanguage', lng);
+        document.cookie = `selectedLanguage=${lng}; path=/; max-age=31536000`;
+        localStorage.setItem('selectedLanguage', lng); // Opcional para acceso rápido en cliente
     };
 
     return (
