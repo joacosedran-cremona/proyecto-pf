@@ -43,7 +43,15 @@ interface EnfriadorContextType {
 const EnfriadorContext = createContext<EnfriadorContextType | undefined>(undefined);
 
 export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) => {
-    const [enfriadorId, setEnfriadorId] = useState<number>(1);
+    const [enfriadorId, setEnfriadorId] = useState<number>(() => {
+        const saved = localStorage.getItem('lastEnfriadorId');
+        return saved ? parseInt(saved) : 1;
+    });
+
+    useEffect(() => {
+        localStorage.setItem('lastEnfriadorId', enfriadorId.toString());
+    }, [enfriadorId]);
+
     const [enfriadorData, setEnfriadorData] = useState<EnfriadorData>({
         num_enfriador: 0,
         tempIng: "N/A",

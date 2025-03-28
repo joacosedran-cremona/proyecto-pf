@@ -31,6 +31,24 @@ interface Section {
   style: React.CSSProperties;
 }
 
+interface LayoutTranslations {
+  titulo: string;
+  subtitulo: string;
+  datos: {
+    tempAgua: string;
+    tempProd: string;
+    receta: string;
+    tiempo: string;
+  };
+  equipos: {
+    [key: string]: string;  // Para mantener el formato C1L1, C2L1, etc.
+  };
+  tooltip: {
+    cocina: string;
+    enfriador: string;
+  };
+}
+
 const h = "27.5%";
 const topL1 = "9.3%";
 const topL2 = "63%";
@@ -84,7 +102,7 @@ export function ImagenLayout() {
   const sections: Section[] = useMemo(() => [
     ...sectionConfig.cocinas.map(({ id, key, position, line, equipmentId }) => ({
       id,
-      name: t(`cocinas.${key}`),
+      name: t(`equipos.${equipmentId}`, equipmentId),
       equipmentId,
       path: "/cocinas",
       style: { 
@@ -96,7 +114,7 @@ export function ImagenLayout() {
     })),
     ...sectionConfig.enfriadores.map(({ id, key, position, line, equipmentId }) => ({
       id: id + 6,
-      name: t(`enfriadores.${key}`),
+      name: t(`equipos.${equipmentId}`, equipmentId),
       equipmentId,
       path: "/enfriadores",
       style: { 
@@ -139,6 +157,8 @@ export function ImagenLayout() {
       />
       {sections.map((section) => {
         const equipo = getEquipoData(section.equipmentId);
+        // Extraer el número del equipo del ID (C1L1 -> 1, E2L1 -> 2, etc.)
+        const equipoNum = section.equipmentId.match(/[CE](\d+)L\d+/)?.[1] || '1';
         const href = `${section.path}?id=${section.equipmentId}`;
         const recuadroStyle: React.CSSProperties = {
           ...section.style,

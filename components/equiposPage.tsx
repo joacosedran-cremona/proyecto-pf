@@ -17,6 +17,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 interface EquipoPageProps {
     type: "cocina" | "enfriador";
+    initialId: number;
 }
 
 const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {

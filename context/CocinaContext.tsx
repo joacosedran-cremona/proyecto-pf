@@ -45,7 +45,15 @@ interface CocinaContextType {
 const CocinaContext = createContext<CocinaContextType | undefined>(undefined);
 
 export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
-    const [cocinaId, setCocinaId] = useState<number>(1);
+    const [cocinaId, setCocinaId] = useState<number>(() => {
+        const saved = localStorage.getItem('lastCocinaId');
+        return saved ? parseInt(saved) : 1;
+    });
+    
+    useEffect(() => {
+        localStorage.setItem('lastCocinaId', cocinaId.toString());
+    }, [cocinaId]);
+
     const [cocinaData, setCocinaData] = useState<CocinaData>({
         num_cocina: 0,
         tempIng: "N/A",

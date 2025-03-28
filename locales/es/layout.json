@@ -5,23 +5,21 @@
       "receta": "Receta",
       "tiempo": "Tiempo"
     },
-    "cocinas": {
-      "cocina1": "C1L1",
-      "cocina2": "C2L1",
-      "cocina3": "C3L1",
-      "cocina4": "C1L2",
-      "cocina5": "C2L2",
-      "cocina6": "C3L2"
-    },
-    "enfriadores": {
-      "enfriador1": "E1L1",
-      "enfriador2": "E2L1",
-      "enfriador3": "E3L1",
-      "enfriador4": "E4L1",
-      "enfriador5": "E1L2",
-      "enfriador6": "E2L2",
-      "enfriador7": "E3L2",
-      "enfriador8": "E4L2"
+    "equipos": {
+      "C1L1": "C1L1",
+      "C2L1": "C2L1",
+      "C3L1": "C3L1",
+      "C1L2": "C1L2",
+      "C2L2": "C2L2",
+      "C3L2": "C3L2",
+      "E1L1": "E1L1",
+      "E2L1": "E2L1",
+      "E3L1": "E3L1",
+      "E4L1": "E4L1",
+      "E1L2": "E1L2",
+      "E2L2": "E2L2",
+      "E3L2": "E3L2",
+      "E4L2": "E4L2"
     },
     "tooltip": {
       "cocina": "Cocina {{number}} Línea {{line}}",
@@ -29,4 +27,4 @@
     },
     "titulo": "COCINAS & ENFRIADORES",
     "subtitulo": "Paneo General"
-  }
+}
