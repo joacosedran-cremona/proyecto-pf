@@ -1,4 +1,4 @@
-import i18n from 'i18next';
+import { createInstance } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import esHeader from './locales/es/header.json';
@@ -48,17 +48,9 @@ const resources = {
     },
 };
 
-const getInitialLanguage = () => {
-    if (typeof window === 'undefined') {
-        const cookies = require('next/headers').cookies();
-        return cookies.get('selectedLanguage')?.value || 'es';
-    }
-    return localStorage.getItem('selectedLanguage') || document.cookie.replace(/(?:(?:^|.*;\s*)selectedLanguage\s*=\s*([^;]*).*$)|^.*$/, '$1') || 'es';
-};
-
-i18n.use(initReactI18next).init({
+export const i18n = createInstance({
     resources,
-    lng: getInitialLanguage(),
+    lng: 'es',
     fallbackLng: 'es',
     ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones', 'hist_alert_tit', 'tabla'],
     interpolation: { 
@@ -67,4 +59,11 @@ i18n.use(initReactI18next).init({
     },
 });
 
-export default i18n;
+declare module 'i18next' {
+    interface CustomTypeOptions {
+        resources: typeof resources['en'];
+        returnNull: false;
+    }
+}
+
+i18n.use(initReactI18next);

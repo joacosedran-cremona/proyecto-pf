@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
 import clsx from "clsx";
-
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import Navbar from "@/components/header/navbar";
 import Footer from "@/components/footer";
+import { cookies } from 'next/headers';
 
 export const metadata = {
   title: {
@@ -17,11 +17,15 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  const cookieStore = await cookies();
+  const initialLanguage = cookieStore.get('selectedLanguage')?.value || 'es';
+
   return (
     <html className="dark" suppressHydrationWarning lang="en">
       <head />
@@ -30,7 +34,7 @@ export default function RootLayout({
           "min-h-screen bg-grey font-mono antialiased w-full"
         )}
       >
-        <Providers>
+        <Providers initialLanguage={initialLanguage}>
           <div className="flex flex-col w-full min-h-screen">
             <Navbar />
             <main className="min-h-screen w-full bg-grey p-20 pt-[85px]">
