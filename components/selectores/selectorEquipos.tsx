@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from 'react-i18next';
 
 interface SelectorProps {
@@ -11,6 +11,11 @@ interface SelectorProps {
     optionClasses?: string;
 }
 
+// Tipos específicos para las traducciones
+type CocinaKeys = `cocinas.cocina${1 | 2 | 3 | 4 | 5 | 6}`;
+type EnfriadorKeys = `enfriadores.enfriador${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8}`;
+type TranslationKey = 'select' | CocinaKeys | EnfriadorKeys;
+
 const Selector: React.FC<SelectorProps> = ({
     value,
     onChange,
@@ -20,24 +25,43 @@ const Selector: React.FC<SelectorProps> = ({
 }) => {
     const { t } = useTranslation('selectores');
     
-    // Generar items basado en el tipo de equipo
-    const items = Array.from({ length: isCocina ? 6 : 8 }, (_, i) => ({
-        id: i + 1,
-        name: t(isCocina ? `cocinas.cocina${i + 1}` : `enfriadores.enfriador${i + 1}`)
-    }));
+    const items = useMemo(() => {
+        const length = isCocina ? 6 : 8;
+        return Array.from({ length }, (_, i) => {
+            const id = i + 1;
+            const key = isCocina 
+                ? `cocinas.cocina${id}` 
+                : `enfriadores.enfriador${id}`;
+            return {
+                id,
+                name: t(key as TranslationKey)
+            };
+        });
+    }, [isCocina, t]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newValue = Number(e.target.value);
+        if (!isNaN(newValue)) {
+            onChange(newValue);
+        }
+    };
 
     return (
         <div className="flex min-h-[50px]">
             <select
                 value={value}
-                onChange={(e) => onChange(Number(e.target.value))}
+                onChange={handleChange}
                 className={selectClasses}
             >
                 <option value={0} disabled>
                     {t('select')}
                 </option>
                 {items.map((item) => (
-                    <option key={item.id} value={item.id} className={optionClasses}>
+                    <option 
+                        key={item.id} 
+                        value={item.id} 
+                        className={optionClasses}
+                    >
                         {item.name}
                     </option>
                 ))}
