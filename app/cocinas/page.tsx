@@ -11,12 +11,17 @@ export default function Cocinas() {
     useEffect(() => {
         const idParam = searchParams.get('id');
         if (idParam) {
-            const id = parseInt(idParam.replace('C', '').replace('L1', ''));
-            setInitialId(Math.min(6, Math.max(1, id)));
-            localStorage.setItem('lastCocinaId', id.toString());
+            // Convertir directamente a número
+            const id = parseInt(idParam);
+            if (!isNaN(id)) {
+                const validId = Math.min(6, Math.max(1, id));
+                setInitialId(validId);
+                localStorage.setItem('lastCocinaId', validId.toString());
+            }
         } else {
             const savedId = localStorage.getItem('lastCocinaId');
-            setInitialId(savedId ? parseInt(savedId) : 1);
+            const id = savedId ? parseInt(savedId) : 1;
+            setInitialId(id);
         }
     }, [searchParams]);
 

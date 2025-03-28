@@ -17,7 +17,6 @@ interface SectorIOCocina {
     vapor_vivo: boolean;
 }
 
-
 export interface CocinaData {
     num_cocina: number;
     tempIng: string | number | null;
@@ -49,10 +48,13 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
         const saved = localStorage.getItem('lastCocinaId');
         return saved ? parseInt(saved) : 1;
     });
-    
-    useEffect(() => {
-        localStorage.setItem('lastCocinaId', cocinaId.toString());
-    }, [cocinaId]);
+
+    const safeSetCocinaId = (id: number) => {
+        if (!isNaN(id) && id > 0) {
+            setCocinaId(id);
+            localStorage.setItem('lastCocinaId', id.toString());
+        }
+    };
 
     const [cocinaData, setCocinaData] = useState<CocinaData>({
         num_cocina: 0,
@@ -79,11 +81,11 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
                 const selectedCocina = data.find(
                     (item: { num_cocina: number }) => item.num_cocina === cocinaId
                 );
-    
+
                 if (selectedCocina) {
                     const pasos = selectedCocina.pasos;
                     const ultimoPaso = pasos ? pasos[pasos.length - 1] : null;
-                    
+
                     setCocinaData({
                         num_cocina: selectedCocina.num_cocina,
                         tempIng: ultimoPaso?.temp_Ing ?? "N/A",  // Ahora se obtiene del último paso
@@ -126,7 +128,7 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
     }, [cocinaId]);
 
     return (
-        <CocinaContext.Provider value={{ cocinaId, setCocinaId, cocinaData, setCocinaData }}>
+        <CocinaContext.Provider value={{ cocinaId, setCocinaId: safeSetCocinaId, cocinaData, setCocinaData }}>
             {children}
         </CocinaContext.Provider>
     );

@@ -157,9 +157,8 @@ export function ImagenLayout() {
       />
       {sections.map((section) => {
         const equipo = getEquipoData(section.equipmentId);
-        // Extraer el número del equipo del ID (C1L1 -> 1, E2L1 -> 2, etc.)
         const equipoNum = section.equipmentId.match(/[CE](\d+)L\d+/)?.[1] || '1';
-        const href = `${section.path}?id=${section.equipmentId}`;
+        const href = `${section.path}?id=${equipoNum}`;
         const recuadroStyle: React.CSSProperties = {
           ...section.style,
           backgroundColor: equipo ? getEstadoColor(equipo.estado) : "black",
@@ -178,7 +177,18 @@ export function ImagenLayout() {
                 line: lineaEquipo
               })}
             >
-              <span className="absolute shadow border z-999" style={recuadroStyle}>
+              <span 
+                className="absolute shadow border z-999" 
+                style={recuadroStyle}
+                onClick={() => {
+                  const idNumber = parseInt(equipoNum);
+                  if (tipoEquipo === 'cocina') {
+                    localStorage.setItem('lastCocinaId', idNumber.toString());
+                  } else {
+                    localStorage.setItem('lastEnfriadorId', idNumber.toString());
+                  }
+                }}
+              >
                 {equipo && (
                   <div className="text-white text-[calc(0.7vw+0.5vh)] text-stroke width-full font-bold p-3">
                     <div className="flex w-full justify-between">

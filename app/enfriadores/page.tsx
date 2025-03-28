@@ -11,12 +11,17 @@ export default function Enfriadores() {
     useEffect(() => {
         const idParam = searchParams.get('id');
         if (idParam) {
-            const id = parseInt(idParam.replace('E', '').replace('L1', ''));
-            setInitialId(Math.min(8, Math.max(1, id)));
-            localStorage.setItem('lastEnfriadorId', id.toString());
+            // Convertir directamente a número
+            const id = parseInt(idParam);
+            if (!isNaN(id)) {
+                const validId = Math.min(8, Math.max(1, id));
+                setInitialId(validId);
+                localStorage.setItem('lastEnfriadorId', validId.toString());
+            }
         } else {
             const savedId = localStorage.getItem('lastEnfriadorId');
-            setInitialId(savedId ? parseInt(savedId) : 1);
+            const id = savedId ? parseInt(savedId) : 1;
+            setInitialId(id);
         }
     }, [searchParams]);
 

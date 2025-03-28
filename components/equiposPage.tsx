@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useCocina } from "@/context/CocinaContext";
 import { useEnfriador } from "@/context/EnfriadorContext";
 import Selector from "./selectores/selectorEquipos";
@@ -15,12 +15,7 @@ import { EnfriadorData } from "@/context/EnfriadorContext";
 import { useTranslation } from 'react-i18next';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-interface EquipoPageProps {
-    type: "cocina" | "enfriador";
-    initialId: number;
-}
-
-const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
+export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfriador', initialId: number }) {
     const { t } = useTranslation('monitoreo');
     const router = useRouter();
     const pathname = usePathname();
@@ -77,6 +72,16 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
         { label: t('sectorIO.valvulaAmoniaco'), value: (data as EnfriadorData).sectorIO[0].valvula_amoniaco }
         ]
     : [];
+
+    useEffect(() => {
+        if (initialId) {
+            if (type === 'cocina') {
+                setCocinaId(initialId);
+            } else {
+                setEnfriadorId(initialId);
+            }
+        }
+    }, [initialId, type, setCocinaId, setEnfriadorId]);
 
     React.useEffect(() => {
         if (isCocina) {
@@ -142,6 +147,4 @@ const EquipoPage: React.FC<EquipoPageProps> = ({ type }) => {
         </div>
         </section>
     );
-};
-
-export default EquipoPage;
+}
