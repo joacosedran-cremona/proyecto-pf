@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useCocina } from "@/context/CocinaContext";
 import { useEnfriador } from "@/context/EnfriadorContext";
 import Selector from "./selectores/selectorEquipos";
@@ -74,28 +74,28 @@ export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfr
     : [];
 
     useEffect(() => {
-        if (initialId) {
-            if (type === 'cocina') {
-                setCocinaId(initialId);
-            } else {
-                setEnfriadorId(initialId);
+        const targetId = initialId || validatedId;
+        if (isCocina) {
+            if (cocinaId !== targetId) {
+                setCocinaId(targetId);
+            }
+        } else {
+            if (enfriadorId !== targetId) {
+                setEnfriadorId(targetId);
             }
         }
-    }, [initialId, type, setCocinaId, setEnfriadorId]);
+    }, [initialId, validatedId, isCocina, cocinaId, enfriadorId, setCocinaId, setEnfriadorId]);
 
-    React.useEffect(() => {
-        if (isCocina) {
-            setCocinaId(validatedId);
-        } else {
-            setEnfriadorId(validatedId);
-        }
-    }, [validatedId, isCocina]);
-
-    const handleSelectionChange = (newId: number) => {
+    const handleSelectionChange = useCallback((newId: number) => {
+        if (newId === validatedId) return; // Evitar actualizaciones innecesarias
+        
         const params = new URLSearchParams(searchParams);
         params.set('id', newId.toString());
-        router.replace(`${pathname}?${params.toString()}`);
-    };
+        // Usar push en lugar de replace para mejor manejo del historial
+        router.push(`${pathname}?${params.toString()}`, { 
+            scroll: false,
+        });
+    }, [pathname, searchParams, router, validatedId]);
 
     return (
         <section className="flex flex-col gap-20 min-h-[85vh] pt-[40px]">

@@ -10,6 +10,8 @@ import { CocinaProvider } from "@/context/CocinaContext";
 import { EnfriadorProvider } from "@/context/EnfriadorContext";
 import { LineaProvider } from "@/context/LineaContext";
 
+import { WebSocketProvider } from "@/context/WebSocketContext";
+
 import { I18nextProvider } from 'react-i18next';
 import { i18n } from '@/i18n';
 
@@ -58,21 +60,22 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
   }, [initialLanguage]);
 
   return (
-    <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
-        <I18nextProvider i18n={i18n}>
-          {/* Renderizar contenido solo después de que el componente esté montado */}
-          {mounted && (
-            <LineaProvider>
-              <CocinaProvider>
-                <EnfriadorProvider>
-                  {children}
-                </EnfriadorProvider>
-              </CocinaProvider>
-            </LineaProvider>
-          )}
-        </I18nextProvider>
-      </NextThemesProvider>
-    </HeroUIProvider>
+    <WebSocketProvider pollId="datos-home">
+      <HeroUIProvider navigate={router.push}>
+        <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
+          <I18nextProvider i18n={i18n}>
+            {mounted && (
+              <LineaProvider>
+                <CocinaProvider>
+                  <EnfriadorProvider>
+                    {children}
+                  </EnfriadorProvider>
+                </CocinaProvider>
+              </LineaProvider>
+            )}
+          </I18nextProvider>
+        </NextThemesProvider>
+      </HeroUIProvider>
+    </WebSocketProvider>
   );
 }

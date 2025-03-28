@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 
 interface SelectorProps {
@@ -11,51 +11,49 @@ interface SelectorProps {
     optionClasses?: string;
 }
 
-// Tipos específicos para las traducciones
 type CocinaKeys = `cocinas.cocina${1 | 2 | 3 | 4 | 5 | 6}`;
 type EnfriadorKeys = `enfriadores.enfriador${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8}`;
 type TranslationKey = 'select' | CocinaKeys | EnfriadorKeys;
 
-const Selector: React.FC<SelectorProps> = ({
+const Selector: React.FC<SelectorProps> = React.memo(({
     value,
     onChange,
     isCocina,
-    selectClasses,
-    optionClasses,
+    selectClasses = "",
+    optionClasses = "",
 }) => {
     const { t } = useTranslation('selectores');
     
+    // Memoizar los items para evitar recálculos innecesarios
     const items = useMemo(() => {
         const length = isCocina ? 6 : 8;
-        return Array.from({ length }, (_, i) => {
-            const id = i + 1;
-            const key = isCocina 
-                ? `cocinas.cocina${id}` 
-                : `enfriadores.enfriador${id}`;
-            return {
-                id,
-                name: t(key as TranslationKey)
-            };
-        });
+        return Array.from({ length }, (_, i) => ({
+            id: i + 1,
+            name: t(
+                `${isCocina ? 'cocinas.cocina' : 'enfriadores.enfriador'}${i + 1}` as TranslationKey,
+                { returnNull: true }
+            ) || `${isCocina ? 'Cocina' : 'Enfriador'} ${i + 1}`
+        }));
     }, [isCocina, t]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // Optimizar el handler del cambio
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
         const newValue = Number(e.target.value);
-        if (!isNaN(newValue)) {
-            onChange(newValue);
+        if (!isNaN(newValue) && newValue !== value) {
+            requestAnimationFrame(() => {
+                onChange(newValue);
+            });
         }
-    };
+    }, [onChange, value]);
 
-    return (
+    // Evitar re-renders innecesarios usando useMemo para el select
+    return useMemo(() => (
         <div className="flex min-h-[50px]">
             <select
                 value={value}
                 onChange={handleChange}
                 className={selectClasses}
             >
-                <option value={0} disabled>
-                    {t('select')}
-                </option>
                 {items.map((item) => (
                     <option 
                         key={item.id} 
@@ -67,7 +65,13 @@ const Selector: React.FC<SelectorProps> = ({
                 ))}
             </select>
         </div>
-    );
-};
+    ), [value, handleChange, selectClasses, optionClasses, items]);
+}, 
+(prevProps, nextProps) => {
+    return prevProps.value === nextProps.value && 
+        prevProps.isCocina === nextProps.isCocina;
+});
+
+Selector.displayName = 'Selector';
 
 export default Selector;

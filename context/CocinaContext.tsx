@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useWebSocketContext } from "@/context/WebSocketContext";
 
 interface Paso {
     id: number;
@@ -56,6 +57,8 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    const { data } = useWebSocketContext("cocinas-datos");
+
     const [cocinaData, setCocinaData] = useState<CocinaData>({
         num_cocina: 0,
         tempIng: "N/A",
@@ -74,21 +77,19 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     useEffect(() => {
-        async function fetchData() {
+        if (data) {
             try {
-                const response = await fetch("/data/cocinas.json");
-                const data = await response.json();
                 const selectedCocina = data.find(
                     (item: { num_cocina: number }) => item.num_cocina === cocinaId
                 );
 
                 if (selectedCocina) {
-                    const pasos = selectedCocina.pasos;
-                    const ultimoPaso = pasos ? pasos[pasos.length - 1] : null;
+                    const pasos = selectedCocina.pasos || [];
+                    const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
 
                     setCocinaData({
                         num_cocina: selectedCocina.num_cocina,
-                        tempIng: ultimoPaso?.temp_Ing ?? "N/A",  // Ahora se obtiene del último paso
+                        tempIng: ultimoPaso?.temp_Ing ?? "N/A",
                         tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
                         tempProd: ultimoPaso?.temp_Prod ?? "N/A",
                         nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
@@ -98,34 +99,20 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
                         cant_torres: selectedCocina.cant_torres ?? null,
                         tiempo: ultimoPaso?.tiempo ?? null,
                         tipo_Fin: selectedCocina.tipo_Fin ?? null,
-                        pasos: pasos ?? [],
+                        pasos: pasos,
                         ultimoPaso: ultimoPaso,
                         sectorIO: selectedCocina.sector_io ?? [],
                     });
                 } else {
-                    setCocinaData({
-                        num_cocina: 0,
-                        tempIng: "N/A",
-                        tempAgua: "N/A",
-                        tempProd: "N/A",
-                        nivAgua: "N/A",
-                        nom_receta: null,
-                        num_receta: null,
-                        estado: null,
-                        cant_torres: null,
-                        tiempo: null,
-                        tipo_Fin: null,
-                        pasos: [],
-                        ultimoPaso: null,
-                        sectorIO: [],
-                    });
+                    console.warn(`No se encontró una cocina con el ID ${cocinaId}`);
                 }
             } catch (error) {
-                console.error("Error fetching cocina data:", error);
+                console.error("Error procesando los datos del WebSocket:", error);
             }
+        } else {
+            console.warn("No se recibieron datos del WebSocket.");
         }
-        fetchData();
-    }, [cocinaId]);
+    }, [data, cocinaId]);
 
     return (
         <CocinaContext.Provider value={{ cocinaId, setCocinaId: safeSetCocinaId, cocinaData, setCocinaData }}>

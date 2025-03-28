@@ -1,6 +1,7 @@
 "use client"
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useWebSocketContext } from "@/context/WebSocketContext";
 
 interface Paso {
     id: number;
@@ -68,31 +69,15 @@ const LineaContext = createContext<LineaContextType | undefined>(undefined);
 
 export const LineaProvider = ({ children }: { children: React.ReactNode }) => {
     const [lineaSeleccionada, setLineaSeleccionada] = useState<number>(1);
+    const { data } = useWebSocketContext("lineas-datos");
+
     const [lineasData, setLineasData] = useState<LineaData | null>(null);
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const [responseCocinas, responseEnfriadores] = await Promise.all([
-                    fetch("/data/cocinas.json"),
-                    fetch("/data/enfriadores.json")
-                ]);
-
-                const [dataCocinas, dataEnfriadores] = await Promise.all([
-                    responseCocinas.json(),
-                    responseEnfriadores.json()
-                ]);
-
-                setLineasData({
-                    cocinas: dataCocinas,
-                    enfriadores: dataEnfriadores
-                });
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
+        if (data) {
+            setLineasData(data);
         }
-        fetchData();
-    }, []);
+    }, [data]);
 
     return (
         <LineaContext.Provider value={{ lineaSeleccionada, setLineaSeleccionada, lineasData, setLineasData }}>

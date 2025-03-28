@@ -60,6 +60,20 @@ Como usar?
 import { useTranslation } from 'react-i18next';
 Colocar dentro de la funcion "const { t } = useTranslation('NombreDelArchivo');" y en donde hay un texto colocaremos {t("objeto.atributo")}.
 
+
+## WebSocket
+```tsx
+// Usando el endpoint por defecto
+const { data } = useWebSocketContext();
+
+// Usando un endpoint específico
+const { data } = useWebSocketContext("mi-endpoint-especifico");
+
+// Usando endpoints dinámicos
+const endpoint = `${miVariable}-datos`;
+const { data } = useWebSocketContext(endpoint);
+```
+
 ---------
 ## Json Generator
 

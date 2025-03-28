@@ -3,8 +3,10 @@
 import EquipoPage from "@/components/equiposPage";
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useWebSocketContext } from "@/context/WebSocketContext";
 
 export default function Cocinas() {
+    const { data, isConnected } = useWebSocketContext("enfriadores-datos");
     const searchParams = useSearchParams();
     const [initialId, setInitialId] = useState<number>(1);
     

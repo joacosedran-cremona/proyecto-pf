@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useWebSocketContext } from "@/context/WebSocketContext";
 
 interface Paso {
     id: number;
@@ -52,6 +53,8 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
         localStorage.setItem('lastEnfriadorId', enfriadorId.toString());
     }, [enfriadorId]);
 
+    const { data } = useWebSocketContext("enfriadores-datos");
+
     const [enfriadorData, setEnfriadorData] = useState<EnfriadorData>({
         num_enfriador: 0,
         tempIng: "N/A",
@@ -70,64 +73,34 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
     });
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await fetch("/data/enfriadores.json");
-                const data = await response.json();
-    
-                // Buscar el enfriador correspondiente
-                const selectedEnfriador = data.find(
-                    (item: { num_enfriador: number }) => item.num_enfriador === enfriadorId
-                );
-    
-                if (selectedEnfriador) {
-                    // Asegurarse de que pasos no sea undefined
-                    const pasos = selectedEnfriador.pasos || [];
-                    const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
-    
-                    setEnfriadorData({
-                        num_enfriador: selectedEnfriador.num_enfriador,
-                        tempIng: ultimoPaso?.temp_Ing ?? "N/A",
-                        tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
-                        tempProd: ultimoPaso?.temp_Prod ?? "N/A",
-                        nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
-                        nom_receta: selectedEnfriador.nom_receta ?? null,
-                        num_receta: selectedEnfriador.num_receta ?? null,
-                        estado: selectedEnfriador.estado ?? null,
-                        cant_torres: selectedEnfriador.cant_torres ?? null,
-                        tiempo: ultimoPaso?.tiempo ?? null,
-                        tipo_Fin: selectedEnfriador.tipo_Fin ?? null,
-                        pasos: pasos,
-                        ultimoPaso: ultimoPaso,
-                        sectorIO: selectedEnfriador.sector_io ?? [],
-                    });
-                } else {
-                    // Si no se encuentra un enfriador, establecer valores predeterminados
-                    setEnfriadorData({
-                        num_enfriador: 0,
-                        tempIng: "N/A",
-                        tempAgua: "N/A",
-                        tempProd: "N/A",
-                        nivAgua: "N/A",
-                        nom_receta: null,
-                        num_receta: null,
-                        estado: null,
-                        cant_torres: null,
-                        tiempo: null,
-                        tipo_Fin: null,
-                        pasos: [],
-                        ultimoPaso: null,
-                        sectorIO: [],
-                    });
-                }
-            } catch (error) {
-                console.error("Error fetching enfriador data:", error);
+        if (data) {
+            const selectedEnfriador = data.find(
+                (item: { num_enfriador: number }) => item.num_enfriador === enfriadorId
+            );
+
+            if (selectedEnfriador) {
+                const pasos = selectedEnfriador.pasos || [];
+                const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
+
+                setEnfriadorData({
+                    num_enfriador: selectedEnfriador.num_enfriador,
+                    tempIng: ultimoPaso?.temp_Ing ?? "N/A",
+                    tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
+                    tempProd: ultimoPaso?.temp_Prod ?? "N/A",
+                    nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
+                    nom_receta: selectedEnfriador.nom_receta ?? null,
+                    num_receta: selectedEnfriador.num_receta ?? null,
+                    estado: selectedEnfriador.estado ?? null,
+                    cant_torres: selectedEnfriador.cant_torres ?? null,
+                    tiempo: ultimoPaso?.tiempo ?? null,
+                    tipo_Fin: selectedEnfriador.tipo_Fin ?? null,
+                    pasos: pasos,
+                    ultimoPaso: ultimoPaso,
+                    sectorIO: selectedEnfriador.sector_io ?? [],
+                });
             }
         }
-    
-        fetchData();
-    }, [enfriadorId]);
-    
+    }, [data, enfriadorId]);
 
     return (
         <EnfriadorContext.Provider value={{ enfriadorId, setEnfriadorId, enfriadorData, setEnfriadorData }}>
