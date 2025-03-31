@@ -1,132 +1,103 @@
+"use client";
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useWebSocketContext } from "@/context/WebSocketContext";
-
-interface Paso {
-    id: number;
-    temp_Ing: string | number | null;
-    temp_Agua: string | number | null;
-    temp_Prod: string | number | null;
-    niv_Agua: string | number | null;
-    tiempo: number | null;  // Cambiado a number | null
-}
-
-interface SectorIOCocina {
-    entrada_agua: boolean;
-    bomba_recirculacion: boolean;
-    filtro_succion_agua: boolean;
-    vapor_serpentina: boolean;
-    vapor_vivo: boolean;
-}
-
-export interface CocinaData {
-    num_cocina: number;
-    tempIng: string | number | null;
-    tempAgua: string | number | null;
-    tempProd: string | number | null;
-    nivAgua: string | number | null;
-    nom_receta: string | null;
-    num_receta: number | null;
-    estado: string | null;
-    cant_torres: number | null;
-    tiempo: number | null;
-    tipo_Fin: string | null;
-    pasos: Paso[];
-    ultimoPaso: Paso | null;
-    sectorIO: SectorIOCocina[];
-}
+import { CocinaData } from "@/utils/interface";
 
 interface CocinaContextType {
-    cocinaId: number;
-    setCocinaId: (id: number) => void;
-    cocinaData: CocinaData;
-    setCocinaData: (data: CocinaData) => void;
+  cocinaId: number;
+  setCocinaId: (id: number) => void;
+  cocinaData: CocinaData;
+  setCocinaData: React.Dispatch<React.SetStateAction<CocinaData>>;
 }
 
 const CocinaContext = createContext<CocinaContextType | undefined>(undefined);
 
+const defaultCocinaData: CocinaData = {
+  num_cocina: 0,
+  tempIng: "N/A",
+  tempAgua: "N/A",
+  tempProd: "N/A",
+  nivAgua: "N/A",
+  nom_receta: null,
+  num_receta: null,
+  estado: null,
+  cant_torres: null,
+  tiempo: null,
+  tipo_Fin: null,
+  pasos: [],
+  ultimoPaso: null,
+  sectorIO: []
+};
+
 export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
-    const [cocinaId, setCocinaId] = useState<number>(() => {
-        const saved = localStorage.getItem('lastCocinaId');
-        return saved ? parseInt(saved) : 1;
-    });
+  const [cocinaId, setCocinaId] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('lastCocinaId');
+      return saved ? parseInt(saved) : 1;
+    }
+    return 1;
+  });
 
-    const safeSetCocinaId = (id: number) => {
-        if (!isNaN(id) && id > 0) {
-            setCocinaId(id);
-            localStorage.setItem('lastCocinaId', id.toString());
-        }
-    };
+  const { data: wsData, isConnected } = useWebSocketContext("cocinas-datos");
+  const [cocinaData, setCocinaData] = useState<CocinaData>(defaultCocinaData);
 
-    const { data } = useWebSocketContext("cocinas-datos");
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lastCocinaId', cocinaId.toString());
+    }
+  }, [cocinaId]);
 
-    const [cocinaData, setCocinaData] = useState<CocinaData>({
-        num_cocina: 0,
-        tempIng: "N/A",
-        tempAgua: "N/A",
-        tempProd: "N/A",
-        nivAgua: "N/A",
-        nom_receta: null,
-        num_receta: null,
-        estado: null,
-        cant_torres: null,
-        tiempo: null,
-        tipo_Fin: null,
-        pasos: [],
-        ultimoPaso: null,
-        sectorIO: [],
-    });
+  useEffect(() => {
+    if (wsData && Array.isArray(wsData)) {
+      const selectedCocina = wsData.find(
+        (item: { num_cocina: number }) => item.num_cocina === cocinaId
+      );
 
-    useEffect(() => {
-        if (data) {
-            try {
-                const selectedCocina = data.find(
-                    (item: { num_cocina: number }) => item.num_cocina === cocinaId
-                );
+      if (selectedCocina) {
+        const pasos = selectedCocina.pasos || [];
+        const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
 
-                if (selectedCocina) {
-                    const pasos = selectedCocina.pasos || [];
-                    const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
+        setCocinaData({
+          num_cocina: selectedCocina.num_cocina,
+          tempIng: ultimoPaso?.temp_Ing ?? "N/A",
+          tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
+          tempProd: ultimoPaso?.temp_Prod ?? "N/A",
+          nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
+          nom_receta: selectedCocina.nom_receta ?? null,
+          num_receta: selectedCocina.num_receta ?? null,
+          estado: selectedCocina.estado ?? null,
+          cant_torres: selectedCocina.cant_torres ?? null,
+          tiempo: ultimoPaso?.tiempo ?? null,
+          tipo_Fin: selectedCocina.tipo_Fin ?? null,
+          pasos: pasos,
+          ultimoPaso: ultimoPaso,
+          sectorIO: selectedCocina.sector_io ?? []
+        });
+      }
+    }
+  }, [wsData, cocinaId]);
 
-                    setCocinaData({
-                        num_cocina: selectedCocina.num_cocina,
-                        tempIng: ultimoPaso?.temp_Ing ?? "N/A",
-                        tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
-                        tempProd: ultimoPaso?.temp_Prod ?? "N/A",
-                        nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
-                        nom_receta: selectedCocina.nom_receta ?? null,
-                        num_receta: selectedCocina.num_receta ?? null,
-                        estado: selectedCocina.estado ?? null,
-                        cant_torres: selectedCocina.cant_torres ?? null,
-                        tiempo: ultimoPaso?.tiempo ?? null,
-                        tipo_Fin: selectedCocina.tipo_Fin ?? null,
-                        pasos: pasos,
-                        ultimoPaso: ultimoPaso,
-                        sectorIO: selectedCocina.sector_io ?? [],
-                    });
-                } else {
-                    console.warn(`No se encontró una cocina con el ID ${cocinaId}`);
-                }
-            } catch (error) {
-                console.error("Error procesando los datos del WebSocket:", error);
-            }
-        } else {
-            console.warn("No se recibieron datos del WebSocket.");
-        }
-    }, [data, cocinaId]);
-
-    return (
-        <CocinaContext.Provider value={{ cocinaId, setCocinaId: safeSetCocinaId, cocinaData, setCocinaData }}>
-            {children}
-        </CocinaContext.Provider>
-    );
+  return (
+    <CocinaContext.Provider 
+      value={{ 
+        cocinaId, 
+        setCocinaId, 
+        cocinaData, 
+        setCocinaData 
+      }}
+    >
+      {children}
+    </CocinaContext.Provider>
+  );
 };
 
 export const useCocina = () => {
-    const context = useContext(CocinaContext);
-    if (!context) {
-        throw new Error("useCocina debe ser usado dentro de un CocinaProvider");
-    }
-    return context;
+  const context = useContext(CocinaContext);
+  if (!context) {
+    throw new Error("useCocina debe ser usado dentro de un CocinaProvider");
+  }
+  return context;
 };
 
 export { CocinaContext };

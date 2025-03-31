@@ -4,7 +4,7 @@ import { useWebSocketContext } from "@/context/WebSocketContext";
 import { useEffect } from "react";
 
 export default function TestPage() {
-  const { data, isConnected } = useWebSocketContext("datos-enfriadores");
+  const { data, isConnected } = useWebSocketContext("datos-home");
 
   useEffect(() => {
     if (data) {

@@ -1,17 +1,20 @@
+"use client";
+
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState, useMemo } from 'react';
 import { Image } from '@heroui/image';
 import Link from 'next/link';
-import {Tooltip} from "@heroui/tooltip";
+import { Tooltip } from "@heroui/tooltip";
+import { useWebSocketContext } from "@/context/WebSocketContext";
 
 interface Equipo {
-  id: string;
-  nombre: string;
+  tipo: 'COCINA' | 'ENFRIADOR';
+  id: number;
   estado: string;
   tempAguaActual: number;
   tempProductoActual: number;
   receta: string;
-  tiempoTranscurrido: string;
+  tiempoTranscurrido: number;
 }
 
 interface Linea {
@@ -26,7 +29,7 @@ interface EquiposData {
 interface Section {
   id: number;
   name: string;
-  equipmentId: string;
+  key: string;
   path: string;
   style: React.CSSProperties;
 }
@@ -66,22 +69,22 @@ const leftPositions = {
 
 const sectionConfig = {
   cocinas: [
-    { id: 1, key: 'cocina1', line: 1, position: 'C1', equipmentId: 'C1L1' },
-    { id: 2, key: 'cocina2', line: 1, position: 'C2', equipmentId: 'C2L1' },
-    { id: 3, key: 'cocina3', line: 1, position: 'C3', equipmentId: 'C3L1' },
-    { id: 4, key: 'cocina4', line: 2, position: 'C1', equipmentId: 'C1L2' },
-    { id: 5, key: 'cocina5', line: 2, position: 'C2', equipmentId: 'C2L2' },
-    { id: 6, key: 'cocina6', line: 2, position: 'C3', equipmentId: 'C3L2' },
+    { id: 1, key: 'cocina1', line: 1, position: 'C1' },
+    { id: 2, key: 'cocina2', line: 1, position: 'C2' },
+    { id: 3, key: 'cocina3', line: 1, position: 'C3' },
+    { id: 4, key: 'cocina4', line: 2, position: 'C1' },
+    { id: 5, key: 'cocina5', line: 2, position: 'C2' },
+    { id: 6, key: 'cocina6', line: 2, position: 'C3' },
   ],
   enfriadores: [
-    { id: 1, key: 'enfriador1', line: 1, position: 'E1', equipmentId: 'E1L1' },
-    { id: 2, key: 'enfriador2', line: 1, position: 'E2', equipmentId: 'E2L1' },
-    { id: 3, key: 'enfriador3', line: 1, position: 'E3', equipmentId: 'E3L1' },
-    { id: 4, key: 'enfriador4', line: 1, position: 'E4', equipmentId: 'E4L1' },
-    { id: 5, key: 'enfriador5', line: 2, position: 'E1', equipmentId: 'E1L2' },
-    { id: 6, key: 'enfriador6', line: 2, position: 'E2', equipmentId: 'E2L2' },
-    { id: 7, key: 'enfriador7', line: 2, position: 'E3', equipmentId: 'E3L2' },
-    { id: 8, key: 'enfriador8', line: 2, position: 'E4', equipmentId: 'E4L2' },
+    { id: 1, key: 'enfriador1', line: 1, position: 'E1' },
+    { id: 2, key: 'enfriador2', line: 1, position: 'E2' },
+    { id: 3, key: 'enfriador3', line: 1, position: 'E3' },
+    { id: 4, key: 'enfriador4', line: 1, position: 'E4' },
+    { id: 5, key: 'enfriador5', line: 2, position: 'E1' },
+    { id: 6, key: 'enfriador6', line: 2, position: 'E2' },
+    { id: 7, key: 'enfriador7', line: 2, position: 'E3' },
+    { id: 8, key: 'enfriador8', line: 2, position: 'E4' },
   ]
 };
 
@@ -98,55 +101,98 @@ function getEstadoColor(estado: string): string {
 export function ImagenLayout() {
   const { t } = useTranslation('layout');
   const [equiposData, setEquiposData] = useState<EquiposData | null>(null);
+  const { data: wsData, isConnected } = useWebSocketContext("datos-home");
 
-  const sections: Section[] = useMemo(() => [
-    ...sectionConfig.cocinas.map(({ id, key, position, line, equipmentId }) => ({
-      id,
-      name: t(`equipos.${equipmentId}`, equipmentId),
-      equipmentId,
-      path: "/cocinas",
-      style: { 
-        top: line === 1 ? topL1 : topL2,
-        left: leftPositions[position as keyof typeof leftPositions],
-        width,
-        height: h
-      }
-    })),
-    ...sectionConfig.enfriadores.map(({ id, key, position, line, equipmentId }) => ({
-      id: id + 6,
-      name: t(`equipos.${equipmentId}`, equipmentId),
-      equipmentId,
-      path: "/enfriadores",
-      style: { 
-        top: line === 1 ? topL1 : topL2,
-        left: leftPositions[position as keyof typeof leftPositions],
-        width,
-        height: h
-      }
-    }))
-  ], [t]);
+  const sections: Section[] = useMemo(() => {
+    const generateSections = (config: any[], path: string, type: 'cocinas' | 'enfriadores') => {
+      return config.map(({ id, key, position, line }) => {
+        const translatedName = t(`equipos.${key}`, { defaultValue: key }); // Use defaultValue to ensure a fallback
+        return {
+          id: type === 'enfriadores' ? id + 6 : id,
+          name: translatedName,
+          key: key,
+          path,
+          style: {
+            top: line === 1 ? topL1 : topL2,
+            left: leftPositions[position as keyof typeof leftPositions],
+            width,
+            height: h
+          }
+        };
+      });
+    };
+
+    return [
+      ...generateSections(sectionConfig.cocinas, "/cocinas", 'cocinas'),
+      ...generateSections(sectionConfig.enfriadores, "/enfriadores", 'enfriadores')
+    ];
+  }, [t]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/data/home.json');
-        const data: EquiposData = await response.json();
-        setEquiposData(data);
-      } catch (error) {
-        console.error("Error al cargar el archivo JSON:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    console.log('Estado de conexión WebSocket:', isConnected);
+  }, [isConnected]);
 
-  const getEquipoData = (equipmentId: string): Equipo | undefined => {
-    if (!equiposData) return undefined;
-    for (const linea of equiposData.lineas) {
-      const equipo = linea.equipos.find(e => e.id === equipmentId);
-      if (equipo) return equipo;
+  useEffect(() => {
+    if (wsData) {
+      console.log('Nuevo mensaje WebSocket recibido:', {
+        timestamp: new Date().toISOString(),
+        data: wsData
+      });
+
+      if ('lineas' in wsData && Array.isArray(wsData.lineas)) {
+        console.log('Estructura de líneas:', wsData.lineas.map((l: Linea) => ({
+          lineaId: l.id,
+          cantidadEquipos: l.equipos?.length || 0
+        })));
+
+        setEquiposData(wsData as EquiposData);
+      } else {
+        console.error('Formato de datos inválido:', wsData);
+      }
     }
-    return undefined;
+  }, [wsData]);
+
+    const getEquipoData = (section: Section): Equipo | undefined => {
+    if (!equiposData) {
+      console.log('No hay datos de equipos disponibles');
+      return undefined;
+    }
+
+    const lineaNum = sectionConfig[section.path.slice(1) === 'cocinas' ? 'cocinas' : 'enfriadores'].find(conf => conf.key === section.key)?.line;
+
+    if (!lineaNum) {
+      console.log(`No se encontró la línea para la sección ${section.key}`);
+      return undefined;
+    }
+
+    const linea = equiposData.lineas.find((l: Linea) => l.id === lineaNum);
+    if (!linea) {
+      console.log(`No se encontró la línea ${lineaNum}`);
+      return undefined;
+    }
+
+    const tipo = section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR';
+
+    const sectionConfigItem = sectionConfig[tipo === 'COCINA' ? 'cocinas' : 'enfriadores'].find(conf => conf.key === section.key);
+
+    if (!sectionConfigItem) {
+        console.log(`No se encontró la configuración para la sección ${section.key}`);
+        return undefined;
+    }
+
+    const equipoEncontrado = linea.equipos.find(e => e.tipo === tipo && e.id === sectionConfigItem.id);
+
+    console.log(`Resultado búsqueda ${section.key}:`, {
+      encontrado: !!equipoEncontrado,
+      datos: equipoEncontrado,
+      linea: lineaNum,
+      equiposEnLinea: linea.equipos.map(e => ({ tipo: e.tipo, id: e.id }))
+    });
+
+    return equipoEncontrado;
   };
+
+  console.log('Sections generadas:', sections);
 
   return (
     <div className="w-auto h-full relative flex justify-center items-center">
@@ -155,18 +201,28 @@ export function ImagenLayout() {
         src="/layout.png"
         alt="Imagen de prueba"
       />
+      {!isConnected && (
+        <div className="absolute top-0 left-0 bg-red-500 text-white p-2">
+          WebSocket desconectado
+        </div>
+      )}
       {sections.map((section) => {
-        const equipo = getEquipoData(section.equipmentId);
-        const equipoNum = section.equipmentId.match(/[CE](\d+)L\d+/)?.[1] || '1';
+        const equipo = getEquipoData(section);
+        console.log(`Renderizando sección ${section.key}:`, {
+          section,
+          equipoEncontrado: equipo
+        });
+        
+        const equipoNum = section.id;
         const href = `${section.path}?id=${equipoNum}`;
         const recuadroStyle: React.CSSProperties = {
           ...section.style,
           backgroundColor: equipo ? getEstadoColor(equipo.estado) : "black",
         };
-        const match = section.equipmentId.match(/^([CE])(\d+)L(\d+)$/i);
-        const tipoEquipo = match?.[1] === 'C' ? 'cocina' : 'enfriador';
-        const numeroEquipo = match?.[2] || '1';
-        const lineaEquipo = match?.[3] || '1';
+        const tipoEquipo = section.path.slice(1) === 'cocinas' ? 'cocina' : 'enfriador';
+        const sectionConfigItem = sectionConfig[tipoEquipo === 'cocina' ? 'cocinas' : 'enfriadores'].find(conf => conf.key === section.key);
+        const numeroEquipo = sectionConfigItem?.id || '1';
+        const lineaEquipo = sectionConfigItem?.line || '1';
         
         return (
           <Link key={section.id} href={href} className="z-999">
@@ -181,7 +237,7 @@ export function ImagenLayout() {
                 className="absolute shadow border z-999" 
                 style={recuadroStyle}
                 onClick={() => {
-                  const idNumber = parseInt(equipoNum);
+                  const idNumber = parseInt(String(numeroEquipo));
                   if (tipoEquipo === 'cocina') {
                     localStorage.setItem('lastCocinaId', idNumber.toString());
                   } else {

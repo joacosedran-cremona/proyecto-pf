@@ -23,6 +23,7 @@ export interface SectorIOCocina extends SectorIOBase {
 }
 
 export interface CocinaData {
+    num_cocina: number;
     tempIng: string | number | null;
     tempAgua: string | number | null;
     tempProd: string | number | null;
@@ -39,6 +40,7 @@ export interface CocinaData {
 }
 
 export interface EnfriadorData {
+    num_enfriador: number;
     tempIng: string | number | null;
     tempAgua: string | number | null;
     tempProd: string | number | null;
