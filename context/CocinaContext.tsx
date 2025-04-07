@@ -39,7 +39,7 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
     return 1;
   });
 
-  const { data: wsData, isConnected } = useWebSocketContext("cocinas-datos");
+  const { data: wsData, isConnected } = useWebSocketContext();
   const [cocinaData, setCocinaData] = useState<CocinaData>(defaultCocinaData);
 
   useEffect(() => {

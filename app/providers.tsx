@@ -60,7 +60,7 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
   }, [initialLanguage]);
 
   return (
-    <WebSocketProvider pollId="datos-home">
+    <WebSocketProvider>
       <HeroUIProvider navigate={router.push}>
         <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
           <I18nextProvider i18n={i18n}>

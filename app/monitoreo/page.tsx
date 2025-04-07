@@ -5,8 +5,8 @@ import Grafico from "@/components/graficos/graficoMonitoreo";
 import Selector from "@/components/selectores/selectorLineas";
 
 const lineas = {
-    1: { cocinas: [1, 2, 3], enfriadores: [1, 2, 3, 4] },
-    2: { cocinas: [4, 5, 6], enfriadores: [5, 6, 7, 8] }
+    1: { cocinas: [1, 2, 3], enfriadores: [7, 8, 9, 10] },
+    2: { cocinas: [4, 5, 6], enfriadores: [11, 12, 13, 14] }
 } as const;
 
 const Monitoreo = () => {

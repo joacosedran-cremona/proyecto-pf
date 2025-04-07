@@ -10,8 +10,6 @@ import EstadoEquipo from "./monitoreoIndividual/estadoEquipo";
 import SectorIO from "./monitoreoIndividual/sectorIO";
 import { getColorClass } from "@/utils/logicaColores";
 import { displayData } from "@/utils/displayData";
-import { CocinaData } from "@/context/CocinaContext";
-import { EnfriadorData } from "@/context/EnfriadorContext";
 import { useTranslation } from 'react-i18next';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
@@ -28,7 +26,7 @@ export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfr
     const borderColor = isCocina ? "border-orange" : "border-blue";
     const bgColor = isCocina ? "bg-oranget" : "bg-bluet";
     const idParam = searchParams.get('id');
-    const maxId = isCocina ? 6 : 8;
+    const maxId = isCocina ? 6 : 14;
     const currentId = idParam ? parseInt(idParam) : (isCocina ? cocinaId : enfriadorId);
     const validatedId = Math.max(1, Math.min(currentId, maxId));
 
@@ -87,11 +85,10 @@ export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfr
     }, [initialId, validatedId, isCocina, cocinaId, enfriadorId, setCocinaId, setEnfriadorId]);
 
     const handleSelectionChange = useCallback((newId: number) => {
-        if (newId === validatedId) return; // Evitar actualizaciones innecesarias
+        if (newId === validatedId) return;
         
         const params = new URLSearchParams(searchParams);
         params.set('id', newId.toString());
-        // Usar push en lugar de replace para mejor manejo del historial
         router.push(`${pathname}?${params.toString()}`, { 
             scroll: false,
         });
@@ -105,7 +102,7 @@ export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfr
                 <Selector
                     value={validatedId}
                     onChange={handleSelectionChange}
-                    isCocina={isCocina} // Nueva prop
+                    isCocina={isCocina}
                     selectClasses={`w-full bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
                     optionClasses="p-2 bg-black font-bold"
                 />

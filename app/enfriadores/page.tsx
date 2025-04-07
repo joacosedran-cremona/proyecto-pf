@@ -15,13 +15,13 @@ export default function EnfriadoresPage() {
         if (idParam) {
             const id = parseInt(idParam);
             if (!isNaN(id)) {
-                const validId = Math.min(8, Math.max(1, id));
+                const validId = Math.min(14, Math.max(7, id));
                 setInitialId(validId);
                 localStorage.setItem('lastEnfriadorId', validId.toString());
             }
         } else {
             const savedId = localStorage.getItem('lastEnfriadorId');
-            const id = savedId ? parseInt(savedId) : 1;
+            const id = savedId ? parseInt(savedId) : 7;
             setInitialId(id);
         }
     }, [searchParams]);

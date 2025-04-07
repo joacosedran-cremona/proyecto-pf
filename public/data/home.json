@@ -1,140 +1,137 @@
 {
-    "lineas":
-    [
+    "lineas": [
         {
-            "id": 1,
             "equipos": [
-            {
-                "id": "C1L1",
-                "nombre": "C1L1",
-                "estado": "INACTIVO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "Pate",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "C2L1",
-                "nombre": "C2L1",
-                "estado": "COCINANDO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "C3L1",
-                "nombre": "C3L1",
-                "estado": "PAUSA",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E1L1",
-                "nombre": "E1L1",
-                "estado": "FALLA",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "Pate",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E2L1",
-                "nombre": "E2L1",
-                "estado": "ENFRIANDO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E3L1",
-                "nombre": "E3L1",
-                "estado": "INACTIVO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E4L1",
-                "nombre": "E4L1",
-                "estado": "FALLA",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            }
+                {
+                    "tipo": "COCINA",
+                    "id": 1,
+                    "estado": "FINALIZADO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Jamon",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "COCINA",
+                    "id": 2,
+                    "estado": "INACTIVO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Pate",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "COCINA",
+                    "id": 3,
+                    "estado": "FINALIZADO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Paleta",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 7,
+                    "estado": "FALLA",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Jamon",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 8,
+                    "estado": "ENFRIANDO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Pate",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 9,
+                    "estado": "ENFRIANDO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Pate",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 10,
+                    "estado": "INACTIVO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Paleta",
+                    "tiempoTranscurrido": 1
+                }
             ]
         },
         {
-            "id": 2,
             "equipos": [
-            {
-                "id": "C1L2",
-                "nombre": "C1L2",
-                "estado": "FINALIZADO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "C2L2",
-                "nombre": "C2L2",
-                "estado": "FALLA",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "C3L2",
-                "nombre": "C3L2",
-                "estado": "INACTIVO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E1L2",
-                "nombre": "E1L2",
-                "estado": "ENFRIANDO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E2L2",
-                "nombre": "E2L2",
-                "estado": "ENFRIANDO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E3L2",
-                "nombre": "E3L2",
-                "estado": "INACTIVO",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            },
-            {
-                "id": "E4L2",
-                "nombre": "E4L2",
-                "estado": "PAUSA",
-                "tempAguaActual": 0,
-                "tempProductoActual": 0,
-                "receta": "STRING",
-                "tiempoTranscurrido": "HH:MM"
-            }
+                {
+                    "tipo": "COCINA",
+                    "id": 4,
+                    "estado": "COCINANDO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Paleta",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "COCINA",
+                    "id": 5,
+                    "estado": "FINALIZADO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Pate",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "COCINA",
+                    "id": 6,
+                    "estado": "COCINANDO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Pate",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 11,
+                    "estado": "ENFRIANDO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Jamon",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 12,
+                    "estado": "INACTIVO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Pate",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 13,
+                    "estado": "ENFRIANDO",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Jamon",
+                    "tiempoTranscurrido": 1
+                },
+                {
+                    "tipo": "ENFRIADOR",
+                    "id": 14,
+                    "estado": "FALLA",
+                    "tempAguaActual": 1,
+                    "tempProductoActual": 1,
+                    "receta": "Paleta",
+                    "tiempoTranscurrido": 1
+                }
             ]
         }
     ]

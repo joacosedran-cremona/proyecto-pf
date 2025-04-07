@@ -44,7 +44,7 @@ interface LayoutTranslations {
     tiempo: string;
   };
   equipos: {
-    [key: string]: string;  // Para mantener el formato C1L1, C2L1, etc.
+    [key: string]: string;
   };
   tooltip: {
     cocina: string;
@@ -77,14 +77,14 @@ const sectionConfig = {
     { id: 6, key: 'cocina6', line: 2, position: 'C3' },
   ],
   enfriadores: [
-    { id: 1, key: 'enfriador1', line: 1, position: 'E1' },
-    { id: 2, key: 'enfriador2', line: 1, position: 'E2' },
-    { id: 3, key: 'enfriador3', line: 1, position: 'E3' },
-    { id: 4, key: 'enfriador4', line: 1, position: 'E4' },
-    { id: 5, key: 'enfriador5', line: 2, position: 'E1' },
-    { id: 6, key: 'enfriador6', line: 2, position: 'E2' },
-    { id: 7, key: 'enfriador7', line: 2, position: 'E3' },
-    { id: 8, key: 'enfriador8', line: 2, position: 'E4' },
+    { id: 7,  key: 'enfriador1', line: 1, position: 'E1' },
+    { id: 8,  key: 'enfriador2', line: 1, position: 'E2' },
+    { id: 9,  key: 'enfriador3', line: 1, position: 'E3' },
+    { id: 10, key: 'enfriador4', line: 1, position: 'E4' },
+    { id: 11, key: 'enfriador5', line: 2, position: 'E1' },
+    { id: 12, key: 'enfriador6', line: 2, position: 'E2' },
+    { id: 13, key: 'enfriador7', line: 2, position: 'E3' },
+    { id: 14, key: 'enfriador8', line: 2, position: 'E4' },
   ]
 };
 
@@ -101,14 +101,14 @@ function getEstadoColor(estado: string): string {
 export function ImagenLayout() {
   const { t } = useTranslation('layout');
   const [equiposData, setEquiposData] = useState<EquiposData | null>(null);
-  const { data: wsData, isConnected } = useWebSocketContext("datos-home");
+  const { data: wsData, isConnected } = useWebSocketContext();
 
   const sections: Section[] = useMemo(() => {
     const generateSections = (config: any[], path: string, type: 'cocinas' | 'enfriadores') => {
       return config.map(({ id, key, position, line }) => {
         const translatedName = t(`equipos.${key}`, { defaultValue: key }); // Use defaultValue to ensure a fallback
         return {
-          id: type === 'enfriadores' ? id + 6 : id,
+          id: type === 'enfriadores' ? id : id,
           name: translatedName,
           key: key,
           path,
@@ -133,63 +133,62 @@ export function ImagenLayout() {
   }, [isConnected]);
 
   useEffect(() => {
-    if (wsData) {
+    if (wsData && typeof wsData === 'object') {
       console.log('Nuevo mensaje WebSocket recibido:', {
         timestamp: new Date().toISOString(),
         data: wsData
       });
 
-      if ('lineas' in wsData && Array.isArray(wsData.lineas)) {
-        console.log('Estructura de líneas:', wsData.lineas.map((l: Linea) => ({
-          lineaId: l.id,
-          cantidadEquipos: l.equipos?.length || 0
-        })));
+      // Verifica si los datos tienen la estructura esperada
+      if (wsData.lineas && Array.isArray(wsData.lineas)) {
+        const datosFormateados = {
+          lineas: wsData.lineas.map((linea: any) => ({
+            id: linea.id || 0,
+            equipos: Array.isArray(linea.equipos) ? linea.equipos.map((equipo: any) => ({
+              tipo: equipo.tipo,
+              id: equipo.id,
+              estado: equipo.estado || 'INACTIVO',
+              tempAguaActual: equipo.tempAguaActual || 0,
+              tempProductoActual: equipo.tempProductoActual || 0,
+              receta: equipo.receta || '-',
+              tiempoTranscurrido: equipo.tiempoTranscurrido || 0
+            })) : []
+          }))
+        };
 
-        setEquiposData(wsData as EquiposData);
+        setEquiposData(datosFormateados);
+        console.log('Datos formateados:', datosFormateados);
       } else {
         console.error('Formato de datos inválido:', wsData);
       }
     }
   }, [wsData]);
 
-    const getEquipoData = (section: Section): Equipo | undefined => {
+  const getEquipoData = (section: Section): Equipo | undefined => {
     if (!equiposData) {
-      console.log('No hay datos de equipos disponibles');
-      return undefined;
+      return {
+        tipo: section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR',
+        id: section.id,
+        estado: 'INACTIVO',
+        tempAguaActual: 0,
+        tempProductoActual: 0,
+        receta: '-',
+        tiempoTranscurrido: 0
+      };
     }
 
-    const lineaNum = sectionConfig[section.path.slice(1) === 'cocinas' ? 'cocinas' : 'enfriadores'].find(conf => conf.key === section.key)?.line;
+    for (const linea of equiposData.lineas) {
+      const equipo = linea.equipos.find(e => 
+        e.tipo === (section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR') && 
+        e.id === section.id
+      );
 
-    if (!lineaNum) {
-      console.log(`No se encontró la línea para la sección ${section.key}`);
-      return undefined;
+      if (equipo) {
+        return equipo;
+      }
     }
 
-    const linea = equiposData.lineas.find((l: Linea) => l.id === lineaNum);
-    if (!linea) {
-      console.log(`No se encontró la línea ${lineaNum}`);
-      return undefined;
-    }
-
-    const tipo = section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR';
-
-    const sectionConfigItem = sectionConfig[tipo === 'COCINA' ? 'cocinas' : 'enfriadores'].find(conf => conf.key === section.key);
-
-    if (!sectionConfigItem) {
-        console.log(`No se encontró la configuración para la sección ${section.key}`);
-        return undefined;
-    }
-
-    const equipoEncontrado = linea.equipos.find(e => e.tipo === tipo && e.id === sectionConfigItem.id);
-
-    console.log(`Resultado búsqueda ${section.key}:`, {
-      encontrado: !!equipoEncontrado,
-      datos: equipoEncontrado,
-      linea: lineaNum,
-      equiposEnLinea: linea.equipos.map(e => ({ tipo: e.tipo, id: e.id }))
-    });
-
-    return equipoEncontrado;
+    return undefined;
   };
 
   console.log('Sections generadas:', sections);
@@ -221,7 +220,12 @@ export function ImagenLayout() {
         };
         const tipoEquipo = section.path.slice(1) === 'cocinas' ? 'cocina' : 'enfriador';
         const sectionConfigItem = sectionConfig[tipoEquipo === 'cocina' ? 'cocinas' : 'enfriadores'].find(conf => conf.key === section.key);
-        const numeroEquipo = sectionConfigItem?.id || '1';
+        
+        let numeroMostrado = sectionConfigItem?.id || '1';
+        if (tipoEquipo === 'enfriador') {
+          numeroMostrado = (sectionConfigItem?.id || 0) - 6;
+        }
+
         const lineaEquipo = sectionConfigItem?.line || '1';
         
         return (
@@ -229,7 +233,7 @@ export function ImagenLayout() {
             <Tooltip
               placement="top"
               content={t(`tooltip.${tipoEquipo}`, {
-                number: numeroEquipo,
+                number: numeroMostrado,
                 line: lineaEquipo
               })}
             >
@@ -237,11 +241,10 @@ export function ImagenLayout() {
                 className="absolute shadow border z-999" 
                 style={recuadroStyle}
                 onClick={() => {
-                  const idNumber = parseInt(String(numeroEquipo));
                   if (tipoEquipo === 'cocina') {
-                    localStorage.setItem('lastCocinaId', idNumber.toString());
+                    localStorage.setItem('lastCocinaId', String(section.id));
                   } else {
-                    localStorage.setItem('lastEnfriadorId', idNumber.toString());
+                    localStorage.setItem('lastEnfriadorId', String(section.id));
                   }
                 }}
               >
@@ -251,8 +254,8 @@ export function ImagenLayout() {
                       <p className="text-white">{section.name}</p>
                       <p className="text-white">{equipo.estado}</p>
                     </div>
-                    <p className="text-white">{t('datos.tempAgua')}: {equipo.tempAguaActual}</p>
-                    <p className="text-white">{t('datos.tempProd')}: {equipo.tempProductoActual}</p>
+                    <p className="text-white">{t('datos.tempAgua')}: {equipo.tempAguaActual || '-'}</p>
+                    <p className="text-white">{t('datos.tempProd')}: {equipo.tempProductoActual || '-'}</p>
                     <p className="text-white">{t('datos.receta')}: {equipo.receta}</p>
                     <p className="text-white">{t('datos.tiempo')}: {equipo.tiempoTranscurrido}</p>
                   </div>

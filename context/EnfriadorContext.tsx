@@ -39,7 +39,7 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
     return 1;
   });
 
-  const { data: wsData, isConnected } = useWebSocketContext("enfriadores-datos");
+  const { data: wsData, isConnected } = useWebSocketContext();
   const [enfriadorData, setEnfriadorData] = useState<EnfriadorData>(defaultEnfriadorData);
 
   useEffect(() => {

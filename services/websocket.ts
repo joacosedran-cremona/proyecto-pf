@@ -30,8 +30,10 @@ export default function useWebSocket(pollId: string) {
             socket.onmessage = (event) => {
                 try {
                     const message = JSON.parse(event.data);
+                    console.log('WebSocket mensaje recibido:', message);
                     setData(message);
                 } catch (err) {
+                    console.error('Error parsing WebSocket message:', err);
                     setError('Error al procesar el mensaje recibido');
                 }
             };

@@ -7,31 +7,25 @@ interface WebSocketContextType {
   data: any;
   isConnected: boolean;
   error: string | null;
-  pollId: string;
 }
 
 const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
 
-export const WebSocketProvider = ({ children, pollId = "datos-home" }: { children: React.ReactNode, pollId?: string }) => {
-  const { data, isConnected, error } = useWebSocket(pollId);
+export const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
+  const { data, isConnected, error } = useWebSocket("datos");
 
   return (
-    <WebSocketContext.Provider value={{ data, isConnected, error, pollId }}>
+    <WebSocketContext.Provider value={{ data, isConnected, error }}>
       {children}
     </WebSocketContext.Provider>
   );
 };
 
-export function useWebSocketContext(customPollId?: string) {
+export function useWebSocketContext() {
   const context = useContext(WebSocketContext);
   
   if (!context) {
     throw new Error('useWebSocketContext debe ser usado dentro de un WebSocketProvider');
-  }
-
-  if (customPollId) {
-    const { data, isConnected, error } = useWebSocket(customPollId);
-    return { data, isConnected, error, pollId: customPollId };
   }
 
   return context;
