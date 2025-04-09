@@ -16,34 +16,31 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
     const chartRef = useRef<HTMLCanvasElement>(null);
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [equipo, setEquipo] = useState<any>(null); // Guarda el equipo una vez encontrado
 
     const { lineaSeleccionada, lineasData } = useLinea();
 
     useEffect(() => {
-        if (!lineasData) {
-            setLoading(true);
-            return;
+        console.log('lineasData:', lineasData); // 🔍 VERIFICA QUÉ TRAE
+        setLoading(true);
+        if (!lineasData) return;
+
+        let encontrado;
+
+        if (contextType === 'cocinas' && Array.isArray(lineasData?.cocinas)) {
+            encontrado = lineasData.cocinas.find(e => e.num_cocina === id);
+        } else if (contextType === 'enfriadores' && Array.isArray(lineasData?.enfriadores)) {
+            encontrado = lineasData.enfriadores.find(e => e.num_enfriador === id);
         }
 
-        const equipo = contextType === 'cocinas'
-            ? lineasData.cocinas.find(e => e.num_cocina === id)
-            : lineasData.enfriadores.find(e => e.num_enfriador === id);
+        setEquipo(encontrado);
 
-        if (!equipo || !equipo.pasos || !chartRef.current) {
-            setLoading(true);
-            return;
-        }
+        if (!encontrado || !encontrado.pasos || !chartRef.current) return;
 
         const ctx = chartRef.current.getContext('2d');
-        if (!ctx) {
-            setLoading(true);
-            return;
-        }
+        if (!ctx) return;
 
-        // Destruir la instancia previa, si existe
-        if (chartInstanceRef.current) {
-            chartInstanceRef.current.destroy();
-        }
+        if (chartInstanceRef.current) chartInstanceRef.current.destroy();
 
         const image = new Image();
         image.src = '/creminox.png';
@@ -68,9 +65,9 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
             }
         };
 
-        const chartData = transformData(equipo.pasos);
+        const chartData = transformData(encontrado.pasos);
 
-        const nombreEquipo = contextType === 'cocinas' 
+        const nombreEquipo = contextType === 'cocinas'
             ? `${t('equipo.cocina')} ${id}`
             : `${t('equipo.enfriador')} ${id}`;
 
@@ -198,29 +195,23 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         return () => chartInstanceRef.current?.destroy();
     }, [lineasData, lineaSeleccionada, contextType, id, t]);
 
-    // Si el equipo está inactivo se muestra un mensaje
-    const equipo = contextType === 'cocinas'
-        ? lineasData?.cocinas.find(e => e.num_cocina === id)
-        : lineasData?.enfriadores.find(e => e.num_enfriador === id);
-
-    // Primero, si no existe el equipo, retornamos un mensaje o un estado de carga.
-    if (!equipo) {
+    // Validaciones seguras
+    if (!lineasData || !equipo) {
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
-                <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+                <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{t('equipoNoEncontrado')}</p>
             </div>
         );
     }
-    
+
     if (equipo.estado === 'INACTIVO') {
         const nombreEquipo = contextType === 'cocinas' 
             ? `${t('equipo.cocina')} ${id}`
             : `${t('equipo.enfriador')} ${id}`;
-            
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
-                <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+                <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{nombreEquipo} - {t('inactividad.titulo')}</p>
                 <p className="w-full text-center text-xl text-white">{t('inactividad.mensaje')}</p>
             </div>
@@ -231,17 +222,15 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         const nombreEquipo = contextType === 'cocinas' 
             ? `${t('equipo.cocina')} ${id}`
             : `${t('equipo.enfriador')} ${id}`;
-
         return (
             <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
-                <AiOutlineExclamationCircle className="w-auto h-1/4"/>
+                <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{nombreEquipo} - {t('error.titulo')}</p>
                 <p className="w-full text-center text-3xl text-white">{t('error.mensaje')}</p>
             </div>
         );
     }
 
-    // Función para reiniciar el zoom
     const resetZoom = () => {
         if (chartInstanceRef.current) {
             chartInstanceRef.current.resetZoom();
