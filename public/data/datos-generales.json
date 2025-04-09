@@ -19,7 +19,7 @@
                 "num_receta": 1,
                 "nom_receta": "Jamon",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -55,7 +55,7 @@
                 "num_receta": 1,
                 "nom_receta": "Pate",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -91,7 +91,7 @@
                 "num_receta": 1,
                 "nom_receta": "Paleta",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -127,7 +127,7 @@
                 "num_receta": 1,
                 "nom_receta": "Paleta",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -304,7 +304,7 @@
                 "num_receta": 1,
                 "nom_receta": "Pate",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -340,7 +340,7 @@
                 "num_receta": 1,
                 "nom_receta": "Pate",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -519,7 +519,7 @@
                 "num_receta": 1,
                 "nom_receta": "Jamon",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -555,7 +555,7 @@
                 "num_receta": 1,
                 "nom_receta": "Pate",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -732,7 +732,7 @@
                 "num_receta": 1,
                 "nom_receta": "Pate",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -909,7 +909,7 @@
                 "num_receta": 1,
                 "nom_receta": "Paleta",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -945,7 +945,7 @@
                 "num_receta": 1,
                 "nom_receta": "Jamon",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -1122,7 +1122,7 @@
                 "num_receta": 1,
                 "nom_receta": "Pate",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -1158,7 +1158,7 @@
                 "num_receta": 1,
                 "nom_receta": "Jamon",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,
@@ -1335,7 +1335,7 @@
                 "num_receta": 1,
                 "nom_receta": "Paleta",
                 "cant_torres": 1,
-                "tipo_Fin": 1,
+                "tipo_fin": 1,
                 "sector_io": [
                     {
                         "filtro_succion_agua": false,

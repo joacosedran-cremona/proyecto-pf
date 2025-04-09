@@ -5,7 +5,7 @@
         "nom_receta": "Pollo Asado",
         "estado": "ENFRIANDO",
         "cant_torres": 3,
-        "tipo_Fin": "180 min",
+        "tipo_fin": "180 min",
         "pasos": [
             {
                 "id": 1,
@@ -335,7 +335,7 @@
         "nom_receta": "Arroz con Pollo",
         "estado": "PAUSA",
         "cant_torres": 3,
-        "tipo_Fin": "180 min",
+        "tipo_fin": "180 min",
         "pasos": [
             {
                 "id": 1,
@@ -649,7 +649,7 @@
         "nom_receta": "Arroz con Pollo",
         "estado": "ENFRIANDO",
         "cant_torres": 2,
-        "tipo_Fin": "180 min",
+        "tipo_fin": "180 min",
         "pasos": [
             {
                 "id": 1,
@@ -883,7 +883,7 @@
         "nom_receta": "Pollo Asado",
         "estado": "INACTIVO",
         "cant_torres": 1,
-        "tipo_Fin": "10°C",
+        "tipo_fin": "10°C",
         "pasos": [
             {
                 "id": 1,
@@ -1229,7 +1229,7 @@
         "nom_receta": "Pate",
         "estado": "PAUSA",
         "cant_torres": 3,
-        "tipo_Fin": "10°C",
+        "tipo_fin": "10°C",
         "pasos": [
             {
                 "id": 1,
@@ -1503,7 +1503,7 @@
         "nom_receta": "Pollo Asado",
         "estado": "FINALIZADO",
         "cant_torres": 3,
-        "tipo_Fin": "120 min",
+        "tipo_fin": "120 min",
         "pasos": [
             {
                 "id": 1,
@@ -1713,7 +1713,7 @@
         "nom_receta": "Arroz con Pollo",
         "estado": "FALLA",
         "cant_torres": 2,
-        "tipo_Fin": "120 min",
+        "tipo_fin": "120 min",
         "pasos": [
             {
                 "id": 1,
@@ -1899,7 +1899,7 @@
         "nom_receta": "Pate",
         "estado": "PAUSA",
         "cant_torres": 1,
-        "tipo_Fin": "0°C",
+        "tipo_fin": "0°C",
         "pasos": [
             {
                 "id": 1,

@@ -1,9 +1,14 @@
 import React from 'react';
 import { GoDotFill } from "react-icons/go";
 
+interface DatoIO {
+    label: string;
+    value: boolean;
+}
+
 interface SectorIOProps {
-    datosIO: { label: string, value: string | number | boolean | null }[];
-    getColorClass: (label: string, value: string | number | null | boolean) => string;
+    datosIO: DatoIO[];
+    getColorClass: (label: string, value: boolean) => string;
 }
 
 const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass }) => {

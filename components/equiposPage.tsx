@@ -14,12 +14,86 @@ import { displayData } from "@/utils/displayData";
 // Idioma
 import { useTranslation } from 'react-i18next';
 
+// Contextos y navegación
+import { useSearchParams } from 'next/navigation';
+import { useCocinaContext } from '@/context/CocinaContext';
+import { useEnfriadorContext } from '@/context/EnfriadorContext';
+import { useMemo } from 'react';
+import { SectorIOType } from '@/types/sectorIO';
+
 interface EquipoPageProps {
     type: "cocina" | "enfriador";
 }
 
 export default function EquipoPage({type}: EquipoPageProps) {
     const { t } = useTranslation('monitoreo');
+    const searchParams = useSearchParams();
+    const { cocinas } = useCocinaContext();
+    const { enfriadores } = useEnfriadorContext();
+    
+    // Obtener ID del equipo seleccionado
+    const currentId = Number(searchParams.get('id')) || 
+        (type === "cocina" ? 1 : 7); // Valores por defecto
+    
+    // Obtener datos del equipo según el tipo
+    const equipo = type === "cocina" 
+        ? cocinas.find(c => c.info.id === currentId)
+        : enfriadores.find(e => e.info.id === currentId);
+
+    // Variables derivadas
+    const isCocina = type === "cocina";
+    const color = isCocina ? "orange" : "blue";
+    const borderColor = isCocina ? "orange" : "blue";
+    const bgColor = isCocina ? "orange" : "blue";
+
+    // Datos formateados para los componentes hijos
+    const datosEquipo = {
+        temp_Agua: equipo?.info.temp_Agua || 0,
+        temp_Prod: equipo?.info.temp_Prod || 0,
+        temp_Ingreso: equipo?.info.temp_Ingreso || 0,
+        temp_Chiller: equipo?.info.temp_Chiller || 0,
+        niv_Agua: equipo?.info.niv_Agua || 0
+    };
+
+    const datosCiclo = [
+        { label: t('cicloActivo.paso'), value: equipo?.info.receta_paso_actual || "N/A" },
+        { label: t('cicloActivo.receta'), value: equipo?.detalles.num_receta || '-' },
+        { label: t('cicloActivo.cantTorres'), value: equipo?.detalles.cant_torres || "N/A" },
+        { label: t('cicloActivo.tiempo'), value: equipo?.info.tiempoTranscurrido ?? "N/A" },
+        { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_fin ?? "N/A" }
+    ];
+    
+    const datosIO = useMemo(() => {
+        if (!equipo?.detalles.sector_io[0]) return [];
+    
+        const sectorIO = equipo.detalles.sector_io[0] as SectorIOType;
+        const baseIO = [
+            { label: t('sectorIO.bomba'), value: sectorIO.bomba_recirculacion },
+            { label: t('sectorIO.entradaAgua'), value: sectorIO.entrada_agua },
+            { label: t('sectorIO.filtroSuccion'), value: sectorIO.filtro_succion_agua }
+        ];
+    
+        if (isCocina && 'vapor_serpentina' in sectorIO) {
+            return [
+                ...baseIO,
+                { label: t('sectorIO.vaporSerp'), value: sectorIO.vapor_serpentina },
+                { label: t('sectorIO.vaporVivo'), value: sectorIO.vapor_vivo }
+            ];
+        } else if (!isCocina && 'valvula_amoniaco' in sectorIO) {
+            return [
+                ...baseIO,
+                { label: t('sectorIO.valvulaAmoniaco'), value: sectorIO.valvula_amoniaco }
+            ];
+        }
+    
+        return baseIO;
+    }, [equipo, isCocina, t]);
+
+    const handleSelectionChange = (newId: number) => {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('id', String(newId));
+        window.history.pushState(null, '', `?${searchParams.toString()}`);
+    };
 
     return (
         <section className="flex flex-col gap-20 min-h-[85vh] pt-[40px]">
@@ -35,10 +109,10 @@ export default function EquipoPage({type}: EquipoPageProps) {
                 />
             </div>
             <p className={`${bgColor} flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
-            {t('titulo.receta')}: {data.nom_receta ?? "N/A"}
+            {t('titulo.receta')}: {equipo?.detalles.nom_receta ?? "N/A"}
             </p>
             <p className={`bg-black flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
-            {t('titulo.estado')}: {data.estado ?? "N/A"}
+            {t('titulo.estado')}: {equipo?.info.estado ?? "N/A"}
             </p>
         </div>
 

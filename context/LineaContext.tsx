@@ -30,7 +30,7 @@ interface CocinaData {
     estado: string | null;
     cant_torres: number | null;
     tiempo: number | null;
-    tipo_Fin: string | null;
+    tipo_fin: string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
     sectorIO: SectorIO[];
@@ -47,7 +47,7 @@ interface EnfriadorData {
     estado: string | null;
     cant_torres: number | null;
     tiempo: number | null;
-    tipo_Fin: string | null;
+    tipo_fin: string | null;
     pasos: Paso[];
     ultimoPaso: Paso | null;
     sectorIO: SectorIO[];

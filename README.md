@@ -231,7 +231,7 @@ const { data } = useWebSocketContext(endpoint);
     nom_receta: '{{random("Pate", "Arroz con Pollo", "Pollo Asado")}}',
     estado: '{{random("INACTIVO", "COCINANDO", "PAUSA", "FINALIZADO", "FALLA")}}',
     cant_torres: '{{integer(1, 3)}}',
-	tipo_Fin: '{{random("100°C", "90°C", "60 min", "120 min")}}',
+	tipo_fin: '{{random("100°C", "90°C", "60 min", "120 min")}}',
     pasos: [
       '{{repeat(20, 50)}}',
       {
@@ -271,7 +271,7 @@ const { data } = useWebSocketContext(endpoint);
     nom_receta: '{{random("Pate", "Arroz con Pollo", "Pollo Asado")}}',
     estado: '{{random("INACTIVO", "ENFRIANDO", "PAUSA", "FINALIZADO", "FALLA")}}',
     cant_torres: '{{integer(1, 3)}}',
-    tipo_Fin: '0°C',
+    tipo_fin: '0°C',
     pasos: [
       '{{repeat(20, 50)}}',
       {
@@ -306,7 +306,7 @@ const { data } = useWebSocketContext(endpoint);
     num_receta: '{{integer(1, 5)}}',
     nom_receta: '{{random("Pate", "Paleta", "Panceta")}}',
     estado: '{{random("INACTIVO", "ENFRIANDO", "PAUSA", "FINALIZADO", "FALLA")}}',
-    cant_torres: '{{integer(1, 3)}}', tipo_Fin: '0°C',
+    cant_torres: '{{integer(1, 3)}}', tipo_fin: '0°C',
     pasos: [
       '{{repeat(20, 50)}}',
       {
