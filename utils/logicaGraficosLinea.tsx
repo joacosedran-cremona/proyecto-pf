@@ -18,9 +18,9 @@ export const transformData = (data: Paso[]) => {
             if (item.temp_Agua !== null && item.temp_Agua !== 'N/A' && typeof item.temp_Agua === 'number') {
                 tempAguaData.push({ x: tiempo, y: item.temp_Agua });
             }
-            // Agregar temp_Prod a los datos
-            if (item.temp_Prod !== null && item.temp_Prod !== 'N/A' && typeof item.temp_Prod === 'number') {
-                tempProdData.push({ x: tiempo, y: item.temp_Prod });
+            // Agregar temp_Ingreso a los datos
+            if (item.temp_Ingreso !== null && item.temp_Ingreso !== 'N/A' && typeof item.temp_Ingreso === 'number') {
+                tempProdData.push({ x: tiempo, y: item.temp_Ingreso });
             }
         }
     });

@@ -12,7 +12,7 @@ interface WebSocketContextType {
 const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
 
 export const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data, isConnected, error } = useWebSocket("datos");
+  const { data, isConnected, error } = useWebSocket("datos-generales");
 
   return (
     <WebSocketContext.Provider value={{ data, isConnected, error }}>

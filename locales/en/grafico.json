@@ -3,7 +3,7 @@
     {
         "tempIngreso": "Inlet Temperature",
         "tempAgua": "Water Temperature",
-        "tempProd": "Product Temperature",
+        "tempIng": "Product Temperature",
         "temperatura": "Temperature"
     },
     "ejes":

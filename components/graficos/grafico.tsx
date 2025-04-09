@@ -62,7 +62,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             }
         };
 
-        const chartData = transformData([data]);
+        const chartData = transformData(data); // Modificado aquí
 
         const config: ChartConfiguration<'line'> = {
             type: 'line',

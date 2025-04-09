@@ -4,7 +4,7 @@
         "titulo": "Equipment Status",
         "tempIngreso": "Inlet Temp.",
         "tempAgua": "Water Temp.",
-        "tempProd": "Product Temp.",
+        "tempIng": "Inlet Temp",
         "nivelAgua": "Water Level"
     },
     "cicloActivo":

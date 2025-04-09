@@ -2,33 +2,42 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useWebSocketContext } from "@/context/WebSocketContext";
-import { EnfriadorData } from "@/utils/interface";
+
+interface SectorIO {
+  filtro_succion_agua: boolean;
+  entrada_agua: boolean;
+  bomba_recirculacion: boolean;
+  valvula_amoniaco: boolean;
+}
+
+export interface EnfriadorDataCompleta {
+  id: number;
+  num_enfriador: number;
+  temperatura: number;
+  nivel: number;
+  receta: string;
+  nro_receta: number;
+  estado: string;
+  torres: number;
+  tiempo: number;
+  fin: string;
+  io_sector: {
+      bomba: boolean;
+      agua: boolean;
+      filtro: boolean;
+      amoniaco: boolean;
+  }[];
+}
 
 interface EnfriadorContextType {
   enfriadorId: number;
   setEnfriadorId: (id: number) => void;
-  enfriadorData: EnfriadorData;
-  setEnfriadorData: React.Dispatch<React.SetStateAction<EnfriadorData>>;
+  enfriadorData: EnfriadorDataCompleta | null;
+  todosLosEnfriadores: EnfriadorDataCompleta[];
+  setTodosLosEnfriadores: React.Dispatch<React.SetStateAction<EnfriadorDataCompleta[]>>;
 }
 
 const EnfriadorContext = createContext<EnfriadorContextType | undefined>(undefined);
-
-const defaultEnfriadorData: EnfriadorData = {
-  num_enfriador: 0,
-  tempIng: "N/A",
-  tempAgua: "N/A",
-  tempProd: "N/A",
-  nivAgua: "N/A",
-  nom_receta: null,
-  num_receta: null,
-  estado: null,
-  cant_torres: null,
-  tiempo: null,
-  tipo_Fin: null,
-  pasos: [],
-  ultimoPaso: null,
-  sectorIO: []
-};
 
 export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) => {
   const [enfriadorId, setEnfriadorId] = useState<number>(() => {
@@ -39,8 +48,9 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
     return 1;
   });
 
-  const { data: wsData, isConnected } = useWebSocketContext();
-  const [enfriadorData, setEnfriadorData] = useState<EnfriadorData>(defaultEnfriadorData);
+  const { data: wsData } = useWebSocketContext();
+  const [todosLosEnfriadores, setTodosLosEnfriadores] = useState<EnfriadorDataCompleta[]>([]);
+  const [enfriadorData, setEnfriadorData] = useState<EnfriadorDataCompleta | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -49,31 +59,21 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
   }, [enfriadorId]);
 
   useEffect(() => {
-    if (wsData && Array.isArray(wsData)) {
-      const selectedEnfriador = wsData.find(
-        (item: { num_enfriador: number }) => item.num_enfriador === enfriadorId
+    if (wsData && Array.isArray(wsData['datos-enfriadores'])) {
+      const enfriadores = wsData['datos-enfriadores'].map((enfriadorPar: any[]) => {
+        const [datosPrincipales, datosSecundarios] = enfriadorPar;
+        return {
+          ...datosPrincipales,
+          ...datosSecundarios
+        };
+      });
+      setTodosLosEnfriadores(enfriadores);
+
+      const enfriadorSeleccionado = enfriadores.find(
+        enfriador => enfriador.id === enfriadorId
       );
-
-      if (selectedEnfriador) {
-        const pasos = selectedEnfriador.pasos || [];
-        const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
-
-        setEnfriadorData({
-          num_enfriador: selectedEnfriador.num_enfriador,
-          tempIng: ultimoPaso?.temp_Ing ?? "N/A",
-          tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
-          tempProd: ultimoPaso?.temp_Prod ?? "N/A",
-          nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
-          nom_receta: selectedEnfriador.nom_receta ?? null,
-          num_receta: selectedEnfriador.num_receta ?? null,
-          estado: selectedEnfriador.estado ?? null,
-          cant_torres: selectedEnfriador.cant_torres ?? null,
-          tiempo: ultimoPaso?.tiempo ?? null,
-          tipo_Fin: selectedEnfriador.tipo_Fin ?? null,
-          pasos: pasos,
-          ultimoPaso: ultimoPaso,
-          sectorIO: selectedEnfriador.sector_io ?? []
-        });
+      if (enfriadorSeleccionado) {
+        setEnfriadorData(enfriadorSeleccionado);
       }
     }
   }, [wsData, enfriadorId]);
@@ -84,7 +84,8 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
         enfriadorId, 
         setEnfriadorId, 
         enfriadorData, 
-        setEnfriadorData 
+        todosLosEnfriadores,
+        setTodosLosEnfriadores
       }}
     >
       {children}

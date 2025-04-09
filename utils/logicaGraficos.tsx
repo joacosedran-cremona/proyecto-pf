@@ -1,52 +1,56 @@
-import { CocinaData, EnfriadorData } from './interface';
+import { CocinaDataCompleta } from '@/context/CocinaContext';
+import { EnfriadorDataCompleta } from '@/context/EnfriadorContext';
 
-export const transformData = (data: (CocinaData | EnfriadorData)[]) => {
-    const labels: string[] = [];
-    const tempIngrData: { x: number, y: number }[] = [];
+export const transformData = (equipo: CocinaDataCompleta | EnfriadorDataCompleta | null) => {
+    if (!equipo || !equipo.historial) {
+        return {
+            labels: [],
+            datasets: []
+        };
+    }
+
     const tempAguaData: { x: number, y: number }[] = [];
     const tempProdData: { x: number, y: number }[] = [];
 
-    data.forEach(item => {
-        item.pasos.forEach((paso) => {
-            const tiempo = paso.tiempo;
-            if (tiempo !== null && !isNaN(tiempo)) {
-                if (paso.temp_Ing !== null && paso.temp_Ing !== 'N/A' && typeof paso.temp_Ing === 'number') {
-                    tempIngrData.push({ x: tiempo, y: paso.temp_Ing });
-                }
-                if (paso.temp_Agua !== null && paso.temp_Agua !== 'N/A' && typeof paso.temp_Agua === 'number') {
-                    tempAguaData.push({ x: tiempo, y: paso.temp_Agua });
-                }
-                if (paso.temp_Prod !== null && paso.temp_Prod !== 'N/A' && typeof paso.temp_Prod === 'number') {
-                    tempProdData.push({ x: tiempo, y: paso.temp_Prod });
-                }
+    equipo.historial.forEach((registro) => {
+        if (registro.tiempo !== undefined && !isNaN(registro.tiempo)) {
+            if (registro.temp_Agua !== undefined && !isNaN(registro.temp_Agua)) {
+                tempAguaData.push({ 
+                    x: registro.tiempo, 
+                    y: registro.temp_Agua 
+                });
             }
-        });
+            if (registro.temp_Ingreso !== undefined && !isNaN(registro.temp_Ingreso)) {
+                tempProdData.push({ 
+                    x: registro.tiempo, 
+                    y: registro.temp_Ingreso 
+                });
+            }
+        }
     });
 
     return {
-        labels,
+        labels: [],
         datasets: [
             {
-                label: 'Temperatura de Ingreso',
-                backgroundColor: 'rgba(255, 165, 0, 0.5)', // Naranja/amarillo
-                borderColor: 'rgb(255, 165, 0)',
-                fill: false,
-                data: tempIngrData
-            },
-            {
                 label: 'Temperatura de Agua',
-                backgroundColor: 'rgba(54, 162, 235, 0.5)', // Azul
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 borderColor: 'rgb(54, 162, 235)',
                 fill: false,
                 data: tempAguaData
             },
             {
                 label: 'Temperatura de Producto',
-                backgroundColor: 'rgba(75, 192, 75, 0.5)', // Verde
+                backgroundColor: 'rgba(75, 192, 75, 0.5)',
                 borderColor: 'rgb(75, 192, 75)',
                 fill: false,
                 data: tempProdData
             }
         ]
     };
+};
+
+// Función auxiliar para determinar el tipo de equipo
+export const getEquipoTipo = (equipo: CocinaDataCompleta | EnfriadorDataCompleta) => {
+    return equipo.tipo === 'COCINA' ? 'Cocina' : 'Enfriador';
 };

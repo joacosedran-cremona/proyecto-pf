@@ -7,7 +7,7 @@ interface Paso {
     id: number;
     temp_Ing: string | number | null;
     temp_Agua: string | number | null;
-    temp_Prod: string | number | null;
+    temp_Ingreso: string | number | null;
     niv_Agua: string | number | null;
     tiempo: number | null;
 }
@@ -23,7 +23,7 @@ interface CocinaData {
     num_cocina: number;
     tempIng: string | number | null;
     tempAgua: string | number | null;
-    tempProd: string | number | null;
+    tempIng: string | number | null;
     nivAgua: string | number | null;
     nom_receta: string | null;
     num_receta: number | null;
@@ -40,7 +40,7 @@ interface EnfriadorData {
     num_enfriador: number;
     tempIng: string | number | null;
     tempAgua: string | number | null;
-    tempProd: string | number | null;
+    tempIng: string | number | null;
     nivAgua: string | number | null;
     nom_receta: string | null;
     num_receta: number | null;
@@ -69,7 +69,7 @@ const LineaContext = createContext<LineaContextType | undefined>(undefined);
 
 export const LineaProvider = ({ children }: { children: React.ReactNode }) => {
     const [lineaSeleccionada, setLineaSeleccionada] = useState<number>(1);
-    const { data } = useWebSocketContext("lineas-datos");
+    const { data } = useWebSocketContext();
 
     const [lineasData, setLineasData] = useState<LineaData | null>(null);
 

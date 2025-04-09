@@ -3,29 +3,36 @@
 import EquipoPage from "@/components/equiposPage";
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useWebSocketContext } from "@/context/WebSocketContext";
+import { useCocina } from "@/context/CocinaContext";
 
-export default function Cocinas() {
-    const { data, isConnected } = useWebSocketContext("enfriadores-datos");
+export default function CocinasPage() {
+    const { todasLasCocinas } = useCocina();
     const searchParams = useSearchParams();
     const [initialId, setInitialId] = useState<number>(1);
     
     useEffect(() => {
         const idParam = searchParams.get('id');
         if (idParam) {
-            // Convertir directamente a número
             const id = parseInt(idParam);
             if (!isNaN(id)) {
-                const validId = Math.min(6, Math.max(1, id));
-                setInitialId(validId);
-                localStorage.setItem('lastCocinaId', validId.toString());
+                // Validamos que el ID exista en los datos y esté en el rango correcto (1-6)
+                const cocinaExists = todasLasCocinas.some(
+                    cocina => cocina.id === id
+                );
+                if (cocinaExists && id >= 1 && id <= 6) {
+                    setInitialId(id);
+                    localStorage.setItem('lastCocinaId', id.toString());
+                }
             }
         } else {
             const savedId = localStorage.getItem('lastCocinaId');
             const id = savedId ? parseInt(savedId) : 1;
-            setInitialId(id);
+            // Validamos que el ID guardado sea válido
+            if (id >= 1 && id <= 6) {
+                setInitialId(id);
+            }
         }
-    }, [searchParams]);
+    }, [searchParams, todasLasCocinas]);
 
     return <EquipoPage type="cocina" initialId={initialId} />;
 }

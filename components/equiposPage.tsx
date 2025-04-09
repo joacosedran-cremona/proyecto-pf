@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useCallback } from "react";
-import { useCocina } from "@/context/CocinaContext";
-import { useEnfriador } from "@/context/EnfriadorContext";
+import { useCocina, CocinaDataCompleta } from "@/context/CocinaContext";
+import { useEnfriador, EnfriadorDataCompleta } from "@/context/EnfriadorContext";
 import Selector from "./selectores/selectorEquipos";
 import Grafico from "./graficos/grafico";
 import CicloActivo from "./monitoreoIndividual/cicloActivo";
@@ -12,87 +12,159 @@ import { getColorClass } from "@/utils/logicaColores";
 import { displayData } from "@/utils/displayData";
 import { useTranslation } from 'react-i18next';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { 
+    BaseEquipoData, 
+    CocinaData, 
+    EnfriadorData, 
+    SectorIOCocina, 
+    SectorIOEnfriador,
+    SectorIOBase 
+} from '@/utils/interface';
+import { mapCocinaData, mapEnfriadorData } from '@/utils/mapData';
 
 export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfriador', initialId: number }) {
     const { t } = useTranslation('monitoreo');
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    
     const { cocinaId, setCocinaId, cocinaData } = useCocina();
     const { enfriadorId, setEnfriadorId, enfriadorData } = useEnfriador();
+    
     const isCocina = type === "cocina";
-    const data = isCocina ? cocinaData : enfriadorData;
+    const defaultData: BaseEquipoData = {
+        tempIng: null,
+        nivAgua: null,
+        nom_receta: "N/A",
+        estado: "N/A",
+        num_receta: null,
+        cant_torres: null,
+        tiempo: null,
+        tipo_Fin: "N/A",
+        ultimoPaso: {
+            id: 0,
+            temp_Agua: null,
+            temp_Ing: null,    // Agregado
+            temp_Ingreso: null, // Agregado
+            niv_Agua: null,    // Agregado
+            tiempo: null       // Agregado
+        },
+        sectorIO: [
+            isCocina 
+                ? {
+                    bomba_recirculacion: false,
+                    entrada_agua: false,
+                    filtro_succion_agua: false,
+                    vapor_serpentina: false,
+                    vapor_vivo: false
+                } as SectorIOCocina
+                : {
+                    bomba_recirculacion: false,
+                    entrada_agua: false,
+                    filtro_succion_agua: false,
+                    valvula_amoniaco: false
+                } as SectorIOEnfriador
+        ]
+    };
+
+    const mappedData = isCocina 
+        ? mapCocinaData(cocinaData) || defaultData
+        : mapEnfriadorData(enfriadorData) || defaultData;
+    
+    const data = mappedData as CocinaData | EnfriadorData;
     const color = isCocina ? "orange" : "blue";
     const borderColor = isCocina ? "border-orange" : "border-blue";
     const bgColor = isCocina ? "bg-oranget" : "bg-bluet";
+    
     const idParam = searchParams.get('id');
-    const maxId = isCocina ? 6 : 14;
-    const currentId = idParam ? parseInt(idParam) : (isCocina ? cocinaId : enfriadorId);
-    const validatedId = Math.max(1, Math.min(currentId, maxId));
+    const maxId = isCocina ? 6 : 8;
+    const currentId = idParam 
+        ? Math.max(1, Math.min(parseInt(idParam), maxId))
+        : (initialId || (isCocina ? cocinaId : enfriadorId));
 
-    const datosEquipo = [
-        { label: t('estadoEquipo.tempIngreso'), value: data.tempIng ?? "N/A", unit: "°C" },
-        { label: t('estadoEquipo.tempAgua'), value: data.ultimoPaso?.temp_Agua ?? "N/A", unit: "°C" },
-        { label: t('estadoEquipo.tempProd'), value: data.tempProd ?? "N/A", unit: "°C" },
-        { label: t('estadoEquipo.nivelAgua'), value: data.nivAgua ?? "N/A", unit: "mm" }
-    ];
+    const datosEquipo = React.useMemo(() => [
+        { 
+            label: t('estadoEquipo.tempIngreso'), 
+            value: data?.ultimoPaso?.temp_Ing || "N/A", 
+            unit: "°C" 
+        },
+        { 
+            label: t('estadoEquipo.tempAgua'), 
+            value: data?.ultimoPaso?.temp_Agua || "N/A", 
+            unit: "°C" 
+        },
+        { 
+            label: t('estadoEquipo.nivelAgua'), 
+            value: data?.nivAgua || "N/A", 
+            unit: "mm" 
+        }
+    ], [data, t]);
 
-    const labelToKeyMap: Record<string, string> = {
+    const labelToKeyMap = React.useMemo(() => ({
         [t('estadoEquipo.tempIngreso')]: 'tempIngreso',
         [t('estadoEquipo.tempAgua')]: 'tempAgua',
-        [t('estadoEquipo.tempProd')]: 'tempProd',
+        [t('estadoEquipo.tempIng')]: 'tempIng',
         [t('estadoEquipo.nivelAgua')]: 'nivelAgua',
-    };
+    }), [t]);
 
-    const datosCiclo = [
-        { label: t('cicloActivo.paso'), value: data.ultimoPaso?.id ?? "N/A" },
-        { label: t('cicloActivo.receta'), value: data.num_receta ?? "N/A" },
-        { label: t('cicloActivo.cantTorres'), value: data.cant_torres ?? "N/A" },
-        { label: t('cicloActivo.tiempo'), value: data.tiempo ?? "N/A" },
-        { label: t('cicloActivo.tipoFin'), value: data.tipo_Fin ?? "N/A" }
-    ];
+    const datosCiclo = React.useMemo(() => [
+        { label: t('cicloActivo.paso'), value: data?.ultimoPaso?.id?.toString() || "N/A" },
+        { label: t('cicloActivo.receta'), value: data?.num_receta?.toString() || "N/A" },
+        { label: t('cicloActivo.cantTorres'), value: data?.cant_torres?.toString() || "N/A" },
+        { label: t('cicloActivo.tiempo'), value: data?.tiempo?.toString() || "N/A" },
+        { label: t('cicloActivo.tipoFin'), value: data?.tipo_Fin || "N/A" }
+    ], [data, t]);
 
-    const datosIO = isCocina
-    ? (data as CocinaData).sectorIO?.[0]
-    ? [
-        { label: t('sectorIO.bomba'), value: (data as CocinaData).sectorIO[0].bomba_recirculacion },
-        { label: t('sectorIO.entradaAgua'), value: (data as CocinaData).sectorIO[0].entrada_agua },
-        { label: t('sectorIO.filtroSuccion'), value: (data as CocinaData).sectorIO[0].filtro_succion_agua },
-        { label: t('sectorIO.vaporSerp'), value: (data as CocinaData).sectorIO[0].vapor_serpentina },
-        { label: t('sectorIO.vaporVivo'), value: (data as CocinaData).sectorIO[0].vapor_vivo }
-        ]
-    : []
-    : (data as EnfriadorData).sectorIO?.[0]
-    ? [
-        { label: t('sectorIO.bomba'), value: (data as EnfriadorData).sectorIO[0].bomba_recirculacion },
-        { label: t('sectorIO.entradaAgua'), value: (data as EnfriadorData).sectorIO[0].entrada_agua },
-        { label: t('sectorIO.filtroSuccion'), value: (data as EnfriadorData).sectorIO[0].filtro_succion_agua },
-        { label: t('sectorIO.valvulaAmoniaco'), value: (data as EnfriadorData).sectorIO[0].valvula_amoniaco }
-        ]
-    : [];
+    const datosIO = React.useMemo(() => {
+        const sectorIO = data?.sectorIO?.[0] || defaultData.sectorIO[0];
+
+        const commonData = [
+            { label: t('sectorIO.bomba'), value: sectorIO.bomba_recirculacion || false },
+            { label: t('sectorIO.entradaAgua'), value: sectorIO.entrada_agua || false },
+            { label: t('sectorIO.filtroSuccion'), value: sectorIO.filtro_succion_agua || false },
+        ];
+
+        if (isCocina) {
+            const cocinaSectorIO = sectorIO as SectorIOCocina;
+            return [
+                ...commonData,
+                { label: t('sectorIO.vaporSerp'), value: cocinaSectorIO.vapor_serpentina || false },
+                { label: t('sectorIO.vaporVivo'), value: cocinaSectorIO.vapor_vivo || false }
+            ];
+        }
+
+        const enfriadorSectorIO = sectorIO as SectorIOEnfriador;
+        return [
+            ...commonData,
+            { label: t('sectorIO.valvulaAmoniaco'), value: enfriadorSectorIO.valvula_amoniaco || false }
+        ];
+    }, [data, isCocina, t]);
+
+    const formattedDisplayData = useCallback((value: string | number, unit?: string): string | number => {
+        const result = displayData(value, unit);
+        return typeof result === 'boolean' ? result.toString() : result;
+    }, []);
 
     useEffect(() => {
-        const targetId = initialId || validatedId;
         if (isCocina) {
-            if (cocinaId !== targetId) {
-                setCocinaId(targetId);
-            }
+            setCocinaId(currentId);
         } else {
-            if (enfriadorId !== targetId) {
-                setEnfriadorId(targetId);
-            }
+            setEnfriadorId(currentId);
         }
-    }, [initialId, validatedId, isCocina, cocinaId, enfriadorId, setCocinaId, setEnfriadorId]);
+        
+        if (!idParam || parseInt(idParam) !== currentId) {
+            const params = new URLSearchParams(searchParams);
+            params.set('id', currentId.toString());
+            router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+        }
+    }, [currentId, isCocina]);
 
     const handleSelectionChange = useCallback((newId: number) => {
-        if (newId === validatedId) return;
-        
+        const validatedNewId = Math.max(1, Math.min(newId, maxId));
         const params = new URLSearchParams(searchParams);
-        params.set('id', newId.toString());
-        router.push(`${pathname}?${params.toString()}`, { 
-            scroll: false,
-        });
-    }, [pathname, searchParams, router, validatedId]);
+        params.set('id', validatedNewId.toString());
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    }, [pathname, searchParams, router, maxId]);
 
     return (
         <section className="flex flex-col gap-20 min-h-[85vh] pt-[40px]">
@@ -100,7 +172,7 @@ export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfr
         <div className="flex w-full h-full gap-20">
             <div className="w-1/3">
                 <Selector
-                    value={validatedId}
+                    value={currentId}
                     onChange={handleSelectionChange}
                     isCocina={isCocina}
                     selectClasses={`w-full bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
@@ -123,9 +195,8 @@ export default function EquipoPage({ type, initialId }: { type: 'cocina' | 'enfr
                 <EstadoEquipo 
                     datos={datosEquipo} 
                     getColorClass={(label, value) => getColorClass(labelToKeyMap[label] || '', value, color)} 
-                    displayData={(value, unit) => displayData(value, unit)} 
+                    displayData={formattedDisplayData}
                 />
-
                 </div>
                 <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
                 <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor="lightRed" />

@@ -1,7 +1,7 @@
 {
     "datos": {
         "tempAgua": "Water Temp.",
-        "tempProd": "Product Temp.",
+        "tempIng": "Inlet Temp",
         "receta": "Recipe",
         "tiempo": "Elapsed Time "
     },
@@ -22,8 +22,8 @@
         "enfriador8": "C8L2"
     },
     "tooltip": {
-        "cocina": "Kitchen {{number}} Línea {{line}}",
-        "enfriador": "Chiller {{number}} Línea {{line}}"
+        "cocina": "Kitchen {{number}} Line {{line}}",
+        "enfriador": "Chiller {{number}} Line {{line}}"
     },
     "titulo": "KITCHENS & CHILLERS",
     "subtitulo": "General Panel"

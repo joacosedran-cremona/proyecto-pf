@@ -2,33 +2,48 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useWebSocketContext } from "@/context/WebSocketContext";
-import { CocinaData } from "@/utils/interface";
+
+interface SectorIO {
+  filtro_succion_agua: boolean;
+  entrada_agua: boolean;
+  bomba_recirculacion: boolean;
+  vapor_serpentina: boolean;
+  vapor_vivo: boolean;
+}
+
+export interface CocinaDataCompleta {
+  tipo: string;
+  id: number;
+  estado: string;
+  temp_Agua: number;
+  temp_Ingreso: number;
+  niv_Agua: number;
+  receta: string;
+  tiempoTranscurrido: number;
+  num_cocina: number;
+  num_receta: number;
+  nom_receta: string;
+  cant_torres: number;
+  tipo_Fin: number;
+  sector_io: SectorIO[];
+  historial: Array<{
+    id: number;
+    tiempo: number;
+    temp_Agua: number;
+    temp_Ingreso: number;
+    estado: string;
+  }>;
+}
 
 interface CocinaContextType {
   cocinaId: number;
   setCocinaId: (id: number) => void;
-  cocinaData: CocinaData;
-  setCocinaData: React.Dispatch<React.SetStateAction<CocinaData>>;
+  cocinaData: CocinaDataCompleta | null;
+  todasLasCocinas: CocinaDataCompleta[];
+  setTodasLasCocinas: React.Dispatch<React.SetStateAction<CocinaDataCompleta[]>>;
 }
 
 const CocinaContext = createContext<CocinaContextType | undefined>(undefined);
-
-const defaultCocinaData: CocinaData = {
-  num_cocina: 0,
-  tempIng: "N/A",
-  tempAgua: "N/A",
-  tempProd: "N/A",
-  nivAgua: "N/A",
-  nom_receta: null,
-  num_receta: null,
-  estado: null,
-  cant_torres: null,
-  tiempo: null,
-  tipo_Fin: null,
-  pasos: [],
-  ultimoPaso: null,
-  sectorIO: []
-};
 
 export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
   const [cocinaId, setCocinaId] = useState<number>(() => {
@@ -39,8 +54,9 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
     return 1;
   });
 
-  const { data: wsData, isConnected } = useWebSocketContext();
-  const [cocinaData, setCocinaData] = useState<CocinaData>(defaultCocinaData);
+  const { data: wsData } = useWebSocketContext();
+  const [todasLasCocinas, setTodasLasCocinas] = useState<CocinaDataCompleta[]>([]);
+  const [cocinaData, setCocinaData] = useState<CocinaDataCompleta | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -49,31 +65,21 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
   }, [cocinaId]);
 
   useEffect(() => {
-    if (wsData && Array.isArray(wsData)) {
-      const selectedCocina = wsData.find(
-        (item: { num_cocina: number }) => item.num_cocina === cocinaId
-      );
+    if (wsData && Array.isArray(wsData['datos-cocinas'])) {
+      // Guardamos todas las cocinas
+      const cocinas = wsData['datos-cocinas'].map((cocinaPar: any[]) => {
+        const [datosPrincipales, datosSecundarios] = cocinaPar;
+        return {
+          ...datosPrincipales,
+          ...datosSecundarios
+        };
+      });
+      setTodasLasCocinas(cocinas);
 
-      if (selectedCocina) {
-        const pasos = selectedCocina.pasos || [];
-        const ultimoPaso = pasos.length > 0 ? pasos[pasos.length - 1] : null;
-
-        setCocinaData({
-          num_cocina: selectedCocina.num_cocina,
-          tempIng: ultimoPaso?.temp_Ing ?? "N/A",
-          tempAgua: ultimoPaso?.temp_Agua ?? "N/A",
-          tempProd: ultimoPaso?.temp_Prod ?? "N/A",
-          nivAgua: ultimoPaso?.niv_Agua ?? "N/A",
-          nom_receta: selectedCocina.nom_receta ?? null,
-          num_receta: selectedCocina.num_receta ?? null,
-          estado: selectedCocina.estado ?? null,
-          cant_torres: selectedCocina.cant_torres ?? null,
-          tiempo: ultimoPaso?.tiempo ?? null,
-          tipo_Fin: selectedCocina.tipo_Fin ?? null,
-          pasos: pasos,
-          ultimoPaso: ultimoPaso,
-          sectorIO: selectedCocina.sector_io ?? []
-        });
+      // Actualizamos la cocina seleccionada
+      const cocinaSeleccionada = cocinas.find(cocina => cocina.num_cocina === cocinaId);
+      if (cocinaSeleccionada) {
+        setCocinaData(cocinaSeleccionada);
       }
     }
   }, [wsData, cocinaId]);
@@ -84,7 +90,8 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
         cocinaId, 
         setCocinaId, 
         cocinaData, 
-        setCocinaData 
+        todasLasCocinas,
+        setTodasLasCocinas
       }}
     >
       {children}

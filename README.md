@@ -238,7 +238,7 @@ const { data } = useWebSocketContext(endpoint);
         id: '{{index() + 1}}',
         tiempo: '{{5 * index()}}',
         temp_Agua: '{{integer(90, 95)}}',
-        temp_Prod: function() {
+        temp_Ingreso: function() {
           var x = this.tiempo;
           var a = 20;
           var b = Math.log(5) / 180;
@@ -278,7 +278,7 @@ const { data } = useWebSocketContext(endpoint);
         id: '{{index() + 1}}',
         tiempo: '{{5 * index()}}',
         temp_Agua: '{{integer(0, 5)}}',
-        temp_Prod: function() {
+        temp_Ingreso: function() {
           var x = this.tiempo;
           var a = 100;
           var b = Math.log(100) / 180;
@@ -313,7 +313,7 @@ const { data } = useWebSocketContext(endpoint);
         id: '{{index() + 1}}',
         tiempo: '{{5 * index()}}',
         temp_Agua: '{{integer(0, 5)}}',
-        temp_Prod: function() {
+        temp_Ingreso: function() {
           var x = this.tiempo;
           var a = 100;
           var b = Math.log(100) / 180; return parseFloat((a * Math.exp(-b * x)).toFixed(2));

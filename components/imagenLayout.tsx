@@ -1,11 +1,13 @@
 "use client";
 
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Image } from '@heroui/image';
 import Link from 'next/link';
 import { Tooltip } from "@heroui/tooltip";
 import { useWebSocketContext } from "@/context/WebSocketContext";
+import { useCocina } from "@/context/CocinaContext";
+import { useEnfriador } from "@/context/EnfriadorContext";
 
 interface Equipo {
   tipo: 'COCINA' | 'ENFRIADOR';
@@ -39,7 +41,7 @@ interface LayoutTranslations {
   subtitulo: string;
   datos: {
     tempAgua: string;
-    tempProd: string;
+    tempIng: string;
     receta: string;
     tiempo: string;
   };
@@ -90,7 +92,7 @@ const sectionConfig = {
 
 function getEstadoColor(estado: string): string {
   const estadoUpper = estado.toUpperCase();
-  if (estadoUpper === "FALLA") return "#C00";
+  if (estadoUpper === "FALLA") return "#C13D";
   if (["COCINANDO", "PRE-CALENTADO", "ENFRIANDO", "PRE-ENFRIADO"].includes(estadoUpper)) return "#9b9D";
   if (estadoUpper === "PAUSA") return "#BB8D";
   if (estadoUpper === "FINALIZADO") return "#9bbD";
@@ -100,13 +102,14 @@ function getEstadoColor(estado: string): string {
 
 export function ImagenLayout() {
   const { t } = useTranslation('layout');
-  const [equiposData, setEquiposData] = useState<EquiposData | null>(null);
-  const { data: wsData, isConnected } = useWebSocketContext();
+  const { isConnected } = useWebSocketContext();
+  const { todasLasCocinas } = useCocina();
+  const { todosLosEnfriadores } = useEnfriador();
 
   const sections: Section[] = useMemo(() => {
     const generateSections = (config: any[], path: string, type: 'cocinas' | 'enfriadores') => {
       return config.map(({ id, key, position, line }) => {
-        const translatedName = t(`equipos.${key}`, { defaultValue: key }); // Use defaultValue to ensure a fallback
+        const translatedName = t(`equipos.${key}`, { defaultValue: key });
         return {
           id: type === 'enfriadores' ? id : id,
           name: translatedName,
@@ -128,70 +131,46 @@ export function ImagenLayout() {
     ];
   }, [t]);
 
-  useEffect(() => {
-    console.log('Estado de conexión WebSocket:', isConnected);
-  }, [isConnected]);
-
-  useEffect(() => {
-    if (wsData && typeof wsData === 'object') {
-      console.log('Nuevo mensaje WebSocket recibido:', {
-        timestamp: new Date().toISOString(),
-        data: wsData
-      });
-
-      // Verifica si los datos tienen la estructura esperada
-      if (wsData.lineas && Array.isArray(wsData.lineas)) {
-        const datosFormateados = {
-          lineas: wsData.lineas.map((linea: any) => ({
-            id: linea.id || 0,
-            equipos: Array.isArray(linea.equipos) ? linea.equipos.map((equipo: any) => ({
-              tipo: equipo.tipo,
-              id: equipo.id,
-              estado: equipo.estado || 'INACTIVO',
-              tempAguaActual: equipo.tempAguaActual || 0,
-              tempProductoActual: equipo.tempProductoActual || 0,
-              receta: equipo.receta || '-',
-              tiempoTranscurrido: equipo.tiempoTranscurrido || 0
-            })) : []
-          }))
-        };
-
-        setEquiposData(datosFormateados);
-        console.log('Datos formateados:', datosFormateados);
-      } else {
-        console.error('Formato de datos inválido:', wsData);
-      }
-    }
-  }, [wsData]);
-
   const getEquipoData = (section: Section): Equipo | undefined => {
-    if (!equiposData) {
-      return {
-        tipo: section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR',
-        id: section.id,
-        estado: 'INACTIVO',
-        tempAguaActual: 0,
-        tempProductoActual: 0,
-        receta: '-',
-        tiempoTranscurrido: 0
-      };
-    }
-
-    for (const linea of equiposData.lineas) {
-      const equipo = linea.equipos.find(e => 
-        e.tipo === (section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR') && 
-        e.id === section.id
-      );
-
-      if (equipo) {
-        return equipo;
+    const tipoEquipo = section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR';
+    
+    if (tipoEquipo === 'COCINA') {
+      const cocina = todasLasCocinas.find(c => c.num_cocina === section.id);
+      if (cocina) {
+        return {
+          tipo: 'COCINA',
+          id: cocina.num_cocina,
+          estado: cocina.estado,
+          tempAguaActual: cocina.temp_Agua,
+          tempProductoActual: cocina.temp_Ingreso,
+          receta: cocina.receta,
+          tiempoTranscurrido: cocina.tiempoTranscurrido
+        };
+      }
+    } else {
+      const enfriador = todosLosEnfriadores.find(e => e.num_enfriador === (section.id - 6));
+      if (enfriador) {
+        return {
+          tipo: 'ENFRIADOR',
+          id: section.id,
+          estado: enfriador.estado,
+          tempAguaActual: enfriador.temp_Agua,
+          tempProductoActual: enfriador.temp_Ingreso,
+          receta: enfriador.receta,
+          tiempoTranscurrido: enfriador.tiempoTranscurrido
+        };
       }
     }
 
-    return undefined;
+    return {
+      tipo: tipoEquipo,
+      id: section.id,
+      estado: 'INACTIVO',
+      tempAguaActual: 0,
+      tempProductoActual: 0,
+      receta: '-',
+    };
   };
-
-  console.log('Sections generadas:', sections);
 
   return (
     <div className="w-auto h-full relative flex justify-center items-center">
@@ -233,37 +212,90 @@ export function ImagenLayout() {
             <Tooltip
               placement="top"
               content={t(`tooltip.${tipoEquipo}`, {
-                number: numeroMostrado,
+                number: tipoEquipo === 'cocina' ? section.id : (section.id - 6),
                 line: lineaEquipo
               })}
             >
-              <span 
-                className="absolute shadow border z-999" 
-                style={recuadroStyle}
+              <span
+                className={`absolute shadow border z-999 rounded-md p-2 flex flex-col justify-between ${
+                  equipo?.estado === 'FALLA' ? 'bg-red-600' :
+                  equipo?.estado === 'PAUSA' ? 'bg-yellow-400' :
+                  equipo?.estado === 'INACTIVO' ? 'bg-gray-600' :
+                  equipo?.estado === 'FINALIZADO' ? 'bg-blue-400' :
+                  'bg-green-600'
+                }`}
+                style={{
+                  ...recuadroStyle,
+                  color: 'white',
+                  fontFamily: 'sans-serif',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.8)', // emula contorno
+                }}
                 onClick={() => {
                   if (tipoEquipo === 'cocina') {
                     localStorage.setItem('lastCocinaId', String(section.id));
                   } else {
-                    localStorage.setItem('lastEnfriadorId', String(section.id));
+                    localStorage.setItem('lastEnfriadorId', String(section.id - 6));
                   }
                 }}
               >
                 {equipo && (
-                  <div className="text-white text-[calc(0.7vw+0.5vh)] text-stroke width-full font-bold p-3">
-                    <div className="flex w-full justify-between">
-                      <p className="text-white">{section.name}</p>
-                      <p className="text-white">{equipo.estado}</p>
+                  <div className="w-full">
+                    <div className="flex justify-between items-center mb-1 ml-2">
+                      <p
+                        className="font-extrabold uppercase"
+                        style={{
+                          fontSize: 'calc(0.9vw + 0.6vh)',
+                          textShadow: '1px 1px 2px black',
+                        }}
+                      >
+                        {section.name}
+                      </p>
+                      <p
+                        className="font-extrabold uppercase"
+                        style={{
+                          fontSize: 'calc(0.4vw + 0.5vh)',
+                          textShadow: '1px 1px 2px black',
+                          marginRight: '3px',
+                        }}
+                      >
+                        {equipo.estado}
+                      </p>
                     </div>
-                    <p className="text-white">{t('datos.tempAgua')}: {equipo.tempAguaActual || '-'}</p>
-                    <p className="text-white">{t('datos.tempProd')}: {equipo.tempProductoActual || '-'}</p>
-                    <p className="text-white">{t('datos.receta')}: {equipo.receta}</p>
-                    <p className="text-white">{t('datos.tiempo')}: {equipo.tiempoTranscurrido}</p>
+                    <div className="mt-[10px]">
+                      <p
+                        className="font-bold"
+                        style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black'}}
+                      >
+                        T. Ingreso: {equipo.tempProductoActual ?? '-'}
+                      </p>
+                      <p
+                        className="font-bold"
+                        style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
+                      >
+                        T. Agua: {equipo.tempAguaActual ?? '-'}
+                      </p>
+                      <p
+                        className="font-bold"
+                        style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
+                      >
+                        Receta: {equipo.receta ?? '-'}
+                      </p>
+                      {equipo.tiempoTranscurrido && (
+                        <p
+                          className="font-bold"
+                          style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
+                        >
+                          Tiempo: {equipo.tiempoTranscurrido}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )}
               </span>
             </Tooltip>
           </Link>
         );
+        
       })}
     </div>
   );

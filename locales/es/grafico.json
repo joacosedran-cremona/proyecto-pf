@@ -3,7 +3,7 @@
     {
         "tempIngreso": "Temperatura de Ingreso",
         "tempAgua": "Temperatura del Agua",
-        "tempProd": "Temperatura del Producto",
+        "tempIng": "Temperatura del Producto",
         "temperatura": "Temperatura"
     },
     "ejes":

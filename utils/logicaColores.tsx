@@ -21,7 +21,7 @@ export const getColorClass = (key: string, value: Value, defaultColor: 'orange' 
         return "text-blueGraph !important";
     }
 
-    if (key === 'tempProd') {
+    if (key === 'tempIng') {
         return "text-greenGraph !important";
     }
 

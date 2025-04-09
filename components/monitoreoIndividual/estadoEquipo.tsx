@@ -1,25 +1,38 @@
 import React from 'react';
-
+import { useTranslation } from 'react-i18next';
 
 interface EstadoEquipoProps {
-    datos: { label: string, value: string | number | null, unit?: string }[];
-    displayData: (data: string | number | null | boolean, unit?: string) => string | number | boolean;
+    datos: Array<{
+        label: string;
+        value: string | number;
+        unit?: string;
+    }>;
     getColorClass: (label: string, value: string | number | null) => string;
+    displayData?: (value: string | number, unit?: string) => string | number | boolean;
 }
 
 const EstadoEquipo: React.FC<EstadoEquipoProps> = ({ datos, getColorClass, displayData }) => {
+    const { t } = useTranslation('monitoreo');
+
+    const formatValue = (value: string | number, unit?: string) => {
+        if (displayData) {
+            return displayData(value, unit);
+        }
+        return unit ? `${value} ${unit}` : value;
+    };
+
     return (
         <>
-            <h2 className="text-xl text-white">Estado Equipo</h2>
+            <h2 className="text-xl text-white">
+                {t('estadoEquipo.titulo')}
+            </h2>
             <ul className="flex flex-col justify-between grow gap-[1vh]">
-                {datos.map((dato) => (
-                    <li key={dato.label} className="bg-grey flex flex-col px-20 py-[1vh] rounded-md">
-                        <p className="text-[calc(0.6vw+1vh)] text-white">
-                            {dato.label}
-                        </p>
-                        <p className={`text-[calc(0.5vw+1vh)] ${getColorClass(dato.label, dato.value)}`}>
-                            {displayData(dato.value, dato.unit)}
-                        </p>
+                {datos.map((dato, index) => (
+                    <li key={`${dato.label}-${index}`} className="bg-grey flex flex-col px-20 py-[1vh] rounded-md">
+                        <span className="text-[calc(0.6vw+1vh)] text-white">{dato.label}:</span>
+                        <span className={`text-[calc(0.5vw+1vh)] ${getColorClass(dato.label, dato.value)}`}>
+                            {formatValue(dato.value, dato.unit)}
+                        </span>
                     </li>
                 ))}
             </ul>

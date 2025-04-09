@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useMemo, useCallback } from "react";
-import { useTranslation } from 'react-i18next';
+import React from "react";
 
 interface SelectorProps {
     value: number;
@@ -11,67 +10,37 @@ interface SelectorProps {
     optionClasses?: string;
 }
 
-type CocinaKeys = `cocinas.cocina${1 | 2 | 3 | 4 | 5 | 6}`;
-type EnfriadorKeys = `enfriadores.enfriador${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8}`;
-type TranslationKey = 'select' | CocinaKeys | EnfriadorKeys;
-
-const Selector: React.FC<SelectorProps> = React.memo(({
-    value,
-    onChange,
-    isCocina,
-    selectClasses = "",
-    optionClasses = "",
-}) => {
-    const { t } = useTranslation('selectores');
+export default function Selector({ value, onChange, isCocina, selectClasses, optionClasses }: SelectorProps) {
+    const maxItems = isCocina ? 6 : 8;
     
-    // Memoizar los items para evitar recálculos innecesarios
-    const items = useMemo(() => {
-        const length = isCocina ? 6 : 8;
-        return Array.from({ length }, (_, i) => ({
-            id: i + 1,
-            name: t(
-                `${isCocina ? 'cocinas.cocina' : 'enfriadores.enfriador'}${i + 1}` as TranslationKey,
-                { returnNull: true }
-            ) || `${isCocina ? 'Cocina' : 'Enfriador'} ${i + 1}`
-        }));
-    }, [isCocina, t]);
+    // Convertir el ID real al número visible (1-8 para enfriadores, 1-6 para cocinas)
+    const visibleNumber = isCocina ? value : value - 1;
+    
+    const options = Array.from({ length: maxItems }, (_, i) => ({
+        value: isCocina ? i + 1 : i + 7,
+        label: `${isCocina ? 'Cocina' : 'Enfriador'} ${i + 1} - L${
+            isCocina
+              ? (i + 1 <= 3 ? '1' : '2')  // Cocina: 1-3 => Línea 1, 4-6 => Línea 2
+              : (i + 1 <= 4 ? '1' : '2')  // Enfriador: 1-4 => Línea 1, 5-8 => Línea 2
+        }`,          
+        visibleNumber: i - 1
+    }));
 
-    // Optimizar el handler del cambio
-    const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newValue = Number(e.target.value);
-        if (!isNaN(newValue) && newValue !== value) {
-            requestAnimationFrame(() => {
-                onChange(newValue);
-            });
-        }
-    }, [onChange, value]);
-
-    // Evitar re-renders innecesarios usando useMemo para el select
-    return useMemo(() => (
-        <div className="flex min-h-[50px]">
-            <select
-                value={value}
-                onChange={handleChange}
-                className={selectClasses}
-            >
-                {items.map((item) => (
-                    <option 
-                        key={item.id} 
-                        value={item.id} 
-                        className={optionClasses}
-                    >
-                        {item.name}
-                    </option>
-                ))}
-            </select>
-        </div>
-    ), [value, handleChange, selectClasses, optionClasses, items]);
-}, 
-(prevProps, nextProps) => {
-    return prevProps.value === nextProps.value && 
-        prevProps.isCocina === nextProps.isCocina;
-});
-
-Selector.displayName = 'Selector';
-
-export default Selector;
+    return (
+        <select
+            value={value}
+            onChange={(e) => onChange(parseInt(e.target.value))}
+            className={selectClasses}
+        >
+            {options.map(option => (
+                <option 
+                    key={option.value} 
+                    value={option.value}
+                    className={optionClasses}
+                >
+                    {option.label}
+                </option>
+            ))}
+        </select>
+    );
+}

@@ -4,7 +4,7 @@
         "titulo": "Estado Equipo",
         "tempIngreso": "Temp. Ingreso",
         "tempAgua": "Temp. Agua",
-        "tempProd": "Temp. Producto",
+        "tempIng": "Temp. Ingreso",
         "nivelAgua": "Nivel Agua"
     },
     "cicloActivo":
