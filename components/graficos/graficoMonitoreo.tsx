@@ -24,27 +24,35 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         console.log('lineasData:', lineasData); // 🔍 VERIFICA QUÉ TRAE
         setLoading(true);
         if (!lineasData) return;
-
+    
         let encontrado;
-
-        if (contextType === 'cocinas' && Array.isArray(lineasData?.cocinas)) {
-            encontrado = lineasData.cocinas.find(e => e.num_cocina === id);
-        } else if (contextType === 'enfriadores' && Array.isArray(lineasData?.enfriadores)) {
-            encontrado = lineasData.enfriadores.find(e => e.num_enfriador === id);
+    
+        // Ajustar la estructura de los datos
+        const cocinas = Array.isArray(lineasData['datos-cocinas'])
+            ? lineasData['datos-cocinas'].map((grupo) => grupo[1])
+            : [];
+        const enfriadores = Array.isArray(lineasData['datos-enfriadores'])
+            ? lineasData['datos-enfriadores'].map((grupo) => grupo[1])
+            : [];
+    
+        if (contextType === 'cocinas') {
+            encontrado = cocinas.find(e => e.num_cocina === id);
+        } else if (contextType === 'enfriadores') {
+            encontrado = enfriadores.find(e => e.num_enfriador === (id - 6));
         }
-
+    
         setEquipo(encontrado);
-
-        if (!encontrado || !encontrado.pasos || !chartRef.current) return;
-
+    
+        if (!encontrado || !encontrado.historial || !chartRef.current) return;
+    
         const ctx = chartRef.current.getContext('2d');
         if (!ctx) return;
-
+    
         if (chartInstanceRef.current) chartInstanceRef.current.destroy();
-
+    
         const image = new Image();
         image.src = '/creminox.png';
-
+    
         const plugin: Plugin = {
             id: 'customCanvasBackgroundImage',
             beforeDraw: (chart: Chart) => {
@@ -64,15 +72,15 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                 }
             }
         };
-
-        const chartData = transformData(encontrado.pasos);
-
+    
+        const chartData = transformData(encontrado.historial);
+    
         const nombreEquipo = contextType === 'cocinas'
             ? `${t('equipo.cocina')} ${id}`
-            : `${t('equipo.enfriador')} ${id}`;
-
+            : `${t('equipo.enfriador')} ${id - 6}`;
+    
         const tituloColor = contextType === 'cocinas' ? '#EF8225' : '#3AF';
-
+    
         const config: ChartConfiguration<'line'> = {
             type: 'line',
             data: chartData,
@@ -188,10 +196,10 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
             },
             plugins: [plugin]
         };
-
+    
         chartInstanceRef.current = new Chart(ctx, config);
         setLoading(false);
-
+    
         return () => chartInstanceRef.current?.destroy();
     }, [lineasData, lineaSeleccionada, contextType, id, t]);
 
