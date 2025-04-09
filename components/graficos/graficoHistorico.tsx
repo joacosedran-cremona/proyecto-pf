@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import { useCocina } from '@/context/CocinaContext';
-import { useEnfriador } from '@/context/EnfriadorContext';
+import { useCocinaContext } from '@/context/CocinaContext';
+import { useEnfriadorContext } from '@/context/EnfriadorContext';
 import { transformData } from '../../utils/logicaGraficos';
 import { Button, Spinner } from '@heroui/react';
 
@@ -14,8 +14,8 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const { cocinaData } = useCocina();
-    const { enfriadorData } = useEnfriador();
+    const { cocinaData } = useCocinaContext();
+    const { enfriadorData } = useEnfriadorContext();
 
     // Función para reiniciar el zoom del gráfico
     const resetZoom = () => {

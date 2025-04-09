@@ -1,104 +1,80 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { useWebSocketContext } from "@/context/WebSocketContext";
+import React, { createContext, useContext } from 'react';
+import { useWebSocketContext } from './WebSocketContext';
+
+interface EnfriadorInfo {
+  tipo: string;
+  id: number;
+  estado: string;
+  temp_Agua: number;
+  temp_Prod: number;
+  temp_Ingreso: number;
+  temp_Chiller: number;
+  niv_Agua: number;
+  receta: string;
+  receta_paso_actual: number;
+  tiempoTranscurrido: number;
+}
+
+interface EnfriadorDetalles {
+  num_enfriador: number;
+  num_receta: number;
+  nom_receta: string;
+  cant_torres: number;
+  tipo_Fin: string;
+  sector_io: SectorIO[];
+  historial: any[];
+}
 
 interface SectorIO {
   filtro_succion_agua: boolean;
   entrada_agua: boolean;
   bomba_recirculacion: boolean;
   valvula_amoniaco: boolean;
+  vapor_serpentina_acc: boolean;
+  vapor_vivo_lim: boolean;
+  vapor_vivo_lim_acc: boolean;
+  tapa_estado: boolean;
+  tapa_estado_acc: string;
 }
 
-export interface EnfriadorDataCompleta {
-  id: number;
-  num_enfriador: number;
-  temperatura: number;
-  nivel: number;
-  receta: string;
-  nro_receta: number;
-  estado: string;
-  torres: number;
-  tiempo: number;
-  fin: string;
-  io_sector: {
-      bomba: boolean;
-      agua: boolean;
-      filtro: boolean;
-      amoniaco: boolean;
-  }[];
+interface EnfriadorCompleto {
+  info: EnfriadorInfo;
+  detalles: EnfriadorDetalles;
 }
 
 interface EnfriadorContextType {
-  enfriadorId: number;
-  setEnfriadorId: (id: number) => void;
-  enfriadorData: EnfriadorDataCompleta | null;
-  todosLosEnfriadores: EnfriadorDataCompleta[];
-  setTodosLosEnfriadores: React.Dispatch<React.SetStateAction<EnfriadorDataCompleta[]>>;
+  enfriadores: EnfriadorCompleto[];
+  isLoading: boolean;
+  error: string | null;
 }
 
 const EnfriadorContext = createContext<EnfriadorContextType | undefined>(undefined);
 
 export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) => {
-  const [enfriadorId, setEnfriadorId] = useState<number>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('lastEnfriadorId');
-      return saved ? parseInt(saved) : 1;
-    }
-    return 1;
-  });
-
-  const { data: wsData } = useWebSocketContext();
-  const [todosLosEnfriadores, setTodosLosEnfriadores] = useState<EnfriadorDataCompleta[]>([]);
-  const [enfriadorData, setEnfriadorData] = useState<EnfriadorDataCompleta | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('lastEnfriadorId', enfriadorId.toString());
-    }
-  }, [enfriadorId]);
-
-  useEffect(() => {
-    if (wsData && Array.isArray(wsData['datos-enfriadores'])) {
-      const enfriadores = wsData['datos-enfriadores'].map((enfriadorPar: any[]) => {
-        const [datosPrincipales, datosSecundarios] = enfriadorPar;
-        return {
-          ...datosPrincipales,
-          ...datosSecundarios
-        };
-      });
-      setTodosLosEnfriadores(enfriadores);
-
-      const enfriadorSeleccionado = enfriadores.find(
-        enfriador => enfriador.id === enfriadorId
-      );
-      if (enfriadorSeleccionado) {
-        setEnfriadorData(enfriadorSeleccionado);
-      }
-    }
-  }, [wsData, enfriadorId]);
+  const { data, isConnected, error } = useWebSocketContext();
+  
+  const enfriadores = data?.['datos-enfriadores']?.map((item: any[]) => ({
+    info: item[0],
+    detalles: item[1]
+  })) || [];
 
   return (
-    <EnfriadorContext.Provider 
-      value={{ 
-        enfriadorId, 
-        setEnfriadorId, 
-        enfriadorData, 
-        todosLosEnfriadores,
-        setTodosLosEnfriadores
-      }}
-    >
+    <EnfriadorContext.Provider value={{ 
+      enfriadores, 
+      isLoading: !isConnected,
+      error 
+    }}>
       {children}
     </EnfriadorContext.Provider>
   );
 };
 
-export const useEnfriador = () => {
+export function useEnfriadorContext() {
   const context = useContext(EnfriadorContext);
   if (!context) {
-    throw new Error("useEnfriador debe ser usado dentro de un EnfriadorProvider");
+    throw new Error('useEnfriadorContext debe ser usado dentro de un EnfriadorProvider');
   }
   return context;
-};
-
-export { EnfriadorContext };
+}

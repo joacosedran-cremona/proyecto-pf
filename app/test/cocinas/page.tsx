@@ -1,0 +1,31 @@
+"use client";
+
+import { useCocinaContext } from "@/context/CocinaContext";
+import { useEffect } from "react";
+
+export default function TestPage() {
+  const { cocinas, isLoading } = useCocinaContext();
+
+  useEffect(() => {
+    if (cocinas) {
+      console.log('Datos recibidos:', cocinas);
+    }
+  }, [cocinas]);
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl mb-4">Prueba WebSocket</h1>
+      <div className="mb-4">
+        Estado: {isLoading ? 
+          <span className="text-green-500">Conectado</span> : 
+          <span className="text-red-500">Desconectado</span>
+        }
+      </div>
+      {cocinas && (
+        <pre className="bg-black p-4 rounded">
+          {JSON.stringify(cocinas, null, 2)}
+        </pre>
+      )}
+    </div>
+  );
+}

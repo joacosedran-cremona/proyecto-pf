@@ -11,17 +11,14 @@ interface SelectorProps {
 }
 
 export default function Selector({ value, onChange, isCocina, selectClasses, optionClasses }: SelectorProps) {
-    const maxItems = isCocina ? 6 : 8;
-    
-    // Convertir el ID real al número visible (1-8 para enfriadores, 1-6 para cocinas)
-    const visibleNumber = isCocina ? value : value - 1;
+    const maxItems = isCocina ? 6 : 14;
     
     const options = Array.from({ length: maxItems }, (_, i) => ({
         value: isCocina ? i + 1 : i + 7,
         label: `${isCocina ? 'Cocina' : 'Enfriador'} ${i + 1} - L${
             isCocina
-              ? (i + 1 <= 3 ? '1' : '2')  // Cocina: 1-3 => Línea 1, 4-6 => Línea 2
-              : (i + 1 <= 4 ? '1' : '2')  // Enfriador: 1-4 => Línea 1, 5-8 => Línea 2
+                ? (i + 1 <= 3 ? '1' : '2')
+                : (i + 1 <= 4 ? '1' : '2')
         }`,          
         visibleNumber: i - 1
     }));

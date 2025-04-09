@@ -23,10 +23,8 @@ export const WebSocketProvider = ({ children }: { children: React.ReactNode }) =
 
 export function useWebSocketContext() {
   const context = useContext(WebSocketContext);
-  
   if (!context) {
     throw new Error('useWebSocketContext debe ser usado dentro de un WebSocketProvider');
   }
-
   return context;
 }
