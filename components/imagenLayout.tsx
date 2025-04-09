@@ -9,6 +9,51 @@ import { useWebSocketContext } from "@/context/WebSocketContext";
 import { useCocinaContext } from "@/context/CocinaContext";
 import { useEnfriadorContext } from "@/context/EnfriadorContext";
 
+interface Equipo {
+  tipo: 'COCINA' | 'ENFRIADOR';
+  id: number;
+  estado: string;
+  tempAguaActual: number;
+  tempProductoActual: number;
+  receta: string;
+  tiempoTranscurrido: number;
+}
+
+interface Linea {
+  id: number;
+  equipos: Equipo[];
+}
+
+interface EquiposData {
+  lineas: Linea[];
+}
+
+interface Section {
+  id: number;
+  name: string;
+  key: string;
+  path: string;
+  style: React.CSSProperties;
+}
+
+interface LayoutTranslations {
+  titulo: string;
+  subtitulo: string;
+  datos: {
+    tempAgua: string;
+    tempIng: string;
+    receta: string;
+    tiempo: string;
+  };
+  equipos: {
+    [key: string]: string;
+  };
+  tooltip: {
+    cocina: string;
+    enfriador: string;
+  };
+}
+
 const h = "27.5%";
 const topL1 = "9.3%";
 const topL2 = "63%";
@@ -57,6 +102,76 @@ function getEstadoColor(estado: string): string {
 
 export function ImagenLayout() {
   const { t } = useTranslation('layout');
+  const { isConnected } = useWebSocketContext();
+  const { cocinas } = useCocinaContext();
+  const { enfriadores } = useEnfriadorContext();
+
+  const sections: Section[] = useMemo(() => {
+    const generateSections = (config: any[], path: string, type: 'cocinas' | 'enfriadores') => {
+      return config.map(({ id, key, position, line }) => {
+        const translatedName = t(`equipos.${key}`, { defaultValue: key });
+        return {
+          id: type === 'enfriadores' ? id : id,
+          name: translatedName,
+          key: key,
+          path,
+          style: {
+            top: line === 1 ? topL1 : topL2,
+            left: leftPositions[position as keyof typeof leftPositions],
+            width,
+            height: h
+          }
+        };
+      });
+    };
+
+    return [
+      ...generateSections(sectionConfig.cocinas, "/cocinas", 'cocinas'),
+      ...generateSections(sectionConfig.enfriadores, "/enfriadores", 'enfriadores')
+    ];
+  }, [t]);
+
+  const getEquipoData = (section: Section): Equipo | undefined => {
+    const tipoEquipo = section.path.slice(1) === 'cocinas' ? 'COCINA' : 'ENFRIADOR';
+    
+    if (tipoEquipo === 'COCINA') {
+      const cocina = cocinas.find(c => c.info.id === section.id);
+      if (cocina) {
+        return {
+          tipo: 'COCINA',
+          id: cocina.info.id,
+          estado: cocina.info.estado,
+          tempAguaActual: cocina.info.temp_Agua,
+          tempProductoActual: cocina.info.temp_Ingreso,
+          receta: cocina.info.receta,
+          tiempoTranscurrido: cocina.info.tiempoTranscurrido
+        };
+      }
+    } else {
+      const enfriador = enfriadores.find(e => e.info.id === section.id);
+      if (enfriador) {
+        return {
+          tipo: 'ENFRIADOR',
+          id: enfriador.info.id,
+          estado: enfriador.info.estado,
+          tempAguaActual: enfriador.info.temp_Agua,
+          tempProductoActual: enfriador.info.temp_Ingreso,
+          receta: enfriador.info.receta,
+          tiempoTranscurrido: enfriador.info.tiempoTranscurrido
+        };
+      }
+    }
+
+    return {
+      tipo: tipoEquipo,
+      id: section.id,
+      estado: 'INACTIVO',
+      tempAguaActual: 0,
+      tempProductoActual: 0,
+      receta: '-',
+      tiempoTranscurrido: 0
+    };
+  };
 
   return (
     <div className="w-auto h-full relative flex justify-center items-center">
@@ -114,13 +229,13 @@ export function ImagenLayout() {
                   ...recuadroStyle,
                   color: 'white',
                   fontFamily: 'sans-serif',
-                  textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.8)', // emula contorno
                 }}
                 onClick={() => {
                   if (tipoEquipo === 'cocina') {
                     localStorage.setItem('lastCocinaId', String(section.id));
                   } else {
-                    localStorage.setItem('lastEnfriadorId', String(section.id - 6));
+                    localStorage.setItem('lastEnfriadorId', String(section.id));
                   }
                 }}
               >
