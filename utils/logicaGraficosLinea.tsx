@@ -1,27 +1,31 @@
 import { Paso } from './interface';
 
-export const transformData = (data: Paso[]) => {
+export const transformData = (data: { historial: Paso[] }[]) => {
     const labels: string[] = [];
     const tempIngrData: { x: number, y: number }[] = [];
     const tempAguaData: { x: number, y: number }[] = [];
     const tempProdData: { x: number, y: number }[] = [];
 
-    // Iterar directamente sobre los pasos
+    // Iterar sobre los objetos que contienen historial
     data.forEach(item => {
-        const tiempo = item.tiempo;
-        if (tiempo !== null && !isNaN(tiempo)) {
-            // Agregar temp_Ing a los datos
-            if (item.temp_Ing !== null && item.temp_Ing !== 'N/A' && typeof item.temp_Ing === 'number') {
-                tempIngrData.push({ x: tiempo, y: item.temp_Ing });
-            }
-            // Agregar temp_Agua a los datos
-            if (item.temp_Agua !== null && item.temp_Agua !== 'N/A' && typeof item.temp_Agua === 'number') {
-                tempAguaData.push({ x: tiempo, y: item.temp_Agua });
-            }
-            // Agregar temp_Ingreso a los datos
-            if (item.temp_Ingreso !== null && item.temp_Ingreso !== 'N/A' && typeof item.temp_Ingreso === 'number') {
-                tempProdData.push({ x: tiempo, y: item.temp_Ingreso });
-            }
+        if (item.historial && Array.isArray(item.historial)) {
+            item.historial.forEach(paso => {
+                const tiempo = paso.tiempo;
+                if (tiempo !== null && !isNaN(tiempo)) {
+                    // Agregar temp_Ing a los datos
+                    if (paso.temp_Ing !== null && paso.temp_Ing !== 'N/A' && typeof paso.temp_Ing === 'number') {
+                        tempIngrData.push({ x: tiempo, y: paso.temp_Ing });
+                    }
+                    // Agregar temp_Agua a los datos
+                    if (paso.temp_Agua !== null && paso.temp_Agua !== 'N/A' && typeof paso.temp_Agua === 'number') {
+                        tempAguaData.push({ x: tiempo, y: paso.temp_Agua });
+                    }
+                    // Agregar temp_Ingreso a los datos
+                    if (paso.temp_Ingreso !== null && paso.temp_Ingreso !== 'N/A' && typeof paso.temp_Ingreso === 'number') {
+                        tempProdData.push({ x: tiempo, y: paso.temp_Ingreso });
+                    }
+                }
+            });
         }
     });
 
