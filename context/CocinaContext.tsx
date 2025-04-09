@@ -14,7 +14,7 @@ interface CocinaInfo {
   niv_Agua: number;
   receta: string;
   receta_paso_actual: number;
-  tiempoTranscurrido: number;
+  tiempoTranscurrido: string;
 }
 
 interface CocinaDetalles {

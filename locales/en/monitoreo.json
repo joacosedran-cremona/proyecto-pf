@@ -25,7 +25,8 @@
         "filtroSuccion": "Water Suction Filter",
         "valvulaAmoniaco": "Ammonia Valve",
         "vaporSerp": "Coil Steam",
-        "vaporVivo": "Live Steam"
+        "vaporVivo": "Live Steam",
+        "vaporLim":"Cleaning Live Steam"
     },
     "titulo":
     {

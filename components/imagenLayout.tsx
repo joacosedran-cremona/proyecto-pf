@@ -16,7 +16,7 @@ interface Equipo {
   tempAguaActual: number;
   tempProductoActual: number;
   receta: string;
-  tiempoTranscurrido: number;
+  tiempoTranscurrido: string;
 }
 
 interface Linea {
@@ -169,7 +169,7 @@ export function ImagenLayout() {
       tempAguaActual: 0,
       tempProductoActual: 0,
       receta: '-',
-      tiempoTranscurrido: 0
+      tiempoTranscurrido: "00:00"
     };
   };
 
@@ -281,14 +281,12 @@ export function ImagenLayout() {
                       >
                         Receta: {equipo.receta ?? '-'}
                       </p>
-                      {equipo.tiempoTranscurrido && (
-                        <p
-                          className="font-bold"
-                          style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
-                        >
-                          Tiempo: {equipo.tiempoTranscurrido}
-                        </p>
-                      )}
+                      <p
+                        className="font-bold"
+                        style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
+                      >
+                        Tiempo: {equipo.tiempoTranscurrido}
+                      </p>
                     </div>
                   </div>
                 )}

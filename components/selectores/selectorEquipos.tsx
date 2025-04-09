@@ -11,7 +11,7 @@ interface SelectorProps {
 }
 
 export default function Selector({ value, onChange, isCocina, selectClasses, optionClasses }: SelectorProps) {
-    const maxItems = isCocina ? 6 : 14;
+    const maxItems = isCocina ? 6 : 8;
     
     const options = Array.from({ length: maxItems }, (_, i) => ({
         value: isCocina ? i + 1 : i + 7,

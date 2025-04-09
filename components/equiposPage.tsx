@@ -87,7 +87,8 @@ export default function EquipoPage({type}: EquipoPageProps) {
         } else if (!isCocina && 'valvula_amoniaco' in sectorIO) {
             return [
                 ...baseIO,
-                { label: t('sectorIO.valvulaAmoniaco'), value: sectorIO.valvula_amoniaco }
+                { label: t('sectorIO.valvulaAmoniaco'), value: sectorIO.valvula_amoniaco },
+                { label: t('sectorIO.vaporLim'), value: sectorIO.vapor_vivo_lim }
             ];
         }
     
