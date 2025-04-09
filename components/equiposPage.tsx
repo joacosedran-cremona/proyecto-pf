@@ -46,14 +46,19 @@ export default function EquipoPage({type}: EquipoPageProps) {
     const borderColor = isCocina ? "orange" : "blue";
     const bgColor = isCocina ? "orange" : "blue";
 
-    // Datos formateados para los componentes hijos
-    const datosEquipo = {
-        temp_Agua: equipo?.info.temp_Agua || 0,
-        temp_Prod: equipo?.info.temp_Prod || 0,
-        temp_Ingreso: equipo?.info.temp_Ingreso || 0,
-        temp_Chiller: equipo?.info.temp_Chiller || 0,
-        niv_Agua: equipo?.info.niv_Agua || 0
+    const labelToKeyMap: Record<string, string> = {
+        [t('estadoEquipo.tempIngreso')]: 'tempIngreso',
+        [t('estadoEquipo.tempAgua')]: 'tempAgua',
+        [t('estadoEquipo.tempProd')]: 'tempProd',
+        [t('estadoEquipo.nivelAgua')]: 'nivelAgua'
     };
+
+    const datosEquipo = [
+        { label: t('estadoEquipo.tempIngreso'), value: equipo?.info.temp_Ingreso ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.tempAgua'), value: equipo?.info.temp_Agua ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.tempProd'), value: equipo?.info.temp_Prod ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.nivelAgua'), value: equipo?.info.niv_Agua ?? "N/A", unit: "mm" }
+    ];
 
     const datosCiclo = [
         { label: t('cicloActivo.paso'), value: equipo?.info.receta_paso_actual || "N/A" },
@@ -93,6 +98,11 @@ export default function EquipoPage({type}: EquipoPageProps) {
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set('id', String(newId));
         window.history.pushState(null, '', `?${searchParams.toString()}`);
+    };
+
+    const formattedDisplayData = (value: string | number, unit?: string) => {
+        if (value === "N/A") return value;
+        return unit ? `${value} ${unit}` : value;
     };
 
     return (

@@ -5,6 +5,7 @@
         "tempIngreso": "Inlet Temp.",
         "tempAgua": "Water Temp.",
         "tempIng": "Inlet Temp",
+        "tempProd": "Product Temp",
         "nivelAgua": "Water Level"
     },
     "cicloActivo":
