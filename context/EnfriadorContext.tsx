@@ -39,7 +39,7 @@ interface SectorIO {
   tapa_estado_acc: string;
 }
 
-interface EnfriadorCompleto {
+export interface EnfriadorCompleto {
   info: EnfriadorInfo;
   detalles: EnfriadorDetalles;
 }

@@ -43,8 +43,8 @@ export default function EquipoPage({type}: EquipoPageProps) {
     // Variables derivadas
     const isCocina = type === "cocina";
     const color = isCocina ? "orange" : "blue";
-    const borderColor = isCocina ? "orange" : "blue";
-    const bgColor = isCocina ? "orange" : "blue";
+    const borderColor = isCocina ? "border-orange" : "border-blue";
+    const bgColor = isCocina ? "bg-oranget" : "bg-bluet";
 
     const labelToKeyMap: Record<string, string> = {
         [t('estadoEquipo.tempIngreso')]: 'tempIngreso',
@@ -62,15 +62,38 @@ export default function EquipoPage({type}: EquipoPageProps) {
 
     const datosCiclo = [
         { label: t('cicloActivo.paso'), value: equipo?.info.receta_paso_actual || "N/A" },
-        { label: t('cicloActivo.receta'), value: equipo?.detalles.num_receta || '-' },
+        { label: t('cicloActivo.receta'), value: equipo?.detalles.num_receta || 'N/A' },
         { label: t('cicloActivo.cantTorres'), value: equipo?.detalles.cant_torres || "N/A" },
         { label: t('cicloActivo.tiempo'), value: equipo?.info.tiempoTranscurrido ?? "N/A" },
         { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_fin ?? "N/A" }
     ];
     
     const datosIO = useMemo(() => {
-        if (!equipo?.detalles.sector_io[0]) return [];
+        // Definimos los sensores base que siempre deben mostrarse
+        const defaultBaseIO = [
+            { label: t('sectorIO.bomba'), value: false },
+            { label: t('sectorIO.entradaAgua'), value: false },
+            { label: t('sectorIO.filtroSuccion'), value: false }
+        ];
     
+        // Si no hay datos, retornamos los sensores por defecto según el tipo
+        if (!equipo?.detalles.sector_io[0]) {
+            if (isCocina) {
+                return [
+                    ...defaultBaseIO,
+                    { label: t('sectorIO.vaporSerp'), value: false },
+                    { label: t('sectorIO.vaporVivo'), value: false }
+                ];
+            } else {
+                return [
+                    ...defaultBaseIO,
+                    { label: t('sectorIO.valvulaAmoniaco'), value: false },
+                    { label: t('sectorIO.vaporLim'), value: false }
+                ];
+            }
+        }
+    
+        // Si hay datos, seguimos con la lógica normal
         const sectorIO = equipo.detalles.sector_io[0] as SectorIOType;
         const baseIO = [
             { label: t('sectorIO.bomba'), value: sectorIO.bomba_recirculacion },
@@ -120,10 +143,10 @@ export default function EquipoPage({type}: EquipoPageProps) {
                 />
             </div>
             <p className={`${bgColor} flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
-            {t('titulo.receta')}: {equipo?.detalles.nom_receta ?? "N/A"}
+                {t('titulo.receta')}: {equipo?.detalles.nom_receta ?? "N/A"}
             </p>
             <p className={`bg-black flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
-            {t('titulo.estado')}: {equipo?.info.estado ?? "N/A"}
+                {t('titulo.estado')}: {equipo?.info.estado ?? "N/A"}
             </p>
         </div>
 

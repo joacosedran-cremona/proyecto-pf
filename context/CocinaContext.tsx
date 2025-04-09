@@ -39,7 +39,7 @@ interface SectorIO {
   tapa_estado_acc: string;
 }
 
-interface CocinaCompleta {
+export interface CocinaCompleta {
   info: CocinaInfo;
   detalles: CocinaDetalles;
 }
