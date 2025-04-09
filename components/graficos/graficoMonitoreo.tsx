@@ -7,6 +7,7 @@ import { transformData } from '../../utils/logicaGraficosLinea';
 import { Button, Spinner } from '@heroui/react';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useTranslation } from 'react-i18next';
+import { datosTransformados } from '../../context/LineaContext';
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -18,32 +19,22 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
     const [loading, setLoading] = useState<boolean>(true);
     const [equipo, setEquipo] = useState<any>(null); // Guarda el equipo una vez encontrado
 
-    const { lineaSeleccionada, lineasData } = useLinea();
+    const { lineaSeleccionada, datosTransformados } = useLinea();
 
     useEffect(() => {
-        console.log('lineasData:', lineasData); // 🔍 VERIFICA QUÉ TRAE
         setLoading(true);
-        if (!lineasData) return;
+        if (!datosTransformados) return;
     
-        let encontrado;
-    
-        // Ajustar la estructura de los datos
-        const cocinas = Array.isArray(lineasData['datos-cocinas'])
-            ? lineasData['datos-cocinas'].map((grupo) => grupo[1])
-            : [];
-        const enfriadores = Array.isArray(lineasData['datos-enfriadores'])
-            ? lineasData['datos-enfriadores'].map((grupo) => grupo[1])
-            : [];
-    
+        let equipo;
         if (contextType === 'cocinas') {
-            encontrado = cocinas.find(e => e.num_cocina === id);
-        } else if (contextType === 'enfriadores') {
-            encontrado = enfriadores.find(e => e.num_enfriador === (id - 6));
+            equipo = datosTransformados.cocinas.find(e => e.num_cocina === id);
+        } else {
+            equipo = datosTransformados.enfriadores.find(e => e.num_enfriador === (id - 6));
         }
     
-        setEquipo(encontrado);
+        setEquipo(equipo);
     
-        if (!encontrado || !encontrado.historial || !chartRef.current) return;
+        if (!equipo || !equipo.grafico || !chartRef.current) return;
     
         const ctx = chartRef.current.getContext('2d');
         if (!ctx) return;
@@ -73,7 +64,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
             }
         };
     
-        const chartData = transformData(encontrado.historial);
+        const chartData = transformData(equipo.historial);
     
         const nombreEquipo = contextType === 'cocinas'
             ? `${t('equipo.cocina')} ${id}`
@@ -201,10 +192,10 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
         setLoading(false);
     
         return () => chartInstanceRef.current?.destroy();
-    }, [lineasData, lineaSeleccionada, contextType, id, t]);
+    }, [datosTransformados, contextType, id, t]);
 
     // Validaciones seguras
-    if (!lineasData || !equipo) {
+    if (!datosTransformados || !equipo) {
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />

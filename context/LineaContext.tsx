@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useWebSocketContext } from "@/context/WebSocketContext";
+import { transformData } from '../utils/logicaGraficos';
 
 interface Paso {
     id: number;
@@ -23,7 +24,6 @@ interface CocinaData {
     num_cocina: number;
     tempIng: string | number | null;
     tempAgua: string | number | null;
-    tempIng: string | number | null;
     nivAgua: string | number | null;
     nom_receta: string | null;
     num_receta: number | null;
@@ -40,7 +40,6 @@ interface EnfriadorData {
     num_enfriador: number;
     tempIng: string | number | null;
     tempAgua: string | number | null;
-    tempIng: string | number | null;
     nivAgua: string | number | null;
     nom_receta: string | null;
     num_receta: number | null;
@@ -67,20 +66,45 @@ interface LineaContextType {
 
 const LineaContext = createContext<LineaContextType | undefined>(undefined);
 
+// LineaContext.tsx
 export const LineaProvider = ({ children }: { children: React.ReactNode }) => {
     const [lineaSeleccionada, setLineaSeleccionada] = useState<number>(1);
     const { data } = useWebSocketContext();
 
     const [lineasData, setLineasData] = useState<LineaData | null>(null);
+    const [datosTransformados, setDatosTransformados] = useState<any | null>(null);
 
     useEffect(() => {
         if (data) {
             setLineasData(data);
+
+            // Transformamos una sola vez
+            const cocinas = Array.isArray(data['datos-cocinas'])
+                ? data['datos-cocinas'].map((grupo) => grupo[1])
+                : [];
+
+            const enfriadores = Array.isArray(data['datos-enfriadores'])
+                ? data['datos-enfriadores'].map((grupo) => grupo[1])
+                : [];
+
+            // Aplicamos transformData a cada equipo
+            const transformado = {
+                cocinas: cocinas.map((c) => ({
+                    ...c,
+                    grafico: transformData(c.historial)
+                })),
+                enfriadores: enfriadores.map((e) => ({
+                    ...e,
+                    grafico: transformData(e.historial)
+                }))
+            };
+
+            setDatosTransformados(transformado);
         }
     }, [data]);
 
     return (
-        <LineaContext.Provider value={{ lineaSeleccionada, setLineaSeleccionada, lineasData, setLineasData }}>
+        <LineaContext.Provider value={{ lineaSeleccionada, setLineaSeleccionada, lineasData, datosTransformados }}>
             {children}
         </LineaContext.Provider>
     );
