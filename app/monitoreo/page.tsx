@@ -11,7 +11,6 @@ const lineas = {
 
 const Monitoreo = () => {
     const { lineaSeleccionada, lineasData } = useLinea();
-    if (!lineasData) return <div>Loading...</div>;
 
     const linea = lineas[lineaSeleccionada as keyof typeof lineas];
 

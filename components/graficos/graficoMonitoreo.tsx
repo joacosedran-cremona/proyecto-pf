@@ -7,6 +7,7 @@ import { transformData } from '../../utils/logicaGraficosLinea';
 import { Button, Spinner } from '@heroui/react';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useTranslation } from 'react-i18next';
+import 'chartjs-adapter-date-fns';
 import { datosTransformados } from '../../context/LineaContext';
 
 Chart.register(...registerables);
@@ -119,19 +120,25 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                             label: (context) => {
                                 const datasetLabel = context.dataset.label || t('datos.temperatura');
                                 const temperature = context.parsed.y;
-                                const totalSeconds = Math.floor(context.parsed.x);
-                                const hours = Math.floor(totalSeconds / 3600);
-                                const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                const seconds = totalSeconds % 60;
-                                const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                                // Convertir el tiempo a un objeto Date
+                                const rawTime = context.raw.x; // Asegúrate de que `x` contiene el valor de tiempo
+                                const date = new Date(rawTime);
+                    
+                                // Formatear la fecha y hora
+                                const hours = String(date.getHours()).padStart(2, '0');
+                                const minutes = String(date.getMinutes()).padStart(2, '0');
+                                const seconds = String(date.getSeconds()).padStart(2, '0');
+                                const timeFormatted = `${hours}:${minutes}:${seconds}`;
+                    
                                 return [
                                     `${t('tooltip')}: ${timeFormatted}`,
-                                    `${datasetLabel}: ${temperature}°C`
+                                    `${datasetLabel}: ${temperature.toFixed(2)}°C`
                                 ];
                             },
                             title: () => ''
                         }
-                    }
+                    }                    
                 },
                 transitions: {
                     zoom: {
@@ -156,20 +163,17 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores'; id: number }> 
                         }
                     },
                     x: {
-                        type: 'linear',
-                        position: 'bottom',
-                        min: 0,
-                        ticks: {
-                            stepSize: 10,
-                            callback: (value) => {
-                                const totalSeconds = Math.floor(Number(value));
-                                const hours = Math.floor(totalSeconds / 3600);
-                                const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+                        type: 'time',
+                        time: {
+                            unit: 'minute',
+                            tooltipFormat: 'HH:mm:ss', // para tooltip
+                            displayFormats: {
+                                minute: 'HH:mm',
+                                hour: 'HH:mm'
                             }
                         },
-                        afterBuildTicks: (axis) => {
-                            axis.ticks = axis.ticks.filter(t => t.value >= 0);
+                        ticks: {
+                            color: '#fff',
                         },
                         title: {
                             display: true,

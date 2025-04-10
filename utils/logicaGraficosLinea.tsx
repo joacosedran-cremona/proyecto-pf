@@ -9,21 +9,20 @@ export const transformData = (data: Paso[]) => {
     // Iterar directamente sobre los pasos
     data.forEach(item => {
         const tiempo = item.tiempo;
-        if (tiempo !== null && !isNaN(tiempo)) {
-            // Agregar temp_Ing a los datos
+        const tiempoMs = new Date(tiempo).getTime();
+    
+        if (!isNaN(tiempoMs)) {
             if (item.temp_Ing !== null && item.temp_Ing !== 'N/A' && typeof item.temp_Ing === 'number') {
-                tempIngrData.push({ x: tiempo, y: item.temp_Ing });
+                tempIngrData.push({ x: tiempoMs, y: item.temp_Ing });
             }
-            // Agregar temp_Agua a los datos
             if (item.temp_Agua !== null && item.temp_Agua !== 'N/A' && typeof item.temp_Agua === 'number') {
-                tempAguaData.push({ x: tiempo, y: item.temp_Agua });
+                tempAguaData.push({ x: tiempoMs, y: item.temp_Agua });
             }
-            // Agregar temp_Ingreso a los datos
             if (item.temp_Ingreso !== null && item.temp_Ingreso !== 'N/A' && typeof item.temp_Ingreso === 'number') {
-                tempProdData.push({ x: tiempo, y: item.temp_Ingreso });
+                tempProdData.push({ x: tiempoMs, y: item.temp_Ingreso });
             }
         }
-    });
+    });    
 
     return {
         labels,
