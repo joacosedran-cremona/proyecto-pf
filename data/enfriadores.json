@@ -1,0 +1,1330 @@
+[
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 7,
+        "estado": "FALLA",
+        "temp_Agua": 1,
+        "temp_Prod": 1,
+        "temp_Ingreso": 1,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Jamon",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 1,
+        "num_receta": 1,
+        "nom_receta": "Jamon",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": []
+    }
+    },
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 8,
+        "estado": "ENFRIANDO",
+        "temp_Agua": 1,
+        "temp_Prod": 1,
+        "temp_Ingreso": 2,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 2,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": [
+        {
+            "id": 1,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 2,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 3,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 4,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 5,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 6,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 7,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 8,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 9,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 10,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 11,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 12,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 13,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 14,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 15,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 16,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 17,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 18,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 19,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 20,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 21,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 22,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 23,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 24,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 25,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 26,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 27,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 28,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 29,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 30,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 31,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 32,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 33,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 34,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 35,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 36,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 37,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 2,
+            "estado": "ENFRIANDO"
+        }
+        ]
+    }
+    },
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 9,
+        "estado": "ENFRIANDO",
+        "temp_Agua": 1,
+        "temp_Prod": 1,
+        "temp_Ingreso": 3,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 3,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": [
+        {
+            "id": 1,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 2,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 3,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 4,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 5,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 6,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 7,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 8,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 9,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 10,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 11,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 12,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 13,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 14,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 15,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 16,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 17,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 18,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 19,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 20,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 21,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 22,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 23,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 24,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 25,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 26,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 27,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 28,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 29,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 30,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 31,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 32,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 33,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 34,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 35,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 36,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 37,
+            "tiempo": 1,
+            "temp_Agua": 1,
+            "temp_Ingreso": 3,
+            "estado": "ENFRIANDO"
+        }
+        ]
+    }
+    },
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 10,
+        "estado": "INACTIVO",
+        "temp_Agua": 1,
+        "temp_Prod": 1,
+        "temp_Ingreso": 4,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Paleta",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 4,
+        "num_receta": 1,
+        "nom_receta": "Paleta",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": []
+    }
+    },
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 11,
+        "estado": "ENFRIANDO",
+        "temp_Agua": 2,
+        "temp_Prod": 1,
+        "temp_Ingreso": 5,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Jamon",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 5,
+        "num_receta": 1,
+        "nom_receta": "Jamon",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": [
+        {
+            "id": 1,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 2,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 3,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 4,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 5,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 6,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 7,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 8,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 9,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 10,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 11,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 12,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 13,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 14,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 15,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 16,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 17,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 18,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 19,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 20,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 21,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 22,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 23,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 24,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 25,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 26,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 27,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 28,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 29,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 30,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 31,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 32,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 33,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 34,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 35,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 36,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 37,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 5,
+            "estado": "ENFRIANDO"
+        }
+        ]
+    }
+    },
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 12,
+        "estado": "INACTIVO",
+        "temp_Agua": 2,
+        "temp_Prod": 1,
+        "temp_Ingreso": 6,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 6,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": []
+    }
+    },
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 13,
+        "estado": "ENFRIANDO",
+        "temp_Agua": 2,
+        "temp_Prod": 1,
+        "temp_Ingreso": 7,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Jamon",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 7,
+        "num_receta": 1,
+        "nom_receta": "Jamon",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": [
+        {
+            "id": 1,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 2,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 3,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 4,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 5,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 6,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 7,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 8,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 9,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 10,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 11,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 12,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 13,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 14,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 15,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 16,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 17,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 18,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 19,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 20,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 21,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 22,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 23,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 24,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 25,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 26,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 27,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 28,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 29,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 30,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 31,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 32,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 33,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 34,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 35,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 36,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        },
+        {
+            "id": 37,
+            "tiempo": 1,
+            "temp_Agua": 2,
+            "temp_Ingreso": 7,
+            "estado": "ENFRIANDO"
+        }
+        ]
+    }
+    },
+    {
+    "info": {
+        "tipo": "ENFRIADOR",
+        "id": 14,
+        "estado": "FALLA",
+        "temp_Agua": 2,
+        "temp_Prod": 1,
+        "temp_Ingreso": 8,
+        "temp_Chiller": 1,
+        "niv_Agua": 1,
+        "receta": "Paleta",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+    },
+    "detalles": {
+        "num_enfriador": 8,
+        "num_receta": 1,
+        "nom_receta": "Paleta",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+        {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+        }
+        ],
+        "historial": []
+    }
+    }
+]

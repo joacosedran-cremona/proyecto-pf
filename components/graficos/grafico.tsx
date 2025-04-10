@@ -17,11 +17,11 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const { cocinaData } = useCocinaContext();
-    const { enfriadorData } = useEnfriadorContext();
+    const { cocinas } = useCocinaContext();
+    const { enfriadores } = useEnfriadorContext();
 
     useEffect(() => {
-        const data = contextType === 'cocinas' ? cocinaData : enfriadorData;
+        const data = contextType === 'cocinas' ? cocinas : enfriadores;
         if (!data || !chartRef.current) {
             setLoading(true);
             return;
@@ -192,7 +192,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
         setLoading(false);
 
         return () => chartInstance.destroy();
-    }, [cocinaData, enfriadorData, contextType, t]);
+    }, [cocinas, enfriadores, contextType, t]);
 
     const resetZoom = () => {
         if (chartInstanceRef.current) {
@@ -200,7 +200,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
         }
     };
 
-    const equipo = contextType === 'cocinas' ? cocinaData : enfriadorData;
+    const equipo = contextType === 'cocinas' ? cocinas : enfriadores;
 
     if (!equipo) {
         return (
