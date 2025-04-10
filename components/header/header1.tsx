@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Link from "next/link";
 import Image from "next/image";
 import { VscAccount, VscBell  } from "react-icons/vsc";
-import { CambioIdioma } from "../traduccion/cambioIdioma";
+import DropdownBanderas from '@/components/traduccion/dropdownBanderas';
 
 interface Header1Props {
   currentPath: string;
@@ -13,7 +13,7 @@ interface Header1Props {
 interface OpcionIcono {
   id: number;
   url?: string;
-  icon: JSX.Element;
+  icon: JSX.Element | React.ReactNode;
 }
 
 interface OpcionMenu {
@@ -26,6 +26,7 @@ interface OpcionMenu {
 const opcionesIconos: OpcionIcono[] = [
   { id: 1, icon: <VscAccount className="w-auto h-full" /> },
   { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-full" /> },
+  { id: 3, icon: <DropdownBanderas /> },
 ];
 
 const Header1: React.FC<Header1Props> = ({ currentPath }) => {
@@ -42,7 +43,7 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
     <nav className="fixed top-0 left-0 right-0 z-50 flex flex-row w-full p-20 h-[65px] bg-[#EEE]">
       <div className="flex flex-row h-full w-[30%] justify-start gap-30">
         {opcionesIconos.map(({ id, url, icon }) => (
-          <div key={id} className="h-full w-auto">
+          <div key={id}>
             {url ? (
               <Link href={url}>
                 {icon}
@@ -59,7 +60,6 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
       </p>
 
       <div className="flex flex-row w-[30%] justify-end">
-        <CambioIdioma />
         <ul className="flex flex-row w-full h-full gap-[1vw] justify-end">
           {opcionesMenu.map(({ id, url, text }) => (
             <li key={id} className="h-full">

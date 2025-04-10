@@ -93,7 +93,7 @@ const sectionConfig = {
 function getEstadoColor(estado: string): string {
   const estadoUpper = estado.toUpperCase();
   if (estadoUpper === "FALLA") return "#C13D";
-  if (["COCINANDO", "PRE-CALENTADO", "ENFRIANDO", "PRE-ENFRIADO"].includes(estadoUpper)) return "#9b9D";
+  if (["COCINANDO", "PRE-CALENTAMIENTO", "ENFRIANDO", "PRE-ENFRIAMIENTO"].includes(estadoUpper)) return "#9b9D";
   if (estadoUpper === "PAUSA") return "#BB8D";
   if (estadoUpper === "FINALIZADO") return "#9bbD";
   if (estadoUpper === "INACTIVO") return "#666D";
