@@ -4,11 +4,11 @@
     "tipo": "COCINA",
     "id": 1,
     "estado": "OPERATIVO",
-    "temp_Agua": 1,
-    "temp_Prod": 1,
-    "temp_Ingreso": 1,
-    "temp_Chiller": 1,
-    "niv_Agua": 1,
+    "temp_agua": 1,
+    "temp_prod": 1,
+    "temp_ingreso": 1,
+    "temp_chiller": 1,
+    "niv_agua": 1,
     "receta": "JAMON TIPO 1",
     "receta_paso_actual": 1,
     "tiempoTranscurrido": 1
@@ -36,232 +36,232 @@
         {
         "id": 1,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 2,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 3,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 4,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 5,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 6,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 7,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 8,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 9,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 10,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 11,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 12,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 13,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 14,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 15,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 16,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 17,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 18,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 19,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 20,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 21,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 22,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 23,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 24,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 25,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 26,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 27,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 28,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 29,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 30,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 31,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 32,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 33,
         "tiempo": 1,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         }
     ]
@@ -272,11 +272,11 @@
     "tipo": "COCINA",
     "id": 2,
     "estado": "INACTIVO",
-    "temp_Agua": 1,
-    "temp_Prod": 1,
-    "temp_Ingreso": 2,
-    "temp_Chiller": 1,
-    "niv_Agua": 1,
+    "temp_agua": 1,
+    "temp_prod": 1,
+    "temp_ingreso": 2,
+    "temp_chiller": 1,
+    "niv_agua": 1,
     "receta": "Pate",
     "receta_paso_actual": 1,
     "tiempoTranscurrido": 1
@@ -308,11 +308,11 @@
     "tipo": "COCINA",
     "id": 3,
     "estado": "FINALIZADO",
-    "temp_Agua": 1,
-    "temp_Prod": 1,
-    "temp_Ingreso": 3,
-    "temp_Chiller": 1,
-    "niv_Agua": 1,
+    "temp_agua": 1,
+    "temp_prod": 1,
+    "temp_ingreso": 3,
+    "temp_chiller": 1,
+    "niv_agua": 1,
     "receta": "Paleta",
     "receta_paso_actual": 1,
     "tiempoTranscurrido": 1
@@ -344,11 +344,11 @@
     "tipo": "COCINA",
     "id": 4,
     "estado": "OPERATIVO",
-    "temp_Agua": 2,
-    "temp_Prod": 1,
-    "temp_Ingreso": 4,
-    "temp_Chiller": 1,
-    "niv_Agua": 1,
+    "temp_agua": 2,
+    "temp_prod": 1,
+    "temp_ingreso": 4,
+    "temp_chiller": 1,
+    "niv_agua": 1,
     "receta": "Paleta",
     "receta_paso_actual": 1,
     "tiempoTranscurrido": 1
@@ -376,232 +376,232 @@
         {
         "id": 1,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 2,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 3,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 4,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 5,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 6,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 7,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 8,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 9,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 10,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 11,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 12,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 13,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 14,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 15,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 16,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 17,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 18,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 19,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 20,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 21,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 22,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 23,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 24,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 25,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 26,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 27,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 28,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 29,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 30,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 31,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 32,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 33,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         }
     ]
@@ -612,11 +612,11 @@
     "tipo": "COCINA",
     "id": 5,
     "estado": "FINALIZADO",
-    "temp_Agua": 2,
-    "temp_Prod": 1,
-    "temp_Ingreso": 5,
-    "temp_Chiller": 1,
-    "niv_Agua": 1,
+    "temp_agua": 2,
+    "temp_prod": 1,
+    "temp_ingreso": 5,
+    "temp_chiller": 1,
+    "niv_agua": 1,
     "receta": "Pate",
     "receta_paso_actual": 1,
     "tiempoTranscurrido": 1
@@ -648,11 +648,11 @@
     "tipo": "COCINA",
     "id": 6,
     "estado": "OPERATIVO",
-    "temp_Agua": 2,
-    "temp_Prod": 1,
-    "temp_Ingreso": 6,
-    "temp_Chiller": 1,
-    "niv_Agua": 1,
+    "temp_agua": 2,
+    "temp_prod": 1,
+    "temp_ingreso": 6,
+    "temp_chiller": 1,
+    "niv_agua": 1,
     "receta": "Pate",
     "receta_paso_actual": 1,
     "tiempoTranscurrido": 1
@@ -680,232 +680,232 @@
         {
         "id": 1,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 2,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 3,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 4,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 5,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 6,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 7,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 8,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 9,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 10,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 11,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 12,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 13,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 14,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 15,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 16,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 17,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 18,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 19,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 20,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 21,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 22,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 23,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 24,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 25,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 26,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 27,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 28,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 29,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 30,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 31,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 32,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         },
         {
         "id": 33,
         "tiempo": 2,
-        "temp_Agua": 1,
-        "temp_Ingreso": 1,
+        "temp_agua": 1,
+        "temp_ingreso": 1,
         "estado": "OPERATIVO"
         }
     ]

@@ -2,11 +2,11 @@ interface DatosEquipo {
   tipo: string;
   id: number;
   estado: string;
-  temp_Agua: number;
-  temp_Prod: number;
-  temp_Ingreso: number;
-  temp_Chiller: number;
-  niv_Agua: number;
+  temp_agua: number;
+  temp_prod: number;
+  temp_ingreso: number;
+  temp_chiller: number;
+  niv_agua: number;
   receta: string;
   receta_paso_actual: number;
   tiempoTranscurrido: string; // Cambiado a string
@@ -15,8 +15,8 @@ interface DatosEquipo {
 interface HistorialItem {
   id_historial: number;
   tiempo: string; // Cambiado a string
-  temp_Agua: number;
-  temp_Ingreso: number;
+  temp_agua: number;
+  temp_ingreso: number;
   estado: string;
 }
 
@@ -74,8 +74,8 @@ export const transformData = (
     // Convertir la diferencia de tiempo a segundos relativos
     const tiempoRelativo = getTimestamp(item.tiempo) - tiempoInicial;
     tiempos.push(tiempoRelativo);
-    tempAgua.push(item.temp_Agua);
-    tempIngreso.push(item.temp_Ingreso);
+    tempAgua.push(item.temp_agua);
+    tempIngreso.push(item.temp_ingreso);
   });
 
   const chartData = {

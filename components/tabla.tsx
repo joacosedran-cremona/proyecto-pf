@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
-import alertas from "@/public/data/alertas.json";
+
 import { useTranslation } from "react-i18next";
 
 export type Alerta = {

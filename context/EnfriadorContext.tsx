@@ -7,11 +7,11 @@ interface EnfriadorInfo {
   tipo: string;
   id: number;
   estado: string;
-  temp_Agua: number;
-  temp_Prod: number;
-  temp_Ingreso: number;
-  temp_Chiller: number;
-  niv_Agua: number;
+  temp_agua: number;
+  temp_prod: number;
+  temp_ingreso: number;
+  temp_chiller: number;
+  niv_agua: number;
   receta: string;
   receta_paso_actual: number;
   tiempoTranscurrido: string;
@@ -22,7 +22,7 @@ interface EnfriadorDetalles {
   num_receta: number;
   nom_receta: string;
   cant_torres: number;
-  tipo_Fin: string;
+  tipo_fin: string;
   sector_io: SectorIO[];
   historial: any[];
 }

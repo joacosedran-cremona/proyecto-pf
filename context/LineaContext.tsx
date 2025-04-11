@@ -2,118 +2,96 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useWebSocketContext } from "@/context/WebSocketContext";
-import { transformData } from '../utils/logicaGraficos';
 
-interface Paso {
-    id: number;
-    temp_Ing: string | number | null;
-    temp_Agua: string | number | null;
-    temp_Ingreso: string | number | null;
-    niv_Agua: string | number | null;
-    tiempo: number | null;
+interface InfoEquipo {
+  tipo: 'COCINA' | 'ENFRIADOR';
+  id: number;
+  estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO' | 'PRE CALENTAMIENTO' | 'PRE ENFRIAMIENTO';
+  temp_agua: number;
+  temp_prod: number;
+  temp_ingreso: number;
+  temp_chiller: number;
+  niv_agua: number;
+  receta: string;
+  receta_paso_actual: number;
+  tiempoTranscurrido: number;
+  num_cocina?: number;
+  num_enfriador?: number;
 }
 
-interface SectorIO {
-    frio: boolean;
-    vapor_vivo: boolean;
-    vapor_serp: boolean;
-    io_yy_eq_xx: boolean;
+interface DetallesEquipo {
+  historial: Array<{
+    id_historial: number;
+    tiempo: number;
+    temp_agua: number;
+    temp_ingreso: number;
+    estado: string;
+  }>;
 }
 
-interface CocinaData {
-    num_cocina: number;
-    tempIng: string | number | null;
-    tempAgua: string | number | null;
-    nivAgua: string | number | null;
-    nom_receta: string | null;
-    num_receta: number | null;
-    estado: string | null;
-    cant_torres: number | null;
-    tiempo: number | null;
-    tipo_Fin: string | null;
-    pasos: Paso[];
-    ultimoPaso: Paso | null;
-    sectorIO: SectorIO[];
-}
+// Exportar el tipo LineaId
+export type LineaId = 1 | 2;
 
-interface EnfriadorData {
-    num_enfriador: number;
-    tempIng: string | number | null;
-    tempAgua: string | number | null;
-    nivAgua: string | number | null;
-    nom_receta: string | null;
-    num_receta: number | null;
-    estado: string | null;
-    cant_torres: number | null;
-    tiempo: number | null;
-    tipo_Fin: string | null;
-    pasos: Paso[];
-    ultimoPaso: Paso | null;
-    sectorIO: SectorIO[];
-}
-
+// Interfaces existentes con tipos corregidos
 interface LineaData {
-    cocinas: CocinaData[];
-    enfriadores: EnfriadorData[];
+  cocinas: Array<[InfoEquipo, DetallesEquipo]>;
+  enfriadores: Array<[InfoEquipo, DetallesEquipo]>;
 }
+
+// Modificar LineasState para usar Record
+interface LineasState extends Record<LineaId, LineaData> {}
 
 interface LineaContextType {
-    lineaSeleccionada: number;
-    setLineaSeleccionada: (id: number) => void;
-    lineasData: LineaData | null;
-    setLineasData: (data: LineaData) => void;
+  lineaSeleccionada: LineaId;
+  setLineaSeleccionada: (id: LineaId) => void;
+  lineasData: LineasState | null;
 }
 
 const LineaContext = createContext<LineaContextType | undefined>(undefined);
 
-// LineaContext.tsx
 export const LineaProvider = ({ children }: { children: React.ReactNode }) => {
-    const [lineaSeleccionada, setLineaSeleccionada] = useState<number>(1);
-    const { data } = useWebSocketContext();
+  const [lineaSeleccionada, setLineaSeleccionada] = useState<LineaId>(1);
+  const [lineasData, setLineasData] = useState<LineasState | null>(null);
+  const { data } = useWebSocketContext();
 
-    const [lineasData, setLineasData] = useState<LineaData | null>(null);
-    const [datosTransformados, setDatosTransformados] = useState<any | null>(null);
+  useEffect(() => {
+    if (data) {
+      const datosCocinas = data['datos-cocinas'] || [];
+      const datosEnfriadores = data['datos-enfriadores'] || [];
 
-    useEffect(() => {
-        if (data) {
-            setLineasData(data);
+      // Organizar datos por líneas
+      const linea1 = {
+        cocinas: datosCocinas.filter(([info]: [InfoEquipo, any]) => [1, 2, 3].includes(info.id)),
+        enfriadores: datosEnfriadores.filter(([info]: [InfoEquipo, any]) => [7, 8, 9, 10].includes(info.id))
+      };
 
-            // Transformamos una sola vez
-            const cocinas = Array.isArray(data['datos-cocinas'])
-                ? data['datos-cocinas'].map((grupo) => grupo[1])
-                : [];
+      const linea2 = {
+        cocinas: datosCocinas.filter(([info]: [InfoEquipo, any]) => [4, 5, 6].includes(info.id)),
+        enfriadores: datosEnfriadores.filter(([info]: [InfoEquipo, any]) => [11, 12, 13, 14].includes(info.id))
+      };
 
-            const enfriadores = Array.isArray(data['datos-enfriadores'])
-                ? data['datos-enfriadores'].map((grupo) => grupo[1])
-                : [];
+      setLineasData({
+        1: linea1,
+        2: linea2
+      });
+    }
+  }, [data]);
 
-            // Aplicamos transformData a cada equipo
-            const transformado = {
-                cocinas: cocinas.map((c) => ({
-                    ...c,
-                    grafico: transformData(c.historial)
-                })),
-                enfriadores: enfriadores.map((e) => ({
-                    ...e,
-                    grafico: transformData(e.historial)
-                }))
-            };
-
-            setDatosTransformados(transformado);
-        }
-    }, [data]);
-
-    return (
-        <LineaContext.Provider value={{ lineaSeleccionada, setLineaSeleccionada, lineasData, datosTransformados }}>
-            {children}
-        </LineaContext.Provider>
-    );
+  return (
+    <LineaContext.Provider value={{ 
+      lineaSeleccionada, 
+      setLineaSeleccionada, 
+      lineasData 
+    }}>
+      {children}
+    </LineaContext.Provider>
+  );
 };
 
 export const useLinea = () => {
-    const context = useContext(LineaContext);
-    if (!context) {
-        throw new Error("useLinea debe ser usado dentro de un LineaProvider");
-    }
-    return context;
+  const context = useContext(LineaContext);
+  if (!context) {
+    throw new Error("useLinea debe ser usado dentro de un LineaProvider");
+  }
+  return context;
 };

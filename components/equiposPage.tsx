@@ -54,10 +54,10 @@ export default function EquipoPage({type}: EquipoPageProps) {
     };
 
     const datosEquipo = [
-        { label: t('estadoEquipo.tempIngreso'), value: equipo?.info.temp_Ingreso ?? "N/A", unit: "°C" },
-        { label: t('estadoEquipo.tempAgua'), value: equipo?.info.temp_Agua ?? "N/A", unit: "°C" },
-        { label: t('estadoEquipo.tempProd'), value: equipo?.info.temp_Prod ?? "N/A", unit: "°C" },
-        { label: t('estadoEquipo.nivelAgua'), value: equipo?.info.niv_Agua ?? "N/A", unit: "mm" }
+        { label: t('estadoEquipo.tempIngreso'), value: equipo?.info.temp_ingreso ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.tempAgua'), value: equipo?.info.temp_agua ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.tempProd'), value: equipo?.info.temp_prod ?? "N/A", unit: "°C" },
+        { label: t('estadoEquipo.nivelAgua'), value: equipo?.info.niv_agua ?? "N/A", unit: "mm" }
     ];
 
     const datosCiclo = [
@@ -65,7 +65,7 @@ export default function EquipoPage({type}: EquipoPageProps) {
         { label: t('cicloActivo.receta'), value: equipo?.detalles.num_receta || 'N/A' },
         { label: t('cicloActivo.cantTorres'), value: equipo?.detalles.cant_torres || "N/A" },
         { label: t('cicloActivo.tiempo'), value: equipo?.info.tiempoTranscurrido ?? "N/A" },
-        { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_Fin ?? "N/A" }
+        { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_fin ?? "N/A" }
     ];
     
     const datosIO = useMemo(() => {

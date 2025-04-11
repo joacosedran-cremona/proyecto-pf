@@ -141,8 +141,8 @@ export function ImagenLayout() {
           tipo: 'COCINA',
           id: cocina.info.id,
           estado: cocina.info.estado,
-          tempAguaActual: cocina.info.temp_Agua,
-          tempProductoActual: cocina.info.temp_Ingreso,
+          tempAguaActual: cocina.info.temp_agua,
+          tempProductoActual: cocina.info.temp_ingreso,
           receta: cocina.info.receta,
           tiempoTranscurrido: cocina.info.tiempoTranscurrido
         };
@@ -154,8 +154,8 @@ export function ImagenLayout() {
           tipo: 'ENFRIADOR',
           id: enfriador.info.id,
           estado: enfriador.info.estado,
-          tempAguaActual: enfriador.info.temp_Agua,
-          tempProductoActual: enfriador.info.temp_Ingreso,
+          tempAguaActual: enfriador.info.temp_agua,
+          tempProductoActual: enfriador.info.temp_ingreso,
           receta: enfriador.info.receta,
           tiempoTranscurrido: enfriador.info.tiempoTranscurrido
         };

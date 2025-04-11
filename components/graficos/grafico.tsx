@@ -1,5 +1,5 @@
 //React
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useSearchParams } from 'next/navigation';
 
@@ -13,7 +13,7 @@ import { transformData } from '@/utils/logicaGraficos';
 import { clearStoredData } from '@/utils/logicaGraficos';
 
 //HeroUI
-import { Button, Spinner } from '@heroui/react';
+import { Button } from '@heroui/react';
 
 //Idioma
 import { useTranslation } from 'react-i18next';
@@ -25,29 +25,16 @@ interface InfoEquipo {
     tipo: 'COCINA' | 'ENFRIADOR';
     id: number;
     estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO';
-    temp_Agua: number;
-    temp_Prod: number;
-    temp_Ingreso: number;
-    temp_Chiller: number;
-    niv_Agua: number;
+    temp_agua: number;
+    temp_prod: number;
+    temp_ingreso: number;
+    temp_chiller: number;
+    niv_agua: number;
     receta: string;
     receta_paso_actual: number;
     tiempoTranscurrido: number;
     num_cocina?: number;
     num_enfriador?: number;
-}
-
-interface EquipoData {
-    info: InfoEquipo;
-    detalles: {
-        historial: Array<{
-            id_historial: number;
-            tiempo: number;
-            temp_Agua: number;
-            temp_Ingreso: number;
-            estado: string;
-        }>;
-    };
 }
 
 const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ contextType }) => {
@@ -301,7 +288,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             </div>
         );
     }
-
+/*
     if (equipo.estado === 'FINALIZADO') {
         const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
             ? `${t('equipo.cocina')} ${equipo.num_cocina}`
@@ -317,7 +304,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             </div>
         );
     }
-
+*/
     if (equipo.estado === 'FALLA') {
         const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
             ? `${t('equipo.cocina')} ${equipo.num_cocina}`
