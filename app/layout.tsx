@@ -2,8 +2,8 @@ import "@/styles/globals.css";
 import clsx from "clsx";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
-import Navbar from "@/components/header/navbar";
-import Footer from "@/components/footer";
+import Navbar from "@/components/header_Footer/navbar";
+import Footer from "@/components/header_Footer/footer";
 import { cookies } from 'next/headers';
 
 export const metadata = {
