@@ -65,7 +65,7 @@ export default function EquipoPage({type}: EquipoPageProps) {
         { label: t('cicloActivo.receta'), value: equipo?.detalles.num_receta || 'N/A' },
         { label: t('cicloActivo.cantTorres'), value: equipo?.detalles.cant_torres || "N/A" },
         { label: t('cicloActivo.tiempo'), value: equipo?.info.tiempoTranscurrido ?? "N/A" },
-        { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_fin ?? "N/A" }
+        { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_Fin ?? "N/A" }
     ];
     
     const datosIO = useMemo(() => {
@@ -173,7 +173,7 @@ export default function EquipoPage({type}: EquipoPageProps) {
             </div>
             </div>
             <div className="w-full 1365:w-2/3">
-            <Grafico contextType={isCocina ? "cocinas" : "enfriadores"} />
+                <Grafico contextType={isCocina ? "cocinas" : "enfriadores"} />
             </div>
         </div>
         </section>

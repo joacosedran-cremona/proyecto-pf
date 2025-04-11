@@ -14,8 +14,15 @@ const WebSocketContext = createContext<WebSocketContextType | undefined>(undefin
 export const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, isConnected, error } = useWebSocket("datos-generales");
 
+  // Proporcionar un valor inicial seguro
+  const value = {
+    data: data || { 'datos-cocinas': [], 'datos-enfriadores': [] },
+    isConnected,
+    error
+  };
+
   return (
-    <WebSocketContext.Provider value={{ data, isConnected, error }}>
+    <WebSocketContext.Provider value={value}>
       {children}
     </WebSocketContext.Provider>
   );

@@ -60,11 +60,11 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
   }, [initialLanguage]);
 
   return (
-    <WebSocketProvider>
-      <HeroUIProvider navigate={router.push}>
-        <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
-          <I18nextProvider i18n={i18n}>
-            {mounted && (
+    <HeroUIProvider navigate={router.push}>
+      <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
+        <I18nextProvider i18n={i18n}>
+          {mounted && (
+            <WebSocketProvider>
               <LineaProvider>
                 <CocinaProvider>
                   <EnfriadorProvider>
@@ -72,10 +72,10 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
                   </EnfriadorProvider>
                 </CocinaProvider>
               </LineaProvider>
-            )}
-          </I18nextProvider>
-        </NextThemesProvider>
-      </HeroUIProvider>
-    </WebSocketProvider>
+            </WebSocketProvider>
+          )}
+        </I18nextProvider>
+      </NextThemesProvider>
+    </HeroUIProvider>
   );
 }

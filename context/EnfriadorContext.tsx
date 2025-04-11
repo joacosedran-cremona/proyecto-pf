@@ -22,7 +22,7 @@ interface EnfriadorDetalles {
   num_receta: number;
   nom_receta: string;
   cant_torres: number;
-  tipo_fin: string;
+  tipo_Fin: string;
   sector_io: SectorIO[];
   historial: any[];
 }
