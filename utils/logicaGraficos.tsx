@@ -9,12 +9,12 @@ interface DatosEquipo {
   niv_Agua: number;
   receta: string;
   receta_paso_actual: number;
-  tiempoTranscurrido: number;
+  tiempoTranscurrido: string; // Cambiado a string
 }
 
 interface HistorialItem {
   id_historial: number;
-  tiempo: number;
+  tiempo: string; // Cambiado a string
   temp_Agua: number;
   temp_Ingreso: number;
   estado: string;
@@ -29,16 +29,16 @@ export const transformData = (
   datosCocinas: Array<[DatosEquipo, DetallesEquipo]>,
   datosEnfriadores: Array<[DatosEquipo, DetallesEquipo]>
 ) => {
-  console.log('Buscando equipo con ID:', equipoId);
 
-  // Combinar datos de cocinas y enfriadores
   const todosEquipos = [...(datosCocinas || []), ...(datosEnfriadores || [])];
-
-  // Encontrar el equipo específico
   const equipo = todosEquipos.find(([info]) => info.id === equipoId);
 
+  // Si no hay datos en tiempo real, intentar recuperar del localStorage
   if (!equipo) {
-    console.log('No se encontró el equipo:', equipoId);
+    const cachedData = localStorage.getItem(`equipo-${equipoId}`);
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    }
     return {
       labels: [],
       datasets: []
@@ -46,13 +46,23 @@ export const transformData = (
   }
 
   const [info, detalles] = equipo;
-
-  // Obtener el historial del equipo
   const historial = detalles.historial || [];
-  console.log('Historial encontrado:', historial.length, 'registros');
+
+  // Función para convertir fecha string a timestamp en segundos
+  const getTimestamp = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return Math.floor(date.getTime() / 1000);
+  };
+
+  // Obtener el timestamp inicial (primer registro del historial)
+  const tiempoInicial = historial.length > 0 ? 
+    getTimestamp(historial[0].tiempo) : 
+    getTimestamp(new Date().toISOString());
 
   // Ordenar el historial por tiempo
-  const historialOrdenado = [...historial].sort((a, b) => a.tiempo - b.tiempo);
+  const historialOrdenado = [...historial].sort((a, b) => 
+    getTimestamp(a.tiempo) - getTimestamp(b.tiempo)
+  );
 
   // Crear arrays para los datos
   const tiempos: number[] = [];
@@ -61,23 +71,14 @@ export const transformData = (
 
   // Agregar datos del historial
   historialOrdenado.forEach(item => {
-    tiempos.push(item.tiempo);
+    // Convertir la diferencia de tiempo a segundos relativos
+    const tiempoRelativo = getTimestamp(item.tiempo) - tiempoInicial;
+    tiempos.push(tiempoRelativo);
     tempAgua.push(item.temp_Agua);
     tempIngreso.push(item.temp_Ingreso);
   });
 
-  // Agregar el dato actual al final
-  tiempos.push(info.tiempoTranscurrido);
-  tempAgua.push(info.temp_Agua);
-  tempIngreso.push(info.temp_Ingreso);
-
-  console.log('Datos procesados:', {
-    tiempos,
-    tempAgua,
-    tempIngreso
-  });
-
-  return {
+  const chartData = {
     labels: tiempos,
     datasets: [
       {
@@ -96,4 +97,18 @@ export const transformData = (
       }
     ]
   };
+
+  // Guardar los datos en localStorage
+  try {
+    localStorage.setItem(`equipo-${equipoId}`, JSON.stringify(chartData));
+  } catch (error) {
+    console.warn('Error al guardar datos en localStorage:', error);
+  }
+
+  return chartData;
+};
+
+// Función auxiliar para limpiar datos antiguos
+export const clearStoredData = (equipoId: number) => {
+  localStorage.removeItem(`equipo-${equipoId}`);
 };

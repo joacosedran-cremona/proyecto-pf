@@ -3,7 +3,7 @@
     "info": {
     "tipo": "COCINA",
     "id": 1,
-    "estado": "COCINANDO",
+    "estado": "OPERATIVO",
     "temp_Agua": 1,
     "temp_Prod": 1,
     "temp_Ingreso": 1,
@@ -38,231 +38,231 @@
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 2,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 3,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 4,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 5,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 6,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 7,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 8,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 9,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 10,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 11,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 12,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 13,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 14,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 15,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 16,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 17,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 18,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 19,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 20,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 21,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 22,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 23,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 24,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 25,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 26,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 27,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 28,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 29,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 30,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 31,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 32,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 33,
         "tiempo": 1,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         }
     ]
     }
@@ -343,7 +343,7 @@
     "info": {
     "tipo": "COCINA",
     "id": 4,
-    "estado": "COCINANDO",
+    "estado": "OPERATIVO",
     "temp_Agua": 2,
     "temp_Prod": 1,
     "temp_Ingreso": 4,
@@ -378,231 +378,231 @@
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 2,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 3,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 4,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 5,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 6,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 7,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 8,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 9,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 10,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 11,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 12,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 13,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 14,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 15,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 16,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 17,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 18,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 19,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 20,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 21,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 22,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 23,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 24,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 25,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 26,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 27,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 28,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 29,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 30,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 31,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 32,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 33,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         }
     ]
     }
@@ -647,7 +647,7 @@
     "info": {
     "tipo": "COCINA",
     "id": 6,
-    "estado": "COCINANDO",
+    "estado": "OPERATIVO",
     "temp_Agua": 2,
     "temp_Prod": 1,
     "temp_Ingreso": 6,
@@ -682,231 +682,231 @@
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 2,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 3,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 4,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 5,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 6,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 7,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 8,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 9,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 10,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 11,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 12,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 13,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 14,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 15,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 16,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 17,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 18,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 19,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 20,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 21,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 22,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 23,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 24,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 25,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 26,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 27,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 28,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 29,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 30,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 31,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 32,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         },
         {
         "id": 33,
         "tiempo": 2,
         "temp_Agua": 1,
         "temp_Ingreso": 1,
-        "estado": "COCINANDO"
+        "estado": "OPERATIVO"
         }
     ]
     }

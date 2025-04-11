@@ -1,16 +1,9 @@
 "use client";
 
 import { useCocinaContext } from "@/context/CocinaContext";
-import { useEffect } from "react";
 
 export default function TestPage() {
   const { cocinas, isLoading } = useCocinaContext();
-
-  useEffect(() => {
-    if (cocinas) {
-      console.log('Datos recibidos:', cocinas);
-    }
-  }, [cocinas]);
 
   return (
     <div className="p-4">

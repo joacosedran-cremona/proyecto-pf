@@ -10,6 +10,7 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 //Context y Funciones
 import { useWebSocketContext } from '@/context/WebSocketContext';
 import { transformData } from '@/utils/logicaGraficos';
+import { clearStoredData } from '@/utils/logicaGraficos';
 
 //HeroUI
 import { Button, Spinner } from '@heroui/react';
@@ -23,7 +24,7 @@ Chart.register(zoomPlugin);
 interface InfoEquipo {
     tipo: 'COCINA' | 'ENFRIADOR';
     id: number;
-    estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'COCINANDO' | 'ENFRIANDO';
+    estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO';
     temp_Agua: number;
     temp_Prod: number;
     temp_Ingreso: number;
@@ -55,24 +56,33 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
+    const [hasCachedData, setHasCachedData] = useState<boolean>(false);
     const { data, isConnected } = useWebSocketContext();
     const searchParams = useSearchParams();
     const currentId = Number(searchParams.get('id')) || (contextType === 'cocinas' ? 1 : 7);
 
     useEffect(() => {
+        if (data && isConnected) {
+            // Limpiar datos almacenados cuando la conexión se restablece
+            clearStoredData(currentId);
+            setHasCachedData(false);
+        }
+
         if (!data || !isConnected) {
-            setLoading(true);
+            // Verificar si hay datos en caché
+            const cachedData = localStorage.getItem(`equipo-${currentId}`);
+            if (cachedData) {
+                setHasCachedData(true);
+                setLoading(false);
+            } else {
+                setHasCachedData(false);
+                setLoading(true);
+            }
             return;
         }
 
         const datosCocinas = data['datos-cocinas'];
         const datosEnfriadores = data['datos-enfriadores'];
-
-        console.log('Datos disponibles:', {
-            cocinas: datosCocinas?.length,
-            enfriadores: datosEnfriadores?.length,
-            equipoId: currentId
-        });
 
         try {
             const image = new Image();
@@ -253,7 +263,6 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             }
             setLoading(false);
         } catch (error) {
-            console.error('Error al crear el gráfico:', error);
             setLoading(true);
         }
     }, [data, isConnected, currentId, contextType, t, isFirstLoad]);
@@ -263,19 +272,6 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             chartInstanceRef.current.resetZoom();
         }
     };
-
-    if (loading || !data || !isConnected) {
-        return (
-            <div className="flex items-center justify-center h-full w-full">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto" />
-                    <p className="mt-4">
-                        {!isConnected ? 'Conectando al servidor...' : 'Cargando datos...'}
-                    </p>
-                </div>
-            </div>
-        );
-    }
 
     // Buscar el equipo en los datos con tipado correcto
     const equipos = data[`datos-${contextType}`] as Array<[InfoEquipo, any]> || [];
@@ -306,6 +302,22 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
         );
     }
 
+    if (equipo.estado === 'FINALIZADO') {
+        const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
+            ? `${t('equipo.cocina')} ${equipo.num_cocina}`
+            : contextType === 'enfriadores' && 'num_enfriador' in equipo
+            ? `${t('equipo.enfriador')} ${equipo.num_enfriador}`
+            : t('equipo.desconocido');
+
+        return (
+            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+                <AiOutlineExclamationCircle className="w-auto h-1/4" />
+                <p className="text-3xl text-white">{nombreEquipo} - {t('finalizado.titulo')}</p>
+                <p className="text-xl text-white">{t('finalizado.mensaje')}</p>
+            </div>
+        );
+    }
+
     if (equipo.estado === 'FALLA') {
         const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
             ? `${t('equipo.cocina')} ${equipo.num_cocina}`
@@ -325,9 +337,14 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
     return (
         <div className="bg-black p-20 h-full w-full rounded-md relative">
             <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
-            {loading && (
-                <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
-                    <Spinner label={t('cargando')} />
+            {loading && !hasCachedData && (
+                <div className="flex absolute items-center justify-center h-full w-full">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto" />
+                        <p className="mt-4">
+                            {'Conectando al servidor...'}
+                        </p>
+                    </div>
                 </div>
             )}
             <Button

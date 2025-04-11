@@ -112,7 +112,7 @@
             {
                 "tipo": "COCINA",
                 "id": 4,
-                "estado": "COCINANDO",
+                "estado": "PRE CALENTAMIENTO",
                 "temp_Agua": 2,
                 "temp_Prod": 1,
                 "temp_Ingreso": 4,
@@ -144,38 +144,38 @@
                 "historial": [
                     {
                         "id_historial": 1,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:54",
                         "temp_Agua": 1,
                         "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
+                        "estado": "PRE CALENTAMIENTO"
                     },
                     {
                         "id_historial": 2,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:50:04",
                         "temp_Agua": 1,
                         "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
+                        "estado": "PRE CALENTAMIENTO"
                     },
                     {
                         "id_historial": 3,
-                        "tiempo": 2,
+                        "tiempo": "2025-04-11 10:50:14",
                         "temp_Agua": 1,
                         "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
+                        "estado": "PRE CALENTAMIENTO"
                     },
                     {
                         "id_historial": 4,
-                        "tiempo": 2,
+                        "tiempo": "2025-04-11 10:50:24",
                         "temp_Agua": 1,
                         "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
+                        "estado": "PRE CALENTAMIENTO"
                     },
                     {
                         "id_historial": 5,
-                        "tiempo": 2,
+                        "tiempo": "2025-04-11 10:50:35",
                         "temp_Agua": 1,
                         "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
+                        "estado": "PRE CALENTAMIENTO"
                     }
                 ]
             }
@@ -220,7 +220,7 @@
             {
                 "tipo": "COCINA",
                 "id": 6,
-                "estado": "COCINANDO",
+                "estado": "OPERATIVO",
                 "temp_Agua": 2,
                 "temp_Prod": 1,
                 "temp_Ingreso": 6,
@@ -249,43 +249,7 @@
                         "tapa_estado_acc": "REPOSO"
                     }
                 ],
-                "historial": [
-                    {
-                        "id_historial": 1,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
-                    },
-                    {
-                        "id_historial": 2,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
-                    },
-                    {
-                        "id_historial": 3,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
-                    },
-                    {
-                        "id_historial": 4,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
-                    },
-                    {
-                        "id_historial": 5,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "COCINANDO"
-                    }
-                ]
+                "historial": []
             }
         ]
     ],
@@ -330,7 +294,7 @@
             {
                 "tipo": "ENFRIADOR",
                 "id": 8,
-                "estado": "ENFRIANDO",
+                "estado": "PRE ENFRIAMIENTO",
                 "temp_Agua": 1,
                 "temp_Prod": 1,
                 "temp_Ingreso": 2,
@@ -362,38 +326,38 @@
                 "historial": [
                     {
                         "id_historial": 1,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:48:52",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 2,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 2,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:02",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 2,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 3,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:12",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 2,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 4,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:23",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 2,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 5,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:33",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 2,
+                        "estado": "PRE ENFRIAMIENTO"
                     }
                 ]
             }
@@ -402,7 +366,7 @@
             {
                 "tipo": "ENFRIADOR",
                 "id": 9,
-                "estado": "ENFRIANDO",
+                "estado": "PRE ENFRIAMIENTO",
                 "temp_Agua": 1,
                 "temp_Prod": 1,
                 "temp_Ingreso": 3,
@@ -434,38 +398,38 @@
                 "historial": [
                     {
                         "id_historial": 1,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:48:52",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 3,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 2,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:02",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 3,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 3,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:12",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 3,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 4,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:23",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 3,
+                        "estado": "PRE ENFRIAMIENTO"
                     },
                     {
                         "id_historial": 5,
-                        "tiempo": 1,
+                        "tiempo": "2025-04-11 10:49:33",
                         "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
+                        "temp_Ingreso": 3,
+                        "estado": "PRE ENFRIAMIENTO"
                     }
                 ]
             }
@@ -510,7 +474,7 @@
             {
                 "tipo": "ENFRIADOR",
                 "id": 11,
-                "estado": "ENFRIANDO",
+                "estado": "OPERATIVO",
                 "temp_Agua": 2,
                 "temp_Prod": 1,
                 "temp_Ingreso": 5,
@@ -539,43 +503,7 @@
                         "tapa_estado_acc": "REPOSO"
                     }
                 ],
-                "historial": [
-                    {
-                        "id_historial": 1,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 2,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 3,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 4,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 5,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    }
-                ]
+                "historial": []
             }
         ],
         [
@@ -618,7 +546,7 @@
             {
                 "tipo": "ENFRIADOR",
                 "id": 13,
-                "estado": "ENFRIANDO",
+                "estado": "OPERATIVO",
                 "temp_Agua": 2,
                 "temp_Prod": 1,
                 "temp_Ingreso": 7,
@@ -647,43 +575,7 @@
                         "tapa_estado_acc": "REPOSO"
                     }
                 ],
-                "historial": [
-                    {
-                        "id_historial": 1,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 2,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 3,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 4,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    },
-                    {
-                        "id_historial": 5,
-                        "tiempo": 1,
-                        "temp_Agua": 1,
-                        "temp_Ingreso": 1,
-                        "estado": "ENFRIANDO"
-                    }
-                ]
+                "historial": []
             }
         ],
         [

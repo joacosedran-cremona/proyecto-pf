@@ -45,8 +45,6 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
       i18n.init({
         lng: initialLanguage,
         fallbackLng: 'es'
-      }).then(() => {
-        console.log('i18n initialized successfully');
       });
     }
 

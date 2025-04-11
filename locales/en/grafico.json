@@ -21,6 +21,11 @@
         "titulo": "INACTIVE",
         "mensaje": "The equipment is inactive, waiting for connection"
     },
+    "finalizado":
+    {
+        "titulo": "FINALIZED",
+        "mensaje": "The device has completed its operational cycle. Awaiting new data input."
+    },
     "equipo":
     {
         "cocina": "Cooking Unit",
@@ -31,5 +36,6 @@
     "tituloGrafico": "Real-Time Temperatures",
     "reiniciarZoom": "Reset Zoom",
     "cargando": "Loading...",
-    "equipoNoEncontrado": "Equipment not found"
+    "equipoNoEncontrado": "Equipment not found",
+    "cargandoGrafico": "Rendering Graph..."
 }

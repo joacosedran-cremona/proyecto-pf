@@ -1,16 +1,9 @@
 "use client";
 
 import { useEnfriadorContext } from "@/context/EnfriadorContext";
-import { useEffect } from "react";
 
 export default function TestPage() {
   const { enfriadores, isLoading } = useEnfriadorContext();
-
-  useEffect(() => {
-    if (enfriadores) {
-      console.log('Datos recibidos:', enfriadores);
-    }
-  }, [enfriadores]);
 
   return (
     <div className="p-4">

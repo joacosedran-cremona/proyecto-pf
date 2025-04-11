@@ -93,7 +93,7 @@ const sectionConfig = {
 function getEstadoColor(estado: string): string {
   const estadoUpper = estado.toUpperCase();
   if (estadoUpper === "FALLA") return "#C13D";
-  if (["COCINANDO", "PRE CALENTAMIENTO", "ENFRIANDO", "PRE ENFRIAMIENTO"].includes(estadoUpper)) return "#9b9D";
+  if (["OPERATIVO", "PRE CALENTAMIENTO", "PRE ENFRIAMIENTO"].includes(estadoUpper)) return "#9b9D";
   if (estadoUpper === "PAUSA") return "#BB8D";
   if (estadoUpper === "FINALIZADO") return "#9bbD";
   if (estadoUpper === "INACTIVO") return "#666D";
@@ -180,17 +180,9 @@ export function ImagenLayout() {
         src="/layout.png"
         alt="Imagen de prueba"
       />
-      {!isConnected && (
-        <div className="absolute top-0 left-0 bg-red-500 text-white p-2">
-          WebSocket desconectado
-        </div>
-      )}
       {sections.map((section) => {
         const equipo = getEquipoData(section);
-        console.log(`Renderizando sección ${section.key}:`, {
-          section,
-          equipoEncontrado: equipo
-        });
+        console.log(`Renderizando sección ${section.key}:`, { section, equipoEncontrado: equipo});
         
         const equipoNum = section.id;
         const href = `${section.path}?id=${equipoNum}`;

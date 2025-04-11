@@ -22,6 +22,11 @@
         "titulo": "INACTIVO",
         "mensaje": "El equipo está inactivo, esperando conexión"
     },
+    "finalizado":
+    {
+        "titulo": "FINALIZADO",
+        "mensaje": "El equipo ha finalizado su ciclo. Esperando nuevos datos"
+    },
     "equipo":
     {
         "cocina": "Cocina",
@@ -32,5 +37,6 @@
     "tituloGrafico": "Temperaturas en tiempo real",
     "reiniciarZoom": "Reiniciar Zoom",
     "cargando": "Cargando...",
-    "equipoNoEncontrado": "Equipo no encontrado"
+    "equipoNoEncontrado": "Equipo no encontrado",
+    "cargandoGrafico": "Renderizando gráfico..."
 }
