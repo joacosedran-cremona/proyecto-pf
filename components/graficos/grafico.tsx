@@ -268,7 +268,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">{t('equipoNoEncontrado')}</p>
+                <p className="text-3xl text-white jutify-center">{t('equipoNoEncontrado')}</p>
             </div>
         );
     }

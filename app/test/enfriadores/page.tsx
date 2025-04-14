@@ -10,8 +10,8 @@ export default function TestPage() {
       <h1 className="text-2xl mb-4">Prueba WebSocket</h1>
       <div className="mb-4">
         Estado: {isLoading ? 
-          <span className="text-green-500">Conectado</span> : 
-          <span className="text-red-500">Desconectado</span>
+          <span className="text-green">Conectado</span> : 
+          <span className="text-red">Desconectado</span>
         }
       </div>
       {enfriadores && (

@@ -1,5 +1,6 @@
 {
     "datos": {
+      "tempActual": "Temp. Prod.",
       "tempAgua": "Temp. Agua",
       "tempIng": "Temp. Ingreso",
       "receta": "Receta",

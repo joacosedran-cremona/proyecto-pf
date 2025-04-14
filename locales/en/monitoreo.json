@@ -32,5 +32,6 @@
     {
         "receta": "Recipe",
         "estado": "Status"
-    }
+    },
+    "monitoreo": "EQUIPMENT MONITORING"
 }
