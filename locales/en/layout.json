@@ -1,5 +1,6 @@
 {
     "datos": {
+        "tempActual": "Prod. Temp.",
         "tempAgua": "Water Temp.",
         "tempIng": "Inlet Temp",
         "receta": "Recipe",

@@ -211,11 +211,11 @@ export function ImagenLayout() {
             >
               <span
                 className={`absolute shadow border z-999 rounded-md p-2 flex flex-col justify-between ${
-                  equipo?.estado === 'FALLA' ? 'bg-red-600' :
-                  equipo?.estado === 'PAUSA' ? 'bg-yellow-400' :
-                  equipo?.estado === 'INACTIVO' ? 'bg-gray-600' :
-                  equipo?.estado === 'FINALIZADO' ? 'bg-blue-400' :
-                  'bg-green-600'
+                  equipo?.estado === 'FALLA' ? 'bg-red' :
+                  equipo?.estado === 'PAUSA' ? 'bg-yellow' :
+                  equipo?.estado === 'INACTIVO' ? 'bg-gray' :
+                  equipo?.estado === 'FINALIZADO' ? 'bg-blue' :
+                  'bg-green'
                 }`}
                 style={{
                   ...recuadroStyle,
@@ -259,25 +259,25 @@ export function ImagenLayout() {
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black'}}
                       >
-                        T. Ingreso: {equipo.tempProductoActual ?? '-'}
+                        {t('datos.tempActual')} {equipo.tempProductoActual ?? '-'}
                       </p>
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
-                        T. Agua: {equipo.tempAguaActual ?? '-'}
+                        {t('datos.tempAgua')} : {equipo.tempAguaActual ?? '-'}
                       </p>
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
-                        Receta: {equipo.receta ?? '-'}
+                        {t('datos.receta')} : {equipo.receta ?? '-'}
                       </p>
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
-                        Tiempo: {equipo.tiempoTranscurrido}
+                        {t('datos.tiempo')} : {equipo.tiempoTranscurrido}
                       </p>
                     </div>
                   </div>

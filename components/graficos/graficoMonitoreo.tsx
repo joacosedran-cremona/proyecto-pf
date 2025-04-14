@@ -139,7 +139,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                 title: {
                                     align: 'start',
                                     color: '#D9D9D9',
-                                    display: true,
+                                    display: false, // Desactivamos el título nativo ya que ahora usamos el div
                                     font: {
                                         weight: 'normal',
                                         size: 20,
@@ -279,7 +279,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">{t('equipoNoEncontrado')}</p>
+                <p className="text-3xl text-white text-center">{t('equipoNoEncontrado')}</p>
             </div>
         );
     }
@@ -294,8 +294,8 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
         return (
             <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">{nombreEquipo} - {t('inactividad.titulo')}</p>
-                <p className="text-xl text-white">{t('inactividad.mensaje')}</p>
+                <p className="text-3xl text-white text-center">{nombreEquipo} - {t('inactividad.titulo')}</p>
+                <p className="text-xl text-white text-center">{t('inactividad.mensaje')}</p>
             </div>
         );
     }
@@ -318,14 +318,14 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
 
     return (
         <div className="bg-black p-6 h-full w-full rounded-md relative text-white">
-          <div className="flex justify-between mb-[-20px] m-5">
+          <div className="flex h-[20%] justify-between p-5">
             <div className="flex items-start gap-6">
                 <div className={`text-[28px] font-bold ${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'}`}>
                 {equipo.tipo === 'COCINA' 
                 ? `C${equipo.id}` 
                 : `E${equipo.id-6}`}
                 </div>
-              <div className="text-sm leading-tight mt-[2px]">
+              <div className="text-sm leading-tight">
                 <div>
                   <span className="font-semibold"></span> {equipo.receta}
                 </div>
@@ -349,7 +349,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
             </div>
           </div>
       
-          <canvas ref={chartRef} className="block w-full h-full max-h-screen pb-30 px-6" />
+          <canvas ref={chartRef} className="block w-full max-h-[80%] px-6" />
       
           {loading && !hasCachedData && (
             <div className="flex absolute items-center justify-center h-full w-full">

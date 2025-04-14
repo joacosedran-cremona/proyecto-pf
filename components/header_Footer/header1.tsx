@@ -22,7 +22,6 @@ interface OpcionMenu {
   text: string;
 }
 
-
 const opcionesIconos: OpcionIcono[] = [
   { id: 1, icon: <VscAccount className="w-auto h-full" /> },
   { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-full" /> },
