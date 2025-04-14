@@ -14,8 +14,18 @@ export default function Historico() {
   const [selectedId, setSelectedId] = useState<number>(0);
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">("cocina");
   const [setData] = useState<any>(null);
+  const [selectedValue, setSelectedValue] = useState(1);
   const { t } = useTranslation('hist_alert_tit');
   
+  const handleDateChange = (start: Date | null, end: Date | null) => {
+    // Aquí puedes usar las fechas seleccionadas
+    console.log('Fechas seleccionadas en el padre:', { start, end });
+  };
+
+  const handleChange = (value: number) => {
+    setSelectedValue(value);
+  };
+
   const handleSelection = async (id: number) => {
     setSelectedId(id);
     if (id === 0) return;
@@ -42,19 +52,31 @@ export default function Historico() {
 
   return (
     <section className="flex flex-col w-full items-center justify-center gap-20">
-      <div className="flex flex-row w-full min-h-[50px] h-[5vh] items-bottom">
-        <h1 className="flex w-1/3 h-full text-3xl align-bottom text-white">{t('historico')}</h1>
-        <div className="flex flex-row w-2/3 justify-end gap-20">
-          <Selector
-            value={selectedId}
-            onChange={handleSelection}
-            selectClasses={`w-auto bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
-            optionClasses="p-2 bg-black font-bold"
+      <div className="flex flex-row items-center justify-between bg-black p-4 w-full rounded-md">
+        {/* Botones de exportación a la izquierda */}
+        <div className="flex gap-10 ml-10">
+          <BotonPDF selectClasses="text-white bg-red-700/50 hover:bg-red-800 min-h-[40px]" />
+          <BotonExcel selectClasses="text-white bg-green-700 hover:bg-green-800 min-h-[40px]" />
+        </div>
+
+        {/* Texto central */}
+        <div className="text-center text-white">
+          <h2 className="text-md font-bold uppercase mb-[-6px]">FILTRAR POR</h2>
+          <span className="text-sm">PERIODO</span>
+        </div>
+
+        {/* Selector de fechas y botón a la derecha */}
+        <div className="flex gap-5 items-center mr-10">
+          <Selector 
+            selectClasses="text-white hover:bg-gray-700"
+            value={selectedValue}
+            onChange={handleChange}
           />
-          <DatePicker />
-          <BotonAplicar selectClasses={`h-full w-1/6 text-lightGrey hover:text-white justify-center gap-5`}/>
-          <BotonExcel selectClasses={`h-full w-1/6`}/>
-          <BotonPDF selectClasses={`h-full w-1/6`}/>
+          <DatePicker 
+            selectClasses="" 
+            onDateChange={handleDateChange}
+          />
+          <BotonAplicar selectClasses="text-white hover:bg-gray-700 px-4 py-2 min-h-[40px]" />
         </div>
       </div>
 

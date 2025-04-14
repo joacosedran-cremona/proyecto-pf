@@ -14,10 +14,9 @@ export default function BotonAplicar({ selectClasses }: BotonAplicarProps) {
             radius="md"
             color="default"
             variant="ghost"
-            className={`${selectClasses} min-w-[130px]`}
+            className={`${selectClasses} min-w-[40px]`}
         >
             <FaSearch style={{ color: 'grey', marginRight: "5px" }} />
-            <p className="text-lightGrey">{t('aplicar')}</p>
         </Button>
     );
 }

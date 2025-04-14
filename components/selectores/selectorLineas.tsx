@@ -14,8 +14,7 @@ const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
 
     const lineaList: Array<{ id: LineaId, name: string }> = [
         { id: 1, name: t('lineas.linea1') },
-        { id: 2, name: t('lineas.linea2') },
-        { id: 3, name: t('lineas.linea3') },
+        { id: 2, name: t('lineas.linea2') }
     ];
 
     const defaultClasses =

@@ -15,17 +15,17 @@
     "error":
     {
         "titulo": "FALLA",
-        "mensaje": "SE DETECTÓ UNA FALLA EN EL EQUIPO"
+        "mensaje": "Equipo suspendido"
     },
     "inactividad":
     {
         "titulo": "INACTIVO",
-        "mensaje": "El equipo está inactivo, esperando conexión"
+        "mensaje": "Esperando conexión"
     },
     "finalizado":
     {
         "titulo": "FINALIZADO",
-        "mensaje": "El equipo ha finalizado su ciclo. Esperando nuevos datos"
+        "mensaje": "El equipo ha finalizado su ciclo."
     },
     "equipo":
     {

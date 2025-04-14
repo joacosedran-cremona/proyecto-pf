@@ -47,6 +47,12 @@ interface DetallesEquipo {
     }>;
 }
 
+const formatTime = (seconds: number): string => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} HS`;
+};
+
 // Modificar la definición del componente para recibir solo el id
 const Grafico: React.FC<{ id: number }> = ({ id }) => {
     const { t } = useTranslation('grafico');
@@ -128,12 +134,12 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     labels: {
                                         usePointStyle: true,
                                     },
+                                    display: false
                                 },
                                 title: {
                                     align: 'start',
                                     color: '#D9D9D9',
                                     display: true,
-                                    text: t('tituloGrafico'),
                                     font: {
                                         weight: 'normal',
                                         size: 20,
@@ -145,15 +151,14 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                 },
                                 zoom: {
                                     pan: {
-                                        enabled: true,
-                                        mode: 'x',
+                                        enabled: false,
                                     },
                                     zoom: {
                                         wheel: {
-                                            enabled: true,
+                                            enabled: false,
                                         },
                                         pinch: {
-                                            enabled: true,
+                                            enabled: false,
                                         },
                                         mode: 'x',
                                     },
@@ -295,22 +300,6 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
         );
     }
 
-    if (equipo.estado === 'FINALIZADO') {
-        const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
-            ? `${t('equipo.cocina')} ${equipo.num_cocina}`
-            : contextType === 'enfriadores' && 'num_enfriador' in equipo
-            ? `${t('equipo.enfriador')} ${equipo.num_enfriador}`
-            : t('equipo.desconocido');
-
-        return (
-            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
-                <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">{nombreEquipo} - {t('finalizado.titulo')}</p>
-                <p className="text-xl text-white">{t('finalizado.mensaje')}</p>
-            </div>
-        );
-    }
-
     if (equipo.estado === 'FALLA') {
         const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
             ? `${t('equipo.cocina')} ${equipo.num_cocina}`
@@ -322,43 +311,56 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
             <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{nombreEquipo} - {t('error.titulo')}</p>
-                <p className="w-full text-center text-3xl text-white">{t('error.mensaje')}</p>
+                <p className="text-xl text-white">{t('error.mensaje')}</p>
             </div>
         );
     }
 
     return (
-        <div className="bg-black p-20 h-full w-full rounded-md relative">
-            <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
-            {loading && !hasCachedData && (
-                <div className="flex absolute items-center justify-center h-full w-full">
-                    <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto" />
-                        <p className="mt-4">
-                            {'Conectando al servidor...'}
-                        </p>
-                    </div>
+        <div className="bg-black p-6 h-full w-full rounded-md relative text-white">
+          <div className="flex justify-between mb-[-20px] m-5">
+            <div className="flex items-start gap-6">
+                <div className={`text-[28px] font-bold ${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'}`}>
+                {equipo.tipo === 'COCINA' 
+                ? `C${equipo.id}` 
+                : `E${equipo.id-6}`}
                 </div>
-            )}
-            <Button
-                style={{
-                    backgroundColor: '#333',
-                    border: '1px solid #CCC',
-                    color: '#CCC',
-                    width: '15%',
-                    height: '35px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontSize: '9px',
-                }}
-                onClick={resetZoom}
-                className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"
-            >
-                {t('reiniciarZoom')}
-            </Button>
+              <div className="text-sm leading-tight mt-[2px]">
+                <div>
+                  <span className="font-semibold"></span> {equipo.receta}
+                </div>
+                <div>
+                  <span className="font-semibold">ESTADO:</span> {equipo.estado}
+                </div>
+                <div>
+                  <span className="font-semibold">TIEMPO:</span> {formatTime(equipo.tiempoTranscurrido)}
+                </div>
+              </div>
+            </div>
+      
+            {/* Derecha: Temperaturas */}
+            <div className="text-right text-sm">
+              <div className={`${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'} font-semibold`}>
+                TEMP. AGUA: <span className="text-white">{equipo.temp_agua.toFixed(1)}°C</span>
+              </div>
+              <div className={`${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'} font-semibold`}>
+                TEMP. PROD: <span className="text-white">{equipo.temp_prod.toFixed(1)}°C</span>
+              </div>
+            </div>
+          </div>
+      
+          <canvas ref={chartRef} className="block w-full h-full max-h-screen pb-30 px-6" />
+      
+          {loading && !hasCachedData && (
+            <div className="flex absolute items-center justify-center h-full w-full">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto" />
+                <p className="mt-4">Conectando al servidor...</p>
+              </div>
+            </div>
+          )}
         </div>
-    );
+      );      
 };
 
 export default Grafico;

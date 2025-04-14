@@ -1,225 +1,291 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
+import { Chart, registerables, ChartConfiguration } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import { useCocinaContext } from '@/context/CocinaContext';
-import { useEnfriadorContext } from '@/context/EnfriadorContext';
-import { transformData } from '../../utils/logicaGraficos';
 import { Button, Spinner } from '@heroui/react';
+import 'chartjs-adapter-date-fns';
+import { es } from 'date-fns/locale';
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
-const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ contextType }) => {
-    const chartRef = useRef<HTMLCanvasElement>(null);
-    const chartInstanceRef = useRef<Chart<'line'> | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+interface HistoricoData {
+  'Temperatura agua': Array<{
+    id: number;
+    idCiclo: number;
+    fechaRegistro: string;
+    idSensor: number;
+    valor: number;
+  }>;
+  'Temperatura producto': Array<{
+    id: number;
+    idCiclo: number;
+    fechaRegistro: string;
+    idSensor: number;
+    valor: number;
+  }>;
+  'Nivel agua': Array<{
+    id: number;
+    idCiclo: number;
+    fechaRegistro: string;
+    idSensor: number;
+    valor: number;
+  }>;
+  general: {
+    id_ciclo: number;
+    ciclo_lote: string;
+    tiempo_transcurrido: string;
+    fecha_inicio: string;
+    fecha_fin: string;
+    receta: string;
+  };
+}
 
-    const { cocinaData } = useCocinaContext();
-    const { enfriadorData } = useEnfriadorContext();
+const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores', id: number }> = ({ contextType, id }) => {
+  const chartRef = useRef<HTMLCanvasElement>(null);
+  const chartInstanceRef = useRef<Chart<'line'> | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [data, setData] = useState<HistoricoData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-    // Función para reiniciar el zoom del gráfico
-    const resetZoom = () => {
-        if (chartInstanceRef.current) {
-            chartInstanceRef.current.resetZoom();
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(`http://192.168.0.61:8000/historico-graficos/Cocina 1-L1/1`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError(error instanceof Error ? error.message : 'Error al cargar los datos');
+      } finally {
+        setLoading(false);
+      }
     };
 
-    useEffect(() => {
-        const data = contextType === 'cocinas' ? cocinaData : enfriadorData;
-        if (!data || !chartRef.current) {
-            setLoading(true);
-            return;
-        }
+    fetchData();
+  }, [contextType, id]);
 
-        const ctx = chartRef.current.getContext('2d');
-        if (!ctx) {
-            setLoading(true);
-            return;
-        }
+  useEffect(() => {
+    if (!data || !chartRef.current) return;
 
-        // Destruir la instancia previa si existe
-        if (chartInstanceRef.current) {
-            chartInstanceRef.current.destroy();
-        }
+    const ctx = chartRef.current.getContext('2d');
+    if (!ctx) return;
 
-        const image = new Image();
-        image.src = '/creminox.png';
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.destroy();
+    }
 
-        const plugin: Plugin = {
-            id: 'customCanvasBackgroundImage',
-            beforeDraw: (chart: Chart) => {
-                if (image.complete) {
-                    const ctx = chart.ctx;
-                    const { top, left, width, height } = chart.chartArea;
-                    ctx.save();
-                    ctx.globalAlpha = 0.2;
-                    // Hacer la imagen responsive
-                    const imageWidth = width * 0.5;
-                    const imageHeight = (image.height / image.width) * imageWidth;
-                    const x = left + (width - imageWidth) / 2;
-                    const y = top + (height - imageHeight) / 2;
-                    ctx.drawImage(image, x, y, imageWidth, imageHeight);
-                    ctx.restore();
-                } else {
-                    image.onload = () => chart.draw();
-                }
-            }
-        };
+    // Procesar los datos para el gráfico con valores por defecto
+    const tempProducto = (data['Temperatura producto'] || []).map(item => ({
+      x: new Date(item.fechaRegistro).getTime(),
+      y: item.valor
+    }));
 
-        const chartData = transformData([data]);
+    const tempAgua = (data['Temperatura agua'] || []).map(item => ({
+      x: new Date(item.fechaRegistro).getTime(),
+      y: item.valor
+    }));
 
-        const config: ChartConfiguration<'line'> = {
-            type: 'line',
-            data: chartData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            usePointStyle: true,
-                        }
-                    },
-                    title: {
-                        align: 'start',
-                        color: '#D9D9D9',
-                        display: true,
-                        text: 'Temperaturas en tiempo real',
-                        font: {
-                            weight: 'normal',
-                            size: 20
-                        },
-                        padding: {
-                            top: 0,
-                            bottom: 15
-                        }
-                    },
-                    zoom: {
-                        pan: {
-                            enabled: true,
-                            mode: 'x',
-                        },
-                        zoom: {
-                            wheel: {
-                                enabled: true,
-                            },
-                            pinch: {
-                                enabled: true
-                            },
-                            mode: 'x',
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: (context) => {
-                                const datasetLabel = context.dataset.label || 'Temperatura';
-                                const temperature = context.parsed.y;
-                                const totalSeconds = Math.floor(context.parsed.x);
-                                // Convertir segundos a formato hh:mm:ss
-                                const hours = Math.floor(totalSeconds / 3600);
-                                const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                const seconds = totalSeconds % 60;
-                                const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                                return [
-                                    `Tiempo transcurrido: ${timeFormatted}`,
-                                    `${datasetLabel}: ${temperature}°C`
-                                ];
-                            },
-                            title: () => ''
-                        }
-                    }
-                },
-                transitions: {
-                    zoom: {
-                        animation: {
-                            duration: 0
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Temperatura (°C)',
-                        },
-                        beginAtZero: true,
-                        border: {
-                            color: '#D9D9D9'
-                        },
-                        grid: {
-                            color: '#1F1F1F',
-                            tickColor: '#fff'
-                        }
-                    },
-                    x: {
-                        type: 'linear',
-                        position: 'bottom',
-                        min: 0,
-                        ticks: {
-                            stepSize: 10,
-                            callback: (value) => {
-                                const totalSeconds = Math.floor(Number(value));
-                                const hours = Math.floor(totalSeconds / 3600);
-                                const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                const seconds = totalSeconds % 60;
-                                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                            }
-                        },
-                        afterBuildTicks: (axis) => {
-                            axis.ticks = axis.ticks.filter(t => t.value >= 0);
-                        },
-                        title: {
-                            display: true,
-                            text: 'Tiempo (hh:mm:ss)',
-                        },
-                        border: {
-                            color: '#D9D9D9'
-                        },
-                        grid: {
-                            color: '#1F1F1F',
-                            tickColor: '#fff'
-                        }
-                    }
-                }
+    const nivelAgua = (data['Nivel agua'] || []).map(item => ({
+      x: new Date(item.fechaRegistro).getTime(),
+      y: item.valor
+    }));
+
+    const config: ChartConfiguration = {
+        type: 'line',
+        data: {
+          datasets: [
+            {
+              label: 'Temperatura Producto',
+              data: tempProducto,
+              borderColor: 'rgb(75, 192, 75)',
+              backgroundColor: 'rgba(75, 192, 75, 0.5)',
+              fill: false,
+              tension: 0.4,
+              yAxisID: 'y',
             },
-            plugins: [plugin]
-        };
+            {
+              label: 'Temperatura Agua',
+              data: tempAgua,
+              borderColor: 'rgb(54, 162, 235)',
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+              fill: false,
+              tension: 0.4,
+              yAxisID: 'y',
+            },
+            {
+              label: 'Nivel Agua',
+              data: nivelAgua,
+              borderColor: 'rgb(255, 165, 0)',
+              backgroundColor: 'rgba(255, 165, 0, 0.5)',
+              fill: false,
+              tension: 0.4,
+              yAxisID: 'y1', // 👉 Escala derecha
+            }
+          ].filter(dataset => dataset.data.length > 0)
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  const value = context.parsed.y;
+                  const date = new Date(context.parsed.x);
+                  return `${context.dataset.label}: ${value} - ${date.toLocaleTimeString('es-ES')}`;
+                }
+              }
+            },
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'x',
+              },
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: true
+                },
+                mode: 'x',
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'time',
+              time: {
+                unit: 'minute',
+                displayFormats: {
+                  minute: 'HH:mm'
+                },
+                tooltipFormat: 'HH:mm:ss'
+              },
+              adapters: {
+                date: {
+                  locale: es
+                }
+              },
+              title: {
+                display: true,
+                text: 'Hora (HH:MM)'
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Temperatura (°C)'
+              }
+            },
+            y1: {
+              position: 'right',
+              beginAtZero: true,
+              grid: {
+                drawOnChartArea: false // 👉 evita líneas duplicadas en el fondo
+              },
+              title: {
+                display: true,
+                text: 'Nivel Agua (mm)'
+              }
+            }
+          }
+        }
+      };      
 
-        // Crear la instancia del gráfico y almacenarla en la referencia
-        chartInstanceRef.current = new Chart(ctx, config);
-        setLoading(false);
+    chartInstanceRef.current = new Chart(ctx, config);
 
-        return () => chartInstanceRef.current?.destroy();
-    }, [cocinaData, enfriadorData, contextType]);
+    return () => {
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy();
+      }
+    };
+  }, [data]);
 
+  const resetZoom = () => {
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.resetZoom();
+    }
+  };
+
+  if (error) {
     return (
-        <div className="bg-black p-20 h-full w-full rounded-md 1365:w-full 1365:h-full relative">
-            <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
-            {loading && (
-                <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 rounded-xl">
-                    <Spinner label="Cargando..." />
-                </div>
-            )}
+      <div className="bg-black p-20 h-full w-full rounded-md flex items-center justify-center">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-black h-full w-full rounded-md relative pt-10 px-20 pb-28">
+      {/* Info del ciclo (posición absoluta, arriba del gráfico) */}
+      {data && (
+        <div className="mb-5">
+          {/* Contenedor flex para los datos de temperatura y nivel */}
+          <div className="flex items-center gap-20">
+            {/* Temperatura Producto */}
+            <div className="text-white mb-6">
+                <h2 className="text-[32px] font-bold mb-[-8px]">GRÁFICO</h2>
+                <p className="mb-[-2px]">
+                <strong>LOTE:</strong> {data.general.ciclo_lote} - {data.general.receta}
+                </p>
+                <p className="text-[#e2973e] text-[14px]">
+                <strong></strong>{' '}
+                {new Date(data.general.fecha_inicio).toLocaleString('es-ES')} -{' '}
+                {new Date(data.general.fecha_fin).toLocaleString('es-ES')}
+                </p>
+            </div>
+            <div className="bg-[#e82a31]/25 text-white min-w-[100px] max-h-[75px] text-sm p-4 rounded-lg backdrop-blur-sm border border-[#e82a31]/50">
+              <p className="font-bold mb-2">Temp. Prod</p>
+              <p><strong>Max: </strong> {data.general.temp_producto_max}°C</p>
+              <p><strong>Min: </strong> {data.general.temp_producto_min}°C</p>
+            </div>
+
+            {/* Temperatura Agua */}
+            <div className="bg-[#3666cc]/25 text-white text-sm p-4 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#3666cc]/50">
+              <p className="font-bold mb-2">Temp. Agua</p>
+              <p><strong>Max: </strong> {data.general.temp_agua_max}°C</p>
+              <p><strong>Min: </strong> {data.general.temp_agua_min}°C</p>
+            </div>
+
+            {/* Nivel Agua */}
+            <div className="bg-yellow-500/25 text-white text-sm p-6 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-yellow-500/50">
+              <p className="font-bold mb-2">Nivel Agua</p>
+              <p><strong>Max: </strong> {data.general.nivel_agua_max} mm</p>
+              <p><strong>Min: </strong> {data.general.nivel_agua_min} mm</p>
+            </div>
+
             <Button
                 onClick={resetZoom}
-                style={{
-                    backgroundColor: "#333",
-                    border: "1px solid #CCC",
-                    color: "#CCC",
-                    width: "15%",
-                    height: "35px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "17px",
-                }}
-                className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"
+                className="absolute top-[35px] right-[35px] text-white bg-grey hover:bg-lightGrey px-10 py-20 rounded-md z-10"
             >
                 Reiniciar Zoom
             </Button>
+          </div>
         </div>
-    );
+      )}
+
+      {/* Gráfico */}
+      <canvas ref={chartRef}></canvas>
+  
+      {/* Spinner */}
+      {loading && (
+        <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75">
+          <Spinner label="Cargando datos..." />
+        </div>
+      )}
+
+    </div>
+  );  
 };
 
 export default Grafico;
