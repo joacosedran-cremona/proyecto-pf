@@ -10,6 +10,8 @@ import { CocinaProvider } from "@/context/CocinaContext";
 import { EnfriadorProvider } from "@/context/EnfriadorContext";
 import { LineaProvider } from "@/context/LineaContext";
 
+import LayoutHandler from "@/components/LayoutHandler";
+
 import { WebSocketProvider } from "@/context/WebSocketContext";
 
 import { I18nextProvider } from 'react-i18next';
@@ -17,6 +19,9 @@ import { i18n } from '@/i18n';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
+
+import ProtectedRoute from "@/components/ProtectedRoute";
+
 
 export interface ProvidersProps {
   initialLanguage: string; 
@@ -62,6 +67,8 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
       <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
         <I18nextProvider i18n={i18n}>
           {mounted && (
+          <LayoutHandler>
+            <ProtectedRoute>
             <WebSocketProvider>
               <LineaProvider>
                 <CocinaProvider>
@@ -71,6 +78,8 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
                 </CocinaProvider>
               </LineaProvider>
             </WebSocketProvider>
+            </ProtectedRoute>
+            </LayoutHandler>
           )}
         </I18nextProvider>
       </NextThemesProvider>

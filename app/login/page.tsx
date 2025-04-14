@@ -1,28 +1,36 @@
 "use client";
 
-import { useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import crem from "@/public/creminox.png";
 
 const Login = () => {
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    sessionStorage.setItem("access", "permitido");
+    router.push("/");
+  };
+
   return (
-    <div className="w-full h-[80%] flex absolute items-center justify-center bg-[#1f1f1f]">
-      <div className="w-auto h-auto gap-5 flex flex-col absolute items-center justify-center m-auto p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
+    <div className="flex w-full h-[90vh] items-center justify-center">
+      <div className="w-auto h-auto gap-5 flex flex-col items-center justify-center p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
         <Image
           src={crem}
           alt="Creminox"
-          className="flex w-[60%] m-auto p-0 h-auto"
+          className="flex w-[60%] p-0 h-auto"
         />
         
-        <form className="w-full max-w-[100vw] h-auto flex flex-col gap-5">
+        <form onSubmit={handleSubmit} className="w-full h-auto flex flex-col gap-5">
           <div className="flex flex-col gap-[5px]">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
               Username
             </label>
             <input
               type="text"
-              className="bg-[#1f1f1f] p-4 rounded-[10px] w-full max-w-[60vw] min-h-[5vh] h-full max-h-[70vw] border-none"
+              className="bg-[#1f1f1f] p-4 rounded-[10px] w-full h-12 flex items-center justify-center border-none mb-[0.4rem]"
             />
           </div>
 
@@ -32,7 +40,7 @@ const Login = () => {
             </label>
             <input
               type="password"
-              className="bg-[#1f1f1f] p-4 rounded-[10px] w-full max-w-[60vw] min-h-[5vh] h-full max-h-[70vw] border-none"
+              className="bg-[#1f1f1f] p-4 rounded-[10px] w-full h-12 flex items-center justify-center border-none mb-[0.4rem]"
             />
           </div>
 
@@ -42,7 +50,7 @@ const Login = () => {
           >
             <button 
               type="submit"
-              className="bg-[#e82a31] p-4 flex-row rounded-[10px] w-full h-12 flex items-center justify-center border-none text-[#D9D9D9] font-bold mb-[0.4rem] cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
+              className="bg-[#e82a31] p-4 rounded-[10px] w-full h-12 flex items-center justify-center border-none text-[#D9D9D9] font-bold mb-[0.4rem] cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
             >
               Login
             </button>

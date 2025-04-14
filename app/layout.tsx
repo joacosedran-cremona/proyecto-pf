@@ -2,8 +2,6 @@ import "@/styles/globals.css";
 import clsx from "clsx";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
-import Navbar from "@/components/header_Footer/navbar";
-import Footer from "@/components/header_Footer/footer";
 import { cookies } from 'next/headers';
 
 export const metadata = {
@@ -22,26 +20,15 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const cookieStore = await cookies();
   const initialLanguage = cookieStore.get('selectedLanguage')?.value || 'es';
 
   return (
     <html className="dark" suppressHydrationWarning lang="en">
       <head />
-      <body
-        className={clsx(
-          "min-h-screen bg-grey font-mono antialiased w-full"
-        )}
-      >
+      <body className={clsx("min-h-screen bg-grey font-mono antialiased w-full")}>
         <Providers initialLanguage={initialLanguage}>
-          <div className="flex flex-col w-full min-h-screen">
-            <Navbar />
-            <main className="min-h-screen w-full bg-grey p-20 pt-[85px]">
-              {children}
-            </main>
-            <Footer />
-          </div>
+            {children}
         </Providers>
       </body>
     </html>
