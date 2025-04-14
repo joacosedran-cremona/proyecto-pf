@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grafico from "@/components/graficos/graficoHistorico";
 import Productividad from "@/components/productividad/productividad";
 import Selector from "@/components/selectores/selectorHistorico";
@@ -11,7 +11,7 @@ import BotonAplicar from "@/components/botones/botonAplicar";
 import { useTranslation } from 'react-i18next';
 
 export default function Historico() {
-  // Remove duplicate/unused states
+  // Estados iniciales con valores por defecto
   const [selectedId, setSelectedId] = useState<number>(1);
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">("cocina");
   const [graphData, setGraphData] = useState<any>(null);
@@ -19,18 +19,27 @@ export default function Historico() {
   const [tempDateRange, setTempDateRange] = useState<{
     startDate: string | null;
     endDate: string | null;
-  }>({ startDate: null, endDate: null });
+  }>({ 
+    startDate: '2000-01-01', 
+    endDate: '2100-01-01' 
+  });
+
+  useEffect(() => {
+    console.log('🚀 Valores iniciales:', {
+      id: tempSelectedValue,
+      fecha_inicio: tempDateRange.startDate,
+      fecha_fin: tempDateRange.endDate
+    });
+  }, []);
 
   const { t } = useTranslation('hist_alert_tit');
   
   const handleDateChange = (startDate: string | null, endDate: string | null) => {
     setTempDateRange({ startDate, endDate });
-    console.log('🗓️ Fechas temporales almacenadas:', { startDate, endDate });
   };
 
   const handleChange = (value: number) => {
     setTempSelectedValue(value);
-    console.log('🔄 Valor temporal almacenado:', value);
   };
 
   const handleApplyClick = async () => {

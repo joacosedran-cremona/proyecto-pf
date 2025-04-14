@@ -4,6 +4,7 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 import { Button, Spinner } from '@heroui/react';
 import 'chartjs-adapter-date-fns';
 import { es } from 'date-fns/locale';
+import TablaCiclos from '@/components/tablaciclos/tablaCiclos';
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -47,22 +48,49 @@ interface HistoricoData {
   };
 }
 
-const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores', id: number }> = ({ contextType, id }) => {
+const equipmentMapping: Record<string, string> = {
+  'C1': 'Cocina 1-L1',
+  'C2': 'Cocina 2-L1',
+  'C3': 'Cocina 3-L1',
+  'C4': 'Cocina 4-L2',
+  'C5': 'Cocina 5-L2',
+  'C6': 'Cocina 6-L2',
+  'E1': 'Enfriador 1-L1',
+  'E2': 'Enfriador 2-L1',
+  'E3': 'Enfriador 3-L1',
+  'E4': 'Enfriador 4-L1',
+  'E5': 'Enfriador 5-L2',
+  'E6': 'Enfriador 6-L2',
+  'E7': 'Enfriador 7-L2',
+  'E8': 'Enfriador 8-L2'
+};
+
+const Grafico: React.FC<GraficoProps> = ({ contextType, id, startDate, endDate }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart<'line'> | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<HistoricoData | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const [showTable, setShowTable] = useState(false);
+  const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`http://192.168.0.61:8000/historico-graficos/Cocina 1-L1/1`);
+        const equipmentName = getEquipmentName(contextType, id);
+        const host = process.env.NEXT_PUBLIC_WS_HOST || '192.168.0.61';
+        const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+        
+        // Use equipmentName instead of equipo
+        const url = `http://${host}:${port}/historico-graficos/${equipmentName}/${selectedCicloId || 1}`;
+        
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -72,9 +100,9 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores', id: number }> 
         setLoading(false);
       }
     };
-
+  
     fetchData();
-  }, [contextType, id]);
+  }, [contextType, id, selectedCicloId]);
 
   useEffect(() => {
     if (!data || !chartRef.current) return;
@@ -232,67 +260,118 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores', id: number }> 
     );
   }
 
+  const getEquipmentName = (type: string, id: number): string => {
+    const key = `${type === 'cocinas' ? 'C' : 'E'}${id}`;
+    return equipmentMapping[key] || '';
+  };
+
+  const formatDate = (date: string) => {
+    const d = new Date(date);
+    return d.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  };
+  
+  const formatTime = (date: string) => {
+    const d = new Date(date);
+    return d.toLocaleTimeString('es-ES', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
   return (
     <div className="bg-black h-full w-full rounded-md relative pt-10 px-20 pb-28">
-      {/* Info del ciclo (posición absoluta, arriba del gráfico) */}
+      {/* Botones de control */}
+      <div className="absolute top-[35px] right-[35px] flex gap-20 z-20">
+        <Button
+          onClick={() => setShowTable(!showTable)}
+          className="text-white bg-grey/100 hover:bg-lightGrey/25 px-10 py-20 rounded-md backdrop-blur-sm border border-grey/50"
+        >
+          {showTable ? 'Ocultar Ciclos' : 'Mostrar Ciclos'}
+        </Button>
+        <Button
+          onClick={resetZoom}
+          className="text-white bg-grey/100 hover:bg-lightGrey/25 px-10 py-20 rounded-md backdrop-blur-sm border border-grey/50"
+        >
+          Reiniciar Zoom
+        </Button>
+      </div>
+  
+      {/* Info del ciclo */}
       {data && (
         <div className="mb-5">
-          {/* Contenedor flex para los datos de temperatura y nivel */}
           <div className="flex items-center gap-20">
-            {/* Temperatura Producto */}
             <div className="text-white mb-6">
-                <h2 className="text-[32px] font-bold mb-[-8px]">GRÁFICO</h2>
-                <p className="mb-[-2px]">
+              <h2 className="text-[32px] font-bold mb-[-8px]">GRÁFICO</h2>
+              <p className="mb-[-2px]">
                 <strong>LOTE:</strong> {data.general.ciclo_lote} - {data.general.receta}
-                </p>
-                <p className="text-[#e2973e] text-[14px]">
-                <strong></strong>{' '}
-                {new Date(data.general.fecha_inicio).toLocaleString('es-ES')} -{' '}
-                {new Date(data.general.fecha_fin).toLocaleString('es-ES')}
-                </p>
+              </p>
+              <p className="text-[#e2973e] text-[14px]">
+                {formatDate(data.general.fecha_inicio)} -{' '}
+                {formatDate(data.general.fecha_fin)}
+              </p>
             </div>
-            <div className="bg-[#e82a31]/25 text-white min-w-[100px] max-h-[75px] text-sm p-4 rounded-lg backdrop-blur-sm border border-[#e82a31]/50">
+            <div className="bg-[#4bc04b]/25 text-white min-w-[100px] max-h-[75px] text-sm p-4 rounded-lg backdrop-blur-sm border border-[#4bc04b]/50">
               <p className="font-bold mb-2">Temp. Prod</p>
               <p><strong>Max: </strong> {data.general.temp_producto_max}°C</p>
               <p><strong>Min: </strong> {data.general.temp_producto_min}°C</p>
             </div>
-
-            {/* Temperatura Agua */}
             <div className="bg-[#3666cc]/25 text-white text-sm p-4 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#3666cc]/50">
               <p className="font-bold mb-2">Temp. Agua</p>
               <p><strong>Max: </strong> {data.general.temp_agua_max}°C</p>
               <p><strong>Min: </strong> {data.general.temp_agua_min}°C</p>
             </div>
-
-            {/* Nivel Agua */}
             <div className="bg-yellow-500/25 text-white text-sm p-6 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-yellow-500/50">
               <p className="font-bold mb-2">Nivel Agua</p>
               <p><strong>Max: </strong> {data.general.nivel_agua_max} mm</p>
               <p><strong>Min: </strong> {data.general.nivel_agua_min} mm</p>
             </div>
-
-            <Button
-                onClick={resetZoom}
-                className="absolute top-[35px] right-[35px] text-white bg-grey hover:bg-lightGrey px-10 py-20 rounded-md z-10"
-            >
-                Reiniciar Zoom
-            </Button>
+            <div className="bg-[#e82a31]/25 text-white text-sm p-6 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#e82a31]/50">
+              <p><strong>H. Inicio: </strong> {formatTime(data.general.fecha_inicio)}</p>
+              <p><strong>H. Fin: </strong> {formatTime(data.general.fecha_fin)}</p>
+              <p><strong>T. Trans: </strong> {data.general.tiempo_transcurrido}</p>
+            </div>
           </div>
         </div>
       )}
-
-      {/* Gráfico */}
-      <canvas ref={chartRef}></canvas>
   
-      {/* Spinner */}
+      {/* Gráfico y Tabla */}
+      <div className="relative w-full h-[calc(100%)]">
+        <canvas ref={chartRef}></canvas>
+  
+        {/* Modal de Tabla */}
+        {showTable && (
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div 
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+          onClick={() => setShowTable(false)} 
+        />
+        <div className="relative z-20 bg-black/80 p-4 rounded-lg border border-gray-700">
+          <TablaCiclos
+            fechaInicio={startDate || '2000-01-01'}
+            fechaFin={endDate || '2100-01-01'}
+            equipo={getEquipmentName(contextType, id)}
+            onCicloSelect={(ciclo) => {
+              setSelectedCicloId(ciclo.id_ciclo);
+              console.log('ID del ciclo seleccionado:', ciclo.id_ciclo);
+              setShowTable(false);
+            }}
+          />
+        </div>
+      </div>
+        )}
+      </div>
+  
+      {/* Loading spinner */}
       {loading && (
         <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75">
           <Spinner label="Cargando datos..." />
         </div>
       )}
-
     </div>
-  );  
-};
-
+  );
+}
 export default Grafico;
