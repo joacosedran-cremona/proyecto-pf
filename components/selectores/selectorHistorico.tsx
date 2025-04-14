@@ -44,9 +44,9 @@ const Selector: React.FC<SelectorProps> = ({
         <Select
             radius="md"
             variant="bordered"
-            defaultSelectedKeys={["1"]}
-            selectedKeys={[value.toString()]}
+            selectedKeys={[value.toString()]}  // Usar solo selectedKeys, no defaultSelectedKeys
             onChange={handleChange}
+            aria-label="Seleccionar equipo"
             classNames={{
                 trigger: "h-[40px] w-[40px]",
                 value: "text-center"

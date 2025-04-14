@@ -8,6 +8,13 @@ import { es } from 'date-fns/locale';
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
+interface GraficoProps {
+  contextType: 'cocinas' | 'enfriadores';
+  id: number;
+  startDate: string | null;
+  endDate: string | null;
+}
+
 interface HistoricoData {
   'Temperatura agua': Array<{
     id: number;

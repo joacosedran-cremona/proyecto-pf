@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 interface DatePickerProps {
   selectClasses?: string;
-  onDateChange?: (startDate: string | null, endDate: string | null) => void; // <== ahora recibe strings formateadas
+  onDateChange?: (startDate: string | null, endDate: string | null) => void;
 }
 
 export default function DatePicker({ selectClasses, onDateChange }: DatePickerProps) {
@@ -27,43 +27,41 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
 
   const formatToYYYYMMDD = (date: Date | null): string | null => {
     if (!date) return null;
-    return date.toISOString().split('T')[0]; // "YYYY-MM-DD"
+    return date.toISOString().split('T')[0];
   };
 
   const handleDateChange = (range: { start: any; end: any }) => {
     try {
       const startDate = convertToDate(range?.start);
       const endDate = convertToDate(range?.end);
-  
+
       if (startDate && isNaN(startDate.getTime())) {
         console.error('Invalid start date');
         return;
       }
-  
+
       if (endDate && isNaN(endDate.getTime())) {
         console.error('Invalid end date');
         return;
       }
-  
+
       setDateRange({ startDate, endDate });
-  
+
       const formattedStart = formatToYYYYMMDD(startDate);
       const formattedEnd = formatToYYYYMMDD(endDate);
-  
-      console.log('Fecha inicio YYYY-MM-DD:', formattedStart);
-      console.log('Fecha fin YYYY-MM-DD:', formattedEnd);
-  
+
       if (onDateChange) {
         onDateChange(formattedStart, formattedEnd);
       }
     } catch (error) {
       console.error('Error processing dates:', error);
     }
-  };  
+  };
 
   return (
     <div className={selectClasses}>
       <DateRangePicker
+        aria-label="Seleccionar rango de fechas"
         calendarProps={{
           classNames: {
             base: "bg-background",
