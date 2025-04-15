@@ -2,6 +2,8 @@
 
 //React
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation'; // Agregar este import
+
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 //ChartJs
@@ -47,14 +49,9 @@ interface DetallesEquipo {
     }>;
 }
 
-const formatTime = (seconds: number): string => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} HS`;
-};
-
 // Modificar la definición del componente para recibir solo el id
 const Grafico: React.FC<{ id: number }> = ({ id }) => {
+    const router = useRouter();
     const { t } = useTranslation('grafico');
     const chartRef = useRef<HTMLCanvasElement>(null);
     const chartInstanceRef = useRef<Chart<'line'> | null>(null);
@@ -65,6 +62,13 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
     
     // Determinar el tipo de equipo basado en el ID
     const contextType = id <= 6 ? 'cocinas' : 'enfriadores';
+
+    const handleClick = () => {
+        const path = id <= 6 
+            ? `/cocinas?id=${id}` 
+            : `/enfriadores?id=${id}`;
+        router.push(path);
+    };
 
     useEffect(() => {
         if (!lineasData) {
@@ -317,7 +321,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
     }
 
     return (
-        <div className="bg-black p-6 h-full w-full rounded-md relative text-white">
+        <div className="bg-black p-6 h-full w-full rounded-md relative text-white cursor-pointer hover:bg-black/80 transition-colors" onClick={handleClick}>
           <div className="flex h-[20%] justify-between p-5">
             <div className="flex items-start gap-6">
                 <div className={`text-[28px] font-bold ${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'}`}>
@@ -333,7 +337,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                   <span className="font-semibold">ESTADO:</span> {equipo.estado}
                 </div>
                 <div>
-                  <span className="font-semibold">TIEMPO:</span> {formatTime(equipo.tiempoTranscurrido)}
+                  <span className="font-semibold">TIEMPO:</span> {equipo.tiempoTranscurrido}
                 </div>
               </div>
             </div>

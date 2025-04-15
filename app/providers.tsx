@@ -20,6 +20,8 @@ import { i18n } from '@/i18n';
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 
+import { Toaster } from 'sonner';
+
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 
@@ -73,7 +75,9 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
               <LineaProvider>
                 <CocinaProvider>
                   <EnfriadorProvider>
-                    {children}
+                    <Toaster richColors />
+                      {children}
+                    <Toaster richColors />
                   </EnfriadorProvider>
                 </CocinaProvider>
               </LineaProvider>

@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-  Spinner
-} from "@heroui/react";
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Spinner } from "@heroui/react";
+import { toast } from 'sonner';
 
 interface Ciclo {
   id_ciclo: number;
@@ -21,29 +14,52 @@ interface TablaCiclosProps {
   fechaInicio: string;
   fechaFin: string;
   equipo: string;
+  selectedCicloId?: number | null; // nuevo prop
   onCicloSelect?: (ciclo: Ciclo) => void;
 }
 
-const TablaCiclos: React.FC<TablaCiclosProps> = ({ fechaInicio, fechaFin, equipo, onCicloSelect }) => {
+const TablaCiclos: React.FC<TablaCiclosProps> = ({ 
+  fechaInicio, 
+  fechaFin, 
+  equipo, 
+  selectedCicloId,
+  onCicloSelect 
+}) => {
   const [ciclos, setCiclos] = useState<Ciclo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedKeys, setSelectedKeys] = useState(new Set([]));
+  
+  // Inicializar selectedKeys con el ciclo actual si existe
+  const [selectedKeys, setSelectedKeys] = useState(
+    new Set(selectedCicloId ? [selectedCicloId.toString()] : [])
+  );
 
   useEffect(() => {
     const fetchCiclos = async () => {
+      setLoading(true);
       try {
         const host = process.env.NEXT_PUBLIC_WS_HOST;
         const port = process.env.NEXT_PUBLIC_WS_PORT;
         const url = `http://${host}:${port}/historico-graficos/${equipo}?fecha_inicio=${fechaInicio}&fecha_fin=${fechaFin}`;
         
         const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Error al obtener los ciclos');
+        const data = await response.json();
+        
+        if (!response.ok || !data || data.length === 0) {
+          // Unified error handling
+          setError('No existen datos en el equipo/fecha ingresada');
+          setCiclos([]);
+          // Show toast with unique ID to prevent duplicates
+          toast.error('Error al obtener sus ciclos', {
+            description: 'No existen datos en el equipo/fecha ingresada',
+            position: 'bottom-right',
+            id: `no-data-${fechaInicio}-${fechaFin}-${equipo}`, // Unique ID based on parameters
+          });
+          return;
         }
         
-        const data = await response.json();
         setCiclos(data);
+        setError(null);
       } catch (error) {
         console.error('Error:', error);
         setError(error instanceof Error ? error.message : 'Error desconocido');
@@ -55,20 +71,22 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({ fechaInicio, fechaFin, equipo
     fetchCiclos();
   }, [fechaInicio, fechaFin, equipo]);
 
+  useEffect(() => {
+    if (selectedCicloId) {
+      setSelectedKeys(new Set([selectedCicloId.toString()]));
+    }
+  }, [selectedCicloId]);
+
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-[200px]">
+      <div className="flex justify-center items-center h-[150px]">
         <Spinner label="Cargando ciclos..." />
       </div>
     );
   }
 
   if (error) {
-    return (
-      <div className="text-red-500 text-center p-4">
-        Error: {error}
-      </div>
-    );
+    return null; // No mostrar nada ya que el error se muestra en el toast
   }
 
   return (
@@ -80,13 +98,11 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({ fechaInicio, fechaFin, equipo
         const selection = new Set(keys);
         setSelectedKeys(selection);
         
-        // Obtener el ID seleccionado
         const selectedId = Array.from(selection)[0];
-        
-        // Encontrar el ciclo correspondiente
         const cicloSeleccionado = ciclos.find(c => c.id_ciclo.toString() === selectedId?.toString());
         
         if (cicloSeleccionado && onCicloSelect) {
+          console.log('🎯 Ciclo seleccionado en Tabla:', cicloSeleccionado.id_ciclo);
           onCicloSelect(cicloSeleccionado);
         }
       }}

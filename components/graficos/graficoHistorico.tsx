@@ -14,6 +14,10 @@ interface GraficoProps {
   id: number;
   startDate: string | null;
   endDate: string | null;
+  showTableOnLoad?: boolean;
+  onTableClose?: () => void;
+  onCicloSelect?: (cicloId: number) => void;
+  selectedCicloId?: number | null;
 }
 
 interface HistoricoData {
@@ -65,15 +69,42 @@ const equipmentMapping: Record<string, string> = {
   'E8': 'Enfriador 8-L2'
 };
 
-const Grafico: React.FC<GraficoProps> = ({ contextType, id, startDate, endDate }) => {
+const Grafico: React.FC<GraficoProps> = ({ 
+  contextType, 
+  id, 
+  startDate, 
+  endDate,
+  showTableOnLoad = false,
+  onTableClose,
+  onCicloSelect,
+  selectedCicloId: externalSelectedCicloId // Renombrado para evitar confusión
+}) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart<'line'> | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<HistoricoData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [showTable, setShowTable] = useState(false);
   const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
+  const [showTable, setShowTable] = useState(showTableOnLoad);
+  const [internalSelectedCicloId, setInternalSelectedCicloId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (externalSelectedCicloId !== undefined) {
+      setInternalSelectedCicloId(externalSelectedCicloId);
+    }
+  }, [externalSelectedCicloId]);
   
+  useEffect(() => {
+    setShowTable(showTableOnLoad);
+  }, [showTableOnLoad]);
+
+  const handleTableClose = () => {
+    setShowTable(false);
+    if (onTableClose) {
+      onTableClose();
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -83,8 +114,11 @@ const Grafico: React.FC<GraficoProps> = ({ contextType, id, startDate, endDate }
         const host = process.env.NEXT_PUBLIC_WS_HOST || '192.168.0.61';
         const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
         
-        // Use equipmentName instead of equipo
-        const url = `http://${host}:${port}/historico-graficos/${equipmentName}/${selectedCicloId || 1}`;
+        // Usar el ciclo seleccionado interno
+        const cicloId = internalSelectedCicloId || 1;
+        const url = `http://${host}:${port}/historico-graficos/${equipmentName}/${cicloId}`;
+        
+        console.log('🔍 Fetching data for:', { equipmentName, cicloId });
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -102,7 +136,7 @@ const Grafico: React.FC<GraficoProps> = ({ contextType, id, startDate, endDate }
     };
   
     fetchData();
-  }, [contextType, id, selectedCicloId]);
+  }, [contextType, id, internalSelectedCicloId]); // Cambiar la dependencia
 
   useEffect(() => {
     if (!data || !chartRef.current) return;
@@ -283,7 +317,7 @@ const Grafico: React.FC<GraficoProps> = ({ contextType, id, startDate, endDate }
   };
 
   return (
-    <div className="bg-black h-full w-full rounded-md relative pt-10 px-20 pb-28">
+    <div className="bg-black h-full w-full rounded-md relative pt-10 px-20 pb-28 grafico-historico">
       {/* Botones de control */}
       <div className="absolute top-[35px] right-[35px] flex gap-20 z-20">
         <Button
@@ -342,27 +376,29 @@ const Grafico: React.FC<GraficoProps> = ({ contextType, id, startDate, endDate }
       <div className="relative w-full h-[calc(100%)]">
         <canvas ref={chartRef}></canvas>
   
-        {/* Modal de Tabla */}
         {showTable && (
-      <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div 
-          className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
-          onClick={() => setShowTable(false)} 
-        />
-        <div className="relative z-20 bg-black/80 p-4 rounded-lg border border-gray-700">
-          <TablaCiclos
-            fechaInicio={startDate || '2000-01-01'}
-            fechaFin={endDate || '2100-01-01'}
-            equipo={getEquipmentName(contextType, id)}
-            onCicloSelect={(ciclo) => {
-              setSelectedCicloId(ciclo.id_ciclo);
-              console.log('ID del ciclo seleccionado:', ciclo.id_ciclo);
-              setShowTable(false);
-            }}
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div 
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+            onClick={handleTableClose} 
           />
+          <div className="relative z-20 bg-black/80 p-4 rounded-lg border border-gray-700">
+            <TablaCiclos
+              fechaInicio={startDate || '2000-01-01'}
+              fechaFin={endDate || '2100-01-01'}
+              equipo={getEquipmentName(contextType, id)}
+              selectedCicloId={internalSelectedCicloId}
+              onCicloSelect={(ciclo) => {
+                setInternalSelectedCicloId(ciclo.id_ciclo);
+                if (onCicloSelect) {
+                  onCicloSelect(ciclo.id_ciclo);
+                }
+                handleTableClose();
+              }}
+            />
+          </div>
         </div>
-      </div>
-        )}
+      )}
       </div>
   
       {/* Loading spinner */}

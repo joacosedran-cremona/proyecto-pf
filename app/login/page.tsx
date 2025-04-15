@@ -44,17 +44,12 @@ const Login = () => {
             />
           </div>
 
-          {/* Botón con spinner */}
-          <Link
-            href="/"
+          <button 
+            type="submit"
+            className="bg-[#e82a31] p-4 rounded-[10px] w-full h-12 flex items-center justify-center border-none text-[#D9D9D9] font-bold mb-[0.4rem] cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
           >
-            <button 
-              type="submit"
-              className="bg-[#e82a31] p-4 rounded-[10px] w-full h-12 flex items-center justify-center border-none text-[#D9D9D9] font-bold mb-[0.4rem] cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
-            >
-              Login
-            </button>
-          </Link>
+            Login
+          </button>
         </form>
 
         <div>

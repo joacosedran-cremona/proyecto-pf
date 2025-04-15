@@ -16,6 +16,8 @@ export default function Historico() {
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">("cocina");
   const [graphData, setGraphData] = useState<any>(null);
   const [tempSelectedValue, setTempSelectedValue] = useState(1);
+  const [showGraphic, setShowGraphic] = useState(true);
+  const [selectedCicloId, setSelectedCicloId] = useState<number>(1);
   const [tempDateRange, setTempDateRange] = useState<{
     startDate: string | null;
     endDate: string | null;
@@ -27,6 +29,7 @@ export default function Historico() {
   useEffect(() => {
     console.log('🚀 Valores iniciales:', {
       id: tempSelectedValue,
+      cicloId: selectedCicloId, // Agregar log del ciclo
       fecha_inicio: tempDateRange.startDate,
       fecha_fin: tempDateRange.endDate
     });
@@ -50,25 +53,18 @@ export default function Historico() {
         fecha_fin: tempDateRange.endDate
     };
 
-    // Log de los datos que se van a enviar
     console.log('📤 Datos a enviar:', dataToSend);
 
     try {
         const equipmentType = tempSelectedValue <= 6 ? "cocina" : "enfriador";
-        const filePath = equipmentType === "cocina" ? "/data/cocinas.json" : "/data/enfriadores.json";
+        
+        // Primero ocultamos el gráfico actual
+        setShowGraphic(false);
         
         // Actualizar estados locales
         setSelectedId(tempSelectedValue);
         setSelectedType(equipmentType);
-
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error("Error al cargar el archivo JSON");
-        }
-        
-        const jsonData = await response.json();
-        const equipmentData = jsonData.find((item: any) => item.id === tempSelectedValue);
-        setGraphData(equipmentData);
+        setGraphData(null); // Limpiamos datos anteriores
 
         // Log de confirmación de datos enviados
         console.log('✅ Datos enviados exitosamente:', dataToSend);
@@ -78,12 +74,26 @@ export default function Historico() {
     }
 };
 
+  const handleCicloSelect = (cicloId: number) => {
+    console.log('🎯 Ciclo seleccionado en Page:', cicloId);
+    setSelectedCicloId(cicloId);
+    setShowGraphic(true);
+  };
+
   return (
     <section className="flex flex-col w-full items-center justify-center gap-20">
       <div className="flex flex-row items-center justify-between bg-black p-4 w-full rounded-md">
         <div className="flex gap-10 ml-10">
-          <BotonPDF selectClasses="text-white bg-red-700/50 hover:bg-red-800 min-h-[40px]" />
-          <BotonExcel selectClasses="text-white bg-green-700 hover:bg-green-800 min-h-[40px]" />
+          <BotonPDF 
+              selectClasses="text-white bg-red-700/50 hover:bg-red-800 min-h-[40px]"
+              equipo={selectedType === "cocina" ? `Cocina ${selectedId}-L1` : `Enfriador ${selectedId}-L1`}
+              cicloId={selectedCicloId}
+          />
+          <BotonExcel 
+            selectClasses="text-white bg-green-700 hover:bg-green-800 min-h-[40px]"
+            equipo={selectedType === "cocina" ? `Cocina ${selectedId}-L1` : `Enfriador ${selectedId}-L1`}
+            cicloId={selectedCicloId}
+          />
         </div>
 
         <div className="text-center text-white">
@@ -114,6 +124,10 @@ export default function Historico() {
           id={selectedId}
           startDate={tempDateRange.startDate}
           endDate={tempDateRange.endDate}
+          showTableOnLoad={!showGraphic}
+          onTableClose={() => setShowGraphic(true)}
+          onCicloSelect={handleCicloSelect}
+          selectedCicloId={selectedCicloId} // Add this prop
         />
       </div>
       <div className="w-full h-auto">
