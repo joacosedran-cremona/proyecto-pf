@@ -1,17 +1,16 @@
 import React, { useMemo, useState, useEffect } from "react";
+import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row } from "material-react-table";
 import { Box, Button } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
-
 import { useTranslation } from "react-i18next";
 
 export type Alerta = {
   key: string;
   description: string;
   type: string;
-  state: string;
   time: string;
 };
 
@@ -22,12 +21,25 @@ const Tabla: React.FC = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      const convertedData = alertas.map((alerta) => ({
-        ...alerta,
-        key: alerta.key.toString(),
-      }));
-      setData(convertedData);
-      setIsLoading(false);
+      setIsLoading(true);
+      try {
+        const response = await fetch("http://192.168.0.75:8000/alarmas");
+        if (!response.ok) throw new Error("Error en la solicitud");
+        
+        const apiData = await response.json();
+        const convertedData = apiData.map((alarma: any) => ({
+          key: alarma.id_alarma.toString(),
+          description: alarma.descripcion,
+          type: alarma.tipo,
+          time: alarma.fecha_registro,
+        }));
+        
+        setData(convertedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     loadData();
@@ -38,22 +50,17 @@ const Tabla: React.FC = () => {
       {
         accessorKey: "description",
         header: t('descripcion'),
-        grow: 1
+        size: 300,
       },
       {
         accessorKey: "type",
         header: t('tipo'),
-        grow: 1
-      },
-      {
-        accessorKey: "state",
-        header: t('estado'),
-        grow: 1
+        size: 150,
       },
       {
         accessorKey: "time",
         header: t('hora'),
-        grow: 1
+        size: 200,
       },
     ],
     [t]
@@ -62,15 +69,30 @@ const Tabla: React.FC = () => {
   const handleExportRows = (rows: MRT_Row<Alerta>[]) => {
     const doc = new jsPDF();
     const tableData = rows.map((row) => Object.values(row.original));
-    const tableHeaders = columns.map((c) => c.header);
+    const tableHeaders = columns.map((c) => c.header as string);
 
     autoTable(doc, {
       head: [tableHeaders],
       body: tableData,
+      theme: 'grid',
+      styles: { fillColor: [41, 41, 41] },
+      headStyles: { fillColor: [25, 25, 25] },
     });
 
     doc.save("tabla_alertas.pdf");
   };
+
+  const customTheme = createTheme({
+    components: {
+      MuiMenu: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: '#131313',
+          },
+        },
+      },
+    },
+  });
 
   const table = useMaterialReactTable({
     columns,
@@ -79,27 +101,161 @@ const Tabla: React.FC = () => {
     enableSorting: true,
     enableColumnResizing: true,
     columnResizeMode: "onChange",
-    layoutMode: "semantic",
+    layoutMode: "grid",
+    
+    //Head
+    muiTableHeadCellProps: {
+      sx: {
+        backgroundColor: "#131313",
+        color: "#d9d9d9",
+        fontWeight: "bold",
+        '& .MuiDivider-root': {
+          backgroundColor: '#FFF5 !important',
+          height: '20px',
+          '&:hover': {
+            backgroundColor: 'rgb(129, 129, 129) !important',
+          },
+        },
+      },
+    },
+
+    muiTableHeadRowProps: {
+      sx: {
+        backgroundColor: "#131313",
+      },
+    },
+
+    muiTopToolbarProps: {
+      sx: {
+        backgroundColor: "#131313",
+        '& .MuiInputBase-root': {
+          color: '#d9d9d9',
+        },
+        '& .MuiInputBase-input': {
+          color: '#d9d9d9',
+        },
+        '& .MuiSvgIcon-root': {
+          color: '#d9d9d9',
+        },
+      },
+    },
+
+    
+    //Body
+    muiTableBodyCellProps: {
+      sx: {
+        backgroundColor: "#131313", // Celdas con fondo oscuro
+        color: "#d9d9d9", 
+      },
+    },
+
+    muiTableBodyRowProps: {
+      sx: {
+        backgroundColor: "#131313",
+        "&:nth-of-type(odd)": {
+          backgroundColor: "#131313", // Alternancia de fondo
+        }
+      },
+    },
+
+
+    //Footer
+    muiTableFooterProps: {
+      sx : {
+        '& MuiInputLabel-root': {
+          color: '#d9d9d9',
+          border: '5px solid #d9d9d9',
+        },
+        '& MuiFormLabel-root': {
+          color: '#d9d9d9',
+          border: '5px solid #d9d9d9',
+        }
+      }
+    },
+
+    muiBottomToolbarProps: {
+      sx: {
+        backgroundColor: "#131313",
+        color: "#d9d9d9",
+        '& .MuiTablePagination-root': {
+          color: '#d9d9d9',
+        },
+        '& .MuiSelect-icon': {
+          color: '#d9d9d9',
+        },
+        '& .MuiInputBase-input': {
+          color: '#d9d9d9',
+        },
+        '& .MuiSvgIcon-root': {
+          color: '#d9d9d9',
+        },
+        '& MuiInputLabel-root': {
+          color: '#d9d9d9',
+          border: '5px solid #d9d9d9',
+        },
+        '& MuiFormLabel-root': {
+          color: '#d9d9d9',
+          border: '5px solid #d9d9d9',
+        }
+      },
+    },
+
+
+    //Pagination
+    muiTableProps: {
+      sx: {
+        '& .MuiInputLabel-root': { // ✅ Selector correcto con punto
+          color: '#d9d9d9 !important',
+        },
+        '& .MuiSelect-select, & .MuiSelect-icon': {
+          color: '#d9d9d9',
+        }
+      },
+    },
+
+    muiTablePaperProps: {
+      elevation: 0,
+      sx: {
+        backgroundColor: '#1e1e1e',
+        borderRadius: '8px',
+      },
+    },
+
+    muiTableContainerProps: {
+      sx: {
+        backgroundColor: "#131313", // Fondo de la tabla
+      },
+    },
+    
+    muiSkeletonProps: {
+      sx: {
+        backgroundColor: "#131313", // Fondo durante el loading
+      },
+    },
+    muiColumnActionsButtonProps: {
+      sx: {
+        color: '#d9d9d9',
+        '&:hover': {
+          backgroundColor: 'rgba(255, 255, 255, 0.1)'
+        }
+      }
+    },
+
     renderTopToolbarCustomActions: ({ table }) => (
-      <Box
-        sx={{
-          display: "flex",
-          gap: "16px",
-          padding: "8px",
-          flexWrap: "wrap",
-        }}
-      >
+      <Box sx={{ display: 'flex', gap: 1, p: 1 }}>
         <Button
-          disabled={table.getPrePaginationRowModel().rows.length === 0}
           onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
           startIcon={<FileDownloadIcon />}
+          variant="contained"
+          color="primary"
         >
           {t('exptodas')}
         </Button>
         <Button
-          disabled={table.getRowModel().rows.length === 0}
           onClick={() => handleExportRows(table.getRowModel().rows)}
           startIcon={<FileDownloadIcon />}
+          variant="outlined"
+          color="secondary"
         >
           {t('expvisibles')}
         </Button>
@@ -108,9 +264,9 @@ const Tabla: React.FC = () => {
   });
 
   return (
-    <div style={{ width: "100%", overflowX: "auto" }}>
+    <ThemeProvider theme={customTheme}>
       <MaterialReactTable table={table} />
-    </div>
+    </ThemeProvider>
   );
 };
 
