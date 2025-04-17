@@ -281,7 +281,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
 
     if (!equipo) {
         return (
-            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <div className="bg-midGrey p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white text-center">{t('equipoNoEncontrado')}</p>
             </div>
@@ -296,7 +296,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
             : t('equipo.desconocido');
 
         return (
-            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <div className="bg-midGrey p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white text-center">{nombreEquipo} - {t('inactividad.titulo')}</p>
                 <p className="text-xl text-white text-center">{t('inactividad.mensaje')}</p>
@@ -312,7 +312,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
             : t('equipo.desconocido');
 
         return (
-            <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <div className="bg-redChill p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{nombreEquipo} - {t('error.titulo')}</p>
                 <p className="text-xl text-white">{t('error.mensaje')}</p>
@@ -321,9 +321,9 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
     }
 
     return (
-        <div className="bg-black p-6 h-full w-full rounded-md relative text-white cursor-pointer hover:bg-black/80 transition-colors" onClick={handleClick}>
-          <div className="flex h-[20%] justify-between p-5">
-            <div className="flex items-start gap-6">
+        <div className="bg-black p-[6px] h-[100%] w-[100%] rounded-md relative text-white cursor-pointer hover:bg-black/80 transition-colors" onClick={handleClick}>
+          <div className="flex h-[20%] justify-between p-[5px]">
+            <div className="flex items-start gap-[6px]">
                 <div className={`text-[28px] font-bold ${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'}`}>
                 {equipo.tipo === 'COCINA' 
                 ? `C${equipo.id}` 
@@ -353,13 +353,13 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
             </div>
           </div>
       
-          <canvas ref={chartRef} className="block w-full max-h-[80%] px-6" />
+          <canvas ref={chartRef} className="block w-[100%] max-h-[80%] px-[6px]" />
       
           {loading && !hasCachedData && (
-            <div className="flex absolute items-center justify-center h-full w-full">
+            <div className="flex absolute items-center justify-center h-[100%] w-[100%]">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto" />
-                <p className="mt-4">Conectando al servidor...</p>
+                <div className="animate-spin rounded-[100%] h-[12px] w-[12px] border-t-[2px] border-b-[2px] border-primary mx-auto" />
+                <p className="mt-[4px]">Conectando al servidor...</p>
               </div>
             </div>
           )}

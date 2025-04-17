@@ -16,13 +16,13 @@ const Footer: React.FC = () => {
     const opcionesIzq: FooterOption[] = [
         {
         id: 1,
-        icono: <FiMapPin className="w-auto h-full" />,
+        icono: <FiMapPin className="w-auto h-[100%]" />,
         link: "https://www.google.com/maps/place/Beron+de+Astrada+2745,+CABA,+Argentina",
         texto: "Beron de Astrada 2745, CABA, Argentina",
         },
         {
         id: 2,
-        icono: <CiMail className="w-auto h-full" />,
+        icono: <CiMail className="w-auto h-[100%]" />,
         link: "mailto:soporte@creminox.com",
         texto: "soporte@creminox.com",
         },
@@ -31,26 +31,26 @@ const Footer: React.FC = () => {
     const opcionesDer: FooterOption[] = [
         {
         id: 3,
-        icono: <FaFacebook className="w-auto h-full" />,
+        icono: <FaFacebook className="w-auto h-[100%]" />,
         link: "https://facebook.com/creminox",
         texto: "/creminox",
         },
         {
         id: 4,
-        icono: <FaLinkedin className="w-auto h-full" />,
+        icono: <FaLinkedin className="w-auto h-[100%]" />,
         link: "https://ar.linkedin.com/company/creminox",
         texto: "Creminox",
         },
     ];
 
     return (
-        <footer className="flex flex-col align-middle bg-footerbg w-full text-white inset-x-0 bottom-0">
-            <div className="flex flex-row w-full max-w-1920 h-[165px] justify-between align-middle p-40">
-                <ul className="flex flex-col justify-center align-middle h-full w-[30%]">
+        <footer className="flex flex-col align-middle bg-footerbg w-[100%] text-white inset-x-[0px] bottom-[0px]">
+            <div className="flex flex-row w-[100%] max-w-1920 h-[165px] justify-between align-middle p-[40px]">
+                <ul className="flex flex-col justify-center align-middle h-[100%] w-[30%]">
                 {opcionesIzq.map(({ id, icono, link, texto }) => (
-                    <li key={id} className="flex flex-row items-center justify-start h-1/2 py-[1vh] gap-10">
+                    <li key={id} className="flex flex-row items-center justify-start h-1/2 py-[1vh] gap-[10px]">
                     <Link
-                        className="flex flex-row items-center h-full gap-10"
+                        className="flex flex-row items-center h-[100%] gap-[10px]"
                         href={link}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -62,9 +62,9 @@ const Footer: React.FC = () => {
                 ))}
                 </ul>
 
-                <div className="flex justify-center align-middle h-full w-[40%]">
+                <div className="flex justify-center align-middle h-[100%] w-[40%]">
                 <Link
-                    className="flex w-auto h-full p-0 justify-center items-center"
+                    className="flex w-auto h-[100%] p-[0px] justify-center items-center"
                     href="https://creminox.com"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -79,11 +79,11 @@ const Footer: React.FC = () => {
                 </Link>
                 </div>
 
-                <ul className="flex flex-col justify-center align-middle h-full w-[30%]">
+                <ul className="flex flex-col justify-center align-middle h-[100%] w-[30%]">
                 {opcionesDer.map(({ id, icono, link, texto }) => (
-                    <li key={id} className="flex flex-row items-center justify-end h-1/2 py-[1vh] gap-10">
+                    <li key={id} className="flex flex-row items-center justify-end h-1/2 py-[1vh] gap-[10px]">
                     <Link
-                        className="flex flex-row items-center h-full gap-15"
+                        className="flex flex-row items-center h-[100%] gap-[15px]"
                         href={link}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
 
             <hr className="border-[#6668]" />
 
-            <p className="flex text-xs font-light text-[#666] py-[5px] w-full justify-center align-middle">
+            <p className="flex text-xs font-light text-[#666] py-[5px] w-[100%] justify-center align-middle">
                 ©2025 All Rights Reserved Cremona Inoxidable
             </p>
         </footer>

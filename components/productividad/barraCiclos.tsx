@@ -23,14 +23,14 @@ const BarraCiclos: React.FC<CiclosBarProps> = ({ ciclosRealizados }) => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-2 text-white">% Ciclos realizados correctamente</h2>
+      <h2 className="text-xl font-bold mb-[2px] text-white">% Ciclos realizados correctamente</h2>
       <div className="flex h-[20px] rounded-[5px] overflow-hidden bg-[#444] mb-[15px]">
         <div
-          className="h-full bg-green"
+          className="h-[100%] bg-green"
           style={{ width: `${porcentajeCorrectos}%` }}
         ></div>
         <div
-          className="h-full bg-red"
+          className="h-[100%] bg-red"
           style={{ width: `${porcentajeIncorrectos}%` }}
         ></div>
       </div>

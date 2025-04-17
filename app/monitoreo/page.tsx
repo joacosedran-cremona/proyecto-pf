@@ -17,21 +17,21 @@ const Monitoreo = () => {
     const linea = lineas[lineaSeleccionada as keyof typeof lineas];
 
     return (
-        <section className="flex flex-col min-h-[650px] h-[90vh] w-full min-w-[720px] items-center justify-center gap-20">
-            <div className="flex w-full justify-between">
+        <section className="flex flex-col min-h-[650px] h-[90vh] w-[100%] min-w-[720px] items-center justify-center gap-[20px]">
+            <div className="flex w-[100%] justify-between">
                 <h1 className="text-2xl font-semibold text-white">{t('monitoreo')}</h1>
                 <div className="w-1/5">
                     <Selector />
                 </div>
             </div>
 
-            <div className="flex flex-row gap-20 h-1/2 w-full">
+            <div className="flex flex-row gap-[20px] h-1/2 w-[100%]">
                 {linea.cocinas.map((id) => (
                     <Grafico key={`equipo-${id}`} id={id} />
                 ))}
             </div>
                 
-            <div className="flex flex-row gap-20 h-1/2 w-full">
+            <div className="flex flex-row gap-[20px] h-1/2 w-[100%]">
                 {linea.enfriadores.map((id) => (
                     <Grafico key={`equipo-${id}`} id={id} />
                 ))}

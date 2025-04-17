@@ -1,4 +1,4 @@
-import { DateRangePicker } from "@heroui/react";
+import {DateRangePicker} from "@heroui/react";
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
@@ -57,31 +57,9 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
       console.error('Error processing dates:', error);
     }
   };
-
-  return (
-    <div className={selectClasses}>
-      <DateRangePicker
-        size="lg"
-        aria-label="Seleccionar rango de fechas"
-        calendarProps={{
-          classNames: {
-            base: "bg-background",
-            headerWrapper: "bg-background",
-            prevButton: "border-[1px] border-default-200 rounded-small",
-            nextButton: "border-[1px] border-default-200 rounded-small",
-            gridHeader: "bg-background shadow-none border-b-[1px] border-default-100",
-            cellButton: [
-              "data-[today=true]:bg-default-100",
-              "data-[selected=true]:bg-primary",
-              "data-[selected=true]:text-primary-foreground",
-            ],
-          },
-        }}
-        placeholder={t('fecha')}
-        className={selectClasses}
-        value={dateRange}
-        onChange={(range) => handleDateChange(range)}
-      />
-    </div>
-  );
+    return <DateRangePicker
+                label={t('fecha')}
+                value={dateRange}
+                onChange={(range) => handleDateChange(range)}
+            />;
 }

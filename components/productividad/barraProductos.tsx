@@ -49,7 +49,7 @@ const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
         {productos.map((producto, index) => (
           <div
             key={index}
-            className="relative h-full after:content-[attr(data-tooltip)] after:absolute after:bg-[rgba(0,0,0,0.7)] after:text-white after:px-[10px] after:rounded-[5px] after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:whitespace-nowrap after:z-10 after:pointer-events-none after:opacity-0 hover:after:opacity-100 hover:after:left-auto hover:after:right-0 hover:after:translate-x-0 hover:after:-translate-y-1/2"
+            className="relative h-[100%] after:content-[attr(data-tooltip)] after:absolute after:bg-[rgba(0,0,0,0.7)] after:text-white after:px-[10px] after:rounded-[5px] after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:whitespace-nowrap after:z-10 after:pointer-events-none after:opacity-[0px] hover:after:opacity-100 hover:after:left-auto hover:after:right-[0px] hover:after:translate-x-[0px] hover:after:-translate-y-1/2"
             style={{
               width: `${producto.porcentaje}%`,
               backgroundColor: producto.color,

@@ -174,9 +174,9 @@ export function ImagenLayout() {
   };
 
   return (
-    <div className="w-auto h-full relative flex justify-center items-center">
+    <div className="w-auto h-[100%] relative flex justify-center items-center">
       <Image
-        className="h-[65vh] w-full z-1"
+        className="h-[65vh] w-[100%] z-1"
         src="/layout.png"
         alt="Imagen de prueba"
       />
@@ -210,7 +210,7 @@ export function ImagenLayout() {
               })}
             >
               <span
-                className={`absolute shadow border z-999 rounded-md p-2 flex flex-col justify-between ${
+                className={`absolute shadow border z-999 rounded-md p-[2px] flex flex-col justify-between ${
                   equipo?.estado === 'FALLA' ? 'bg-red' :
                   equipo?.estado === 'PAUSA' ? 'bg-yellow' :
                   equipo?.estado === 'INACTIVO' ? 'bg-gray' :
@@ -232,8 +232,8 @@ export function ImagenLayout() {
                 }}
               >
                 {equipo && (
-                  <div className="w-full">
-                    <div className="flex justify-between items-center mb-1 ml-2">
+                  <div className="w-[100%]">
+                    <div className="flex justify-between items-center mb-[1px] ml-[2px]">
                       <p
                         className="font-extrabold uppercase"
                         style={{

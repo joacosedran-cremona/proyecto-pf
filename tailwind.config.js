@@ -8,7 +8,6 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./utils/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
-    
   ],
   theme: {
     extend: {
@@ -47,34 +46,6 @@ module.exports = {
         greenState: "#9cbb97",
         blueState: "#9db5bf",
         grayState: "#6e6e6e",
-
-      },
-      spacing: {
-        0: "0px",
-        1: "1px",
-        2: "2px",
-        3: "3px",
-        4: "4px",
-        5: "5px",
-        6: "6px",
-        7: "7px",
-        8: "8px",
-        9: "9px",
-        10: "10px",
-        15: "15px",
-        20: "20px",
-        25: "25px",
-        30: "30px",
-        40: "40px",
-        50: "50px",
-      },
-      width: {
-        full: "100%",
-        "1/2": "50%",
-        "1/4": "25%",
-      },
-      high: {
-        full: "100%",
       },
     },
   },

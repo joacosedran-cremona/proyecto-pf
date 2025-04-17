@@ -23,8 +23,8 @@ interface OpcionMenu {
 }
 
 const opcionesIconos: OpcionIcono[] = [
-  { id: 1, icon: <VscAccount className="w-auto h-full" /> },
-  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-full" /> },
+  { id: 1, icon: <VscAccount className="w-auto h-[100%]" /> },
+  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-[100%]" /> },
   { id: 3, icon: <DropdownBanderas /> },
 ];
 
@@ -39,8 +39,8 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[950] flex flex-row w-full p-20 h-[65px] bg-[#EEE]">
-      <div className="flex flex-row h-full w-[30%] justify-start gap-30">
+    <nav className="fixed top-[0px] left-[0px] right-[0px] z-[950] flex flex-row w-[100%] p-[20px] h-[65px] bg-[#EEE]">
+      <div className="flex flex-row h-[100%] w-[30%] justify-start gap-[30px]">
         {opcionesIconos.map(({ id, url, icon }) => (
           <div key={id}>
             {url ? (
@@ -59,18 +59,18 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
       </p>
 
       <div className="flex flex-row w-[30%] justify-end">
-        <ul className="flex flex-row w-full h-full gap-[1vw] justify-end">
+        <ul className="flex flex-row w-[100%] h-[100%] gap-[1vw] justify-end">
           {opcionesMenu.map(({ id, url, text }) => (
-            <li key={id} className="h-full">
+            <li key={id} className="h-[100%]">
               <Link href={url} className={currentPath === url ? "activeLink" : ""}>
                 <span>{text}</span>
               </Link>
             </li>
           ))}
-          <div className="h-full min-w-[105px] w-[105px] hidden 1050:block">
+          <div className="h-[100%] min-w-[105px] w-[105px] hidden 1050:block">
             <Link href="https://creminox.com" target="_blank" rel="noopener noreferrer">
               <Image
-                className="h-full w-[105px]"
+                className="h-[100%] w-[105px]"
                 src="/creminox.png"
                 alt="Creminox"
                 width={1000}

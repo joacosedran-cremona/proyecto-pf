@@ -130,49 +130,49 @@ export default function EquipoPage({type}: EquipoPageProps) {
     };
 
     return (
-        <section className="flex flex-col gap-20 min-h-[85vh] pt-[40px]">
+        <section className="flex flex-col gap-[20px] min-h-[85vh] pt-[40px]">
         {/* SELECCIÓN Y ESTADO */}
-        <div className="flex w-full h-full gap-20">
+        <div className="flex w-[100%] h-[100%] gap-[20px]">
             <div className="w-1/3">
                 <Selector
                     value={currentId}
                     onChange={handleSelectionChange}
                     isCocina={isCocina}
-                    selectClasses={`w-full bg-[#0001] px-20 border-b-2 ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
-                    optionClasses="p-2 bg-black font-bold"
+                    selectClasses={`w-[100%] bg-[#0001] px-[20px] border-b-[2px] ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
+                    optionClasses="p-[2px] bg-black font-bold"
                 />
             </div>
-            <p className={`${bgColor} flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
+            <p className={`${bgColor} flex justify-start items-center h-[50px] p-[15px] w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
                 {t('titulo.receta')}: {equipo?.detalles.nom_receta ?? "N/A"}
             </p>
-            <p className={`bg-black flex justify-start items-center h-50 p-15 w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
+            <p className={`bg-black flex justify-start items-center h-[50px] p-[15px] w-1/3 ${borderColor} text-[calc(1vw+0.7vh)] font-semibold rounded-md text-white`}>
                 {t('titulo.estado')}: {equipo?.info.estado ?? "N/A"}
             </p>
         </div>
 
         {/* SECCIONES DE INFORMACIÓN */}
-        <div className="flex flex-col w-full min-h-full gap-20 1365:flex-row flex-1">
-            <div className="flex w-full gap-20 1365:flex 1365:flex-col 1365:w-1/3">
-            <div className="flex w-2/3 gap-20 1365:w-full">
-                <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
+        <div className="flex flex-col w-[100%] min-h-[100%] gap-[20px] 1365:flex-row flex-[1px]">
+            <div className="flex w-[100%] gap-[20px] 1365:flex 1365:flex-col 1365:w-1/3">
+            <div className="flex w-2/3 gap-[20px] 1365:w-[100%]">
+                <div className="bg-black flex flex-col p-[20px] w-[100%] h-[100%] rounded-md">
                 <EstadoEquipo 
                     datos={datosEquipo} 
                     getColorClass={(label, value) => getColorClass(labelToKeyMap[label] || '', value, color)} 
                     displayData={formattedDisplayData}
                 />
                 </div>
-                <div className="bg-black flex flex-col p-20 w-full h-full rounded-md">
+                <div className="bg-black flex flex-col p-[20px] w-[100%] h-[100%] rounded-md">
                 <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor="lightRed" />
                 </div>
             </div>
-            <div className="bg-black flex flex-col h-full p-20 w-1/3 flex-grow rounded-md 1365:w-full">
+            <div className="bg-black flex flex-col h-[100%] p-[20px] w-1/3 flex-grow rounded-md 1365:w-[100%]">
             <SectorIO 
                 datosIO={datosIO} 
                 getColorClass={(label, value) => getColorClass(label, value, color)}
             />
             </div>
             </div>
-            <div className="w-full 1365:w-2/3">
+            <div className="w-[100%] 1365:w-2/3">
                 <Grafico contextType={isCocina ? "cocinas" : "enfriadores"} />
             </div>
         </div>

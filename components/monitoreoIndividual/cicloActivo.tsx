@@ -13,7 +13,7 @@ const CicloActivo: React.FC<CicloActivoProps> = ({ datosCiclo, displayData, defa
             <h2 className="text-xl text-white">Ciclo Activo</h2>
             <ul className="flex flex-col gap-[1vh]">
                 {datosCiclo.map((dato) => (
-                    <li key={dato.label} className="bg-grey flex flex-col px-20 py-[1vh] rounded-md ">
+                    <li key={dato.label} className="bg-grey flex flex-col px-[20px] py-[1vh] rounded-md ">
                         <p className="text-[calc(0.4vw+0.9vh)] text-white">
                             {dato.label}
                         </p>

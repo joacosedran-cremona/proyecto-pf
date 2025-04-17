@@ -1,24 +1,26 @@
 "use client";
 
 import { useWebSocketContext } from "@/context/WebSocketContext";
+import DatePicker from "@/ui/datePicker";
 
 export default function TestPage() {
   const { data, isConnected } = useWebSocketContext();
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl mb-4">Prueba WebSocket</h1>
-      <div className="mb-4">
+    <div className="p-[4px]">
+      <h1 className="text-2xl mb-[4px]">Prueba WebSocket</h1>
+      <div className="mb-[4px]">
         Estado: {isConnected ? 
           <span className="text-green">Conectado</span> : 
           <span className="text-red">Desconectado</span>
         }
       </div>
       {data && (
-        <pre className="bg-black p-4 rounded">
+        <pre className="bg-black p-[4px] rounded">
           {JSON.stringify(data, null, 2)}
         </pre>
       )}
+      <DatePicker/>
     </div>
   );
 }

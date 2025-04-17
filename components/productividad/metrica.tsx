@@ -54,7 +54,7 @@ const Metrics: React.FC<MetricsProps> = ({ data, dateRange }) => {
         <span className="text-xl text-blue"> - </span>
         <span className="text-xl text-orange">{dateRange.end}</span>
       </div>
-      <div className="w-full flex items-center justify-evenly">
+      <div className="w-[100%] flex items-center justify-evenly">
         {metrics.map((m) => (
           <div key={m.id}>
             <p className="flex items-center justify-center text-4xl text-white">{m.dato}</p>

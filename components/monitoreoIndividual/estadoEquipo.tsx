@@ -28,7 +28,7 @@ const EstadoEquipo: React.FC<EstadoEquipoProps> = ({ datos, getColorClass, displ
             </h2>
             <ul className="flex flex-col justify-between grow gap-[1vh]">
                 {datos.map((dato, index) => (
-                    <li key={`${dato.label}-${index}`} className="bg-grey flex flex-col px-20 py-[1vh] rounded-md">
+                    <li key={`${dato.label}-${index}`} className="bg-grey flex flex-col px-[20px] py-[1vh] rounded-md">
                         <span className="text-[calc(0.6vw+1vh)] text-white">{dato.label}:</span>
                         <span className={`text-[calc(0.5vw+1vh)] ${getColorClass(dato.label, dato.value)}`}>
                             {formatValue(dato.value, dato.unit)}

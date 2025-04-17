@@ -288,7 +288,7 @@ const Grafico: React.FC<GraficoProps> = ({
 
   if (error) {
     return (
-      <div className="bg-black p-20 h-full w-full rounded-md flex items-center justify-center">
+      <div className="bg-black p-[20px] h-[100%] w-[100%] rounded-md flex items-center justify-center">
         <p className="text-red-500">{error}</p>
       </div>
     );
@@ -317,18 +317,18 @@ const Grafico: React.FC<GraficoProps> = ({
   };
 
   return (
-    <div className="bg-black h-full w-full rounded-md relative pt-10 px-20 pb-28 grafico-historico">
+    <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[20px] pb-[28px] grafico-historico">
       {/* Botones de control */}
-      <div className="absolute top-[35px] right-[35px] flex gap-20 z-20">
+      <div className="absolute top-[35px] right-[35px] flex gap-[20px] z-[20px]">
         <Button
           onClick={() => setShowTable(!showTable)}
-          className="text-white bg-grey/100 hover:bg-lightGrey/25 px-10 py-20 rounded-md backdrop-blur-sm border border-grey/50"
+          className="text-white bg-grey/100 hover:bg-lightGrey/25 px-[10px] py-[20px] rounded-md backdrop-blur-sm border border-grey/50"
         >
           {showTable ? 'Ocultar Ciclos' : 'Mostrar Ciclos'}
         </Button>
         <Button
           onClick={resetZoom}
-          className="text-white bg-grey/100 hover:bg-lightGrey/25 px-10 py-20 rounded-md backdrop-blur-sm border border-grey/50"
+          className="text-white bg-grey/100 hover:bg-lightGrey/25 px-[10px] py-[20px] rounded-md backdrop-blur-sm border border-grey/50"
         >
           Reiniciar Zoom
         </Button>
@@ -336,9 +336,9 @@ const Grafico: React.FC<GraficoProps> = ({
   
       {/* Info del ciclo */}
       {data && (
-        <div className="mb-5">
-          <div className="flex items-center gap-20">
-            <div className="text-white mb-6">
+        <div className="mb-[5px]">
+          <div className="flex items-center gap-[20px]">
+            <div className="text-white mb-[6px]">
               <h2 className="text-[32px] font-bold mb-[-8px]">GRÁFICO</h2>
               <p className="mb-[-2px]">
                 <strong>LOTE:</strong> {data.general.ciclo_lote} - {data.general.receta}
@@ -348,22 +348,22 @@ const Grafico: React.FC<GraficoProps> = ({
                 {formatDate(data.general.fecha_fin)}
               </p>
             </div>
-            <div className="bg-[#4bc04b]/25 text-white min-w-[100px] max-h-[75px] text-sm p-4 rounded-lg backdrop-blur-sm border border-[#4bc04b]/50">
-              <p className="font-bold mb-2">Temp. Prod</p>
+            <div className="bg-[#4bc04b]/25 text-white min-w-[100px] max-h-[75px] text-sm p-[4px] rounded-lg backdrop-blur-sm border border-[#4bc04b]/50">
+              <p className="font-bold mb-[2px]">Temp. Prod</p>
               <p><strong>Max: </strong> {data.general.temp_producto_max}°C</p>
               <p><strong>Min: </strong> {data.general.temp_producto_min}°C</p>
             </div>
-            <div className="bg-[#3666cc]/25 text-white text-sm p-4 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#3666cc]/50">
-              <p className="font-bold mb-2">Temp. Agua</p>
+            <div className="bg-[#3666cc]/25 text-white text-sm p-[4px] rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#3666cc]/50">
+              <p className="font-bold mb-[2px]">Temp. Agua</p>
               <p><strong>Max: </strong> {data.general.temp_agua_max}°C</p>
               <p><strong>Min: </strong> {data.general.temp_agua_min}°C</p>
             </div>
-            <div className="bg-yellow-500/25 text-white text-sm p-6 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-yellow-500/50">
-              <p className="font-bold mb-2">Nivel Agua</p>
+            <div className="bg-yellow-500/25 text-white text-sm p-[6px] rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-yellow-500/50">
+              <p className="font-bold mb-[2px]">Nivel Agua</p>
               <p><strong>Max: </strong> {data.general.nivel_agua_max} mm</p>
               <p><strong>Min: </strong> {data.general.nivel_agua_min} mm</p>
             </div>
-            <div className="bg-[#e82a31]/25 text-white text-sm p-6 rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#e82a31]/50">
+            <div className="bg-[#e82a31]/25 text-white text-sm p-[6px] rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#e82a31]/50">
               <p><strong>H. Inicio: </strong> {formatTime(data.general.fecha_inicio)}</p>
               <p><strong>H. Fin: </strong> {formatTime(data.general.fecha_fin)}</p>
               <p><strong>T. Trans: </strong> {data.general.tiempo_transcurrido}</p>
@@ -373,16 +373,16 @@ const Grafico: React.FC<GraficoProps> = ({
       )}
   
       {/* Gráfico y Tabla */}
-      <div className="relative w-full h-[calc(100%)]">
+      <div className="relative w-[100%] h-[calc(100%)]">
         <canvas ref={chartRef}></canvas>
   
         {showTable && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-[0px] flex items-center justify-center z-50">
           <div 
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+            className="absolute inset-[0px] bg-black/50 backdrop-blur-sm" 
             onClick={handleTableClose} 
           />
-          <div className="relative z-20 bg-black/80 p-4 rounded-lg border border-gray-700">
+          <div className="relative z-[20px] bg-black/80 p-[4px] rounded-lg border border-gray-700">
             <TablaCiclos
               fechaInicio={startDate || '2000-01-01'}
               fechaFin={endDate || '2100-01-01'}
@@ -403,7 +403,7 @@ const Grafico: React.FC<GraficoProps> = ({
   
       {/* Loading spinner */}
       {loading && (
-        <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-75">
+        <div className="absolute inset-[0px] flex justify-center items-center bg-black bg-opacity-75">
           <Spinner label="Cargando datos..." />
         </div>
       )}

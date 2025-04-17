@@ -10,7 +10,7 @@ export const CambioIdioma = () => {
     };
 
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-[2px]">
             <button onClick={() => changeLanguage('es')}>🇪🇸</button>
             <button onClick={() => changeLanguage('en')}>🇺🇸</button>
         </div>

@@ -266,7 +266,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
 
     if (!equipo) {
         return (
-            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <div className="bg-midGrey p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white jutify-center">{t('equipoNoEncontrado')}</p>
             </div>
@@ -281,7 +281,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             : t('equipo.desconocido');
 
         return (
-            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <div className="bg-midGrey p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{nombreEquipo} - {t('inactividad.titulo')}</p>
                 <p className="text-xl text-white">{t('inactividad.mensaje')}</p>
@@ -297,7 +297,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             : t('equipo.desconocido');
 
         return (
-            <div className="bg-midGrey p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <div className="bg-midGrey p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{nombreEquipo} - {t('finalizado.titulo')}</p>
                 <p className="text-xl text-white">{t('finalizado.mensaje')}</p>
@@ -313,22 +313,22 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
             : t('equipo.desconocido');
 
         return (
-            <div className="bg-redChill p-20 h-full w-full rounded-md flex flex-col items-center justify-center text-white gap-20">
+            <div className="bg-redChill p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
                 <AiOutlineExclamationCircle className="w-auto h-1/4" />
                 <p className="text-3xl text-white">{nombreEquipo} - {t('error.titulo')}</p>
-                <p className="w-full text-center text-3xl text-white">{t('error.mensaje')}</p>
+                <p className="w-[100%] text-center text-3xl text-white">{t('error.mensaje')}</p>
             </div>
         );
     }
 
     return (
-        <div className="bg-black p-20 h-full w-full rounded-md relative">
-            <canvas ref={chartRef} className="block w-full h-full max-h-screen"></canvas>
+        <div className="bg-black p-[20px] h-[100%] w-[100%] rounded-md relative">
+            <canvas ref={chartRef} className="block w-[100%] h-[100%] max-h-screen"></canvas>
             {loading && !hasCachedData && (
-                <div className="flex absolute items-center justify-center h-full w-full">
+                <div className="flex absolute items-center justify-center h-[100%] w-[100%]">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto" />
-                        <p className="mt-4">
+                        <div className="animate-spin rounded-[100%] h-[12px] w-[12px] border-t-[2px] border-b-[2px] border-primary mx-auto" />
+                        <p className="mt-[4px]">
                             {'Conectando al servidor...'}
                         </p>
                     </div>
@@ -347,7 +347,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                     fontSize: '17px',
                 }}
                 onClick={resetZoom}
-                className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-3 rounded-md"
+                className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-[3px] rounded-md"
             >
                 {t('reiniciarZoom')}
             </Button>

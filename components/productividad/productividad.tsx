@@ -65,17 +65,17 @@ const Productividad = () => {
   });
 
   return (
-    <div className="flex flex-row h-full gap-20">
+    <div className="flex flex-row h-[100%] gap-[20px]">
       {/* Sección principal de productividad */}
-      <div className="bg-black p-20 w-4/5 rounded-md">
+      <div className="bg-black p-[20px] w-4/5 rounded-md">
         <Metrics data={data} dateRange={dateRange} />
-        <hr className="my-20 border-2" />
+        <hr className="my-[20px] border-[2px]" />
         <BarraProductos data={data} />
-        <hr className="my-20 border-2" />
+        <hr className="my-[20px] border-[2px]" />
         <BarraCiclos ciclosRealizados={ciclosRealizados} />
       </div>
       {/* Sección de filtro de fechas */}
-      <div className="bg-black p-20 w-1/5 rounded-md">
+      <div className="bg-black p-[20px] w-1/5 rounded-md">
         <FiltroPeriodo />
       </div>
     </div>

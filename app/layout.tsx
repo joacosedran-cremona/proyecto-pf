@@ -26,7 +26,7 @@ export default async function RootLayout({
   return (
     <html className="dark" suppressHydrationWarning lang="en">
       <head />
-      <body className={clsx("min-h-screen bg-grey font-mono antialiased w-full")}>
+      <body className={clsx("min-h-screen bg-grey font-mono antialiased w-[100%]")}>
         <Providers initialLanguage={initialLanguage}>
             {children}
         </Providers>
