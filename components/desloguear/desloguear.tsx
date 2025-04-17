@@ -32,16 +32,16 @@ const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
             {/* Botón del perfil - Updated hover effects */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative flex items-center justify-center w-25 h-25 rounded-full 
+                className="relative flex items-center justify-center w-[25px] h-[25px] rounded-[100%] 
                          group transition-all duration-200 ease-in-out"
             >
                 {/* Glow effect */}
-                <div className="absolute inset-0 rounded-full bg-gray-400/0 
+                <div className="absolute inset-0 rounded-[100%] bg-gray-400/0 
                               group-hover:bg-gray-400/20 transition-all duration-200 
                               ease-in-out group-hover:scale-150 pointer-events-none" />
                 
                 {/* Icon with scale effect */}
-                <VscAccount className="w-25 h-25 text-[#131313] transition-transform 
+                <VscAccount className="w-[25px] h-[25px] text-[#131313] transition-transform 
                                      duration-300 ease-in-out group-hover:scale-110" />
             </button>
     
@@ -72,7 +72,7 @@ const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
                 <div className="bg-[#f15b5f] rounded-b-md">
                     <button
                         onClick={handleLogout}
-                        className="w-full text-left px-4 py-3 text-sm text-[#D9D9D9] font-bold
+                        className="w-[100%] text-left px-4 py-3 text-sm text-[#D9D9D9] font-bold
                                  hover:bg-[#ff7a7e] rounded-b-md
                                  active:bg-red-200 active:text-black
                                  transition-all duration-200 ease-in-out

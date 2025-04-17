@@ -24,13 +24,8 @@ interface OpcionMenu {
 }
 
 const opcionesIconos: OpcionIcono[] = [
-<<<<<<< HEAD
-  { id: 1, icon: <VscAccount className="w-auto h-[100%]" /> },
-  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-[100%]" /> },
-=======
   { id: 1, icon: <Desloguear /> },
-  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-full" /> },
->>>>>>> d805298da5e6aae46e05ed4ee50479373c9bbcfe
+  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-[100%]" /> },
   { id: 3, icon: <DropdownBanderas /> },
 ];
 

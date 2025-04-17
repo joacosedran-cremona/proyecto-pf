@@ -24,11 +24,7 @@ const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
     ];
 
     const defaultClasses =
-<<<<<<< HEAD
-        "bg-[#0001] h-[100%] w-[100%] px-[20px] border-b-[2px] border-green focus:border-green focus:outline-none text-lg text-green hover:text-green transition-colors cursor-pointer";
-=======
         "bg-[#0001] h-[100%] w-[100%] px-[20px] border-b-2 border-white focus:border-white focus:outline-none text-lg text-white hover:text-white transition-colors cursor-pointer";
->>>>>>> d805298da5e6aae46e05ed4ee50479373c9bbcfe
 
     return (
         <select
@@ -40,11 +36,7 @@ const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
                 <option
                     key={linea.id}
                     value={linea.id}
-<<<<<<< HEAD
-                    className="p-[2px] text-green hover:text-green bg-black font-bold"
-=======
                     className="p-[2px] text-white hover:text-white bg-black font-bold"
->>>>>>> d805298da5e6aae46e05ed4ee50479373c9bbcfe
                 >
                     {linea.name}
                 </option>
