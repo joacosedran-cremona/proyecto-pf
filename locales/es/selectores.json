@@ -21,8 +21,9 @@
     },
     "lineas":
     {
-        "linea1": "LINEA 1",
-        "linea2": "LINEA 2"
+        "linea1": "Línea 1",
+        "linea2": "Línea 2",
+        "linea3": "Completo"
     },
     "select": "Seleccione un equipo"
 }
