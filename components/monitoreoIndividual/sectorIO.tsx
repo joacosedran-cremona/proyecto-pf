@@ -24,7 +24,7 @@ const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass }) => {
                     return (
                         <li
                             key={dato.label}
-                            className={`bg-grey flex justify-between px-[20px] py-[1vh] rounded-md items-center ${
+                            className={`bg-grey flex justify-between px-[20px] py-0 rounded-md items-center ${
                                 isLastAndOdd ? '1365:col-span-2' : ''
                             }`}
                         >
