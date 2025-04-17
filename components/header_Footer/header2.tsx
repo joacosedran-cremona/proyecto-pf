@@ -37,14 +37,28 @@ const Header2: React.FC<Header2Props> = ({ currentPath }) => {
       <nav className="flex flex-row w-[100%] bg-black p-[3px] h-[40px]">
         <div className="w-1/4"></div>
         <ul className="flex flex-row w-1/2 h-[100%] items-center justify-center">
-          {opcionesBotones.map(({ id, path, text, styleClass }) => (
-            <li key={id} className="flex flex-row w-[100%] h-[100%] items-center justify-center">
-              <Link href={path} className="flex justify-center gap-[5px] h-[100%] items-center">
-                <span className={styleClass}>{text}</span>
-              </Link>
-              {currentPath === path && <div className=""></div>}
-            </li>
-          ))}
+          {opcionesBotones.map(({ id, path, text, styleClass }) => {
+            const colorClase = styleClass
+              .split(' ')
+              .find(className => className.startsWith('text-'))
+              ?.replace('text-', 'border-');
+
+            return (
+              <li 
+                key={id} 
+                className="flex flex-row w-[100%] h-[100%] items-center justify-center relative"
+              >
+                <Link href={path} className="flex justify-center gap-[5px] h-[100%] items-center">
+                  <span className={styleClass}>{text}</span>
+                </Link>
+                {currentPath === path && (
+                  <div
+                    className={`absolute bottom-[-3px] left-1/2 -translate-x-1/2 h-[2px] border-b-3 w-1/2 rounded-xl ${colorClase}`}
+                  />
+                )}
+              </li>
+            );
+          })}
         </ul>
         <div className="w-1/4"></div>
       </nav>
