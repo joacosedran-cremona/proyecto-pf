@@ -3,11 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
 interface DatePickerProps {
-  selectClasses?: string;
   onDateChange?: (startDate: string | null, endDate: string | null) => void;
 }
 
-export default function DatePicker({ selectClasses, onDateChange }: DatePickerProps) {
+export default function DatePicker({ onDateChange }: DatePickerProps) {
   const { t } = useTranslation('botones');
   const [dateRange, setDateRange] = useState<{
     startDate: Date | null;
@@ -58,8 +57,8 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
     }
   };
     return <DateRangePicker
+                className="h-[40px]"
                 label={t('fecha')}
-                value={dateRange}
                 onChange={(range) => handleDateChange(range)}
             />;
 }

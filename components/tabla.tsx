@@ -23,7 +23,10 @@ const Tabla: React.FC = () => {
     const loadData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://192.168.0.75:8000/alarmas");
+        const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
+        const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+
+        const response = await fetch(`http://${host}:${port}/alarmas`);
         if (!response.ok) throw new Error("Error en la solicitud");
         
         const apiData = await response.json();
@@ -242,24 +245,27 @@ const Tabla: React.FC = () => {
     },
 
     renderTopToolbarCustomActions: ({ table }) => (
-      <Box sx={{ display: 'flex', gap: 1, p: 1 }}>
-        <Button
-          onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
-          startIcon={<FileDownloadIcon />}
-          variant="contained"
-          color="primary"
-        >
-          {t('exptodas')}
-        </Button>
-        <Button
-          onClick={() => handleExportRows(table.getRowModel().rows)}
-          startIcon={<FileDownloadIcon />}
-          variant="outlined"
-          color="secondary"
-        >
-          {t('expvisibles')}
-        </Button>
-      </Box>
+      <div>
+        <h1 className="text-white text-3xl flex w-[100%] justify-center items-center">{t('alertas')}</h1>
+        <Box sx={{ display: 'flex', gap: 1, p: 1 }}>
+          <Button
+            onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
+            startIcon={<FileDownloadIcon />}
+            variant="contained"
+            color="primary"
+          >
+            {t('exptodas')}
+          </Button>
+          <Button
+            onClick={() => handleExportRows(table.getRowModel().rows)}
+            startIcon={<FileDownloadIcon />}
+            variant="outlined"
+            color="primary"
+          >
+            {t('expvisibles')}
+          </Button>
+        </Box>
+      </div>
     ),
   });
 

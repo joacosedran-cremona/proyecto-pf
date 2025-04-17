@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { VscAccount, VscBell  } from "react-icons/vsc";
 import DropdownBanderas from '@/components/traduccion/dropdownBanderas';
-import Desloguear from '@/components/desloguear/desloguear';
+import Desloguear from '@/components/botones/desloguear';
 
 interface Header1Props {
   currentPath: string;
@@ -25,7 +25,19 @@ interface OpcionMenu {
 
 const opcionesIconos: OpcionIcono[] = [
   { id: 1, icon: <Desloguear /> },
-  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-[100%]" /> },
+  { 
+    id: 2, 
+    url: "/alertas", 
+    icon: (
+      <Link href="/alertas" className="group relative flex items-center justify-center w-[25px] h-[25px] transition-all duration-200 ease-in-out">
+        {/* Efecto de glow */}
+        <div className="absolute inset-0 rounded-[100%] bg-gray-400/0 group-hover:bg-gray-400/20 transition-all duration-200 ease-in-out group-hover:scale-150 pointer-events-none" />
+        
+        {/* Icono con escala */}
+        <VscBell className="w-[25px] h-[25px] text-[#131313] transition-transform duration-300 ease-in-out group-hover:scale-110" />
+      </Link>
+    ) 
+  },
   { id: 3, icon: <DropdownBanderas /> },
 ];
 
@@ -44,13 +56,7 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
       <div className="flex flex-row h-[100%] w-[30%] justify-start gap-[30px]">
         {opcionesIconos.map(({ id, url, icon }) => (
           <div key={id}>
-            {url ? (
-              <Link href={url}>
-                {icon}
-              </Link>
-            ) : (
-              icon
-            )}
+            {icon}
           </div>
         ))}
       </div>

@@ -91,7 +91,7 @@ export default function Historico() {
           <span className="text-sm">PERIODO</span>
         </div>
 
-        <div className="flex gap-[5px] items-center mr-[10px]">
+        <div className="flex gap-[5px] items-center pr-[10px]">
           <Selector 
             value={tempSelectedValue}
             onChange={handleChange}

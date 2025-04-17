@@ -4,5 +4,6 @@
     "estado": "STATUS",
     "hora": "TIME",
     "exptodas": "EXPORT ALL ROWS",
-    "expvisibles": "EXPORT VISIBLE ROWS"
+    "expvisibles": "EXPORT VISIBLE ROWS",
+    "alertas": "ALERTS"
 }

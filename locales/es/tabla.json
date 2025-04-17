@@ -4,5 +4,6 @@
     "estado": "ESTADO",
     "hora": "HORA",
     "exptodas": "EXPORTAR TODAS LAS FILAS",
-    "expvisibles": "EXPORTAR FILAS VISIBLES"
+    "expvisibles": "EXPORTAR FILAS VISIBLES",
+    "alertas": "ALERTAS"
 }

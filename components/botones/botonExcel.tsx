@@ -2,7 +2,6 @@ import { Button } from "@heroui/react";
 import { FaFileExcel } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 import { toast } from "sonner";
-import { useEffect, useState } from 'react';
 
 interface BotonExcelProps {
     selectClasses?: string;
