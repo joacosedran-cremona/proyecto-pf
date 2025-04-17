@@ -1,55 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import crem from "@/public/creminox.png";
 
-export default function ForgotPassword() {
+const ForgotPassword = () => {
+
   return (
-    <div className="w-[100%] h-[80%] flex absolute items-center justify-center bg-[#1f1f1f]">
-      <div className="w-auto h-auto gap-[5px] flex flex-col absolute items-center justify-center m-auto p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
+    <section className="flex w-[100%] h-[90vh] items-center justify-center">
+      <div className="w-auto h-[60%] gap-[15px] flex flex-col items-center justify-between p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
         <Image
           src={crem}
           alt="Creminox"
-          priority={true}
-          className="flex w-[60%] m-auto p-[0px] h-auto"
+          className="flex w-[60%] p-[0px] h-auto"
         />
         
-        <form className="w-[100%] max-w-[100vw] h-auto flex flex-col gap-[5px]">
-          <div className="flex flex-col gap-[5px]">
+        <form className="w-[100%] h-3/5 flex flex-col justify-evenly">
+          <div className="flex flex-col gap-[5px] h-1/3">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
-              Email
+              email
             </label>
             <input
-              type="email"
-              className="bg-[#1f1f1f] p-[4px] rounded-[10px] w-[100%] max-w-[60vw] min-h-[5vh] h-[100%] max-h-[70vw] border-none"
+              type="text"
+              className="bg-[#1f1f1f] p-[4px] rounded-[10px] w-[100%] h-[60%] flex items-center justify-center border-none"
             />
           </div>
 
-          {/* Botón de recuperación */}
           <button 
             type="submit"
-            className="bg-[#e82a31] p-[4px] flex-row rounded-[10px] w-[100%] h-[12px] flex items-center justify-center border-none text-[#D9D9D9] font-bold mb-[0.4rem] cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
+            className="bg-[#e82a31] p-[4px] rounded-[10px] w-[100%] h-1/6 flex items-center justify-center border-none text-[#D9D9D9] font-bold cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
           >
-            Recuperar Contraseña
+            <Link 
+              href="../login"
+              className="w-[100%] flex text-center justify-center text-white"
+            >
+                Enviar
+            </Link>
           </button>
         </form>
 
-        <div>
-          <Link 
+        <Link 
             href="../login"
             className="w-[100%] flex text-center justify-center text-[#5d5d5d]"
           >
             ¿Recordó su contraseña? Inicie sesión aquí
-          </Link>
-        </div>
-
-        {/* Error container - Add this if you need it */}
-        <div className="h-[20px] flex items-center justify-center">
-          <span className="text-red-500 text-center text-sm"></span>
-        </div>
+        </Link>
       </div>
-    </div>
+    </section>
   );
 }
+
+export default ForgotPassword;

@@ -7,17 +7,19 @@ import clsx from "clsx";
 
 function LayoutHandler({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  
+  const isLoginRoute = ['/login', '/login/recuperacion'].includes(pathname);
 
   return (
     <div className="flex flex-col w-[100%] min-h-screen">
-      {pathname !== '/login' && <Navbar />}
+      {!isLoginRoute && <Navbar />}
       <main className={clsx(
         "min-h-screen w-[100%] bg-grey p-[20px]",
-        pathname !== '/login' && "pt-[85px]"
+        !isLoginRoute && "pt-[85px]"
       )}>
         {children}
       </main>
-      {pathname !== '/login' && <Footer />}
+      {!isLoginRoute && <Footer />}
     </div>
   );
 }

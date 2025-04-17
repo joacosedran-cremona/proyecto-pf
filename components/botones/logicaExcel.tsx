@@ -1,12 +1,9 @@
 'use client';
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { FaFilePdf, FaFileExcel } from "react-icons/fa";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import logoDataURL from './cremonabase64'; // Importa la data URL de la imagen
-import telIcon from './telbase64'; // Importa la data URL de la imagen
-import webIcon from './webbase64'; // Importa la data URL de la imagen
-import mailIcon from './mailbase64'; // Importa la data URL de la imagen
+import logoDataURL from '@/public/cremonabase64'; // Importa la data URL de la imagen
 
 export default function BotonesDescarga({ startDate, endDate }) {
     const storedUser = localStorage.getItem('user_data');
