@@ -17,7 +17,7 @@ const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass }) => {
     return (
         <>
             <h2 className="text-xl text-white">Sector IO</h2>
-            <ul className="grid gap-[1vh] h-[100%] 1365:grid-cols-[2px]">
+            <ul className="grid gap-[1vh] h-[100%] 1365:grid-cols-2">
                 {datosIO.map((dato, index) => {
                     const isLastAndOdd = isOddCount && index === datosIO.length - 1;
                     
@@ -25,7 +25,7 @@ const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass }) => {
                         <li
                             key={dato.label}
                             className={`bg-grey flex justify-between px-[20px] py-[1vh] rounded-md items-center ${
-                                isLastAndOdd ? '1365:col-span-[2px]' : ''
+                                isLastAndOdd ? '1365:col-span-2' : ''
                             }`}
                         >
                             <p className="text-[calc(0.4vw+1vh)] text-white">{dato.label}</p>

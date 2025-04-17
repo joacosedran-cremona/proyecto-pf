@@ -325,7 +325,7 @@ const Grafico: React.FC<GraficoProps> = ({
   };
 
   return (
-    <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[10px] pb-[28px] grafico-historico">
+    <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[10px] pb-[108px] grafico-historico">
       {/* Botones de control */}
       <div className="absolute top-[35px] right-[35px] flex gap-[20px] z-[20px] pdf-ignore">
         <Button

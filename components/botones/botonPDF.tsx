@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
-import logoDataURL from './cremonabase64'; // Importa la data URL de la imagen
+import logoDataURL from '../../public/cremonabase64'; // Importa la data URL de la imagen
 
 interface BotonPDFProps {
     selectClasses?: string;

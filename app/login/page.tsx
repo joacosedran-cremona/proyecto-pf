@@ -15,58 +15,51 @@ const Login = () => {
   };
 
   return (
-    <div className="flex w-[100%] h-[90vh] items-center justify-center">
-      <div className="w-auto h-auto gap-[5px] flex flex-col items-center justify-center p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
+    <section className="flex w-[100%] h-[90vh] items-center justify-center">
+      <div className="w-auto h-[60%] gap-[15px] flex flex-col items-center justify-between p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
         <Image
           src={crem}
           alt="Creminox"
           className="flex w-[60%] p-[0px] h-auto"
         />
         
-        <form onSubmit={handleSubmit} className="w-[100%] h-auto flex flex-col gap-[5px]">
-          <div className="flex flex-col gap-[5px]">
+        <form onSubmit={handleSubmit} className="w-[100%] h-3/5 flex flex-col justify-evenly">
+          <div className="flex flex-col gap-[5px] h-1/3">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
               Username
             </label>
             <input
               type="text"
-              className="bg-[#1f1f1f] p-[4px] rounded-[10px] w-[100%] h-[12px] flex items-center justify-center border-none mb-[0.4rem]"
+              className="bg-[#1f1f1f] p-[4px] rounded-[10px] w-[100%] h-[60%] flex items-center justify-center border-none"
             />
           </div>
 
-          <div className="flex flex-col gap-[5px]">
+          <div className="flex flex-col gap-[5px] h-1/3">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
               Contraseña
             </label>
             <input
               type="password"
-              className="bg-[#1f1f1f] p-[4px] rounded-[10px] w-[100%] h-[12px] flex items-center justify-center border-none mb-[0.4rem]"
+              className="bg-[#1f1f1f] p-[4px] rounded-[10px] w-[100%] h-[60%] flex items-center justify-center border-none"
             />
           </div>
 
           <button 
             type="submit"
-            className="bg-[#e82a31] p-[4px] rounded-[10px] w-[100%] h-[12px] flex items-center justify-center border-none text-[#D9D9D9] font-bold mb-[0.4rem] cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
+            className="bg-[#e82a31] p-[4px] rounded-[10px] w-[100%] h-1/6 flex items-center justify-center border-none text-[#D9D9D9] font-bold cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
           >
             Login
           </button>
         </form>
 
-        <div>
-          <Link 
-            href="/login/recuperacion"
-            className="w-[100%] flex text-center justify-center text-[#5d5d5d]"
-          >
-            ¿Olvidó su contraseña? Recupérela aquí
-          </Link>
-        </div>
-
-        {/* Error container - Add this if you need it */}
-        <div className="h-[20px] flex items-center justify-center">
-          <span className="text-red-500 text-center text-sm"></span>
-        </div>
+        <Link 
+          href="/login/recuperacion"
+          className="w-[100%] flex text-center justify-center text-[#5d5d5d] h-auto text-[14px] font-bold tracking-[0.5px] cursor-pointer hover:text-[#e82a31] transition-all duration-200 ease-in-out"
+        >
+          ¿Olvidó su contraseña? Recupérela aquí
+        </Link>
       </div>
-    </div>
+    </section>
   );
 }
 
