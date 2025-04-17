@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
+import logoDataURL from './cremonabase64'; // Importa la data URL de la imagen
 
 interface BotonPDFProps {
     selectClasses?: string;
@@ -24,69 +25,79 @@ export default function BotonPDF({ selectClasses, equipo, cicloId }: BotonPDFPro
         }
     
         try {
+            // Específicamente buscamos el contenedor del gráfico histórico
             const graphContainer = document.querySelector('.grafico-historico');
             
             if (!graphContainer) {
                 throw new Error('No se encontró el gráfico histórico');
             }
     
-            // Mejorar la calidad y precisión de la captura
             const canvas = await html2canvas(graphContainer, {
-                scale: 3, // Aumentar la escala para mejor calidad
+                scale: 3,
                 backgroundColor: '#000000',
                 logging: false,
                 useCORS: true,
                 allowTaint: true,
-                foreignObjectRendering: true, // Mejor renderizado de elementos HTML
-                removeContainer: false, // Mantener el contenedor original
-                letterRendering: true, // Mejor renderizado de texto
+                ignoreElements: (element) => {
+                    return element.classList.contains('pdf-ignore');
+                }
             });
             
-            const imgData = canvas.toDataURL('image/png', 1.0); // Máxima calidad
+            const imgData = canvas.toDataURL('image/png');
     
-            // Calcular dimensiones manteniendo la proporción original
-            const originalRatio = canvas.width / canvas.height;
-            const pdfWidth = 297; // A4 landscape width in mm
-            const pdfHeight = 210; // A4 landscape height in mm
-            
-            // Calcular dimensiones de la imagen manteniendo márgenes
-            const margins = 10; // márgen en mm
-            const availableWidth = pdfWidth - (margins * 2);
-            const availableHeight = pdfHeight - (margins * 2);
-            
-            let imgWidth = availableWidth;
-            let imgHeight = imgWidth / originalRatio;
-            
-            // Ajustar si la altura excede el espacio disponible
-            if (imgHeight > availableHeight) {
-                imgHeight = availableHeight;
-                imgWidth = imgHeight * originalRatio;
-            }
+            // Configurar dimensiones para orientación horizontal
+            const imgWidth = 287; // A4 landscape width in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            const pageHeight = imgHeight + 30; // A4 landscape height in mm
     
-            // Centrar la imagen en la página
-            const xOffset = (pdfWidth - imgWidth) / 2;
-            const yOffset = (pdfHeight - imgHeight) / 2;
-    
-            // Crear PDF
+            // Crear PDF en orientación horizontal
             const pdf = new jsPDF({
                 orientation: 'landscape',
                 unit: 'mm',
-                format: 'a4',
-                compress: true
+                format: [pageHeight, 297]
             });
     
-            // Agregar la imagen centrada
-            pdf.addImage(
-                imgData, 
-                'PNG', 
-                xOffset, 
-                yOffset, 
-                imgWidth, 
-                imgHeight
-            );
-    
+            // Agregar la imagen del gráfico
+            pdf.addImage(imgData, 'PNG', 5, 25, imgWidth, imgHeight);
+            
+            // Agregar fondo negro para metadata
+            const metadataHeight = 20; // altura del área de metadata
+            pdf.setFillColor(19, 19, 19);
+            pdf.rect(0, 0, 297, metadataHeight, 'F'); // rectangle negro en la parte superior
+
+            // Configurar fuente para texto en negrita
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(10);
+            pdf.setTextColor(255, 255, 255);
+
+            // Agregar labels en negrita
+            pdf.text('Equipo:', 5, 11);
+            pdf.text('Ciclo:', 5, 16);
+            pdf.text('Fecha de exportación:', 5, 6);
+
+            // Configurar fuente para texto normal
+            pdf.setFont('helvetica', 'normal');
+
+            // Agregar valores en texto normal
+            const currentDate = new Date().toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Calcular posición X para los valores (después de los labels)
+            pdf.text(equipo, 20, 11);
+            pdf.text(cicloId.toString(), 16, 16);
+            pdf.text(currentDate, 44, 6);
+
+            const logoWidth = 40;
+            const logoHeight = 10;
+            pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
+            pdf.link(252, 4, 40, 12, {url: "https://creminox.com", target: '_blank'});  
+
+
             // Descargar el PDF
-            pdf.save(`historico_${equipo}_ciclo_${cicloId}.pdf`);
+            pdf.save(`${equipo}_Ciclo-${cicloId}.pdf`);
     
             toast.success('Éxito', {
                 description: 'PDF descargado correctamente',

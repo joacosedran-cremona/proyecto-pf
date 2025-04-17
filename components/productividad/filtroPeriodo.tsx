@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import Selector from "../selectores/selectorLineas";
+import Selector from "../selectores/selectorLineasProductividad";
 import SelectorEquipos from "../selectores/selectorEquipo";
 import DatePicker from "@/ui/datePicker";
 import ButtonAplicar from "../botones/botonAplicar";
@@ -12,7 +12,12 @@ import ButtonExcel from "../botones/botonExcel";
 const FiltroPeriodo: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center h-[100%] gap-[15px]">
+<<<<<<< HEAD
       <h2 className="flex items-center justify-center text-xl text-white">FILTRADO DE FECHAS</h2>
+=======
+      <h2 className="flex items-center justify-center text-xl text-white font-bold">FILTRADO DE FECHAS</h2>
+      <h2 className="flex items-center justify-center text-l text-white mt-[-18]">POR PERIODO</h2>
+>>>>>>> d805298da5e6aae46e05ed4ee50479373c9bbcfe
 
       <div className="flex w-[100%] h-1/5">
         <Selector />

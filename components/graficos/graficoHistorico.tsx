@@ -77,11 +77,10 @@ const Grafico: React.FC<GraficoProps> = ({
   showTableOnLoad = false,
   onTableClose,
   onCicloSelect,
-  selectedCicloId: externalSelectedCicloId // Renombrado para evitar confusión
+  selectedCicloId: externalSelectedCicloId
 }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart<'line'> | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<HistoricoData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
@@ -96,7 +95,7 @@ const Grafico: React.FC<GraficoProps> = ({
   
   useEffect(() => {
     setShowTable(showTableOnLoad);
-  }, [showTableOnLoad]);
+  }, [showTableOnLoad, contextType, id]); // Agregado contextType e id como dependencias
 
   const handleTableClose = () => {
     setShowTable(false);
@@ -107,18 +106,14 @@ const Grafico: React.FC<GraficoProps> = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       setError(null);
       try {
         const equipmentName = getEquipmentName(contextType, id);
         const host = process.env.NEXT_PUBLIC_WS_HOST || '192.168.0.61';
         const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
         
-        // Usar el ciclo seleccionado interno
         const cicloId = internalSelectedCicloId || 1;
         const url = `http://${host}:${port}/historico-graficos/${equipmentName}/${cicloId}`;
-        
-        console.log('🔍 Fetching data for:', { equipmentName, cicloId });
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -126,17 +121,23 @@ const Grafico: React.FC<GraficoProps> = ({
         }
         
         const jsonData = await response.json();
+        if (!jsonData || Object.keys(jsonData).length === 0) {
+          throw new Error('No se encontraron datos');
+        }
+        
         setData(jsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
         setError(error instanceof Error ? error.message : 'Error al cargar los datos');
-      } finally {
-        setLoading(false);
-      }
+        setShowTable(false); // Hide table on error
+        if (onTableClose) {
+          onTableClose();
+        }
+      } // Cierra el try/catch aquí
     };
-  
+
     fetchData();
-  }, [contextType, id, internalSelectedCicloId]); // Cambiar la dependencia
+  }, [contextType, id, internalSelectedCicloId]);
 
   useEffect(() => {
     if (!data || !chartRef.current) return;
@@ -176,6 +177,7 @@ const Grafico: React.FC<GraficoProps> = ({
               fill: false,
               tension: 0.4,
               yAxisID: 'y',
+              pointStyle: 'circle',
             },
             {
               label: 'Temperatura Agua',
@@ -185,6 +187,7 @@ const Grafico: React.FC<GraficoProps> = ({
               fill: false,
               tension: 0.4,
               yAxisID: 'y',
+              pointStyle: 'circle',
             },
             {
               label: 'Nivel Agua',
@@ -193,7 +196,8 @@ const Grafico: React.FC<GraficoProps> = ({
               backgroundColor: 'rgba(255, 165, 0, 0.5)',
               fill: false,
               tension: 0.4,
-              yAxisID: 'y1', // 👉 Escala derecha
+              yAxisID: 'y1',
+              pointStyle: 'circle',
             }
           ].filter(dataset => dataset.data.length > 0)
         },
@@ -203,6 +207,10 @@ const Grafico: React.FC<GraficoProps> = ({
           plugins: {
             legend: {
               position: 'top',
+              labels: {
+                usePointStyle: true,
+                pointStyle: 'circle',
+              }
             },
             tooltip: {
               callbacks: {
@@ -317,9 +325,9 @@ const Grafico: React.FC<GraficoProps> = ({
   };
 
   return (
-    <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[20px] pb-[28px] grafico-historico">
+    <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[10px] pb-[28px] grafico-historico">
       {/* Botones de control */}
-      <div className="absolute top-[35px] right-[35px] flex gap-[20px] z-[20px]">
+      <div className="absolute top-[35px] right-[35px] flex gap-[20px] z-[20px] pdf-ignore">
         <Button
           onClick={() => setShowTable(!showTable)}
           className="text-white bg-grey/100 hover:bg-lightGrey/25 px-[10px] py-[20px] rounded-md backdrop-blur-sm border border-grey/50"
@@ -337,36 +345,59 @@ const Grafico: React.FC<GraficoProps> = ({
       {/* Info del ciclo */}
       {data && (
         <div className="mb-[5px]">
-          <div className="flex items-center gap-[20px]">
-            <div className="text-white mb-[6px]">
-              <h2 className="text-[32px] font-bold mb-[-8px]">GRÁFICO</h2>
-              <p className="mb-[-2px]">
+          <div className="flex items-center gap-[8px] pdf-info-section">
+            <div className="text-white">
+              <h2 className="text-[32px] font-bold">GRÁFICO</h2>
+              <p className="mt-[-6]">
                 <strong>LOTE:</strong> {data.general.ciclo_lote} - {data.general.receta}
               </p>
-              <p className="text-[#e2973e] text-[14px]">
+              <p className="text-[#e2973e] text-[14px] mt-[-5]">
                 {formatDate(data.general.fecha_inicio)} -{' '}
                 {formatDate(data.general.fecha_fin)}
               </p>
             </div>
-            <div className="bg-[#4bc04b]/25 text-white min-w-[100px] max-h-[75px] text-sm p-[4px] rounded-lg backdrop-blur-sm border border-[#4bc04b]/50">
-              <p className="font-bold mb-[2px]">Temp. Prod</p>
-              <p><strong>Max: </strong> {data.general.temp_producto_max}°C</p>
-              <p><strong>Min: </strong> {data.general.temp_producto_min}°C</p>
-            </div>
-            <div className="bg-[#3666cc]/25 text-white text-sm p-[4px] rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#3666cc]/50">
-              <p className="font-bold mb-[2px]">Temp. Agua</p>
-              <p><strong>Max: </strong> {data.general.temp_agua_max}°C</p>
-              <p><strong>Min: </strong> {data.general.temp_agua_min}°C</p>
-            </div>
-            <div className="bg-yellow-500/25 text-white text-sm p-[6px] rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-yellow-500/50">
-              <p className="font-bold mb-[2px]">Nivel Agua</p>
-              <p><strong>Max: </strong> {data.general.nivel_agua_max} mm</p>
-              <p><strong>Min: </strong> {data.general.nivel_agua_min} mm</p>
-            </div>
-            <div className="bg-[#e82a31]/25 text-white text-sm p-[6px] rounded-lg min-w-[100px] max-h-[75px] backdrop-blur-sm border border-[#e82a31]/50">
-              <p><strong>H. Inicio: </strong> {formatTime(data.general.fecha_inicio)}</p>
-              <p><strong>H. Fin: </strong> {formatTime(data.general.fecha_fin)}</p>
-              <p><strong>T. Trans: </strong> {data.general.tiempo_transcurrido}</p>
+
+            <div className="grid grid-cols-4 gap-[8px]">
+              <div className="bg-[#4bc04b] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#4bc04b]/50">
+                <div className="font-bold">Temp. Prod</div>
+                <div className="grid grid-cols-2 m-2">
+                  <span className="font-bold">Max:</span>
+                  <span className='ml-[-20px]'>{data.general.temp_producto_max}°C</span>
+                  <span className="font-bold">Min:</span>
+                  <span className='ml-[-20px]'>{data.general.temp_producto_min}°C</span>
+                </div>
+              </div>
+
+              <div className="bg-[#3666cc] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#3666cc]/50">
+                <div className="font-bold">Temp. Agua</div>
+                <div className="grid grid-cols-2 m-2">
+                  <span className="font-bold">Max:</span>
+                  <span className='ml-[-20px]'>{data.general.temp_agua_max}°C</span>
+                  <span className="font-bold">Min:</span>
+                  <span className='ml-[-20px]'>{data.general.temp_agua_min}°C</span>
+                </div>
+              </div>
+
+              <div className="bg-yellow-500 bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-yellow-500/50">
+                <div className="font-bold">Nivel Agua</div>
+                <div className="grid grid-cols-2 m-2">
+                  <span className="font-bold">Max:</span>
+                  <span className='ml-[-20px]'>{data.general.nivel_agua_max} mm</span>
+                  <span className="font-bold">Min:</span>
+                  <span className='ml-[-20px]'>{data.general.nivel_agua_min} mm</span>
+                </div>
+              </div>
+
+              <div className="bg-[#e82a31] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#e82a31]/50">
+                <div className="grid grid-cols-2 m-2">
+                  <span className="font-bold">H. Inicio:</span>
+                  <span className='ml-[5px]'>{formatTime(data.general.fecha_inicio)}</span>
+                  <span className="font-bold">H. Fin:</span>
+                  <span className='ml-[-10px]'>{formatTime(data.general.fecha_fin)}</span>
+                  <span className="font-bold">T. Trans:</span>
+                  <span>{data.general.tiempo_transcurrido}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -375,38 +406,34 @@ const Grafico: React.FC<GraficoProps> = ({
       {/* Gráfico y Tabla */}
       <div className="relative w-[100%] h-[calc(100%)]">
         <canvas ref={chartRef}></canvas>
-  
-        {showTable && (
-        <div className="fixed inset-[0px] flex items-center justify-center z-50">
-          <div 
-            className="absolute inset-[0px] bg-black/50 backdrop-blur-sm" 
-            onClick={handleTableClose} 
-          />
-          <div className="relative z-[20px] bg-black/80 p-[4px] rounded-lg border border-gray-700">
-            <TablaCiclos
-              fechaInicio={startDate || '2000-01-01'}
-              fechaFin={endDate || '2100-01-01'}
-              equipo={getEquipmentName(contextType, id)}
-              selectedCicloId={internalSelectedCicloId}
-              onCicloSelect={(ciclo) => {
-                setInternalSelectedCicloId(ciclo.id_ciclo);
-                if (onCicloSelect) {
-                  onCicloSelect(ciclo.id_ciclo);
-                }
-                handleTableClose();
-              }}
-            />
-          </div>
-        </div>
-      )}
+    
+        {(showTable || showTableOnLoad) && !error && data && data.general && Object.keys(data).length > 0 && (
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div 
+                    className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+                    onClick={handleTableClose} 
+                />
+                <div className="relative z-20 bg-black/80 p-[4px] rounded-lg border border-gray-700">
+                  <TablaCiclos
+                    fechaInicio={startDate || '2000-01-01'}
+                    fechaFin={endDate || '2100-01-01'}
+                    equipo={getEquipmentName(contextType, id)}
+                    selectedCicloId={internalSelectedCicloId}
+                    onTableClose={handleTableClose} // Pasar la función
+                    onCicloSelect={(ciclo) => {
+                        if (ciclo && ciclo.id_ciclo) {
+                            setInternalSelectedCicloId(ciclo.id_ciclo);
+                            if (onCicloSelect) {
+                                onCicloSelect(ciclo.id_ciclo);
+                            }
+                            handleTableClose();
+                        }
+                    }}
+                  />
+                </div>
+            </div>
+        )}
       </div>
-  
-      {/* Loading spinner */}
-      {loading && (
-        <div className="absolute inset-[0px] flex justify-center items-center bg-black bg-opacity-75">
-          <Spinner label="Cargando datos..." />
-        </div>
-      )}
     </div>
   );
 }

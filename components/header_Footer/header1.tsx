@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { VscAccount, VscBell  } from "react-icons/vsc";
 import DropdownBanderas from '@/components/traduccion/dropdownBanderas';
+import Desloguear from '@/components/desloguear/desloguear';
 
 interface Header1Props {
   currentPath: string;
@@ -23,8 +24,13 @@ interface OpcionMenu {
 }
 
 const opcionesIconos: OpcionIcono[] = [
+<<<<<<< HEAD
   { id: 1, icon: <VscAccount className="w-auto h-[100%]" /> },
   { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-[100%]" /> },
+=======
+  { id: 1, icon: <Desloguear /> },
+  { id: 2, url: "/alertas", icon: <VscBell className="w-auto h-full" /> },
+>>>>>>> d805298da5e6aae46e05ed4ee50479373c9bbcfe
   { id: 3, icon: <DropdownBanderas /> },
 ];
 

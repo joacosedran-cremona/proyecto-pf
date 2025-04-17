@@ -46,31 +46,21 @@ export default function Historico() {
   };
 
   const handleApplyClick = async () => {
-    // Preparar los datos a enviar
-    const dataToSend = {
-        id: tempSelectedValue,
-        fecha_inicio: tempDateRange.startDate,
-        fecha_fin: tempDateRange.endDate
-    };
-
-    console.log('📤 Datos a enviar:', dataToSend);
-
     try {
         const equipmentType = tempSelectedValue <= 6 ? "cocina" : "enfriador";
         
-        // Primero ocultamos el gráfico actual
-        setShowGraphic(false);
-        
-        // Actualizar estados locales
         setSelectedId(tempSelectedValue);
         setSelectedType(equipmentType);
-        setGraphData(null); // Limpiamos datos anteriores
-
-        // Log de confirmación de datos enviados
-        console.log('✅ Datos enviados exitosamente:', dataToSend);
+        setSelectedCicloId(1); // Reset ciclo ID
+        setShowGraphic(false); // Cambiado a false para mostrar la tabla al filtrar
+        
+        console.log('✅ Datos enviados exitosamente:', {
+            id: tempSelectedValue,
+            fecha_inicio: tempDateRange.startDate,
+            fecha_fin: tempDateRange.endDate
+        });
     } catch (error) {
         console.error("❌ Error al procesar los datos:", error);
-        setGraphData(null);
     }
 };
 
@@ -124,10 +114,10 @@ export default function Historico() {
           id={selectedId}
           startDate={tempDateRange.startDate}
           endDate={tempDateRange.endDate}
-          showTableOnLoad={!showGraphic}
+          showTableOnLoad={!showGraphic} // Cambiado para que se sincronice con el estado
           onTableClose={() => setShowGraphic(true)}
           onCicloSelect={handleCicloSelect}
-          selectedCicloId={selectedCicloId} // Add this prop
+          selectedCicloId={selectedCicloId}
         />
       </div>
       <div className="w-[100%] h-auto">

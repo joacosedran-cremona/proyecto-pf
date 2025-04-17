@@ -21,8 +21,9 @@
     },
     "lineas":
     {
-        "linea1": "LINE 1",
-        "linea2": "LINE 2"
+        "linea1": "Line 1",
+        "linea2": "Line 2",
+        "linea3": "Line 3"
     },
     "select": "Select equipment"
 }
