@@ -325,7 +325,7 @@ const Grafico: React.FC<GraficoProps> = ({
   };
 
   return (
-    <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[10px] pb-[28px] grafico-historico">
+    <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[10px] pb-[108px] grafico-historico">
       {/* Botones de control */}
       <div className="absolute top-[35px] right-[35px] flex gap-[20px] z-[20px] pdf-ignore">
         <Button
@@ -344,7 +344,7 @@ const Grafico: React.FC<GraficoProps> = ({
   
       {/* Info del ciclo */}
       {data && (
-        <div className="mb-[5px]">
+        <div className="mb-[5px] ml-[5px]">
           <div className="flex items-center gap-[8px] pdf-info-section">
             <div className="text-white">
               <h2 className="text-[32px] font-bold">GRÁFICO</h2>
@@ -357,8 +357,8 @@ const Grafico: React.FC<GraficoProps> = ({
               </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-[8px]">
-              <div className="bg-[#4bc04b] bg-opacity-[25px] text-white text-sm p-[5px] rounded-lg border border-[#4bc04b]/50">
+            <div className="grid grid-cols-4 gap-[12px] ml-[5px]">
+              <div className="bg-[#4bc04b] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#4bc04b]/50">
                 <div className="font-bold">Temp. Prod</div>
                 <div className="grid grid-cols-2 m-2">
                   <span className="font-bold">Max:</span>
@@ -368,7 +368,7 @@ const Grafico: React.FC<GraficoProps> = ({
                 </div>
               </div>
 
-              <div className="bg-[#3666cc] bg-opacity-[25px] text-white text-sm p-[5px] rounded-lg border border-[#3666cc]/50">
+              <div className="bg-[#3666cc] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#3666cc]/50">
                 <div className="font-bold">Temp. Agua</div>
                 <div className="grid grid-cols-2 m-2">
                   <span className="font-bold">Max:</span>
@@ -378,7 +378,7 @@ const Grafico: React.FC<GraficoProps> = ({
                 </div>
               </div>
 
-              <div className="bg-yellow-500 bg-opacity-[25px] text-white text-sm p-[5px] rounded-lg border border-yellow-500/50">
+              <div className="bg-yellow-500 bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-yellow-500/50">
                 <div className="font-bold">Nivel Agua</div>
                 <div className="grid grid-cols-2 m-2">
                   <span className="font-bold">Max:</span>
@@ -388,7 +388,7 @@ const Grafico: React.FC<GraficoProps> = ({
                 </div>
               </div>
 
-              <div className="bg-[#e82a31] bg-opacity-[25px] text-white text-sm p-[5px] rounded-lg border border-[#e82a31]/50">
+              <div className="bg-[#e82a31] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#e82a31]/50">
                 <div className="grid grid-cols-2 m-2">
                   <span className="font-bold">H. Inicio:</span>
                   <span className='ml-[5px]'>{formatTime(data.general.fecha_inicio)}</span>
