@@ -145,6 +145,9 @@ const Tabla: React.FC = () => {
     enableColumnResizing: true,
     columnResizeMode: "onChange",
     layoutMode: "grid",
+    initialState: {
+      density: 'comfortable'
+    },
 
     //Head
     muiTableHeadCellProps: {
