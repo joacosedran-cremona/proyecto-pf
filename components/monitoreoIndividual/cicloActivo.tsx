@@ -1,5 +1,6 @@
 import React from 'react';
 import { getColorClass } from '@/utils/logicaColores';
+import { useTranslation } from 'react-i18next';
 
 interface CicloActivoProps {
     datosCiclo: { label: string, value: string | number | null }[];
@@ -8,16 +9,20 @@ interface CicloActivoProps {
 }
 
 const CicloActivo: React.FC<CicloActivoProps> = ({ datosCiclo, displayData, defaultColor }) => {
+    const { t } = useTranslation('monitoreo');
+
     return (
         <>
-            <h2 className="text-xl text-white">Ciclo Activo</h2>
-            <ul className="flex flex-col gap-[1vh]">
+            <h2 className="text-xl text-white">
+                {t('cicloActivo.titulo')}
+            </h2>
+            <ul className="flex flex-col justify-between grow gap-[1vh]">
                 {datosCiclo.map((dato) => (
-                    <li key={dato.label} className="bg-grey flex flex-col px-[20px] py-[1vh] rounded-md ">
-                        <p className="text-[calc(0.4vw+0.9vh)] text-white">
+                    <li key={dato.label} className="bg-grey flex flex-col px-[20px] py-[1vh] rounded-md">
+                        <p className="text-[calc(0.6vw+1vh)] text-white">
                             {dato.label}
                         </p>
-                        <p className={`text-[calc(0.4vw+0.8vh)] ${getColorClass(dato.label, dato.value, defaultColor)}`}>
+                        <p className={`text-[calc(0.5vw+1vh)] ${getColorClass(dato.label, dato.value, defaultColor)}`}>
                             {displayData(dato.value)}
                         </p>
                     </li>

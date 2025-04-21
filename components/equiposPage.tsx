@@ -47,24 +47,24 @@ export default function EquipoPage({type}: EquipoPageProps) {
     const bgColor = isCocina ? "bg-oranget" : "bg-bluet";
 
     const labelToKeyMap: Record<string, string> = {
-        [t('estadoEquipo.tempIngreso')]: 'tempIngreso',
+    //    [t('estadoEquipo.tempIngreso')]: 'tempIngreso',
         [t('estadoEquipo.tempAgua')]: 'tempAgua',
         [t('estadoEquipo.tempProd')]: 'tempProd',
-        [t('estadoEquipo.nivelAgua')]: 'nivelAgua'
+        [t('estadoEquipo.nivelAgua')]: 'nivelAgua',
     };
 
     const datosEquipo = [
-        { label: t('estadoEquipo.tempIngreso'), value: equipo?.info.temp_ingreso ?? "N/A", unit: "°C" },
+    //    { label: t('estadoEquipo.tempIngreso'), value: equipo?.info.temp_ingreso ?? "N/A", unit: "°C" },
         { label: t('estadoEquipo.tempAgua'), value: equipo?.info.temp_agua ?? "N/A", unit: "°C" },
         { label: t('estadoEquipo.tempProd'), value: equipo?.info.temp_prod ?? "N/A", unit: "°C" },
-        { label: t('estadoEquipo.nivelAgua'), value: equipo?.info.niv_agua ?? "N/A", unit: "mm" }
+        { label: t('estadoEquipo.nivelAgua'), value: equipo?.info.niv_agua ?? "N/A", unit: "mm" },
+        { label: t('cicloActivo.tiempo'), value: equipo?.info.tiempoTranscurrido ?? "N/A" }
     ];
 
     const datosCiclo = [
         { label: t('cicloActivo.paso'), value: equipo?.info.receta_paso_actual || "N/A" },
         { label: t('cicloActivo.receta'), value: equipo?.detalles.num_receta || 'N/A' },
         { label: t('cicloActivo.cantTorres'), value: equipo?.detalles.cant_torres || "N/A" },
-        { label: t('cicloActivo.tiempo'), value: equipo?.info.tiempoTranscurrido ?? "N/A" },
         { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_fin ?? "N/A" }
     ];
     
@@ -162,7 +162,7 @@ export default function EquipoPage({type}: EquipoPageProps) {
                         />
                     </div>
                     <div className="bg-black flex flex-col p-[20px] w-[100%] h-[100%] rounded-md">
-                        <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor="lightRed" />
+                        <CicloActivo datosCiclo={datosCiclo} displayData={displayData} defaultColor={color} />
                     </div>
                 </div>
                 <div className="bg-black flex flex-col h-[100%] p-[20px] w-1/3 flex-grow rounded-md 1365:w-[100%]">

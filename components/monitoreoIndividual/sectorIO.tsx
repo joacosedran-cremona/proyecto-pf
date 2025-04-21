@@ -1,5 +1,6 @@
 import React from 'react';
 import { GoDotFill } from "react-icons/go";
+import { useTranslation } from 'react-i18next';
 
 interface DatoIO {
     label: string;
@@ -13,10 +14,13 @@ interface SectorIOProps {
 
 const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass }) => {
     const isOddCount = datosIO.length % 2 !== 0;
+    const { t } = useTranslation('monitoreo');
 
     return (
         <>
-            <h2 className="text-xl text-white">Sector IO</h2>
+            <h2 className="text-xl text-white">
+                {t('sectorIO.titulo')}
+            </h2>
             <ul className="grid gap-[1vh] h-[100%] 1365:grid-cols-2">
                 {datosIO.map((dato, index) => {
                     const isLastAndOdd = isOddCount && index === datosIO.length - 1;

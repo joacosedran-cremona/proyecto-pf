@@ -18,11 +18,15 @@ export const getColorClass = (key: string, value: Value, defaultColor: 'orange' 
     }
 
     if (key === 'tempAgua') {
-        return "text-blueGraph !important";
+        return "text-greenGraph !important";
     }
 
     if (key === 'tempIng') {
         return "text-greenGraph !important";
+    }
+
+    if (key === 'tempProd') {
+        return "text-orange !important";
     }
 
     if (key === 'nivelAgua') {
