@@ -8,7 +8,7 @@
     },
     "ejes":
     {
-        "x": "Time (hh:mm:ss)",
+        "x": "Time (hh:mm)",
         "y": "Temperature (°C)"
     },
     "error":

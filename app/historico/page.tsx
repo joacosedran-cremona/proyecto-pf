@@ -72,7 +72,7 @@ export default function Historico() {
 
   return (
     <section className="flex flex-col w-[100%] items-center justify-center gap-[20px]">
-      <div className="flex flex-row items-center justify-between bg-black p-[4px] w-[100%] rounded-md">
+      <div className="flex flex-row items-center justify-between bg-black p-[8px] w-[100%] rounded-md">
         <div className="flex gap-[10px] ml-[10px]">
           <BotonPDF 
               selectClasses="bg-red-700/50 hover:bg-red-800 min-h-[40px]"
@@ -87,7 +87,7 @@ export default function Historico() {
         </div>
 
         <div className="text-center text-white">
-          <h2 className="text-md font-bold uppercase mb-[-6px]">FILTRAR POR</h2>
+          <h2 className="text-lg font-bold uppercase mb-[-6px]">FILTRAR POR</h2>
           <span className="text-sm">PERIODO</span>
         </div>
 

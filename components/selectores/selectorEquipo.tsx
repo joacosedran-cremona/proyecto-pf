@@ -1,44 +1,76 @@
 "use client";
 
-import { useLinea } from "@/context/LineaContext";
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface SelectorProps {
     selectClasses?: string;
+    onEquipoChange: (equipoId: number) => void;
+    disabled?: boolean;
+    lineaSeleccionada?: number;
 }
 
-const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
-    const { lineaSeleccionada, setLineaSeleccionada } = useLinea();
-
+const Selector: React.FC<SelectorProps> = ({ 
+    selectClasses, 
+    onEquipoChange, 
+    disabled = false,
+    lineaSeleccionada = 15 
+}) => {
     const { t } = useTranslation('selectores');
+    const [selectedEquipo, setSelectedEquipo] = useState<string>('todos');
 
-    const lineaList = [
-        { id: 1, name: 'Todos' },
-        { id: 2, name: 'Cocina 1' },
-        { id: 3, name: 'Cocina 2' },
-        { id: 4, name: 'Cocina 3' },
-        { id: 5, name: 'Enfriador 1' },
-        { id: 6, name: 'Enfriador 2' },
-        { id: 7, name: 'Enfriador 3' },
-        { id: 8, name: 'Enfriador 4' },
+    const equiposLinea1 = [
+        { id: 'todos', name: 'Todos', value: 30 },
+        { id: 'cocina1', name: 'Cocina 1', value: 1 },
+        { id: 'cocina2', name: 'Cocina 2', value: 2 },
+        { id: 'cocina3', name: 'Cocina 3', value: 3 },
+        { id: 'enfriador1', name: 'Enfriador 1', value: 7 },
+        { id: 'enfriador2', name: 'Enfriador 2', value: 8 },
+        { id: 'enfriador3', name: 'Enfriador 3', value: 9 },
+        { id: 'enfriador4', name: 'Enfriador 4', value: 10 }
     ];
 
-    const defaultClasses =
-        "bg-[#0001] h-[100%] w-[100%] px-[20px] border-b-2 border-white focus:border-white focus:outline-none text-lg text-white hover:text-white transition-colors cursor-pointer";
+    const equiposLinea2 = [
+        { id: 'todos', name: 'Todos', value: 30 },
+        { id: 'cocina1', name: 'Cocina 4', value: 4 },
+        { id: 'cocina2', name: 'Cocina 5', value: 5 },
+        { id: 'cocina3', name: 'Cocina 6', value: 6 },
+        { id: 'enfriador1', name: 'Enfriador 5', value: 11 },
+        { id: 'enfriador2', name: 'Enfriador 6', value: 12 },
+        { id: 'enfriador3', name: 'Enfriador 7', value: 13 },
+        { id: 'enfriador4', name: 'Enfriador 8', value: 14 }
+    ];
+
+    // Determinar qué lista de equipos usar
+    const equipoList = lineaSeleccionada === 16 ? equiposLinea2 : equiposLinea1;
+
+    useEffect(() => {
+        // Reset selection when line changes
+        setSelectedEquipo('todos');
+        onEquipoChange(30);
+    }, [lineaSeleccionada]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedId = e.target.value;
+        setSelectedEquipo(selectedId);
+        const equipo = equipoList.find(eq => eq.id === selectedId);
+        onEquipoChange(equipo?.value ?? 30);
+    };
 
     return (
         <select
-            value={lineaSeleccionada}
-            onChange={(e) => setLineaSeleccionada(Number(e.target.value))}
-            className={selectClasses || defaultClasses}
+            value={selectedEquipo}
+            onChange={handleChange}
+            disabled={disabled}
+            className={`${selectClasses || "bg-[#0001] h-[100%] w-[100%] px-[20px] border-b-2 border-white focus:border-white focus:outline-none text-lg text-white hover:text-white transition-colors cursor-pointer"} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
-            {lineaList.map((linea) => (
+            {equipoList.map((equipo) => (
                 <option
-                    key={linea.id}
-                    value={linea.id}
+                    key={equipo.id}
+                    value={equipo.id}
                     className="p-[2px] text-white hover:text-white bg-black font-bold"
                 >
-                    {linea.name}
+                    {equipo.name}
                 </option>
             ))}
         </select>

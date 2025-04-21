@@ -1,31 +1,35 @@
 "use client";
 
-import { useLinea, type LineaId } from "@/context/LineaContext";
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface SelectorProps {
     selectClasses?: string;
+    onLineaChange: (lineaId: number) => void;
 }
 
-const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
-    const { lineaSeleccionada, setLineaSeleccionada } = useLinea();
-
+const Selector: React.FC<SelectorProps> = ({ selectClasses, onLineaChange }) => {
     const { t } = useTranslation('selectores');
+    const [selectedLinea, setSelectedLinea] = useState<number>(3);
 
-    const lineaList: Array<{ id: LineaId, name: string }> = [
-        { id: 1, name: t('lineas.linea1') },
-        { id: 2, name: t('lineas.linea2') },
-        { id: 3, name: t('lineas.linea3') }
+    const lineaList = [
+        { id: 1, name: 'Línea 1', value: 15 },
+        { id: 2, name: 'Línea 2', value: 16 },
+        { id: 3, name: 'Completo', value: 0 },
     ];
 
-    const defaultClasses =
-        "bg-[#0001] h-[100%] w-[100%] px-[20] border-b-2 border-white focus:border-white focus:outline-none text-lg text-white hover:text-white transition-colors cursor-pointer";
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const lineaId = Number(e.target.value);
+        setSelectedLinea(lineaId);
+        const linea = lineaList.find(l => l.id === lineaId);
+        onLineaChange(linea?.value ?? 0);
+    };
 
     return (
         <select
-            value={lineaSeleccionada}
-            onChange={(e) => setLineaSeleccionada(Number(e.target.value) as LineaId)}
-            className={selectClasses || defaultClasses}
+            value={selectedLinea}
+            onChange={handleChange}
+            className={selectClasses || "bg-[#0001] h-[100%] w-[100%] px-[20px] border-b-2 border-white focus:border-white focus:outline-none text-lg text-white hover:text-white transition-colors cursor-pointer"}
         >
             {lineaList.map((linea) => (
                 <option

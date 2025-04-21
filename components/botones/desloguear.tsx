@@ -42,14 +42,14 @@ const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
             </button>
     
             {/* Dropdown menu with shadow */}
-            <div className={`absolute left-[-10] mt-10 w-48 rounded-md transform transition-all duration-200 ease-in-out origin-top-right shadow-[0_0_15px_rgba(0,0,0,0.3)]
+            <div className={`absolute left-[-10px] mt-[14px] w-48 rounded-md transform transition-all duration-200 ease-in-out origin-top-right shadow-[0_0_15px_rgba(0,0,0,0.3)]
                 ${isOpen 
                     ? 'opacity-100 scale-100 translate-y-0' 
                     : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
                 } bg-[#EEE]`}>
 
                 {/* Header del perfil */}
-                <div className="px-4 py-3 border-b border-gray-200">
+                <div className="px-[10px] py-[14px] border-b border-gray-200">
                     <div className="flex items-center">
                         <div className="ml-3">
                             <p className="text-sm font-medium text-[#131313]">
@@ -66,7 +66,7 @@ const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
                 <div className="bg-[#f15b5f] rounded-b-md">
                     <button
                         onClick={handleLogout}
-                        className="w-[100%] text-left px-4 py-3 text-sm text-[#D9D9D9] font-bold
+                        className="w-[100%] text-left px-[10px] py-[8px] text-sm text-[#D9D9D9] font-bold
                                  hover:bg-[#ff7a7e] rounded-b-md
                                  active:bg-red-200 active:text-black
                                  transition-all duration-200 ease-in-out

@@ -1,18 +1,15 @@
-// ProductBar.tsx
-"use client";
-
 import React from "react";
 
 interface ProductoRealizado {
   NombreProducto: string;
-  pesoTotal: number;
+  pesoTotal: number; // en kg
   cantidadCiclos: number;
   tiempoTotal: number;
 }
 
 interface FixedData {
   ProductosRealizados: ProductoRealizado[];
-  PesoTotalCiclos: number;
+  produccionTotal: number; // en toneladas
 }
 
 interface ProductBarProps {
@@ -20,7 +17,8 @@ interface ProductBarProps {
 }
 
 const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
-  const PesoTotalCiclosNum: number = data.PesoTotalCiclos;
+  // Convertir produccionTotal de toneladas a kilogramos
+  const produccionTotalEnKg = data.produccionTotal * 1000;
 
   const generarColorAleatorio = (): string => {
     const letras = "23456789ABCDE";
@@ -32,30 +30,35 @@ const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
   };
 
   const productos = data.ProductosRealizados.map((producto) => {
-    const porcentaje = (producto.pesoTotal * 100) / PesoTotalCiclosNum;
+    // Calcular el porcentaje usando la producción total en kg
+    const porcentaje = (producto.pesoTotal * 100) / produccionTotalEnKg;
     return {
       nombre: producto.NombreProducto,
-      peso: producto.pesoTotal.toFixed(2) + "kg",
+      peso: producto.pesoTotal + "kg",
       cantidadCiclos: producto.cantidadCiclos,
-      porcentaje: porcentaje.toFixed(2),
+      porcentaje: porcentaje.toFixed(0),
       color: generarColorAleatorio(),
     };
   });
 
   return (
     <div>
-      <h3 className="text-xl font-bold">% Producto realizado</h3>
+      <h3 className="text-xl font-bold text-white">% Producto realizado</h3>
       <div className="flex h-[20px] rounded-[5px] overflow-hidden bg-[#444] mb-[15px]">
         {productos.map((producto, index) => (
           <div
             key={index}
-            className="relative h-[100%] after:content-[attr(data-tooltip)] after:absolute after:bg-[rgba(0,0,0,0.7)] after:text-white after:px-[10px] after:rounded-[5px] after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:whitespace-nowrap after:z-10 after:pointer-events-none after:opacity-[0px] hover:after:opacity-100 hover:after:left-auto hover:after:right-[0px] hover:after:translate-x-[0px] hover:after:-translate-y-1/2"
+            className="relative h-[100%]"
             style={{
               width: `${producto.porcentaje}%`,
               backgroundColor: producto.color,
             }}
-            data-tooltip={`Ciclos: ${producto.cantidadCiclos}`}
-          ></div>
+          >
+            {/* Tooltip siempre visible */}
+            <span className="absolute product-tooltip bg-[rgba(0,0,0,0.7)] text-white px-[10px] py-[5px] rounded-[5px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap z-10 pointer-events-none">
+              {`Ciclos: ${producto.cantidadCiclos}`}
+            </span>
+          </div>
         ))}
       </div>
       <div className="flex justify-around flex-wrap">

@@ -138,7 +138,7 @@ export default function EquipoPage({type}: EquipoPageProps) {
                     value={currentId}
                     onChange={handleSelectionChange}
                     isCocina={isCocina}
-                    selectClasses={`w-[100%] bg-[#0001] px-[20px] border-b-[2px] ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
+                    selectClasses={`w-[100%] h-[100%] bg-[#1f1f1f] px-[20px] border-b-[2px] ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
                     optionClasses="p-[2px] bg-black font-bold"
                 />
             </div>

@@ -17,3 +17,7 @@
         -webkit-text-stroke: 1px black;
     }
 }
+
+.pdf-margin {
+    margin-bottom: 10px !important;
+  }

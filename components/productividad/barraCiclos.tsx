@@ -1,29 +1,18 @@
-// CiclosBar.tsx
-"use client";
-
 import React from "react";
 
-interface Ciclo {
-  id: number;
-  producto: string;
-  estado: "correcto" | "incorrecto";
+interface BarraCiclosProps {
+  ciclosCorrectos: number;
+  ciclosIncorrectos: number;
 }
 
-interface CiclosBarProps {
-  ciclosRealizados: Ciclo[];
-}
-
-const BarraCiclos: React.FC<CiclosBarProps> = ({ ciclosRealizados }) => {
-  const totalCiclos = ciclosRealizados.length;
-  const correctos = ciclosRealizados.filter((ciclo) => ciclo.estado === "correcto").length;
-  const incorrectos = totalCiclos - correctos;
-
-  const porcentajeCorrectos = (correctos / totalCiclos) * 100;
-  const porcentajeIncorrectos = (incorrectos / totalCiclos) * 100;
+const BarraCiclos: React.FC<BarraCiclosProps> = ({ ciclosCorrectos, ciclosIncorrectos }) => {
+  const totalCiclos = ciclosCorrectos + ciclosIncorrectos;
+  const porcentajeCorrectos = totalCiclos > 0 ? Math.round((ciclosCorrectos / totalCiclos) * 100) : 0;
+  const porcentajeIncorrectos = totalCiclos > 0 ? Math.round((ciclosIncorrectos / totalCiclos) * 100) : 0;
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-[2px] text-white">% Ciclos realizados correctamente</h2>
+      <h2 className="text-xl font-bold text-white">% Ciclos realizados correctamente</h2>
       <div className="flex h-[20px] rounded-[5px] overflow-hidden bg-[#444] mb-[15px]">
         <div
           className="h-[100%] bg-green"
@@ -37,11 +26,15 @@ const BarraCiclos: React.FC<CiclosBarProps> = ({ ciclosRealizados }) => {
       <div className="flex justify-around flex-wrap">
         <div className="flex items-center my-[5px] mx-[10px]">
           <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-green"></span>
-          <p className="text-white">{`Correctos - ${porcentajeCorrectos.toFixed(2)}%`}</p>
+          <p className="text-white">
+            {`Correctos - ${porcentajeCorrectos}% [${ciclosCorrectos} ciclos]`}
+          </p>
         </div>
         <div className="flex items-center my-[5px] mx-[10px]">
           <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-red"></span>
-          <p className="text-white">{`Incorrectos - ${porcentajeIncorrectos.toFixed(2)}%`}</p>
+          <p className="text-white">
+            {`Incorrectos - ${porcentajeIncorrectos}% [${ciclosIncorrectos} ciclos]`}
+          </p>
         </div>
       </div>
     </div>

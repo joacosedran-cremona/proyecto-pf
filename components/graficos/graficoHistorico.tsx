@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Chart, registerables, ChartConfiguration } from 'chart.js';
+import { Chart, registerables, ChartConfiguration, Plugin } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { Button, Spinner } from '@heroui/react';
 import 'chartjs-adapter-date-fns';
@@ -121,11 +121,18 @@ const Grafico: React.FC<GraficoProps> = ({
         }
         
         const jsonData = await response.json();
+  
+        // Verificar si los datos que llegan son null o vacíos
         if (!jsonData || Object.keys(jsonData).length === 0) {
-          throw new Error('No se encontraron datos');
+          setShowTable(false);  // Cierra la tabla si los datos son null o vacíos
+          if (onTableClose) {
+            onTableClose();
+          }
+          return;  // Termina la ejecución si no hay datos
         }
-        
+  
         setData(jsonData);
+  
       } catch (error) {
         console.error('Error fetching data:', error);
         setError(error instanceof Error ? error.message : 'Error al cargar los datos');
@@ -133,11 +140,12 @@ const Grafico: React.FC<GraficoProps> = ({
         if (onTableClose) {
           onTableClose();
         }
-      } // Cierra el try/catch aquí
+      }
     };
-
+  
     fetchData();
-  }, [contextType, id, internalSelectedCicloId]);
+  }, [contextType, id, internalSelectedCicloId]); 
+  
 
   useEffect(() => {
     if (!data || !chartRef.current) return;
@@ -148,6 +156,32 @@ const Grafico: React.FC<GraficoProps> = ({
     if (chartInstanceRef.current) {
       chartInstanceRef.current.destroy();
     }
+
+    // Agregar el plugin de la imagen de fondo
+    const image = new Image();
+    image.src = '/creminox.png';
+
+    const plugin: Plugin = {
+      id: 'customCanvasBackgroundImage',
+      beforeDraw: (chart: Chart) => {
+        if (image.complete) {
+          const ctx = chart.ctx;
+          const { top, left, width, height } = chart.chartArea;
+          ctx.save();
+          ctx.globalAlpha = 0.10;
+
+          const imageWidth = width * 0.25;
+          const imageHeight = (image.height / image.width) * imageWidth;
+          const x = left + (width - imageWidth) / 2;
+          const y = top + (height - imageHeight) / 2.5;
+
+          ctx.drawImage(image, x, y, imageWidth, imageHeight);
+          ctx.restore();
+        } else {
+          image.onload = () => chart.draw();
+        }
+      }
+    };
 
     // Procesar los datos para el gráfico con valores por defecto
     const tempProducto = (data['Temperatura producto'] || []).map(item => ({
@@ -217,7 +251,7 @@ const Grafico: React.FC<GraficoProps> = ({
                 label: (context) => {
                   const value = context.parsed.y;
                   const date = new Date(context.parsed.x);
-                  return `${context.dataset.label}: ${value} - ${date.toLocaleTimeString('es-ES')}`;
+                  return `${context.dataset.label}: ${value}`;
                 }
               }
             },
@@ -276,7 +310,8 @@ const Grafico: React.FC<GraficoProps> = ({
               }
             }
           }
-        }
+        },
+        plugins: [plugin],
       };      
 
     chartInstanceRef.current = new Chart(ctx, config);
@@ -351,7 +386,7 @@ const Grafico: React.FC<GraficoProps> = ({
               <p className="mt-[-6]">
                 <strong>LOTE:</strong> {data.general.ciclo_lote} - {data.general.receta}
               </p>
-              <p className="text-[#e2973e] text-[14px] mt-[-5]">
+              <p className="text-orange text-[14px] mt-[-5]">
                 {formatDate(data.general.fecha_inicio)} -{' '}
                 {formatDate(data.general.fecha_fin)}
               </p>

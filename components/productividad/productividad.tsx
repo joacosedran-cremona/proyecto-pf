@@ -1,4 +1,3 @@
-// Productividad.tsx
 "use client";
 
 import { useState } from "react";
@@ -6,6 +5,7 @@ import Metrics from "./metrica";
 import BarraProductos from './barraProductos';
 import BarraCiclos from "./barraCiclos";
 import FiltroPeriodo from "./filtroPeriodo";
+import { toast } from 'sonner';
 
 interface ProductoRealizado {
   NombreProducto: string;
@@ -15,8 +15,11 @@ interface ProductoRealizado {
 }
 
 interface FixedData {
+  ciclosRealizados: number;
+  ciclosCorrectos: number;
+  ciclosIncorrectos: number;
+  produccionTotal: number;
   ProductosRealizados: ProductoRealizado[];
-  PesoTotalCiclos: number;
 }
 
 interface DateRange {
@@ -24,59 +27,120 @@ interface DateRange {
   end: string;
 }
 
-// Datos fijos para simular la respuesta de la API
-const fixedData: FixedData = {
-  ProductosRealizados: [
-    { NombreProducto: "Producto A", pesoTotal: 1000, cantidadCiclos: 5, tiempoTotal: 3600000 },
-    { NombreProducto: "Producto B", pesoTotal: 1500, cantidadCiclos: 7, tiempoTotal: 5400000 },
-    { NombreProducto: "Producto C", pesoTotal: 2000, cantidadCiclos: 10, tiempoTotal: 7200000 },
-  ],
-  PesoTotalCiclos: 4500,
-};
-
-// Array de ciclos realizados (para la barra de ciclos correctos/incorrectos)
-interface Ciclo {
-  id: number;
-  producto: string;
-  estado: "correcto" | "incorrecto";
+interface ApiResponse {
+  ciclos_realizados: number;
+  produccion_total: number;
+  ciclos_correctos: number;
+  ciclos_incorrectos: number;
+  productos_realizados: Array<{
+    nombre_receta: string;
+    capacidad_receta: number;
+    cantidad_ciclos: number;
+  }>;
 }
 
-const ciclosRealizados: Ciclo[] = [
-  { id: 1, producto: "jamon", estado: "correcto" },
-  { id: 2, producto: "salame", estado: "incorrecto" },
-  { id: 3, producto: "queso", estado: "correcto" },
-  { id: 4, producto: "mortadela", estado: "correcto" },
-  { id: 5, producto: "chorizo", estado: "incorrecto" },
-  { id: 6, producto: "pavo", estado: "correcto" },
-  { id: 7, producto: "tocino", estado: "correcto" },
-  { id: 8, producto: "pollo", estado: "incorrecto" },
-  { id: 9, producto: "ternera", estado: "correcto" },
-  { id: 10, producto: "carnaza", estado: "correcto" },
-];
-
 const Productividad = () => {
-  const today: string = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split('T')[0];
+  const lastWeek = new Date();
+  lastWeek.setDate(lastWeek.getDate() - 7);
+  const lastWeekFormatted = lastWeek.toISOString().split('T')[0];
 
-  // Inicializamos con datos fijos y rango de fechas (hoy a hoy)
-  const [data] = useState<FixedData>(fixedData);
-  const [dateRange] = useState<DateRange>({
-    start: today,
+  const [data, setData] = useState<FixedData>({
+    ciclosRealizados: 0,
+    ciclosCorrectos: 0,
+    ciclosIncorrectos: 0,
+    produccionTotal: 0,
+    ProductosRealizados: []
+  });
+  const [dateRange, setDateRange] = useState<DateRange>({
+    start: lastWeekFormatted,
     end: today,
   });
+  const handleApplyFilters = async (filterData: {
+    startDate: string | null;
+    endDate: string | null;
+    lineaId: number;
+    equipoId: number;
+    dato_enviado: number;
+  }) => {
+    if (!filterData.startDate || !filterData.endDate) return;
+
+    try {
+        const formattedStartDate = filterData.startDate.split('T')[0];
+        const formattedEndDate = filterData.endDate.split('T')[0];
+        const dato = filterData.dato_enviado || 0;
+
+        const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
+        const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+
+        const url = `http://${host}:${port}/historico-productividad/${dato}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`;
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Server response:', errorText);
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const apiData: ApiResponse = await response.json();
+        
+        // Check if data is empty or null
+        if (!apiData || 
+            (apiData.ciclos_realizados === 0 && 
+             apiData.produccion_total === 0 && 
+             apiData.ciclos_correctos === 0 && 
+             apiData.ciclos_incorrectos === 0 && 
+             (!apiData.productos_realizados || apiData.productos_realizados.length === 0))) {
+            
+            toast.error("No existen reportes de productividad en el lapso de las fechas indicadas.");
+            return;
+        }
+
+        setData({
+            ciclosRealizados: apiData.ciclos_realizados,
+            ciclosCorrectos: apiData.ciclos_correctos,
+            ciclosIncorrectos: apiData.ciclos_incorrectos,
+            produccionTotal: apiData.produccion_total,
+            ProductosRealizados: apiData.productos_realizados.map(prod => ({
+                NombreProducto: prod.nombre_receta,
+                pesoTotal: prod.capacidad_receta,
+                cantidadCiclos: prod.cantidad_ciclos,
+                tiempoTotal: 0
+            }))
+        });
+
+        setDateRange({
+            start: formattedStartDate,
+            end: formattedEndDate
+        });
+
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        if (error instanceof Error) {
+            console.error("Error details:", error.message);
+            toast.error("Error al obtener los datos de productividad");
+        }
+    }
+  };
 
   return (
-    <div className="flex flex-row h-[100%] gap-[20px]">
-      {/* Sección principal de productividad */}
+    <div className="productividad-container flex flex-row h-[100%] gap-[20px]">
       <div className="bg-black p-[20px] w-4/5 rounded-md">
-        <Metrics data={data} dateRange={dateRange} />
+        <Metrics 
+          ciclosRealizados={data.ciclosRealizados}
+          produccionTotal={data.produccionTotal}
+          dateRange={dateRange} 
+        />
         <hr className="my-[20px] border-[2px]" />
         <BarraProductos data={data} />
         <hr className="my-[20px] border-[2px]" />
-        <BarraCiclos ciclosRealizados={ciclosRealizados} />
+        <BarraCiclos 
+          ciclosCorrectos={data.ciclosCorrectos}
+          ciclosIncorrectos={data.ciclosIncorrectos}
+        />
       </div>
-      {/* Sección de filtro de fechas */}
-      <div className="bg-black p-[20px] w-1/5 rounded-md">
-        <FiltroPeriodo />
+      <div className="bg-black p-[20px] w-1/5 rounded-md pdf-ignore">
+        <FiltroPeriodo onApplyFilters={handleApplyFilters} />
       </div>
     </div>
   );

@@ -129,18 +129,40 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                     const config: ChartConfiguration<'line'> = {
                         type: 'line',
                         data: {
-                            ...chartData,
                             datasets: [
-                                ...chartData.datasets,
+                                {
+                                    label: 'Temperatura Producto',
+                                    data: lineaActual?.historial?.map(item => ({
+                                        x: new Date(item.tiempo).getTime(),
+                                        y: item.temp_prod
+                                    })) || [],
+                                    borderColor: '#ff7f2a',
+                                    backgroundColor: 'rgba(255, 127, 42, 0.1)',
+                                    yAxisID: 'y',
+                                    borderWidth: 2,
+                                    pointRadius: 0,
+                                },
+                                {
+                                    label: 'Temperatura Agua',
+                                    data: lineaActual?.historial?.map(item => ({
+                                        x: new Date(item.tiempo).getTime(),
+                                        y: item.temp_agua
+                                    })) || [],
+                                    borderColor: '#3AF',
+                                    backgroundColor: 'rgba(51, 170, 255, 0.1)',
+                                    yAxisID: 'y',
+                                    borderWidth: 2,
+                                    pointRadius: 0,
+                                },
                                 {
                                     label: 'Nivel de Agua',
                                     data: lineaActual?.historial?.map(item => ({
                                         x: new Date(item.tiempo).getTime(),
                                         y: item.niv_agua
                                     })) || [],
-                                    borderColor: '#4CAF50', // Color verde para nivel de agua
+                                    borderColor: '#4CAF50',
                                     backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                                    yAxisID: 'y1', // Nueva escala Y
+                                    yAxisID: 'y1',
                                     borderWidth: 2,
                                     pointRadius: 0,
                                 }
@@ -151,71 +173,19 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                             maintainAspectRatio: false,
                             plugins: {
                                 legend: {
-                                    position: 'top',
-                                    labels: {
-                                        usePointStyle: true,
-                                    },
                                     display: false
-                                },
-                                title: {
-                                    align: 'start',
-                                    color: '#D9D9D9',
-                                    display: false, // Desactivamos el título nativo ya que ahora usamos el div
-                                    font: {
-                                        weight: 'normal',
-                                        size: 20,
-                                    },
-                                    padding: {
-                                        top: 0,
-                                        bottom: 15,
-                                    },
-                                },
-                                zoom: {
-                                    pan: {
-                                        enabled: false,
-                                    },
-                                    zoom: {
-                                        wheel: {
-                                            enabled: false,
-                                        },
-                                        pinch: {
-                                            enabled: false,
-                                        },
-                                        mode: 'x',
-                                    },
                                 },
                                 tooltip: {
                                     callbacks: {
                                         label: (context) => {
-                                            const datasetLabel = context.dataset.label || t('datos.temperatura');
-                                            const temperature = context.parsed.y;
-                                            const totalSeconds = Math.floor(context.parsed.x);
-                                
-                                            const hours = Math.floor(totalSeconds / 3600);
-                                            const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-                                
-                                            return [
-                                                `${t('tooltip')}: ${timeFormatted}`,
-                                                `${datasetLabel}: ${temperature}°C`,
-                                            ];
-                                        },
-                                        title: () => '',
-                                    },
-                                },
-                            },
-                            animation: {
-                                duration: isFirstLoad ? 750 : 0
-                            },
-                            transitions: {
-                                zoom: {
-                                    animation: {
-                                        duration: 0
-                                    }
-                                },
-                                active: {
-                                    animation: {
-                                        duration: 0
+                                            const label = context.dataset.label || '';
+                                            const value = context.parsed.y;
+                                            
+                                            if (context.dataset.yAxisID === 'y1') {
+                                                return `${label}: ${value}%`;
+                                            }
+                                            return `${label}: ${value}°C`;
+                                        }
                                     }
                                 }
                             },
@@ -226,7 +196,8 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     position: 'left',
                                     title: {
                                         display: true,
-                                        text: t('ejes.y'),
+                                        text: 'Temperatura (°C)',
+                                        color: '#D9D9D9'
                                     },
                                     beginAtZero: true,
                                     border: {
@@ -235,6 +206,9 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     grid: {
                                         color: '#1F1F1F',
                                         tickColor: '#fff'
+                                    },
+                                    ticks: {
+                                        color: '#D9D9D9'
                                     }
                                 },
                                 y1: {
@@ -243,16 +217,20 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     position: 'right',
                                     title: {
                                         display: true,
-                                        text: 'Nivel de Agua (mm)',
+                                        text: 'Nivel de Agua (%)',
+                                        color: '#4CAF50'
                                     },
                                     beginAtZero: true,
+                                    max: 100,
                                     border: {
-                                        color: '#D9D9D9'
+                                        color: '#4CAF50'
                                     },
                                     grid: {
-                                        color: '#1F1F1F',
-                                        tickColor: '#fff'
+                                        drawOnChartArea: false
                                     },
+                                    ticks: {
+                                        color: '#4CAF50'
+                                    }
                                 },
                                 x: {
                                     type: 'linear',

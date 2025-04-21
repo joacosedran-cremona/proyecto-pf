@@ -8,7 +8,7 @@
     },
     "ejes":
     {
-        "x": "Tiempo (hh:mm:ss)",
+        "x": "Tiempo (hh:mm)",
         "xLinea": "Tiempo (hh:mm)",
         "y": "Temperatura (°C)"
     },

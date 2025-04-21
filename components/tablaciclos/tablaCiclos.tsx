@@ -14,8 +14,9 @@ interface TablaCiclosProps {
   fechaInicio: string;
   fechaFin: string;
   equipo: string;
-  selectedCicloId?: number | null; // nuevo prop
+  selectedCicloId?: number | null;
   onCicloSelect?: (ciclo: Ciclo) => void;
+  onTableClose?: () => void; // Añadir esta prop
 }
 
 const TablaCiclos: React.FC<TablaCiclosProps> = ({ 
@@ -23,12 +24,13 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
   fechaFin, 
   equipo, 
   selectedCicloId,
-  onCicloSelect 
+  onCicloSelect,
+  onTableClose 
 }) => {
   const [ciclos, setCiclos] = useState<Ciclo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+  const [showTable, setShowTable] = useState(true);
   // Inicializar selectedKeys con el ciclo actual si existe
   const [selectedKeys, setSelectedKeys] = useState(
     new Set(selectedCicloId ? [selectedCicloId.toString()] : [])
@@ -45,17 +47,16 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
         const response = await fetch(url);
         const data = await response.json();
         
-        if (!response.ok || !data || data.length === 0) {
-          // Unified error handling
-          setError('No existen datos en el equipo/fecha ingresada');
-          setCiclos([]);
-          // Show toast with unique ID to prevent duplicates
+        if (!response.ok || error || !data || data.length === 0) {
+          if (onTableClose) {
+            onTableClose(); // Llamar a onTableClose cuando no hay datos
+          }
           toast.error('Error al obtener sus ciclos', {
             description: 'No existen datos en el equipo/fecha ingresada',
             position: 'bottom-right',
             id: `no-data-${fechaInicio}-${fechaFin}-${equipo}`, // Unique ID based on parameters
           });
-          return;
+          return null;
         }
         
         setCiclos(data);
@@ -79,52 +80,54 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-[150px]">
+      <div className="flex justify-center items-center h-[150px] max-w-[600px]">
         <Spinner label="Cargando ciclos..." />
       </div>
     );
   }
 
   if (error) {
-    return null; // No mostrar nada ya que el error se muestra en el toast
+    return null;
   }
 
-  return (
-    <Table 
-      aria-label="Tabla de ciclos"
-      selectionMode="single"
-      selectedKeys={selectedKeys}
-      onSelectionChange={(keys) => {
-        const selection = new Set(keys);
-        setSelectedKeys(selection);
-        
-        const selectedId = Array.from(selection)[0];
-        const cicloSeleccionado = ciclos.find(c => c.id_ciclo.toString() === selectedId?.toString());
-        
-        if (cicloSeleccionado && onCicloSelect) {
-          console.log('🎯 Ciclo seleccionado en Tabla:', cicloSeleccionado.id_ciclo);
-          onCicloSelect(cicloSeleccionado);
-        }
-      }}
-      className="w-[600px] bg-black/50 backdrop-blur-sm text-white"
-    >
-      <TableHeader>
-        <TableColumn>ID</TableColumn>
-        <TableColumn>Lote</TableColumn>
-        <TableColumn>Inicio</TableColumn>
-        <TableColumn>Fin</TableColumn>
-      </TableHeader>
-      <TableBody>
-        {ciclos.map((ciclo) => (
-          <TableRow key={ciclo.id_ciclo} className="text-sm hover:bg-gray-700/50 cursor-pointer">
-            <TableCell>{ciclo.id_ciclo}</TableCell>
-            <TableCell>{ciclo.lote}</TableCell>
-            <TableCell>{new Date(ciclo.fecha_inicio).toLocaleDateString('es-ES')}</TableCell>
-            <TableCell>{new Date(ciclo.fecha_fin).toLocaleDateString('es-ES')}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+return (
+    <div className="max-h-[600px] overflow-y-auto overflow-x-hidden">
+      <Table 
+        aria-label="Tabla de ciclos"
+        selectionMode="single"
+        selectedKeys={selectedKeys}
+        onSelectionChange={(keys) => {
+          const selection = new Set(keys);
+          setSelectedKeys(selection);
+          
+          const selectedId = Array.from(selection)[0];
+          const cicloSeleccionado = ciclos.find(c => c.id_ciclo.toString() === selectedId?.toString());
+          
+          if (cicloSeleccionado && onCicloSelect) {
+            console.log('🎯 Ciclo seleccionado en Tabla:', cicloSeleccionado.id_ciclo);
+            onCicloSelect(cicloSeleccionado);
+          }
+        }}
+        className="min-w-[600px] bg-black/50 backdrop-blur-sm text-white"
+      >
+        <TableHeader>
+          <TableColumn>ID</TableColumn>
+          <TableColumn>Lote</TableColumn>
+          <TableColumn>Inicio</TableColumn>
+          <TableColumn>Fin</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {ciclos.map((ciclo) => (
+            <TableRow key={ciclo.id_ciclo} className="text-sm hover:bg-gray-700/50 cursor-pointer">
+              <TableCell>{ciclo.id_ciclo}</TableCell>
+              <TableCell>{ciclo.lote}</TableCell>
+              <TableCell>{new Date(ciclo.fecha_inicio).toLocaleDateString('es-ES')}</TableCell>
+              <TableCell>{new Date(ciclo.fecha_fin).toLocaleDateString('es-ES')}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 
