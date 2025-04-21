@@ -1,9 +1,10 @@
-export interface Paso {
+interface Paso {
     id_historial: number;
-    tiempo: string; // Cambiado a string para manejar el formato ISO
-    temp_Ing?: number | 'N/A' | null;
-    temp_agua?: number | 'N/A' | null;
-    temp_ingreso?: number | 'N/A' | null;
+    tiempo: string;
+    temp_agua: number;
+    temp_prod: number;  // Añadir este campo
+    temp_ingreso?: number;
+    niv_agua: number;
     estado: string;
 }
 
@@ -68,23 +69,27 @@ export const transformData = (
     const tempIngrData: { x: number, y: number }[] = [];
     const tempAguaData: { x: number, y: number }[] = [];
     const tempProdData: { x: number, y: number }[] = [];
+    const nivAguaData: { x: number, y: number }[] = [];
 
     // Procesar datos del historial
     historialOrdenado.forEach(paso => {
         const tiempoRelativo = getTimestamp(paso.tiempo) - tiempoInicial;
         tiempos.push(tiempoRelativo);
-
-        if (paso.temp_Ing !== null && paso.temp_Ing !== 'N/A' && typeof paso.temp_Ing === 'number') {
-            tempIngrData.push({ x: tiempoRelativo, y: paso.temp_Ing });
-        }
+    
         if (paso.temp_agua !== null && paso.temp_agua !== 'N/A' && typeof paso.temp_agua === 'number') {
             tempAguaData.push({ x: tiempoRelativo, y: paso.temp_agua });
         }
-        if (paso.temp_ingreso !== null && paso.temp_ingreso !== 'N/A' && typeof paso.temp_ingreso === 'number') {
-            tempProdData.push({ x: tiempoRelativo, y: paso.temp_ingreso });
+    
+        // Usar temp_prod directamente del historial
+        if (paso.temp_prod !== null && paso.temp_prod !== 'N/A' && typeof paso.temp_prod === 'number') {
+            tempProdData.push({ x: tiempoRelativo, y: paso.temp_prod });
+        }
+    
+        if (paso.niv_agua !== null && typeof paso.niv_agua === 'number') {
+            nivAguaData.push({ x: tiempoRelativo, y: paso.niv_agua });
         }
     });
-
+    
     const chartData = {
         labels: tiempos,
         datasets: [
@@ -108,6 +113,14 @@ export const transformData = (
                 borderColor: 'rgb(75, 192, 75)',
                 fill: false,
                 data: tempProdData
+            },
+            {
+                label: 'Nivel de Agua',
+                backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                borderColor: 'rgb(255, 165, 0)',
+                fill: false,
+                data: nivAguaData,
+                yAxisID: 'y1'  // Asignamos al eje y secundario
             }
         ]
     };
