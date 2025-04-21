@@ -14,7 +14,7 @@
     "error":
     {
         "titulo": "FAULT",
-        "mensaje": "A FAULT HAS BEEN DETECTED IN THE EQUIPMENT"
+        "mensaje": "Suspended equipment"
     },
     "inactividad":
     {

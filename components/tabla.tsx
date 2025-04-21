@@ -1,11 +1,27 @@
+//React
 import React, { useMemo, useState, useEffect } from "react";
-import { createTheme, ThemeProvider, useTheme } from '@mui/material';
+
+//MUI
 import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row } from "material-react-table";
-import { Box, Button } from "@mui/material";
+import { createTheme, ThemeProvider, useTheme } from '@mui/material';
+import { Box, Button, Typography } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+
+//PDF conversor
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
+
+//Idioma
 import { useTranslation } from "react-i18next";
+
+import {
+  MRT_ToggleGlobalFilterButton,
+  MRT_ToggleFiltersButton,
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleDensePaddingButton,
+  MRT_ToggleFullScreenButton,
+} from 'material-react-table';
+
 
 export type Alerta = {
   key: string;
@@ -28,7 +44,7 @@ const Tabla: React.FC = () => {
 
         const response = await fetch(`http://${host}:${port}/alarmas`);
         if (!response.ok) throw new Error("Error en la solicitud");
-        
+
         const apiData = await response.json();
         const convertedData = apiData.map((alarma: any) => ({
           key: alarma.id_alarma.toString(),
@@ -36,7 +52,7 @@ const Tabla: React.FC = () => {
           type: alarma.tipo,
           time: alarma.fecha_registro,
         }));
-        
+
         setData(convertedData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -94,6 +110,30 @@ const Tabla: React.FC = () => {
           },
         },
       },
+      MuiTablePagination: {
+        styleOverrides: {
+          selectLabel: { color: '#ffffff' },
+          selectRoot: { color: '#ffffff' },
+          selectIcon: { color: '#ffffff' },
+          displayedRows: { color: '#ffffff' },
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            color: '#d9d9d9',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            },
+            '&.Mui-selected': {
+              backgroundColor: 'rgba(255, 255, 255, 0.12)',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              }
+            },
+          },
+        },
+      },
     },
   });
 
@@ -105,7 +145,7 @@ const Tabla: React.FC = () => {
     enableColumnResizing: true,
     columnResizeMode: "onChange",
     layoutMode: "grid",
-    
+
     //Head
     muiTableHeadCellProps: {
       sx: {
@@ -131,6 +171,7 @@ const Tabla: React.FC = () => {
     muiTopToolbarProps: {
       sx: {
         backgroundColor: "#131313",
+        position: 'relative',
         '& .MuiInputBase-root': {
           color: '#d9d9d9',
         },
@@ -143,12 +184,12 @@ const Tabla: React.FC = () => {
       },
     },
 
-    
+
     //Body
     muiTableBodyCellProps: {
       sx: {
-        backgroundColor: "#131313", // Celdas con fondo oscuro
-        color: "#d9d9d9", 
+        backgroundColor: "#131313",
+        color: "#d9d9d9",
       },
     },
 
@@ -156,7 +197,7 @@ const Tabla: React.FC = () => {
       sx: {
         backgroundColor: "#131313",
         "&:nth-of-type(odd)": {
-          backgroundColor: "#131313", // Alternancia de fondo
+          backgroundColor: "#131313",
         }
       },
     },
@@ -165,13 +206,11 @@ const Tabla: React.FC = () => {
     //Footer
     muiTableFooterProps: {
       sx : {
-        '& MuiInputLabel-root': {
+        '& .MuiInputLabel-root': {
           color: '#d9d9d9',
-          border: '5px solid #d9d9d9',
         },
-        '& MuiFormLabel-root': {
+        '& .MuiFormLabel-root': {
           color: '#d9d9d9',
-          border: '5px solid #d9d9d9',
         }
       }
     },
@@ -192,13 +231,11 @@ const Tabla: React.FC = () => {
         '& .MuiSvgIcon-root': {
           color: '#d9d9d9',
         },
-        '& MuiInputLabel-root': {
-          color: '#d9d9d9',
-          border: '5px solid #d9d9d9',
+        '& .MuiInputLabel-root': {
+          color: '#d9d9d9 !important',
         },
-        '& MuiFormLabel-root': {
-          color: '#d9d9d9',
-          border: '5px solid #d9d9d9',
+        '& .MuiFormLabel-root': {
+          color: '#d9d9d9 !important',
         }
       },
     },
@@ -207,7 +244,7 @@ const Tabla: React.FC = () => {
     //Pagination
     muiTableProps: {
       sx: {
-        '& .MuiInputLabel-root': { // ✅ Selector correcto con punto
+        '& .MuiInputLabel-root': {
           color: '#d9d9d9 !important',
         },
         '& .MuiSelect-select, & .MuiSelect-icon': {
@@ -226,13 +263,13 @@ const Tabla: React.FC = () => {
 
     muiTableContainerProps: {
       sx: {
-        backgroundColor: "#131313", // Fondo de la tabla
+        backgroundColor: "#131313",
       },
     },
-    
+
     muiSkeletonProps: {
       sx: {
-        backgroundColor: "#131313", // Fondo durante el loading
+        backgroundColor: "#131313",
       },
     },
     muiColumnActionsButtonProps: {
@@ -245,9 +282,21 @@ const Tabla: React.FC = () => {
     },
 
     renderTopToolbarCustomActions: ({ table }) => (
-      <div>
-        <h1 className=" absolute text-white text-3xl flex w-[100%] justify-center items-center">{t('alertas')}</h1>
-        <Box sx={{ display: 'flex', gap: 1, p: 1 }}>
+      <Box sx={{
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr',
+        width: '100%',
+        alignItems: 'center',
+        position: 'relative',
+        gap: 1,
+      }}>
+        {/* Sección izquierda - Botones */}
+        <Box sx={{
+          display: 'flex',
+          gap: 1,
+          gridColumn: 1,
+          justifyContent: 'flex-start'
+        }}>
           <Button
             onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
             startIcon={<FileDownloadIcon />}
@@ -265,7 +314,33 @@ const Tabla: React.FC = () => {
             {t('expvisibles')}
           </Button>
         </Box>
-      </div>
+
+        {/* Sección central - Título */}
+        <Box sx={{
+          gridColumn: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          pointerEvents: 'none',
+          marginLeft: 25,
+        }}>
+          <Typography variant="h4" sx={{
+            color: '#d9d9d9',
+            fontSize: '1.5rem',
+          }}>
+            {t('historial')}
+          </Typography>
+          <Typography variant="subtitle1" sx={{ color: '#d9d9d9' }}>
+            {t('alertas')}
+          </Typography>
+        </Box>
+
+        {/* Sección derecha - Espacio reservado para componentes de la tabla */}
+        <Box sx={{
+          gridColumn: 3,
+          visibility: 'hidden' // Mantiene el espacio reservado
+        }} />
+      </Box>
     ),
   });
 

@@ -9,14 +9,16 @@ interface DatosEquipo {
   niv_agua: number;
   receta: string;
   receta_paso_actual: number;
-  tiempoTranscurrido: string; // Cambiado a string
+  tiempoTranscurrido: string;
 }
 
 interface HistorialItem {
   id_historial: number;
-  tiempo: string; // Cambiado a string
+  tiempo: string;
   temp_agua: number;
-  temp_ingreso: number;
+  temp_prod?: number;  // Asegurarnos que existe esta propiedad
+  temp_ingreso?: number;
+  niv_agua: number;
   estado: string;
 }
 
@@ -29,11 +31,9 @@ export const transformData = (
   datosCocinas: Array<[DatosEquipo, DetallesEquipo]>,
   datosEnfriadores: Array<[DatosEquipo, DetallesEquipo]>
 ) => {
-
   const todosEquipos = [...(datosCocinas || []), ...(datosEnfriadores || [])];
   const equipo = todosEquipos.find(([info]) => info.id === equipoId);
 
-  // Si no hay datos en tiempo real, intentar recuperar del localStorage
   if (!equipo) {
     const cachedData = localStorage.getItem(`equipo-${equipoId}`);
     if (cachedData) {
@@ -48,57 +48,91 @@ export const transformData = (
   const [info, detalles] = equipo;
   const historial = detalles.historial || [];
 
-  // Función para convertir fecha string a timestamp en segundos
   const getTimestamp = (dateStr: string) => {
     const date = new Date(dateStr);
     return Math.floor(date.getTime() / 1000);
   };
 
-  // Obtener el timestamp inicial (primer registro del historial)
   const tiempoInicial = historial.length > 0 ? 
     getTimestamp(historial[0].tiempo) : 
     getTimestamp(new Date().toISOString());
 
-  // Ordenar el historial por tiempo
   const historialOrdenado = [...historial].sort((a, b) => 
     getTimestamp(a.tiempo) - getTimestamp(b.tiempo)
   );
 
-  // Crear arrays para los datos
-  const tiempos: number[] = [];
-  const tempAgua: number[] = [];
-  const tempIngreso: number[] = [];
+  // Crear arrays para los datos con formato x,y
+  const tempAguaData: { x: number, y: number }[] = [];
+  const tempProdData: { x: number, y: number }[] = [];
+  const nivAguaData: { x: number, y: number }[] = [];
 
-  // Agregar datos del historial
+  // Procesar datos del historial
   historialOrdenado.forEach(item => {
-    // Convertir la diferencia de tiempo a segundos relativos
     const tiempoRelativo = getTimestamp(item.tiempo) - tiempoInicial;
-    tiempos.push(tiempoRelativo);
-    tempAgua.push(item.temp_agua);
-    tempIngreso.push(item.temp_ingreso);
+
+    if (typeof item.temp_agua === 'number' && !isNaN(item.temp_agua)) {
+        tempAguaData.push({ x: tiempoRelativo, y: item.temp_agua });
+    }
+    
+    // Procesar temp_prod de manera independiente
+    if (typeof item.temp_prod === 'number' && !isNaN(item.temp_prod)) {
+        tempProdData.push({ x: tiempoRelativo, y: item.temp_prod });
+    }
+    
+    if (typeof item.niv_agua === 'number' && !isNaN(item.niv_agua)) {
+        nivAguaData.push({ x: tiempoRelativo, y: item.niv_agua });
+    }
+  });
+
+  console.log('Datos procesados:', {
+    tempAguaData: tempAguaData.length,
+    tempProdData: tempProdData.length,
+    nivAguaData: nivAguaData.length,
+    primerDato: {
+      agua: tempAguaData[0]?.y,
+      prod: tempProdData[0]?.y,
+      niv: nivAguaData[0]?.y
+    }
   });
 
   const chartData = {
-    labels: tiempos,
     datasets: [
       {
-        label: 'Temperatura de Agua',
+        label: 'Temperatura Agua',
         backgroundColor: 'rgba(54, 162, 235, 0.5)',
         borderColor: 'rgb(54, 162, 235)',
         fill: false,
-        data: tempAgua
+        data: tempAguaData,
+        yAxisID: 'y',
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.4
       },
       {
-        label: 'Temperatura de Ingreso',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        borderColor: 'rgb(255, 99, 132)',
+        label: 'Temperatura Producto',
+        backgroundColor: 'rgba(75, 192, 75, 0.5)',
+        borderColor: 'rgb(75, 192, 75)',
         fill: false,
-        data: tempIngreso
+        data: tempProdData,
+        yAxisID: 'y',
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.4
+      },
+      {
+        label: 'Nivel Agua',
+        backgroundColor: 'rgba(255, 165, 0, 0.5)',
+        borderColor: 'rgb(255, 165, 0)',
+        fill: false,
+        data: nivAguaData,
+        yAxisID: 'y1',
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.4
       }
     ]
   };
 
-  // Guardar los datos en localStorage
   try {
     localStorage.setItem(`equipo-${equipoId}`, JSON.stringify(chartData));
   } catch (error) {
@@ -108,7 +142,6 @@ export const transformData = (
   return chartData;
 };
 
-// Función auxiliar para limpiar datos antiguos
 export const clearStoredData = (equipoId: number) => {
   localStorage.removeItem(`equipo-${equipoId}`);
 };

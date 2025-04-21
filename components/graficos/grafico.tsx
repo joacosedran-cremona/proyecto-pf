@@ -155,25 +155,22 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 tooltip: {
                                     callbacks: {
                                         label: (context) => {
-                                            const datasetLabel = context.dataset.label || t('datos.temperatura');
-                                            const temperature = context.parsed.y;
+                                            const datasetLabel = context.dataset.label || '';
+                                            const value = context.parsed.y;
+                                            const yAxisID = context.dataset.yAxisID;
+                                            
                                             const totalSeconds = Math.floor(context.parsed.x);
-
                                             const hours = Math.floor(totalSeconds / 3600);
                                             const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                            const seconds = totalSeconds % 60;
-                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes
-                                                .toString()
-                                                .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 
                                             return [
                                                 `${t('tooltip')}: ${timeFormatted}`,
-                                                `${datasetLabel}: ${temperature}°C`,
+                                                `${datasetLabel}: ${value}${yAxisID === 'y1' ? ' mm' : '°C'}`
                                             ];
-                                        },
-                                        title: () => '',
-                                    },
-                                },
+                                        }
+                                    }
+                                }
                             },
                             animation: {
                                 duration: isFirstLoad ? 750 : 0
@@ -192,17 +189,42 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                             },
                             scales: {
                                 y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
                                     title: {
                                         display: true,
-                                        text: t('ejes.y'),
-                                    },
-                                    beginAtZero: true,
-                                    border: {
+                                        text: 'Temperatura (°C)',
                                         color: '#D9D9D9'
                                     },
                                     grid: {
                                         color: '#1F1F1F',
                                         tickColor: '#fff'
+                                    },
+                                    ticks: {
+                                        color: '#D9D9D9'
+                                    },
+                                    border: {
+                                        color: '#D9D9D9'
+                                    }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    title: {
+                                        display: true,
+                                        text: 'Nivel de Agua (mm)',
+                                        color: '#D9D9D9'
+                                    },
+                                    grid: {
+                                        drawOnChartArea: false
+                                    },
+                                    ticks: {
+                                        color: '#D9D9D9'
+                                    },
+                                    border: {
+                                        color: '#D9D9D9'
                                     }
                                 },
                                 x: {
@@ -215,9 +237,8 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                             const totalSeconds = Math.floor(Number(value));
                                             const hours = Math.floor(totalSeconds / 3600);
                                             const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                            const seconds = totalSeconds % 60;
 
-                                            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                                            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
                                         }
                                     },
                                     afterBuildTicks: (axis) => {

@@ -128,24 +128,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                 if (ctx) {
                     const config: ChartConfiguration<'line'> = {
                         type: 'line',
-                        data: {
-                            ...chartData,
-                            datasets: [
-                                ...chartData.datasets,
-                                {
-                                    label: 'Nivel de Agua',
-                                    data: lineaActual?.historial?.map(item => ({
-                                        x: new Date(item.tiempo).getTime(),
-                                        y: item.niv_agua
-                                    })) || [],
-                                    borderColor: '#4CAF50', // Color verde para nivel de agua
-                                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                                    yAxisID: 'y1', // Nueva escala Y
-                                    borderWidth: 2,
-                                    pointRadius: 0,
-                                }
-                            ]
-                        },
+                        data: chartData,
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
@@ -187,21 +170,22 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                 tooltip: {
                                     callbacks: {
                                         label: (context) => {
-                                            const datasetLabel = context.dataset.label || t('datos.temperatura');
-                                            const temperature = context.parsed.y;
+                                            const datasetLabel = context.dataset.label || '';
+                                            const value = context.parsed.y;
+                                            const yAxisID = context.dataset.yAxisID;
+                                            
                                             const totalSeconds = Math.floor(context.parsed.x);
-                                
                                             const hours = Math.floor(totalSeconds / 3600);
                                             const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-                                
+                                            const seconds = totalSeconds % 60;
+                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
                                             return [
                                                 `${t('tooltip')}: ${timeFormatted}`,
-                                                `${datasetLabel}: ${temperature}°C`,
+                                                `${datasetLabel}: ${value}${yAxisID === 'y1' ? ' mm' : '°C'}`
                                             ];
-                                        },
-                                        title: () => '',
-                                    },
+                                        }
+                                    }
                                 },
                             },
                             animation: {
@@ -226,15 +210,15 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     position: 'left',
                                     title: {
                                         display: true,
-                                        text: t('ejes.y'),
-                                    },
-                                    beginAtZero: true,
-                                    border: {
+                                        text: 'Temperatura (°C)',
                                         color: '#D9D9D9'
                                     },
                                     grid: {
                                         color: '#1F1F1F',
                                         tickColor: '#fff'
+                                    },
+                                    border: {
+                                        color: '#D9D9D9'  // Color de la línea del eje
                                     }
                                 },
                                 y1: {
@@ -244,15 +228,14 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     title: {
                                         display: true,
                                         text: 'Nivel de Agua (mm)',
-                                    },
-                                    beginAtZero: true,
-                                    border: {
                                         color: '#D9D9D9'
                                     },
                                     grid: {
-                                        color: '#1F1F1F',
-                                        tickColor: '#fff'
+                                        drawOnChartArea: false // Solo mostrar la línea del eje
                                     },
+                                    border: {
+                                        color: '#D9D9D9'  // Color de la línea del eje
+                                    }
                                 },
                                 x: {
                                     type: 'linear',
@@ -264,7 +247,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                             const totalSeconds = Math.floor(Number(value));
                                             const hours = Math.floor(totalSeconds / 3600);
                                             const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                            // Removemos los segundos y solo retornamos horas y minutos
+
                                             return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
                                         }
                                     },
@@ -286,26 +269,6 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     grace: '5%',
                                 }
                             },
-                            interaction: {
-                                mode: 'nearest',
-                                axis: 'x',
-                                intersect: false
-                            },
-                            plugins: {
-                                tooltip: {
-                                    callbacks: {
-                                        label: (context) => {
-                                            const datasetLabel = context.dataset.label || '';
-                                            const value = context.parsed.y;
-                                            
-                                            if (context.dataset.yAxisID === 'y1') {
-                                                return `${datasetLabel}: ${value}%`;
-                                            }
-                                            return `${datasetLabel}: ${value}°C`;
-                                        }
-                                    }
-                                }
-                            }
                         },
                         plugins: [plugin],
                     };
@@ -397,11 +360,14 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
       
             {/* Derecha: Temperaturas */}
             <div className="text-right text-sm">
-              <div className={`${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'} font-semibold`}>
+              <div className={`text-[#36A2EB] font-semibold`}>
                 TEMP. AGUA: <span className="text-white">{equipo.temp_agua.toFixed(1)}°C</span>
               </div>
-              <div className={`${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'} font-semibold`}>
+              <div className={`text-[#4BC04B] font-semibold`}>
                 TEMP. PROD: <span className="text-white">{equipo.temp_prod.toFixed(1)}°C</span>
+              </div>
+              <div className={`text-[#FFA500] font-semibold`}>
+                NIVEL AGUA: <span className="text-white">{equipo.niv_agua}mm</span>
               </div>
             </div>
           </div>
