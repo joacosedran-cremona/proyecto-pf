@@ -26,7 +26,7 @@ Chart.register(zoomPlugin);
 interface InfoEquipo {
     tipo: 'COCINA' | 'ENFRIADOR';
     id: number;
-    estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO' | 'PRE CALENTAMIENTO' | 'PRE ENFRIAMIENTO';
+    estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO' | 'PRE OPERATIVO' | 'PRE OPERATIVO';
     temp_agua: number;
     temp_prod: number;
     temp_ingreso: number;
@@ -210,7 +210,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     position: 'left',
                                     title: {
                                         display: true,
-                                        text: 'Temperatura (°C)',
+                                        text: t('ejes.y'),
                                         color: '#D9D9D9'
                                     },
                                     grid: {
@@ -227,7 +227,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     position: 'right',
                                     title: {
                                         display: true,
-                                        text: 'Nivel de Agua (mm)',
+                                        text: t('ejes.y1'),
                                         color: '#D9D9D9'
                                     },
                                     grid: {
@@ -350,10 +350,10 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                   <span className="font-semibold"></span> {equipo.receta}
                 </div>
                 <div>
-                  <span className="font-semibold">ESTADO:</span> {equipo.estado}
+                  <span className="font-semibold">{t('estado')}</span> {equipo.estado}
                 </div>
                 <div>
-                  <span className="font-semibold">TIEMPO:</span> {equipo.tiempoTranscurrido}
+                  <span className="font-semibold">{t('tiempo')}</span> {equipo.tiempoTranscurrido}
                 </div>
               </div>
             </div>
@@ -361,13 +361,13 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
             {/* Derecha: Temperaturas */}
             <div className="text-right text-sm">
               <div className={`text-[#36A2EB] font-semibold`}>
-                TEMP. AGUA: <span className="text-white">{equipo.temp_agua.toFixed(1)}°C</span>
+                {t('datosMonitoreo.tempAgua')} <span className="text-white">{equipo.temp_agua.toFixed(1)}°C</span>
               </div>
               <div className={`text-[#4BC04B] font-semibold`}>
-                TEMP. PROD: <span className="text-white">{equipo.temp_prod.toFixed(1)}°C</span>
+                {t('datosMonitoreo.tempProd')} <span className="text-white">{equipo.temp_prod.toFixed(1)}°C</span>
               </div>
               <div className={`text-[#FFA500] font-semibold`}>
-                NIVEL AGUA: <span className="text-white">{equipo.niv_agua}mm</span>
+              {t('datosMonitoreo.nivelAgua')} <span className="text-white">{equipo.niv_agua}mm</span>
               </div>
             </div>
           </div>

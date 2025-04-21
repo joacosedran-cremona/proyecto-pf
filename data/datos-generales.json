@@ -112,7 +112,7 @@
             {
                 "tipo": "COCINA",
                 "id": 4,
-                "estado": "PRE CALENTAMIENTO",
+                "estado": "PRE OPERATIVO",
                 "temp_agua": 2,
                 "temp_prod": 1,
                 "temp_ingreso": 4,
@@ -147,35 +147,35 @@
                         "tiempo": "2025-04-11 10:49:54",
                         "temp_agua": 1,
                         "temp_ingreso": 1,
-                        "estado": "PRE CALENTAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 2,
                         "tiempo": "2025-04-11 10:50:04",
                         "temp_agua": 1,
                         "temp_ingreso": 1,
-                        "estado": "PRE CALENTAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 3,
                         "tiempo": "2025-04-11 10:50:14",
                         "temp_agua": 1,
                         "temp_ingreso": 1,
-                        "estado": "PRE CALENTAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 4,
                         "tiempo": "2025-04-11 10:50:24",
                         "temp_agua": 1,
                         "temp_ingreso": 1,
-                        "estado": "PRE CALENTAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 5,
                         "tiempo": "2025-04-11 10:50:35",
                         "temp_agua": 1,
                         "temp_ingreso": 1,
-                        "estado": "PRE CALENTAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     }
                 ]
             }
@@ -294,7 +294,7 @@
             {
                 "tipo": "ENFRIADOR",
                 "id": 8,
-                "estado": "PRE ENFRIAMIENTO",
+                "estado": "PRE OPERATIVO",
                 "temp_agua": 1,
                 "temp_prod": 1,
                 "temp_ingreso": 2,
@@ -329,35 +329,35 @@
                         "tiempo": "2025-04-11 10:48:52",
                         "temp_agua": 1,
                         "temp_ingreso": 2,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 2,
                         "tiempo": "2025-04-11 10:49:02",
                         "temp_agua": 1,
                         "temp_ingreso": 2,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 3,
                         "tiempo": "2025-04-11 10:49:12",
                         "temp_agua": 1,
                         "temp_ingreso": 2,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 4,
                         "tiempo": "2025-04-11 10:49:23",
                         "temp_agua": 1,
                         "temp_ingreso": 2,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 5,
                         "tiempo": "2025-04-11 10:49:33",
                         "temp_agua": 1,
                         "temp_ingreso": 2,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     }
                 ]
             }
@@ -366,7 +366,7 @@
             {
                 "tipo": "ENFRIADOR",
                 "id": 9,
-                "estado": "PRE ENFRIAMIENTO",
+                "estado": "PRE OPERATIVO",
                 "temp_agua": 1,
                 "temp_prod": 1,
                 "temp_ingreso": 3,
@@ -401,35 +401,35 @@
                         "tiempo": "2025-04-11 10:48:52",
                         "temp_agua": 1,
                         "temp_ingreso": 3,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 2,
                         "tiempo": "2025-04-11 10:49:02",
                         "temp_agua": 1,
                         "temp_ingreso": 3,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 3,
                         "tiempo": "2025-04-11 10:49:12",
                         "temp_agua": 1,
                         "temp_ingreso": 3,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 4,
                         "tiempo": "2025-04-11 10:49:23",
                         "temp_agua": 1,
                         "temp_ingreso": 3,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     },
                     {
                         "id_historial": 5,
                         "tiempo": "2025-04-11 10:49:33",
                         "temp_agua": 1,
                         "temp_ingreso": 3,
-                        "estado": "PRE ENFRIAMIENTO"
+                        "estado": "PRE OPERATIVO"
                     }
                 ]
             }

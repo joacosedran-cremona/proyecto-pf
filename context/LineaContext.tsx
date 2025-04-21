@@ -6,7 +6,7 @@ import { useWebSocketContext } from "@/context/WebSocketContext";
 interface InfoEquipo {
   tipo: 'COCINA' | 'ENFRIADOR';
   id: number;
-  estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO' | 'PRE CALENTAMIENTO' | 'PRE ENFRIAMIENTO';
+  estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO' | 'PRE OPERATIVO' | 'PRE OPERATIVO';
   temp_agua: number;
   temp_prod: number;
   temp_ingreso: number;

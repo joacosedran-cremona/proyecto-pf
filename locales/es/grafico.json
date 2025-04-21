@@ -6,11 +6,18 @@
         "tempIng": "Temperatura del Producto",
         "temperatura": "Temperatura"
     },
+    "datosMonitoreo":
+    {
+        "tempAgua": "TEMP. AGUA:",
+        "tempProd": "TEMP. PROD:",
+        "nivelAgua": "NIVEL AGUA:"
+    },
     "ejes":
     {
         "x": "Tiempo (hh:mm)",
         "xLinea": "Tiempo (hh:mm)",
-        "y": "Temperatura (°C)"
+        "y": "Temperatura (°C)",
+        "y1": "Nivel de agua (mm)"
     },
     "error":
     {
@@ -33,6 +40,8 @@
         "enfriador": "Enfriador",
         "desconocido": "Equipo desconocido"
     },
+    "estado": "ESTADO:",
+    "tiempo": "TIEMPO:",
     "tooltip": "Tiempo Transcurrido",
     "tituloGrafico": "Temperaturas en tiempo real",
     "reiniciarZoom": "Reiniciar Zoom",

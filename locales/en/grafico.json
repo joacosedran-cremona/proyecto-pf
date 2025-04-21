@@ -6,10 +6,18 @@
         "tempIng": "Product Temperature",
         "temperatura": "Temperature"
     },
+    "datosMonitoreo":
+    {
+        "tempAgua": "WATER TEMP:",
+        "tempProd": "PROD. TEMP:",
+        "nivelAgua": "WATER LEVEL:"
+    },
     "ejes":
     {
         "x": "Time (hh:mm)",
-        "y": "Temperature (°C)"
+        "xLinea": "Time (hh:mm)",
+        "y": "Temperature (°C)",
+        "y1": "Water level (mm)"
     },
     "error":
     {
@@ -32,6 +40,8 @@
         "enfriador": "Chiller",
         "desconocido": "Unknown Equipment"
     },
+    "estado": "STATE:",
+    "tiempo": "TIME:",
     "tooltip": "Elapsed Time",
     "tituloGrafico": "Real-Time Temperatures",
     "reiniciarZoom": "Reset Zoom",

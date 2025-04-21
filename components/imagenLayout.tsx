@@ -93,7 +93,7 @@ const sectionConfig = {
 function getEstadoColor(estado: string): string {
   const estadoUpper = estado.toUpperCase();
   if (estadoUpper === "FALLA") return "#C13D";
-  if (["OPERATIVO", "PRE CALENTAMIENTO", "PRE ENFRIAMIENTO"].includes(estadoUpper)) return "#9b9D";
+  if (["OPERATIVO", "PRE OPERATIVO", "PRE OPERATIVO"].includes(estadoUpper)) return "#9b9D";
   if (estadoUpper === "PAUSA") return "#BB8D";
   if (estadoUpper === "FINALIZADO") return "#9bbD";
   if (estadoUpper === "INACTIVO") return "#666D";
@@ -244,11 +244,10 @@ export function ImagenLayout() {
                         {section.name}
                       </p>
                       <p
-                        className="font-extrabold uppercase"
+                        className="font-extrabold uppercase text-center w-full"
                         style={{
                           fontSize: 'calc(0.4vw + 0.5vh)',
                           textShadow: '1px 1px 2px black',
-                          marginRight: '3px',
                         }}
                       >
                         {equipo.estado}

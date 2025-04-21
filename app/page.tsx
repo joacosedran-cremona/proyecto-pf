@@ -9,7 +9,7 @@ export default function Home() {
     <section className="flex flex-col w-[100%] items-center justify-center gap-[20px] bg-black rounded-md p-[20px]">
       <div>
         <h1
-          className="flex align-center justify-center w-[100%] text-4xl text-white"
+          className="flex align-center justify-center w-[100%] text-4xl text-white font-semibold"
         >
           {t('titulo')}
         </h1>
