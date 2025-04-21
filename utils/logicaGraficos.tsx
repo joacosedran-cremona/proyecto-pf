@@ -99,8 +99,8 @@ export const transformData = (
     datasets: [
       {
         label: 'Temperatura Agua',
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgba(75, 192, 75, 0.5)',
+        borderColor: 'rgb(75, 192, 75)',
         fill: false,
         data: tempAguaData,
         yAxisID: 'y',
@@ -110,8 +110,8 @@ export const transformData = (
       },
       {
         label: 'Temperatura Producto',
-        backgroundColor: 'rgba(75, 192, 75, 0.5)',
-        borderColor: 'rgb(75, 192, 75)',
+        backgroundColor: 'rgba(255, 165, 0, 0.5)',
+        borderColor: 'rgb(255, 165, 0)',
         fill: false,
         data: tempProdData,
         yAxisID: 'y',
@@ -121,8 +121,8 @@ export const transformData = (
       },
       {
         label: 'Nivel Agua',
-        backgroundColor: 'rgba(255, 165, 0, 0.5)',
-        borderColor: 'rgb(255, 165, 0)',
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: 'rgb(54, 162, 235)',
         fill: false,
         data: nivAguaData,
         yAxisID: 'y1',
