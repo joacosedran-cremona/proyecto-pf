@@ -246,7 +246,7 @@ const Tabla: React.FC = () => {
 
     renderTopToolbarCustomActions: ({ table }) => (
       <div>
-        <h1 className="text-white text-3xl flex w-[100%] justify-center items-center">{t('alertas')}</h1>
+        <h1 className=" absolute text-white text-3xl flex w-[100%] justify-center items-center">{t('alertas')}</h1>
         <Box sx={{ display: 'flex', gap: 1, p: 1 }}>
           <Button
             onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
