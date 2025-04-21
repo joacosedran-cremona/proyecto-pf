@@ -14,15 +14,6 @@ import autoTable from "jspdf-autotable";
 //Idioma
 import { useTranslation } from "react-i18next";
 
-import {
-  MRT_ToggleGlobalFilterButton,
-  MRT_ToggleFiltersButton,
-  MRT_ShowHideColumnsButton,
-  MRT_ToggleDensePaddingButton,
-  MRT_ToggleFullScreenButton,
-} from 'material-react-table';
-
-
 export type Alerta = {
   key: string;
   description: string;
@@ -146,7 +137,7 @@ const Tabla: React.FC = () => {
     columnResizeMode: "onChange",
     layoutMode: "grid",
     initialState: {
-      density: 'comfortable'
+      density: 'spacious'
     },
 
     //Head
