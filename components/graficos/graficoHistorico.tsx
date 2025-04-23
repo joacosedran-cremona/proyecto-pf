@@ -92,6 +92,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
   const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
   const [showTable, setShowTable] = useState(showTableOnLoad);
   const [internalSelectedCicloId, setInternalSelectedCicloId] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation('grafico');
 
   useEffect(() => {
@@ -112,9 +113,12 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       setError(null);
       try {
+        setIsLoading(true);
         const equipmentName = getEquipmentName(contextType, id);
         const host = process.env.NEXT_PUBLIC_WS_HOST || '192.168.0.61';
         const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
@@ -138,6 +142,10 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
         }
   
         setData(jsonData);
+
+        if (isMounted) { // Solo actualiza si el componente está montado
+          setData(jsonData);
+        }
   
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -146,12 +154,17 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
         if (onTableClose) {
           onTableClose();
         }
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
     };
-  
     fetchData();
+
+    return () => {
+      isMounted = false; // Cancela operaciones pendientes
+      setData(null); // Resetear estado crítico
+    };
   }, [contextType, id, externalSelectedCicloId]); 
-  
 
   useEffect(() => {
     if (!data || !chartRef.current) return;
@@ -430,7 +443,11 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
       </div>
   
       {/* Info del ciclo */}
-      {data && (
+      {isLoading ? (
+        <div className="flex justify-center items-center h-full">
+          <Spinner />
+        </div>
+      ) : data && data.general ? (
         <div className="mb-[5px] ml-[5px]">
           <div className="flex items-center gap-[8px] pdf-info-section">
             <div className="text-white">
@@ -487,13 +504,15 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
               </div>
             </div>
             <div className="flex-1 flex justify-center ml-[-200px]">
-              <p className="text-white text-lg font-semibold">
-                <strong>{t('graficoHistorico.ciclo')}</strong> {data.general.id_ciclo}
-              </p>
+              {data?.general?.id_ciclo && (
+                <p className="text-white text-lg font-semibold">
+                  <strong>{t('graficoHistorico.ciclo')}</strong> {data.general.id_ciclo}
+                </p>
+              )}
             </div>
           </div>
         </div>
-      )}
+        ) : null}
   
       {/* Gráfico y Tabla */}
       <div className="relative w-[100%] h-[calc(100%)]">
