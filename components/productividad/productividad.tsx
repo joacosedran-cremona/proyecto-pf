@@ -85,6 +85,7 @@ const Productividad = () => {
 
         const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
         const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+        console.log('Consultando API con fechas:', formattedStartDate, formattedEndDate);
 
         const url = `http://${host}:${port}/historico-productividad/${dato}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`;
         

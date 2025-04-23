@@ -19,42 +19,49 @@ interface FiltroPeriodoProps {
 }
 
 const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
-  // Inicializar con fechas por defecto
-  const today = new Date().toISOString().split('T')[0];
-  const lastWeek = new Date();
-  lastWeek.setDate(lastWeek.getDate() - 7);
-  const lastWeekFormatted = lastWeek.toISOString().split('T')[0];
-
-  const [startDate, setStartDate] = useState<string | null>(lastWeekFormatted);
-  const [endDate, setEndDate] = useState<string | null>(today);
-  const [selectedLinea, setSelectedLinea] = useState<number>(0);
-  const [selectedEquipo, setSelectedEquipo] = useState<number>(30);
-  const [datoEnviado, setDatoEnviado] = useState<number>(0);
-  const { t } = useTranslation('productividad');
-
-  // Agregar useEffect para la carga inicial
-  useEffect(() => {
-    // Ejecutar handleApply con los valores iniciales
-    handleApply();
-  }, []); // Solo se ejecuta al montar el componente
-
-  useEffect(() => {
-      // Calcula el datoEnviado basado en las condiciones
-      let dato = 0;
-      if (selectedLinea === 0) {
-          dato = 0;
-      } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo === 30) {
-          dato = selectedLinea;
-      } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo >= 1 && selectedEquipo <= 14) {
-          dato = selectedEquipo;
-      }
-      setDatoEnviado(dato);
-  }, [selectedLinea, selectedEquipo]);
-
-  const handleDateChange = (start: string | null, end: string | null) => {
+    // Inicializar con fechas por defecto
+    const today = new Date().toISOString().split('T')[0];
+    const lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    const lastWeekFormatted = lastWeek.toISOString().split('T')[0];
+  
+    const [startDate, setStartDate] = useState<string | null>(lastWeekFormatted);
+    const [endDate, setEndDate] = useState<string | null>(today);
+    const [selectedLinea, setSelectedLinea] = useState<number>(0);
+    const [selectedEquipo, setSelectedEquipo] = useState<number>(30);
+    const [datoEnviado, setDatoEnviado] = useState<number>(0);
+    const { t } = useTranslation('productividad');
+  
+    // Ejecutar una sola vez al montar el componente
+    useEffect(() => {
+      console.log('Aplicando filtros iniciales con fechas:', lastWeekFormatted, today);
+      onApplyFilters({
+        startDate: lastWeekFormatted,
+        endDate: today,
+        lineaId: selectedLinea,
+        equipoId: selectedEquipo,
+        dato_enviado: 0
+      });
+    }, []); 
+  
+    useEffect(() => {
+        // Calcula el datoEnviado basado en las condiciones
+        let dato = 0;
+        if (selectedLinea === 0) {
+            dato = 0;
+        } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo === 30) {
+            dato = selectedLinea;
+        } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo >= 1 && selectedEquipo <= 14) {
+            dato = selectedEquipo;
+        }
+        setDatoEnviado(dato);
+    }, [selectedLinea, selectedEquipo]);
+  
+    const handleDateChange = (start: string | null, end: string | null) => {
+      console.log("Nuevas fechas seleccionadas:", start, end);
       setStartDate(start);
       setEndDate(end);
-  };
+    };
 
   const handleLineaChange = (value: number) => {
       setSelectedLinea(value);
@@ -68,16 +75,11 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
   };
 
   const handleApply = () => {
-    if (!startDate || !endDate) return; // Validación adicional
+    if (!startDate || !endDate) return; 
+    
+    console.log('Aplicando filtros con fechas:', startDate, endDate);
     
     onApplyFilters({
-        startDate,
-        endDate,
-        lineaId: selectedLinea,
-        equipoId: selectedEquipo,
-        dato_enviado: datoEnviado // Asegurarse de que este valor se envía
-    });
-    console.log('Dato enviado:', {
         startDate,
         endDate,
         lineaId: selectedLinea,
@@ -104,20 +106,21 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
       </div>
 
           <div className="flex flex-col w-[100%] h-4/5 gap-[10px]">
-              <DatePicker 
-                  selectClasses="h-1/4" 
-                  onDateChange={handleDateChange}
-                  defaultStartDate={lastWeekFormatted}
-                  defaultEndDate={today}
-              />
-              <ButtonAplicar 
-                  selectClasses="h-1/4"
-                  startDate={startDate}
-                  endDate={endDate}
-                  lineaId={selectedLinea}
-                  equipoId={selectedEquipo}
-                  onApplyFilters={handleApply}
-              />
+                <DatePicker 
+                    selectClasses="h-1/4" 
+                    onDateChange={handleDateChange}
+                    defaultStartDate={lastWeekFormatted}
+                    defaultEndDate={today}
+                />
+                <ButtonAplicar 
+                    selectClasses="h-1/4"
+                    startDate={startDate} // Importante: Pasar las fechas actuales
+                    endDate={endDate}
+                    lineaId={selectedLinea}
+                    equipoId={selectedEquipo}
+                    dato_enviado={datoEnviado}
+                    onApplyFilters={handleApply}
+                />
               <ButtonPDF 
                   selectClasses="h-1/4" 
                   lineaId={selectedLinea}

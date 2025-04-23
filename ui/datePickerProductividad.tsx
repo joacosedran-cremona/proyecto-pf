@@ -43,23 +43,25 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   const handleDateChange = (range: { start: any; end: any }) => {
     try {
-      const startDate = convertToDate(range?.start);
-      const endDate = convertToDate(range?.end);
+      const startDateObj = convertToDate(range?.start);
+      const endDateObj = convertToDate(range?.end);
 
-      if (startDate && isNaN(startDate.getTime())) {
+      if (startDateObj && isNaN(startDateObj.getTime())) {
         console.error('Invalid start date');
         return;
       }
 
-      if (endDate && isNaN(endDate.getTime())) {
+      if (endDateObj && isNaN(endDateObj.getTime())) {
         console.error('Invalid end date');
         return;
       }
 
-      setDateRange({ startDate, endDate });
+      // Update local state instead of using undefined setDateRange
+      setStartDate(formatToYYYYMMDD(startDateObj));
+      setEndDate(formatToYYYYMMDD(endDateObj));
 
-      const formattedStart = formatToYYYYMMDD(startDate);
-      const formattedEnd = formatToYYYYMMDD(endDate);
+      const formattedStart = formatToYYYYMMDD(startDateObj);
+      const formattedEnd = formatToYYYYMMDD(endDateObj);
 
       if (onDateChange) {
         onDateChange(formattedStart, formattedEnd);

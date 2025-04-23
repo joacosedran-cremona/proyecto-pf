@@ -22,8 +22,8 @@
         "titulo": "IO Sector",
         "bomba": "Recirculation Pump",
         "entradaAgua": "Water Inlet",
-        "filtroSuccion": "Water Suction Filter",
-        "valvulaAmoniaco": "Ammonia Valve",
+        "filtroSuccion": "Water Filter Valve",
+        "valvulaAmoniaco": "Cooling Exchanger",
         "vaporSerp": "Coil Steam",
         "vaporVivo": "Live Steam",
         "vaporLim":"Cleaning Live Steam"

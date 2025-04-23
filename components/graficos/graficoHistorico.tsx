@@ -17,19 +17,30 @@ const equipmentMapping: Record<string, string> = {
   'C4': 'Cocina 4-L2',
   'C5': 'Cocina 5-L2',
   'C6': 'Cocina 6-L2',
-  'E7': 'Enfriador 1-L1',
-  'E8': 'Enfriador 2-L1',
-  'E9': 'Enfriador 3-L1',
-  'E10': 'Enfriador 4-L1',
-  'E11': 'Enfriador 5-L2',
-  'E12': 'Enfriador 6-L2',
-  'E13': 'Enfriador 7-L2',
-  'E14': 'Enfriador 8-L2'
+  'E1': 'Enfriador 1-L1',
+  'E2': 'Enfriador 2-L1',
+  'E3': 'Enfriador 3-L1',
+  'E4': 'Enfriador 4-L1',
+  'E5': 'Enfriador 5-L2',
+  'E6': 'Enfriador 6-L2',
+  'E7': 'Enfriador 7-L2',
+  'E8': 'Enfriador 8-L2'
 };
 
 const getEquipmentName = (type: string, id: number): string => {
-  const key = `${type === 'cocinas' ? 'C' : 'E'}${id}`;
-  return equipmentMapping[key] || '';
+  // Para enfriadores, necesitamos convertir el ID (7-14) a número de enfriador (1-8)
+  const adjustedId = type === 'enfriadores' ? id - 6 : id;
+  
+  // Determinar la línea
+  let linea = "L1";
+  if ((type === "cocinas" && id > 3) || 
+      (type === "enfriadores" && adjustedId > 4)) {
+    linea = "L2";
+  }
+  
+  // Construir el nombre del equipo directamente sin usar el mapeo
+  const equipmentType = type === 'cocinas' ? "Cocina" : "Enfriador";
+  return `${equipmentType} ${adjustedId}-${linea}`;
 };
 
 interface GraficoProps {
@@ -115,10 +126,18 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
   useEffect(() => {
     let isMounted = true;
 
+    // En graficoHistorico.tsx, añadir verificación antes de hacer la solicitud
     const fetchData = async () => {
       setError(null);
       try {
         setIsLoading(true);
+        
+        // Si no hay ciclo seleccionado, no hacer la petición
+        if (externalSelectedCicloId === null) {
+          setIsLoading(false);
+          return;
+        }
+        
         const equipmentName = getEquipmentName(contextType, id);
         const host = process.env.NEXT_PUBLIC_WS_HOST || '192.168.0.61';
         const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';

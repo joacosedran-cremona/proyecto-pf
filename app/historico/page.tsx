@@ -10,6 +10,20 @@ import BotonPDF from "@/components/botones/botonPDF";
 import BotonAplicar from "@/components/botones/botonAplicar";
 import { useTranslation } from 'react-i18next';
 
+function getEquipmentDisplayName(id: number, type: "cocina" | "enfriador") {
+  // Determinar el sufijo L1/L2 correctamente
+  let linea = "L1";
+  if ((type === "cocina" && id > 3) || 
+      (type === "enfriador" && id > 10)) {
+    linea = "L2";
+  }
+  
+  // Ajustar el número de enfriador (1-8) cuando el ID es 7-14
+  const equipmentNumber = type === "enfriador" ? id - 6 : id;
+  
+  return `${type === "cocina" ? "Cocina" : "Enfriador"} ${equipmentNumber}-${linea}`;
+}
+
 export default function Historico() {
   // Estados iniciales con valores por defecto
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -18,7 +32,7 @@ export default function Historico() {
   const [graphData, setGraphData] = useState<any>(null);
   const [tempSelectedValue, setTempSelectedValue] = useState(1);
   const [showGraphic, setShowGraphic] = useState(true);
-  const [selectedCicloId, setSelectedCicloId] = useState<number>(1);
+  const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
   const { t } = useTranslation('grafico');
   const [tempDateRange, setTempDateRange] = useState<{
     startDate: string | null;
@@ -48,9 +62,18 @@ export default function Historico() {
   const handleApplyClick = async () => {
     try {
       const equipmentType = tempSelectedValue <= 6 ? "cocina" : "enfriador";
-      const equipoName = equipmentType === "cocina" 
-        ? `Cocina ${tempSelectedValue}-L1` 
-        : `Enfriador ${tempSelectedValue}-L1`;
+      
+      // Determinar el sufijo L1/L2 correctamente
+      let linea = "L1";
+      if ((equipmentType === "cocina" && tempSelectedValue > 3) || 
+          (equipmentType === "enfriador" && tempSelectedValue > 10)) {
+        linea = "L2";
+      }
+      
+      // Ajustar el número de enfriador (1-8) cuando el ID es 7-14
+      const equipmentNumber = equipmentType === "enfriador" ? tempSelectedValue - 6 : tempSelectedValue;
+      
+      const equipoName = `${equipmentType === "cocina" ? "Cocina" : "Enfriador"} ${equipmentNumber}-${linea}`;
       
       // Obtener el último ciclo del equipo seleccionado
       const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
@@ -67,12 +90,15 @@ export default function Historico() {
             ciclo.id_ciclo > max.id_ciclo ? ciclo : max
           );
           setSelectedCicloId(lastCiclo.id_ciclo);
+          setSelectedId(tempSelectedValue);
+          setSelectedType(equipmentType);
+          setShowGraphic(false);
+        } else {
+          // No se encontraron ciclos
+          console.log("No se encontraron ciclos para el equipo seleccionado");
+          // Opcional: mostrar una notificación o mensaje al usuario
         }
       }
-      
-      setSelectedId(tempSelectedValue);
-      setSelectedType(equipmentType);
-      setShowGraphic(false);
       
     } catch (error) {
       console.error("❌ Error al procesar los datos:", error);
@@ -127,12 +153,12 @@ export default function Historico() {
         <div className="flex gap-[10px] ml-[10px]">
           <BotonPDF 
               selectClasses="bg-red-700/50 hover:bg-red-800 min-h-[40px]"
-              equipo={selectedType === "cocina" ? `Cocina ${selectedId}-L1` : `Enfriador ${selectedId}-L1`}
+              equipo={getEquipmentDisplayName(selectedId, selectedType)}
               cicloId={selectedCicloId}
           />
           <BotonExcel 
             selectClasses="bg-green-700 hover:bg-green-800 min-h-[40px]"
-            equipo={selectedType === "cocina" ? `Cocina ${selectedId}-L1` : `Enfriador ${selectedId}-L1`}
+            equipo={getEquipmentDisplayName(selectedId, selectedType)}
             cicloId={selectedCicloId}
           />
         </div>

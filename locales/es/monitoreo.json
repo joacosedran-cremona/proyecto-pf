@@ -22,9 +22,9 @@
         "titulo": "Sector IO",
         "bomba": "Bomba Recirculacion",
         "entradaAgua": "Entrada Agua",
-        "filtroSuccion": "Filtro Succion Agua",
+        "filtroSuccion": "Válvula Filtro Agua",
 
-        "valvulaAmoniaco": "Valvula Amoniaco",
+        "valvulaAmoniaco": "Intercambiadora de Frío",
         "vaporSerp": "Vapor Serpentina",
         "vaporVivo": "Vapor Vivo",
         "vaporLim":"Vapor Vivo Limpieza"
