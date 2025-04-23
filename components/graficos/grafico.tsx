@@ -305,11 +305,6 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                     boxHeight: 8, // Altura del cuadrado de color
                                     boxPadding: 4, // Espacio entre el cuadrado y el texto
                                     usePointStyle: false,
-                                    z: 1000
-                                },
-                                endPointLabels: {
-                                    position: 'top',
-                                    z: 99999 // Asegurar que las etiquetas estén por encima
                                 },
                             },
                             animation: {

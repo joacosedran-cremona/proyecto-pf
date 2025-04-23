@@ -1,7 +1,7 @@
 "use client"
 
 import { useLinea } from "@/context/LineaContext";
-import Grafico from "@/components/graficos/graficoMonitoreo";
+import GraficoMonitoreo from "@/components/graficos/graficoMonitoreo";
 import Selector from "@/components/selectores/selectorLineas";
 import { useTranslation } from 'react-i18next';
 
@@ -27,13 +27,13 @@ const Monitoreo = () => {
 
             <div className="flex flex-row gap-[20px] h-1/2 w-[100%]">
                 {linea.cocinas.map((id) => (
-                    <Grafico key={`equipo-${id}`} id={id} />
+                    <GraficoMonitoreo key={`equipo-${id}`} id={id} />
                 ))}
             </div>
                 
             <div className="flex flex-row gap-[20px] h-1/2 w-[100%]">
                 {linea.enfriadores.map((id) => (
-                    <Grafico key={`equipo-${id}`} id={id} />
+                    <GraficoMonitoreo key={`equipo-${id}`} id={id} />
                 ))}
             </div>
         </section>

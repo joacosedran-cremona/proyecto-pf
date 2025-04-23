@@ -75,7 +75,7 @@ interface HistoricoData {
   };
 }
 
-const Grafico: React.FC<GraficoProps> = ({ 
+const GraficoHistorico: React.FC<GraficoProps> = ({ 
   contextType, 
   id, 
   startDate, 
@@ -529,4 +529,4 @@ const Grafico: React.FC<GraficoProps> = ({
     </div>
   );
 }
-export default Grafico;
+export default GraficoHistorico;

@@ -16,6 +16,7 @@ const Selector: React.FC<SelectorProps> = ({
     selectClasses,
 }) => {
     const { t } = useTranslation('selectores');
+    const [internalValue, setInternalValue] = React.useState<number>(value);
 
     const itemsList = [
         { id: 1, shortName: "C1", name: "Cocina 1 - L1" },
@@ -34,14 +35,27 @@ const Selector: React.FC<SelectorProps> = ({
         { id: 14, shortName: "E8", name: "Enfriador 8 - L2" }
     ];
 
+    React.useEffect(() => {
+        setInternalValue(value);
+    }, [value]);
+
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = Number(e.target.value);
-        onChange(selectedValue);
+        
+        // Validación para prevenir desselección
+        if (!isNaN(selectedValue)) {
+            setInternalValue(selectedValue);
+            onChange(selectedValue);
+        } else {
+            // Resetear al valor anterior si se intenta desseleccionar
+            setInternalValue(value);
+        }
     };
 
     return (
         <Select
             radius="lg"
+            disallowEmptySelection
             selectedKeys={[value.toString()]}
             onChange={handleChange}
             aria-label="Seleccionar equipo"
@@ -49,10 +63,8 @@ const Selector: React.FC<SelectorProps> = ({
             classNames={{
                 trigger: "bg-[#27272a] text-white h-[50px] rounded-lg",
                 value: "text-white",
-                content: "bg-black text-white rounded-lg",
                 listbox: "bg-black text-white rounded-lg",
                 base: "rounded-lg",
-                popover: "rounded-lg",
             }}
             renderValue={(items) => {
                 const selected = itemsList.find(i => i.id === Number(items[0]?.key));

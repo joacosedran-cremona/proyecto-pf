@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Grafico from "@/components/graficos/graficoHistorico";
+import GraficoHistorico from "@/components/graficos/graficoHistorico";
 import Productividad from "@/components/productividad/productividad";
 import Selector from "@/components/selectores/selectorHistorico";
 import DatePicker from "@/ui/datePicker"
@@ -149,7 +149,6 @@ export default function Historico() {
             selectClasses="text-white hover:bg-gray-700"
           />
           <DatePicker 
-            selectClasses="" 
             onDateChange={handleDateChange}
           />
           <BotonAplicar 
@@ -160,7 +159,7 @@ export default function Historico() {
       </div>
 
       <div className="w-[100%] h-[80vh]">
-        <Grafico 
+        <GraficoHistorico 
           contextType={selectedType === "cocina" ? "cocinas" : "enfriadores"}
           id={selectedId}
           startDate={tempDateRange.startDate}

@@ -50,7 +50,7 @@ interface DetallesEquipo {
 }
 
 // Modificar la definición del componente para recibir solo el id
-const Grafico: React.FC<{ id: number }> = ({ id }) => {
+const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
     const router = useRouter();
     const { t } = useTranslation('grafico');
     const chartRef = useRef<HTMLCanvasElement>(null);
@@ -397,4 +397,4 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
       );      
 };
 
-export default Grafico;
+export default GraficoMonitoreo;
