@@ -8,11 +8,13 @@ interface BotonAplicarProps {
     endDate: string | null;
     lineaId: number;
     equipoId: number;
+    dato_enviado?: number; // Add this missing prop
     onApplyFilters: (data: {
         startDate: string | null,
         endDate: string | null,
         lineaId: number,
-        equipoId: number
+        equipoId: number,
+        dato_enviado?: number // Add this to match the implementation
     }) => void;
 }
 
@@ -22,6 +24,7 @@ export default function BotonAplicar({
     endDate, 
     lineaId, 
     equipoId,
+    dato_enviado,
     onApplyFilters 
 }: BotonAplicarProps) {
     const { t } = useTranslation('botones');
@@ -32,7 +35,8 @@ export default function BotonAplicar({
             startDate,
             endDate,
             lineaId,
-            equipoId
+            equipoId,
+            dato_enviado
         });
     };
 

@@ -39,7 +39,7 @@ const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
       nombre: producto.NombreProducto,
       peso: producto.pesoTotal + "kg",
       cantidadCiclos: producto.cantidadCiclos,
-      porcentaje: porcentaje.toFixed(0),
+      porcentaje: porcentaje.toFixed(1),
       color: generarColorAleatorio(),
     };
   });

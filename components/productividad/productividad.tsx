@@ -39,11 +39,21 @@ interface ApiResponse {
   }>;
 }
 
+interface FilterData {
+  startDate: string | null;
+  endDate: string | null;
+  lineaId: number;
+  equipoId: number;
+  dato_enviado: number;
+  isUserInitiated?: boolean; // Add this flag
+}
+
 const Productividad = () => {
   const today = new Date().toISOString().split('T')[0];
   const lastWeek = new Date();
   lastWeek.setDate(lastWeek.getDate() - 7);
   const lastWeekFormatted = lastWeek.toISOString().split('T')[0];
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const [data, setData] = useState<FixedData>({
     ciclosRealizados: 0,
@@ -57,36 +67,33 @@ const Productividad = () => {
     end: today,
   });
 
-  // Agregar useEffect para la carga inicial
   useEffect(() => {
-    // Hacer la consulta inicial con los valores por defecto
-    handleApplyFilters({
-      startDate: lastWeekFormatted,
-      endDate: today,
-      lineaId: 0,
-      equipoId: 30,
-      dato_enviado: 0
-    });
-  }, []); // Array vacío para que solo se ejecute al montar el componente
+    if (isInitialLoad) {
+      // Hacer la consulta inicial con los valores por defecto
+      handleApplyFilters({
+        startDate: lastWeekFormatted,
+        endDate: today,
+        lineaId: 0,
+        equipoId: 30,
+        dato_enviado: 0,
+        isUserInitiated: false // Mark this as NOT user initiated
+      });
+      setIsInitialLoad(false);
+    }
+  }, [isInitialLoad]);
 
-  const handleApplyFilters = async (filterData: {
-    startDate: string | null;
-    endDate: string | null;
-    lineaId: number;
-    equipoId: number;
-    dato_enviado: number;
-  }) => {
+  const handleApplyFilters = async (filterData: FilterData) => {
     if (!filterData.startDate || !filterData.endDate) return;
-
+  
     try {
         const formattedStartDate = filterData.startDate.split('T')[0];
         const formattedEndDate = filterData.endDate.split('T')[0];
         const dato = filterData.dato_enviado || 0;
-
+  
         const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
         const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
         console.log('Consultando API con fechas:', formattedStartDate, formattedEndDate);
-
+  
         const url = `http://${host}:${port}/historico-productividad/${dato}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`;
         
         const response = await fetch(url);
@@ -106,10 +113,13 @@ const Productividad = () => {
              apiData.ciclos_incorrectos === 0 && 
              (!apiData.productos_realizados || apiData.productos_realizados.length === 0))) {
             
-            toast.error("No existen reportes de productividad en el lapso de las fechas indicadas.");
+            // Only show toast error if this is a user-initiated action
+            if (filterData.isUserInitiated) {
+                toast.error("No existen reportes de productividad en el lapso de las fechas indicadas.");
+            }
             return;
         }
-
+  
         setData({
             ciclosRealizados: apiData.ciclos_realizados,
             ciclosCorrectos: apiData.ciclos_correctos,
@@ -122,17 +132,20 @@ const Productividad = () => {
                 tiempoTotal: 0
             }))
         });
-
+  
         setDateRange({
             start: formattedStartDate,
             end: formattedEndDate
         });
-
+  
     } catch (error) {
         console.error("Error fetching data:", error);
         if (error instanceof Error) {
             console.error("Error details:", error.message);
-            toast.error("Error al obtener los datos de productividad");
+            // Only show toast error if this is a user-initiated action
+            if (filterData.isUserInitiated) {
+                toast.error("Error al obtener los datos de productividad");
+            }
         }
     }
   };

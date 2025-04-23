@@ -19,11 +19,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const [startDate, setStartDate] = useState<string | null>(defaultStartDate || null);
   const [endDate, setEndDate] = useState<string | null>(defaultEndDate || null);
 
+  // Only set the initial values once, not on every defaultDate change
   useEffect(() => {
     if (defaultStartDate && defaultEndDate) {
-      onDateChange(defaultStartDate, defaultEndDate);
+      // Initialize with defaults, but don't call onDateChange here
+      setStartDate(defaultStartDate);
+      setEndDate(defaultEndDate);
     }
-  }, [defaultStartDate, defaultEndDate, onDateChange]);
+  }, []); // Empty dependency array means this runs once on mount
 
   const convertToDate = (temporalObj: any): Date | null => {
     if (!temporalObj) return null;
@@ -56,12 +59,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
         return;
       }
 
-      // Update local state instead of using undefined setDateRange
-      setStartDate(formatToYYYYMMDD(startDateObj));
-      setEndDate(formatToYYYYMMDD(endDateObj));
-
       const formattedStart = formatToYYYYMMDD(startDateObj);
       const formattedEnd = formatToYYYYMMDD(endDateObj);
+
+      // Update local state
+      setStartDate(formattedStart);
+      setEndDate(formattedEnd);
 
       if (onDateChange) {
         onDateChange(formattedStart, formattedEnd);
@@ -70,10 +73,13 @@ const DatePicker: React.FC<DatePickerProps> = ({
       console.error('Error processing dates:', error);
     }
   };
-    return <DateRangePicker
-                label={t('fecha')}
-                onChange={(range) => handleDateChange(range)}
-            />;
+  
+  return <DateRangePicker
+            label={t('fecha')}
+            onChange={(range) => handleDateChange(range)}
+            // You may need to add a value prop based on startDate and endDate
+            // if your DateRangePicker component supports controlled behavior
+          />;
 }
 
 export default DatePicker;
