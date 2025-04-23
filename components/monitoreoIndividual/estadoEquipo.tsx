@@ -23,7 +23,7 @@ const EstadoEquipo: React.FC<EstadoEquipoProps> = ({ datos, getColorClass, displ
 
     return (
         <>
-            <h2 className="text-xl text-white">
+            <h2 className="text-xl text-white w-auto ">
                 {t('estadoEquipo.titulo')}
             </h2>
             <ul className="flex flex-col justify-between grow gap-[1vh]">

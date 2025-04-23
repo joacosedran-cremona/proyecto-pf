@@ -18,7 +18,7 @@ const SectorIO: React.FC<SectorIOProps> = ({ datosIO, getColorClass }) => {
 
     return (
         <>
-            <h2 className="text-xl text-white">
+            <h2 className="text-xl text-white flex text-center">
                 {t('sectorIO.titulo')}
             </h2>
             <ul className="grid gap-[1vh] h-[100%] 1365:grid-cols-2">
