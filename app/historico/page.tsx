@@ -12,12 +12,14 @@ import { useTranslation } from 'react-i18next';
 
 export default function Historico() {
   // Estados iniciales con valores por defecto
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [selectedId, setSelectedId] = useState<number>(1);
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">("cocina");
   const [graphData, setGraphData] = useState<any>(null);
   const [tempSelectedValue, setTempSelectedValue] = useState(1);
   const [showGraphic, setShowGraphic] = useState(true);
   const [selectedCicloId, setSelectedCicloId] = useState<number>(1);
+  const { t } = useTranslation('grafico');
   const [tempDateRange, setTempDateRange] = useState<{
     startDate: string | null;
     endDate: string | null;
@@ -34,8 +36,6 @@ export default function Historico() {
       fecha_fin: tempDateRange.endDate
     });
   }, []);
-
-  const { t } = useTranslation('hist_alert_tit');
   
   const handleDateChange = (startDate: string | null, endDate: string | null) => {
     setTempDateRange({ startDate, endDate });
@@ -47,28 +47,79 @@ export default function Historico() {
 
   const handleApplyClick = async () => {
     try {
-        const equipmentType = tempSelectedValue <= 6 ? "cocina" : "enfriador";
-        
-        setSelectedId(tempSelectedValue);
-        setSelectedType(equipmentType);
-        setSelectedCicloId(1); // Reset ciclo ID
-        setShowGraphic(false); // Cambiado a false para mostrar la tabla al filtrar
-        
-        console.log('✅ Datos enviados exitosamente:', {
-            id: tempSelectedValue,
-            fecha_inicio: tempDateRange.startDate,
-            fecha_fin: tempDateRange.endDate
-        });
+      const equipmentType = tempSelectedValue <= 6 ? "cocina" : "enfriador";
+      const equipoName = equipmentType === "cocina" 
+        ? `Cocina ${tempSelectedValue}-L1` 
+        : `Enfriador ${tempSelectedValue}-L1`;
+      
+      // Obtener el último ciclo del equipo seleccionado
+      const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
+      const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+      
+      const response = await fetch(
+        `http://${host}:${port}/historico-graficos/${equipoName}?fecha_inicio=${tempDateRange.startDate}&fecha_fin=${tempDateRange.endDate}`
+      );
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.length > 0) {
+          const lastCiclo = data.reduce((max: any, ciclo: any) => 
+            ciclo.id_ciclo > max.id_ciclo ? ciclo : max
+          );
+          setSelectedCicloId(lastCiclo.id_ciclo);
+        }
+      }
+      
+      setSelectedId(tempSelectedValue);
+      setSelectedType(equipmentType);
+      setShowGraphic(false);
+      
     } catch (error) {
-        console.error("❌ Error al procesar los datos:", error);
+      console.error("❌ Error al procesar los datos:", error);
     }
-};
+  };
 
   const handleCicloSelect = (cicloId: number) => {
     console.log('🎯 Ciclo seleccionado en Page:', cicloId);
     setSelectedCicloId(cicloId);
     setShowGraphic(true);
   };
+
+  useEffect(() => {
+    const fetchLastCiclo = async () => {
+      if (!isInitialLoad) return;
+
+      try {
+        const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
+        const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+        const equipmentType = "Cocina 1-L1"; // Cocina 1 por defecto
+        
+        const response = await fetch(
+          `http://${host}:${port}/historico-graficos/${equipmentType}?fecha_inicio=2000-01-01&fecha_fin=2100-01-01`
+        );
+        
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+          // Obtener el ciclo con el ID más alto
+          const lastCiclo = data.reduce((max: any, ciclo: any) => 
+            ciclo.id_ciclo > max.id_ciclo ? ciclo : max
+          );
+          
+          setSelectedCicloId(lastCiclo.id_ciclo);
+          console.log('🔄 Último ciclo encontrado:', lastCiclo.id_ciclo);
+        }
+      } catch (error) {
+        console.error('Error fetching last ciclo:', error);
+      } finally {
+        setIsInitialLoad(false);
+      }
+    };
+
+    fetchLastCiclo();
+  }, [isInitialLoad]);
 
   return (
     <section className="flex flex-col w-[100%] items-center justify-center gap-[20px]">
@@ -86,9 +137,9 @@ export default function Historico() {
           />
         </div>
 
-        <div className="text-center text-white">
-          <h2 className="text-lg font-bold uppercase mb-[-6px]">FILTRAR POR</h2>
-          <span className="text-sm">PERIODO</span>
+        <div className="text-center text-white ml-[110px]">
+          <h2 className="text-lg font-bold uppercase mb-[-6px]">{t('filtroPeriodo.titulo')}</h2>
+          <span className="text-sm">{t('filtroPeriodo.subtitulo')}</span>
         </div>
 
         <div className="flex gap-[5px] items-center pr-[10px]">

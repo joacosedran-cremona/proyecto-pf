@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Metrics from "./metrica";
 import BarraProductos from './barraProductos';
 import BarraCiclos from "./barraCiclos";
@@ -56,6 +56,19 @@ const Productividad = () => {
     start: lastWeekFormatted,
     end: today,
   });
+
+  // Agregar useEffect para la carga inicial
+  useEffect(() => {
+    // Hacer la consulta inicial con los valores por defecto
+    handleApplyFilters({
+      startDate: lastWeekFormatted,
+      endDate: today,
+      lineaId: 0,
+      equipoId: 30,
+      dato_enviado: 0
+    });
+  }, []); // Array vacío para que solo se ejecute al montar el componente
+
   const handleApplyFilters = async (filterData: {
     startDate: string | null;
     endDate: string | null;

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';  
 
 interface ProductoRealizado {
   NombreProducto: string;
@@ -19,6 +20,8 @@ interface ProductBarProps {
 const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
   // Convertir produccionTotal de toneladas a kilogramos
   const produccionTotalEnKg = data.produccionTotal * 1000;
+
+  const { t } = useTranslation('productividad');
 
   const generarColorAleatorio = (): string => {
     const letras = "23456789ABCDE";
@@ -43,7 +46,7 @@ const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-white">% Producto realizado</h3>
+      <h3 className="text-xl font-bold text-white">% {t('barraProductos.texto')}</h3>
       <div className="flex h-[20px] rounded-[5px] overflow-hidden bg-[#444] mb-[15px]">
         {productos.map((producto, index) => (
           <div

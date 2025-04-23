@@ -4,13 +4,38 @@
         "tempIngreso": "Inlet Temperature",
         "tempAgua": "Water Temperature",
         "tempIng": "Product Temperature",
+        "nivelAgua": "Water Level",
         "temperatura": "Temperature"
     },
     "datosMonitoreo":
     {
         "tempAgua": "WATER TEMP:",
         "tempProd": "PROD. TEMP:",
-        "nivelAgua": "WATER LEVEL:"
+        "nivelAgua": "WATER LEVEL:",
+        "letraCocina": "K",
+        "letraEnfriador": "C"
+    },
+    "graficoHistorico":
+    {
+        "titulo": "GRAPH",
+        "lote": "LOT:",
+        "ciclo": "CURRENT CYCLE:",
+        "botonCiclos": "Show Cycles",
+        "botonZoom": "Restart Zoom"
+    },
+    "datosHistorico":
+    {
+        "tempProd": "Prod. Temp",
+        "tempAgua": "Water Temp",
+        "nivelAgua": "Water Level",
+        "hInicio": "Start Time:",
+        "hFin": "End Time:",
+        "tiempoTrans": "T. Elapsed:"
+    },
+    "filtroPeriodo":
+    {
+        "titulo": "FILTER BY",
+        "subtitulo": "PERIOD"
     },
     "ejes":
     {
@@ -43,7 +68,8 @@
     "estado": "STATE:",
     "tiempo": "TIME:",
     "tooltip": "Elapsed Time",
-    "tituloGrafico": "Real-Time Temperatures",
+    "tituloGrafico": "Sensors data",
+    "subtituloGrafico": "in real time",
     "reiniciarZoom": "Reset Zoom",
     "cargando": "Loading...",
     "equipoNoEncontrado": "Equipment not found",

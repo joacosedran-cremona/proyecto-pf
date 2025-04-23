@@ -4,13 +4,38 @@
         "tempIngreso": "Temperatura de Ingreso",
         "tempAgua": "Temperatura del Agua",
         "tempIng": "Temperatura del Producto",
+        "nivelAgua": "Nivel Agua",
         "temperatura": "Temperatura"
     },
     "datosMonitoreo":
     {
         "tempAgua": "TEMP. AGUA:",
         "tempProd": "TEMP. PROD:",
-        "nivelAgua": "NIVEL AGUA:"
+        "nivelAgua": "NIVEL AGUA:",
+        "letraCocina": "C",
+        "letraEnfriador": "E"
+    },
+    "graficoHistorico":
+    {
+        "titulo": "GRÁFICO",
+        "lote": "LOTE:",
+        "ciclo": "CICLO ACTUAL:",
+        "botonCiclos": "Mostrar Ciclos",
+        "botonZoom": "Reiniciar Zoom"
+    },
+    "datosHistorico":
+    {
+        "tempProd": "Temp. Prod",
+        "tempAgua": "Temp. Agua",
+        "nivelAgua": "Nivel Agua",
+        "hInicio": "H. Inicio:",
+        "hFin": "H. Fin:",
+        "tiempoTrans": "T. Trans:"
+    },
+    "filtroPeriodo":
+    {
+        "titulo": "FILTRAR POR",
+        "subtitulo": "PERIODO"
     },
     "ejes":
     {
@@ -43,7 +68,8 @@
     "estado": "ESTADO:",
     "tiempo": "TIEMPO:",
     "tooltip": "Tiempo Transcurrido",
-    "tituloGrafico": "Temperaturas en tiempo real",
+    "tituloGrafico": "Datos de los sensores",
+    "subtituloGrafico": "en tiempo real",
     "reiniciarZoom": "Reiniciar Zoom",
     "cargando": "Cargando...",
     "equipoNoEncontrado": "Equipo no encontrado",

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from 'react-i18next';  
 
 interface DateRange {
   start: string;
@@ -15,10 +16,11 @@ interface MetricsProps {
 }
 
 const Metrics: React.FC<MetricsProps> = ({ ciclosRealizados, produccionTotal, dateRange }) => {
+  const { t } = useTranslation('productividad');
   const metrics = [
     { 
       id: 1, 
-      titulo: "Ciclos realizados", 
+      titulo: t('metrica.ciclos'), 
       dato: (
         <span className="flex items-center gap-2 mb-[3px]">
           {ciclosRealizados}
@@ -34,7 +36,7 @@ const Metrics: React.FC<MetricsProps> = ({ ciclosRealizados, produccionTotal, da
     },
     {
       id: 2,
-      titulo: "Producción total",
+      titulo: t('metrica.produccion'),
       dato: (
         <span>
           {produccionTotal.toFixed(2)} <span className="text-xl ml-[-8px] mb-[3px]">Tn</span>
@@ -45,7 +47,7 @@ const Metrics: React.FC<MetricsProps> = ({ ciclosRealizados, produccionTotal, da
 
   return (
     <div>
-      <h2 className="text-3xl text-white font-bold mb-[-3px]">PRODUCTIVIDAD</h2>
+      <h2 className="text-3xl text-white font-bold mb-[-3px]">{t('titulo')}</h2>
       <div>
         <span className="text-l text-orange">{dateRange.start}</span>
         <span className="text-l text-white"> - </span>

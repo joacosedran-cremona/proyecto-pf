@@ -5,9 +5,32 @@ import { Button, Spinner } from '@heroui/react';
 import 'chartjs-adapter-date-fns';
 import { es } from 'date-fns/locale';
 import TablaCiclos from '@/components/tablaciclos/tablaCiclos';
+import { useTranslation } from 'react-i18next';  
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
+
+const equipmentMapping: Record<string, string> = {
+  'C1': 'Cocina 1-L1',
+  'C2': 'Cocina 2-L1',
+  'C3': 'Cocina 3-L1',
+  'C4': 'Cocina 4-L2',
+  'C5': 'Cocina 5-L2',
+  'C6': 'Cocina 6-L2',
+  'E7': 'Enfriador 1-L1',
+  'E8': 'Enfriador 2-L1',
+  'E9': 'Enfriador 3-L1',
+  'E10': 'Enfriador 4-L1',
+  'E11': 'Enfriador 5-L2',
+  'E12': 'Enfriador 6-L2',
+  'E13': 'Enfriador 7-L2',
+  'E14': 'Enfriador 8-L2'
+};
+
+const getEquipmentName = (type: string, id: number): string => {
+  const key = `${type === 'cocinas' ? 'C' : 'E'}${id}`;
+  return equipmentMapping[key] || '';
+};
 
 interface GraficoProps {
   contextType: 'cocinas' | 'enfriadores';
@@ -52,23 +75,6 @@ interface HistoricoData {
   };
 }
 
-const equipmentMapping: Record<string, string> = {
-  'C1': 'Cocina 1-L1',
-  'C2': 'Cocina 2-L1',
-  'C3': 'Cocina 3-L1',
-  'C4': 'Cocina 4-L2',
-  'C5': 'Cocina 5-L2',
-  'C6': 'Cocina 6-L2',
-  'E1': 'Enfriador 1-L1',
-  'E2': 'Enfriador 2-L1',
-  'E3': 'Enfriador 3-L1',
-  'E4': 'Enfriador 4-L1',
-  'E5': 'Enfriador 5-L2',
-  'E6': 'Enfriador 6-L2',
-  'E7': 'Enfriador 7-L2',
-  'E8': 'Enfriador 8-L2'
-};
-
 const Grafico: React.FC<GraficoProps> = ({ 
   contextType, 
   id, 
@@ -86,6 +92,7 @@ const Grafico: React.FC<GraficoProps> = ({
   const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
   const [showTable, setShowTable] = useState(showTableOnLoad);
   const [internalSelectedCicloId, setInternalSelectedCicloId] = useState<number | null>(null);
+  const { t } = useTranslation('grafico');
 
   useEffect(() => {
     if (externalSelectedCicloId !== undefined) {
@@ -112,8 +119,7 @@ const Grafico: React.FC<GraficoProps> = ({
         const host = process.env.NEXT_PUBLIC_WS_HOST || '192.168.0.61';
         const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
         
-        const cicloId = internalSelectedCicloId || 1;
-        const url = `http://${host}:${port}/historico-graficos/${equipmentName}/${cicloId}`;
+        const url = `http://${host}:${port}/historico-graficos/${equipmentName}/${externalSelectedCicloId}`;
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -144,7 +150,7 @@ const Grafico: React.FC<GraficoProps> = ({
     };
   
     fetchData();
-  }, [contextType, id, internalSelectedCicloId]); 
+  }, [contextType, id, externalSelectedCicloId]); 
   
 
   useEffect(() => {
@@ -204,7 +210,7 @@ const Grafico: React.FC<GraficoProps> = ({
         data: {
           datasets: [
             {
-              label: 'Temperatura Producto',
+              label: t('datos.tempIng'),
               data: tempProducto,
               borderColor: 'rgb(75, 192, 75)',
               backgroundColor: 'rgba(75, 192, 75, 0.5)',
@@ -214,7 +220,7 @@ const Grafico: React.FC<GraficoProps> = ({
               pointStyle: 'circle',
             },
             {
-              label: 'Temperatura Agua',
+              label: t('datos.tempAgua'),
               data: tempAgua,
               borderColor: 'rgb(54, 162, 235)',
               backgroundColor: 'rgba(54, 162, 235, 0.5)',
@@ -224,7 +230,7 @@ const Grafico: React.FC<GraficoProps> = ({
               pointStyle: 'circle',
             },
             {
-              label: 'Nivel Agua',
+              label: t('datos.nivelAgua'),
               data: nivelAgua,
               borderColor: 'rgb(255, 165, 0)',
               backgroundColor: 'rgba(255, 165, 0, 0.5)',
@@ -236,6 +242,10 @@ const Grafico: React.FC<GraficoProps> = ({
           ].filter(dataset => dataset.data.length > 0)
         },
         options: {
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
@@ -248,12 +258,28 @@ const Grafico: React.FC<GraficoProps> = ({
             },
             tooltip: {
               callbacks: {
-                label: (context) => {
-                  const value = context.parsed.y;
-                  const date = new Date(context.parsed.x);
-                  return `${context.dataset.label}: ${value}`;
-                }
-              }
+                  title: (context) => {
+                      const date = new Date(context[0].parsed.x);
+                      const hours = date.getHours();
+                      const minutes = date.getMinutes();
+                      const seconds = date.getSeconds();
+                      const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                      
+                      return `${t('tooltip')}: ${timeFormatted}`;
+                  },
+                  label: (context) => {
+                      const datasetLabel = context.dataset.label || '';
+                      const value = context.parsed.y;
+                      const yAxisID = context.dataset.yAxisID;
+                      
+                      return `${datasetLabel}: ${value}${yAxisID === 'y1' ? ' mm' : '°C'}`;
+                  }
+              },
+              displayColors: true,     // Mostrar los cuadrados de color
+              boxWidth: 8,            // Tamaño del cuadrado de color
+              boxHeight: 8,           // Altura del cuadrado de color
+              boxPadding: 4,          // Espacio entre el cuadrado y el texto
+              usePointStyle: false    // Usar cuadrados en lugar de círculos
             },
             zoom: {
               pan: {
@@ -274,6 +300,12 @@ const Grafico: React.FC<GraficoProps> = ({
           scales: {
             x: {
               type: 'time',
+              border: {
+                color: '#D9D9D9'
+              },
+              grid: {
+                color: '#1F1F1F',
+              },
               time: {
                 unit: 'minute',
                 displayFormats: {
@@ -288,25 +320,34 @@ const Grafico: React.FC<GraficoProps> = ({
               },
               title: {
                 display: true,
-                text: 'Hora (HH:MM)'
+                text: t('ejes.x')
               }
             },
             y: {
               beginAtZero: true,
+              grid: {
+                color: '#1F1F1F',
+              },
+              border: {
+                color: '#D9D9D9'
+              },
               title: {
                 display: true,
-                text: 'Temperatura (°C)'
+                text: t('ejes.y')
               }
             },
             y1: {
               position: 'right',
               beginAtZero: true,
+              border: {
+                color: '#D9D9D9'
+              },
               grid: {
                 drawOnChartArea: false // 👉 evita líneas duplicadas en el fondo
               },
               title: {
                 display: true,
-                text: 'Nivel Agua (mm)'
+                text: t('ejes.y1')
               }
             }
           }
@@ -337,11 +378,6 @@ const Grafico: React.FC<GraficoProps> = ({
     );
   }
 
-  const getEquipmentName = (type: string, id: number): string => {
-    const key = `${type === 'cocinas' ? 'C' : 'E'}${id}`;
-    return equipmentMapping[key] || '';
-  };
-
   const formatDate = (date: string) => {
     const d = new Date(date);
     return d.toLocaleDateString('es-ES', {
@@ -359,6 +395,22 @@ const Grafico: React.FC<GraficoProps> = ({
     });
   };
 
+  const formatTimeTranscurrido = (timeString: string) => {
+    // Separar horas, minutos y segundos
+    const [hours, minutes, secondsWithMs] = timeString.split(':');
+    
+    // Obtener solo la parte entera de los segundos
+    const seconds = Math.floor(parseFloat(secondsWithMs));
+    
+    // Formatear con dos dígitos para cada unidad
+    const formattedHours = hours.padStart(2, '0');
+    const formattedMinutes = minutes.padStart(2, '0');
+    const formattedSeconds = seconds.toString().padStart(2, '0');
+    
+    // Retornar en formato HH:MM:SS
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+};
+
   return (
     <div className="bg-black h-[100%] w-[100%] rounded-md relative pt-[10px] px-[10px] pb-[108px] grafico-historico">
       {/* Botones de control */}
@@ -367,13 +419,13 @@ const Grafico: React.FC<GraficoProps> = ({
           onClick={() => setShowTable(!showTable)}
           className="text-white bg-grey/100 hover:bg-lightGrey/25 px-[10px] py-[20px] rounded-md backdrop-blur-sm border border-grey/50"
         >
-          {showTable ? 'Ocultar Ciclos' : 'Mostrar Ciclos'}
+          {showTable ? t('graficoHistorico.botonCiclos') : t('graficoHistorico.botonCiclos')}
         </Button>
         <Button
           onClick={resetZoom}
           className="text-white bg-grey/100 hover:bg-lightGrey/25 px-[10px] py-[20px] rounded-md backdrop-blur-sm border border-grey/50"
         >
-          Reiniciar Zoom
+          {t('graficoHistorico.botonZoom')}
         </Button>
       </div>
   
@@ -382,57 +434,62 @@ const Grafico: React.FC<GraficoProps> = ({
         <div className="mb-[5px] ml-[5px]">
           <div className="flex items-center gap-[8px] pdf-info-section">
             <div className="text-white">
-              <h2 className="text-[32px] font-bold">GRÁFICO</h2>
-              <p className="mt-[-6]">
-                <strong>LOTE:</strong> {data.general.ciclo_lote} - {data.general.receta}
+              <h2 className="text-[32px] font-bold">{t('graficoHistorico.titulo')}</h2>
+              <p className="mt-[-6px]">
+                <strong>{t('graficoHistorico.lote')}</strong> {data.general.ciclo_lote} - {data.general.receta}
               </p>
-              <p className="text-orange text-[14px] mt-[-5]">
+              <p className="text-orange text-[14px] mt-[-5px]">
                 {formatDate(data.general.fecha_inicio)} -{' '}
                 {formatDate(data.general.fecha_fin)}
               </p>
             </div>
 
             <div className="grid grid-cols-4 gap-[12px] ml-[5px]">
-              <div className="bg-[#4bc04b] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#4bc04b]/50">
-                <div className="font-bold">Temp. Prod</div>
+              <div className="bg-[#4bc04b] bg-opacity-25 text-white text-sm p-[0px] rounded-lg border border-[#4bc04b]/50">
+                <div className="font-bold text-center mt-[5px] mb-[-5px]">{t('datosHistorico.tempProd')}</div>
                 <div className="grid grid-cols-2 m-2">
                   <span className="font-bold">Max:</span>
-                  <span className='ml-[-20px]'>{data.general.temp_producto_max}°C</span>
+                  <span className='ml-[-22px]'>{data.general.temp_producto_max}°C</span>
                   <span className="font-bold">Min:</span>
-                  <span className='ml-[-20px]'>{data.general.temp_producto_min}°C</span>
+                  <span className='ml-[-25px]'>{data.general.temp_producto_min}°C</span>
                 </div>
               </div>
 
-              <div className="bg-[#3666cc] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#3666cc]/50">
-                <div className="font-bold">Temp. Agua</div>
+              <div className="bg-[#3666cc] bg-opacity-25 text-white text-sm p-[0px] rounded-lg border border-[#3666cc]/50">
+                <div className="font-bold text-center mt-[5px] mb-[-5px]">{t('datosHistorico.tempAgua')}</div>
                 <div className="grid grid-cols-2 m-2">
                   <span className="font-bold">Max:</span>
-                  <span className='ml-[-20px]'>{data.general.temp_agua_max}°C</span>
+                  <span className='ml-[-22px]'>{data.general.temp_agua_max}°C</span>
                   <span className="font-bold">Min:</span>
-                  <span className='ml-[-20px]'>{data.general.temp_agua_min}°C</span>
+                  <span className='ml-[-25px]'>{data.general.temp_agua_min}°C</span>
                 </div>
               </div>
 
-              <div className="bg-yellow-500 bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-yellow-500/50">
-                <div className="font-bold">Nivel Agua</div>
+              <div className="bg-yellow-500 bg-opacity-25 text-white text-sm p-[0px] rounded-lg border border-yellow-500/50">
+                <div className="font-bold text-center mt-[5px] mb-[-5px]">{t('datosHistorico.nivelAgua')}</div>
                 <div className="grid grid-cols-2 m-2">
                   <span className="font-bold">Max:</span>
-                  <span className='ml-[-20px]'>{data.general.nivel_agua_max} mm</span>
+                  <span className='ml-[-22px]'>{data.general.nivel_agua_max} mm</span>
                   <span className="font-bold">Min:</span>
-                  <span className='ml-[-20px]'>{data.general.nivel_agua_min} mm</span>
+                  <span className='ml-[-25px]'>{data.general.nivel_agua_min} mm</span>
                 </div>
               </div>
 
-              <div className="bg-[#e82a31] bg-opacity-25 text-white text-sm p-[5px] rounded-lg border border-[#e82a31]/50">
+              <div className="bg-[#e82a31] bg-opacity-25 text-white text-sm p-[0px] rounded-lg border border-[#e82a31]/50">
                 <div className="grid grid-cols-2 m-2">
-                  <span className="font-bold">H. Inicio:</span>
+                  <span className="font-bold">{t('datosHistorico.hInicio')}</span>
                   <span className='ml-[5px]'>{formatTime(data.general.fecha_inicio)}</span>
-                  <span className="font-bold">H. Fin:</span>
-                  <span className='ml-[-[10px]px]'>{formatTime(data.general.fecha_fin)}</span>
-                  <span className="font-bold">T. Trans:</span>
-                  <span>{data.general.tiempo_transcurrido}</span>
+                  <span className="font-bold">{t('datosHistorico.hFin')}</span>
+                  <span className='ml-[-6px]'>{formatTime(data.general.fecha_fin)}</span>
+                  <span className="font-bold">{t('datosHistorico.tiempoTrans')}</span>
+                  <span className='ml-[3px]'>{formatTimeTranscurrido(data.general.tiempo_transcurrido)}</span>
                 </div>
               </div>
+            </div>
+            <div className="flex-1 flex justify-center ml-[-200px]">
+              <p className="text-white text-lg font-semibold">
+                <strong>{t('graficoHistorico.ciclo')}</strong> {data.general.id_ciclo}
+              </p>
             </div>
           </div>
         </div>

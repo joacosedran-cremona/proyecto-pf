@@ -16,5 +16,10 @@
         "home": "Home",
         "monitoreo": "Monitoring",
         "historico": "Historic"
+    },
+    "deslogueo":
+    {
+        "estado": "Active session",
+        "botonsesion": "Log out"
     }
 }

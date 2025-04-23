@@ -321,6 +321,8 @@ const Tabla: React.FC = () => {
           <Typography variant="h4" sx={{
             color: '#d9d9d9',
             fontSize: '1.5rem',
+            fontWeight: 'bold',
+            marginBottom: '-5px'
           }}>
             {t('historial')}
           </Typography>

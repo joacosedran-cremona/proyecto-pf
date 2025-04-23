@@ -7,6 +7,7 @@ import DatePicker from "@/ui/datePickerProductividad";
 import ButtonAplicar from "../botones/botonAplicarProductividad";
 import ButtonPDF from "../botones/botonPDFProductividad";
 import ButtonExcel from "../botones/botonExcelProductividad";
+import { useTranslation } from 'react-i18next';  
 
 interface FiltroPeriodoProps {
     onApplyFilters: (data: {
@@ -18,11 +19,24 @@ interface FiltroPeriodoProps {
 }
 
 const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
-  const [startDate, setStartDate] = useState<string | null>(null);
-  const [endDate, setEndDate] = useState<string | null>(null);
+  // Inicializar con fechas por defecto
+  const today = new Date().toISOString().split('T')[0];
+  const lastWeek = new Date();
+  lastWeek.setDate(lastWeek.getDate() - 7);
+  const lastWeekFormatted = lastWeek.toISOString().split('T')[0];
+
+  const [startDate, setStartDate] = useState<string | null>(lastWeekFormatted);
+  const [endDate, setEndDate] = useState<string | null>(today);
   const [selectedLinea, setSelectedLinea] = useState<number>(0);
   const [selectedEquipo, setSelectedEquipo] = useState<number>(30);
   const [datoEnviado, setDatoEnviado] = useState<number>(0);
+  const { t } = useTranslation('productividad');
+
+  // Agregar useEffect para la carga inicial
+  useEffect(() => {
+    // Ejecutar handleApply con los valores iniciales
+    handleApply();
+  }, []); // Solo se ejecuta al montar el componente
 
   useEffect(() => {
       // Calcula el datoEnviado basado en las condiciones
@@ -74,8 +88,8 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-[100%] gap-[15px]">
-      <h2 className="flex items-center justify-center text-xl text-white font-bold">FILTRADO DE FECHAS</h2>
-      <h2 className="flex items-center justify-center text-l text-white mt-[-18]">POR PERIODO</h2>
+      <h2 className="flex items-center justify-center text-xl text-white font-bold">{t('filtro.titulo')}</h2>
+      <h2 className="flex items-center justify-center text-l text-white mt-[-18]">{t('filtro.subtitulo')}</h2>
 
       <div className="flex w-[100%] h-1/5">
           <Selector onLineaChange={handleLineaChange} />
@@ -93,6 +107,8 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
               <DatePicker 
                   selectClasses="h-1/4" 
                   onDateChange={handleDateChange}
+                  defaultStartDate={lastWeekFormatted}
+                  defaultEndDate={today}
               />
               <ButtonAplicar 
                   selectClasses="h-1/4"

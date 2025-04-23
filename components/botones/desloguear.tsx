@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { VscAccount } from "react-icons/vsc";
+import { useTranslation } from 'react-i18next';  
 
 interface DesloguearProps {
     username?: string;
@@ -10,6 +11,7 @@ interface DesloguearProps {
 const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation('header');
 
     // Cerrar dropdown cuando se hace click fuera
     useEffect(() => {
@@ -56,7 +58,7 @@ const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
                                 Creminox
                             </p>
                             <p className="text-xs text-gray-600">
-                                Sesión activa
+                                {t('deslogueo.estado')}
                             </p>
                         </div>
                     </div>
@@ -73,7 +75,7 @@ const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
                                  flex items-center space-x-2
                                  cursor-pointer"
                     >
-                        <span>Cerrar sesión</span>
+                        <span>{t('deslogueo.botonsesion')}</span>
                     </button>
                 </div>
             </div>

@@ -4,15 +4,26 @@ import { useEffect, useState } from 'react';
 
 interface DatePickerProps {
   selectClasses?: string;
-  onDateChange?: (startDate: string | null, endDate: string | null) => void;
+  onDateChange: (start: string | null, end: string | null) => void;
+  defaultStartDate?: string;
+  defaultEndDate?: string;
 }
 
-export default function DatePicker({ selectClasses, onDateChange }: DatePickerProps) {
+const DatePicker: React.FC<DatePickerProps> = ({ 
+  selectClasses, 
+  onDateChange,
+  defaultStartDate,
+  defaultEndDate
+}) => {
   const { t } = useTranslation('botones');
-  const [dateRange, setDateRange] = useState<{
-    startDate: Date | null;
-    endDate: Date | null;
-  }>({ startDate: null, endDate: null });
+  const [startDate, setStartDate] = useState<string | null>(defaultStartDate || null);
+  const [endDate, setEndDate] = useState<string | null>(defaultEndDate || null);
+
+  useEffect(() => {
+    if (defaultStartDate && defaultEndDate) {
+      onDateChange(defaultStartDate, defaultEndDate);
+    }
+  }, [defaultStartDate, defaultEndDate, onDateChange]);
 
   const convertToDate = (temporalObj: any): Date | null => {
     if (!temporalObj) return null;
@@ -62,3 +73,5 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
                 onChange={(range) => handleDateChange(range)}
             />;
 }
+
+export default DatePicker;

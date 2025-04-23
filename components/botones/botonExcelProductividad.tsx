@@ -19,20 +19,12 @@ export default function BotonExcel({
     const { t } = useTranslation('botones');
 
     const handleExcelDownload = async () => {
-        if (!startDate || !endDate || dato_enviado === undefined) {
-            toast.error('Error', {
-                description: 'Seleccione un periodo y una línea/equipo para descargar',
-                position: 'bottom-right'
-            });
-            return;
-        }
-
         try {
             const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
             const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
 
-            const formattedStartDate = startDate.split('T')[0];
-            const formattedEndDate = endDate.split('T')[0];
+            const formattedStartDate = startDate?.split('T')[0] || new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+            const formattedEndDate = endDate?.split('T')[0] || new Date().toISOString().split('T')[0];
 
             const response = await fetch(
                 `http://${host}:${port}/historico-productividad/descargar/${dato_enviado}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`,

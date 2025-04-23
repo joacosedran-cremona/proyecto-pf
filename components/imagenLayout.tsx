@@ -258,25 +258,25 @@ export function ImagenLayout() {
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black'}}
                       >
-                        {t('datos.tempActual')} {equipo.tempProductoActual ?? '-'}
+                        {t('datos.tempActual')}: {equipo.tempProductoActual ?? '-'}
                       </p>
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
-                        {t('datos.tempAgua')} : {equipo.tempAguaActual ?? '-'}
+                        {t('datos.tempAgua')}: {equipo.tempAguaActual ?? '-'}
                       </p>
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
-                        {t('datos.receta')} : {equipo.receta ?? '-'}
+                        {t('datos.receta')}: {equipo.receta ?? '-'}
                       </p>
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
-                        {t('datos.tiempo')} : {equipo.tiempoTranscurrido}
+                        {t('datos.tiempo')}: {equipo.tiempoTranscurrido}
                       </p>
                     </div>
                   </div>

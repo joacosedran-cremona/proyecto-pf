@@ -130,6 +130,10 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                         type: 'line',
                         data: chartData,
                         options: {
+                            interaction: {
+                                intersect: false,
+                                mode: 'index',
+                            },
                             responsive: true,
                             maintainAspectRatio: false,
                             plugins: {
@@ -169,23 +173,28 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                 },
                                 tooltip: {
                                     callbacks: {
+                                        title: (context) => {
+                                            const totalSeconds = Math.floor(context[0].parsed.x);
+                                            const hours = Math.floor(totalSeconds / 3600);
+                                            const minutes = Math.floor((totalSeconds % 3600) / 60);
+                                            const seconds = totalSeconds % 60;
+                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                                            
+                                            return `${t('tooltip')}: ${timeFormatted}`;
+                                        },
                                         label: (context) => {
                                             const datasetLabel = context.dataset.label || '';
                                             const value = context.parsed.y;
                                             const yAxisID = context.dataset.yAxisID;
                                             
-                                            const totalSeconds = Math.floor(context.parsed.x);
-                                            const hours = Math.floor(totalSeconds / 3600);
-                                            const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                            const seconds = totalSeconds % 60;
-                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-                                            return [
-                                                `${t('tooltip')}: ${timeFormatted}`,
-                                                `${datasetLabel}: ${value}${yAxisID === 'y1' ? ' mm' : '°C'}`
-                                            ];
+                                            return `${datasetLabel}: ${value}${yAxisID === 'y1' ? ' mm' : '°C'}`;
                                         }
-                                    }
+                                    },
+                                    displayColors: true,     // Mostrar los cuadrados de color
+                                    boxWidth: 8,            // Tamaño del cuadrado de color
+                                    boxHeight: 8,           // Altura del cuadrado de color
+                                    boxPadding: 4,          // Espacio entre el cuadrado y el texto
+                                    usePointStyle: false    // Usar cuadrados en lugar de círculos
                                 },
                             },
                             animation: {
@@ -208,6 +217,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     type: 'linear',
                                     display: true,
                                     position: 'left',
+                                    beginAtZero: true,
                                     title: {
                                         display: true,
                                         text: t('ejes.y'),
@@ -225,6 +235,7 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
                                     type: 'linear',
                                     display: true,
                                     position: 'right',
+                                    beginAtZero: true,
                                     title: {
                                         display: true,
                                         text: t('ejes.y1'),
@@ -342,8 +353,8 @@ const Grafico: React.FC<{ id: number }> = ({ id }) => {
             <div className="flex items-start gap-[6px]">
                 <div className={`text-[28px] font-bold ${equipo.tipo === 'COCINA' ? 'text-[#ff7f2a]' : 'text-[#3AF]'}`}>
                 {equipo.tipo === 'COCINA' 
-                ? `C${equipo.id}` 
-                : `E${equipo.id-6}`}
+                ? `${t('datosMonitoreo.letraCocina')}${equipo.id}` 
+                : `${t('datosMonitoreo.letraEnfriador')}${equipo.id-6}`}
                 </div>
               <div className="text-sm leading-tight">
                 <div>

@@ -25,6 +25,12 @@ import enHistAlert from './locales/en/hist_alert_tit.json';
 import esTabla from './locales/es/tabla.json';
 import enTabla from './locales/en/tabla.json';
 
+import esProductividad from './locales/es/productividad.json';
+import enProductividad from './locales/en/productividad.json';
+
+import esLogin from './locales/es/login.json';
+import enLogin from './locales/en/login.json';
+
 const resources = {
     es: { 
         header: esHeader,
@@ -35,6 +41,8 @@ const resources = {
         botones: esBotones,
         hist_alert_tit: esHistAlert,
         tabla: esTabla,
+        productividad: esProductividad,
+        login: esLogin,
     },
     en: { 
         header: enHeader,
@@ -45,6 +53,8 @@ const resources = {
         botones: enBotones,
         hist_alert_tit: enHistAlert,
         tabla: enTabla,
+        productividad: enProductividad,
+        login: enLogin,
     },
 };
 
@@ -52,7 +62,7 @@ export const i18n = createInstance({
     resources,
     lng: 'es',
     fallbackLng: 'es',
-    ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones', 'hist_alert_tit', 'tabla'],
+    ns: ['header', 'layout', 'monitoreo', 'grafico', 'selectores', 'botones', 'hist_alert_tit', 'tabla', 'productividad', 'login'],
     interpolation: { 
         escapeValue: false,
         skipOnVariables: false,

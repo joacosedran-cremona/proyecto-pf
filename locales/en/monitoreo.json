@@ -12,7 +12,7 @@
     {
         "titulo": "Active Cycle",
         "paso": "Step N°",
-        "receta": "Recipe N°",
+        "lote": "Lot N°",
         "cantTorres": "Number of Towers",
         "tiempo": "Elapsed Time",
         "tipoFin": "End Type"

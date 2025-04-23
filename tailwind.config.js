@@ -19,6 +19,7 @@ module.exports = {
         1365: "1365px",
         1050: "1050px",
         545: "545px",
+        'laptop': {'raw': '(min-height: 800px) and (max-height: 900px)'}
       },
       colors: {
         orange: "#EF8225",

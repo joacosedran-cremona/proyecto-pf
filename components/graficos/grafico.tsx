@@ -96,6 +96,120 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                     }
                 }
             };
+            
+            const endPointLabelsPlugin: Plugin = {
+                id: 'endPointLabels',
+                afterDraw: (chart: Chart, args, opts) => {
+                    const ctx = chart.ctx;
+                    ctx.save();
+                    // Aumentar el z-index estableciendo el orden de dibujo
+                    ctx.globalCompositeOperation = 'source-over';
+                    
+                    const labels: Array<{
+                        x: number;
+                        y: number;
+                        width: number;
+                        height: number;
+                    }> = [];
+            
+                    chart.data.datasets.forEach((dataset, i) => {
+                        const meta = chart.getDatasetMeta(i);
+                        if (!meta.hidden && dataset.data.length > 0) {
+                            const lastPoint = meta.data[meta.data.length - 1];
+                            const value = dataset.data[dataset.data.length - 1] as { x: number; y: number };
+                            
+                            ctx.save();
+                            ctx.fillStyle = dataset.borderColor as string;
+                            ctx.font = '14px Arial';
+                            
+                            const text = `${value.y}${dataset.yAxisID === 'y1' ? ' mm' : '°C'}`;
+                            const textWidth = ctx.measureText(text).width;
+                            const padding = 4;
+                            const labelHeight = 20;
+                            
+                            // Calcular posición inicial
+                            let labelX = lastPoint.x + 5; // Reducido de 10 a 5
+                            let labelY = lastPoint.y - 5; // Reducido de 10 a 5
+                            
+                            // Ajustar posición vertical si hay solapamiento
+                            const currentLabel = {
+                                x: labelX,
+                                y: labelY,
+                                width: textWidth + (padding * 2),
+                                height: labelHeight
+                            };
+            
+                            // Verificar solapamiento con etiquetas existentes
+                            let overlap = true;
+                            let alternatePosition = false; // Alternar entre izquierda y derecha
+            
+                            while (overlap) {
+                                overlap = false;
+                                for (const label of labels) {
+                                    if (!(currentLabel.x + currentLabel.width < label.x ||
+                                        currentLabel.x > label.x + label.width ||
+                                        currentLabel.y + currentLabel.height < label.y ||
+                                        currentLabel.y > label.y + label.height)) {
+                                        
+                                        if (!alternatePosition) {
+                                            // Mover a la izquierda en el primer solapamiento
+                                            currentLabel.x = lastPoint.x - currentLabel.width - 5;
+                                            alternatePosition = true;
+                                        } else {
+                                            // Si aún hay solapamiento, mover ligeramente hacia arriba
+                                            currentLabel.y -= labelHeight + 2; // Reducido de 5 a 2
+                                            currentLabel.x = lastPoint.x + 5;
+                                            alternatePosition = false;
+                                        }
+                                        overlap = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            
+                            // Agregar la etiqueta actual al array de etiquetas
+                            labels.push(currentLabel);
+                            
+                            // Dibujar el fondo
+                            ctx.fillStyle = dataset.borderColor as string;
+                            ctx.globalAlpha = 0.15;
+                            ctx.beginPath();
+                            ctx.roundRect(
+                                currentLabel.x,
+                                currentLabel.y,
+                                currentLabel.width,
+                                currentLabel.height,
+                                4
+                            );
+                            ctx.fill();
+                            
+                            // Dibujar el borde
+                            ctx.globalAlpha = 0.8;
+                            ctx.strokeStyle = dataset.borderColor as string;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.roundRect(
+                                currentLabel.x,
+                                currentLabel.y,
+                                currentLabel.width,
+                                currentLabel.height,
+                                4
+                            );
+                            ctx.stroke();
+                            
+                            // Dibujar el texto
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillText(
+                                text,
+                                currentLabel.x + padding,
+                                currentLabel.y + 14
+                            );
+                            
+                            ctx.restore();
+                        }
+                    });
+                }
+            };
 
             const chartData = transformData(
                 currentId,
@@ -116,6 +230,21 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
+                            elements: {
+                                point: {
+                                    radius: 3,           // Tamaño base del punto (siempre visible)
+                                    hoverRadius: 6,      // Tamaño al pasar el mouse
+                                    borderWidth: 2,      // Grosor del borde
+                                    backgroundColor: '#fff'  // Color de fondo del punto
+                                },
+                                line: {
+                                    tension: 0.4        // Suavizado de la línea
+                                }
+                            },
+                            interaction: {
+                                intersect: false,
+                                mode: 'index',
+                            },
                             plugins: {
                                 legend: {
                                     position: 'top',
@@ -125,12 +254,12 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 },
                                 title: {
                                     align: 'start',
-                                    color: '#D9D9D9',
                                     display: true,
-                                    text: t('tituloGrafico'),
+                                    text: `${t('tituloGrafico')}\n${t('subtituloGrafico')}`,
+                                    color: '#D9D9D9',
                                     font: {
-                                        weight: 'normal',
                                         size: 20,
+                                        weight: 'bold'
                                     },
                                     padding: {
                                         top: 0,
@@ -154,23 +283,34 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 },
                                 tooltip: {
                                     callbacks: {
+                                        title: (context) => {
+                                            const totalSeconds = Math.floor(context[0].parsed.x);
+                                            const hours = Math.floor(totalSeconds / 3600);
+                                            const minutes = Math.floor((totalSeconds % 3600) / 60);
+                                            const seconds = totalSeconds % 60;
+                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                                            
+                                            return `${t('tooltip')}: ${timeFormatted}`;
+                                        },
                                         label: (context) => {
                                             const datasetLabel = context.dataset.label || '';
                                             const value = context.parsed.y;
                                             const yAxisID = context.dataset.yAxisID;
                                             
-                                            const totalSeconds = Math.floor(context.parsed.x);
-                                            const hours = Math.floor(totalSeconds / 3600);
-                                            const minutes = Math.floor((totalSeconds % 3600) / 60);
-                                            const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-
-                                            return [
-                                                `${t('tooltip')}: ${timeFormatted}`,
-                                                `${datasetLabel}: ${value}${yAxisID === 'y1' ? ' mm' : '°C'}`
-                                            ];
+                                            return `${datasetLabel}: ${value}${yAxisID === 'y1' ? ' mm' : '°C'}`;
                                         }
-                                    }
-                                }
+                                    },
+                                    displayColors: true, // Mostrar los cuadrados de color
+                                    boxWidth: 8, // Tamaño del cuadrado de color
+                                    boxHeight: 8, // Altura del cuadrado de color
+                                    boxPadding: 4, // Espacio entre el cuadrado y el texto
+                                    usePointStyle: false,
+                                    z: 1000
+                                },
+                                endPointLabels: {
+                                    position: 'top',
+                                    z: 99999 // Asegurar que las etiquetas estén por encima
+                                },
                             },
                             animation: {
                                 duration: isFirstLoad ? 750 : 0
@@ -191,10 +331,11 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 y: {
                                     type: 'linear',
                                     display: true,
+                                    beginAtZero: true,
                                     position: 'left',
                                     title: {
                                         display: true,
-                                        text: 'Temperatura (°C)',
+                                        text: t('ejes.y'),
                                         color: '#D9D9D9'
                                     },
                                     grid: {
@@ -209,12 +350,13 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                     }
                                 },
                                 y1: {
+                                    beginAtZero: true,
                                     type: 'linear',
                                     display: true,
                                     position: 'right',
                                     title: {
                                         display: true,
-                                        text: 'Nivel de Agua (mm)',
+                                        text: t('ejes.y1'),
                                         color: '#D9D9D9'
                                     },
                                     grid: {
@@ -260,7 +402,7 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 }
                             },
                         },
-                        plugins: [plugin],
+                        plugins: [plugin, endPointLabelsPlugin],
                     };
 
                     chartInstanceRef.current = new Chart(ctx, config);

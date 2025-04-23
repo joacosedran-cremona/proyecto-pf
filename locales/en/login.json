@@ -1,0 +1,11 @@
+{
+    "formulario":
+    {
+        "usuario": "Username",
+        "contra": "Password",
+        "recuperar": "Forgot your password? Recover it here.",
+        "correo": "E-mail",
+        "enviar": "Send",
+        "recordo": "Remembered your password? Log in here."
+    }
+}

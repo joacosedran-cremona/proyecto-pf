@@ -63,7 +63,7 @@ export default function EquipoPage({type}: EquipoPageProps) {
 
     const datosCiclo = [
         { label: t('cicloActivo.paso'), value: equipo?.info.receta_paso_actual || "N/A" },
-        { label: t('cicloActivo.receta'), value: equipo?.detalles.num_receta || 'N/A' },
+        { label: t('cicloActivo.lote'), value: equipo?.detalles.num_receta || 'N/A' },
         { label: t('cicloActivo.cantTorres'), value: equipo?.detalles.cant_torres || "N/A" },
         { label: t('cicloActivo.tipoFin'), value: equipo?.detalles.tipo_fin ?? "N/A" }
     ];

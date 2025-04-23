@@ -12,7 +12,7 @@
     {
         "titulo": "Ciclo Activo",
         "paso": "Paso N°",
-        "receta": "N° Receta",
+        "lote": "N° Lote",
         "cantTorres": "Cantidad Torres",
         "tiempo": "Tiempo Transcurrido",
         "tipoFin": "Tipo Fin"

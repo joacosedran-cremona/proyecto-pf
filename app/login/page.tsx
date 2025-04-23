@@ -4,9 +4,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import crem from "@/public/creminox.png";
+import { useTranslation } from 'react-i18next';  
 
 const Login = () => {
   const router = useRouter();
+
+  const { t } = useTranslation('login');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="w-[100%] h-3/5 flex flex-col justify-evenly mt-[-100px]">
           <div className="flex flex-col gap-[5px] h-1/3">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
-              Username
+              {t('formulario.usuario')}
             </label>
             <input
               type="text"
@@ -36,7 +39,7 @@ const Login = () => {
 
           <div className="flex flex-col gap-[5px] h-1/3">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
-              Contraseña
+            {t('formulario.contra')}
             </label>
             <input
               type="password"
@@ -56,7 +59,7 @@ const Login = () => {
           href="/login/recuperacion"
           className="w-[100%] mt-[-100px] flex text-center justify-center text-[#5d5d5d] h-auto text-[14px] font-bold tracking-[0.5px] cursor-pointer hover:text-[#e82a31] transition-all duration-200 ease-in-out"
         >
-          ¿Olvidó su contraseña? Recupérela aquí
+          {t('formulario.recuperar')}
         </Link>
       </div>
     </section>

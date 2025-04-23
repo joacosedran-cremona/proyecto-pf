@@ -4,8 +4,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import crem from "@/public/creminox.png";
+import { useTranslation } from 'react-i18next';  
 
 const ForgotPassword = () => {
+
+  const { t } = useTranslation('login')
 
   return (
     <section className="flex w-[100%] h-[90vh] items-center justify-center">
@@ -19,7 +22,7 @@ const ForgotPassword = () => {
         <form className="w-[100%] h-3/5 flex flex-col justify-evenly">
           <div className="flex flex-col gap-[5px] h-1/3">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
-              email
+              {t('formulario.correo')}
             </label>
             <input
               type="text"
@@ -35,7 +38,7 @@ const ForgotPassword = () => {
               href="../login"
               className="w-[100%] flex text-center justify-center text-white"
             >
-                Enviar
+              {t('formulario.enviar')}
             </Link>
           </button>
         </form>
@@ -44,7 +47,7 @@ const ForgotPassword = () => {
             href="../login"
             className="w-[100%] flex text-center justify-center text-[#5d5d5d]"
           >
-            ¿Recordó su contraseña? Inicie sesión aquí
+            {t('formulario.recordo')}
         </Link>
       </div>
     </section>
