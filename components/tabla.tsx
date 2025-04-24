@@ -6,6 +6,7 @@ import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row 
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 import { Box, Button, Typography } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import logoDataURL from '../public/cremonabase64'; 
 
 //PDF conversor
 import { jsPDF } from "jspdf";
@@ -31,7 +32,7 @@ const Tabla: React.FC = () => {
       setIsLoading(true);
       try {
         const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
-        const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+        const port = process.env.NEXT_PUBLIC_WS_PORT || '8001';
 
         const response = await fetch(`http://${host}:${port}/alarmas`);
         if (!response.ok) throw new Error("Error en la solicitud");
@@ -71,27 +72,97 @@ const Tabla: React.FC = () => {
         accessorKey: "time",
         header: t('hora'),
         size: 200,
-      },
+        Cell: ({ cell }) => {
+          const rawDate = new Date(cell.getValue<string>());
+          const formattedDate = rawDate.toISOString().slice(0, 16).replace("T", " ");
+          return formattedDate;
+        }
+      }
     ],
     [t]
   );
 
   const handleExportRows = (rows: MRT_Row<Alerta>[]) => {
-    const doc = new jsPDF();
-    const tableData = rows.map((row) => Object.values(row.original));
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'pt',
+      format: 'A4',
+    });
+  
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const tableData = rows.map(row =>
+      columns.map(col => {
+        const value = row.original[col.accessorKey as keyof Alerta];
+        if (col.accessorKey === 'time' && typeof value === 'string') {
+          const date = new Date(value);
+          return date.toISOString().slice(0, 16).replace("T", " ");
+        }
+        return value;
+      })
+    );
     const tableHeaders = columns.map((c) => c.header as string);
+    const exportDate = new Date().toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  
+    // CABECERA personalizada
+    const headerHeight = 70;
+    const totalTexto = `Total de registros: ${rows.length}`;
+    doc.setFillColor(19, 19, 19); // Fondo oscuro
+    doc.rect(0, 0, pageWidth, headerHeight, 'F');
+  
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+  
+    doc.text('Fecha de exportación:', 20, 25);
+    doc.text('Contacto: soporte@creminox.com', 20, 40);
+    doc.text(totalTexto, 20, 55);
+  
+    doc.setFont('helvetica', 'normal');
+    doc.text(exportDate, 130, 25);
+  
 
+    const logoWidth = 120;
+    const logoHeight = 25;
+    const logoX = pageWidth - logoWidth - 40;
+    const logoY = (headerHeight - logoHeight) / 2;
+
+    doc.addImage(logoDataURL, 'PNG', logoX, logoY, logoWidth, logoHeight);
+    doc.link(logoX, logoY, logoWidth, logoHeight, {
+      url: "https://creminox.com",
+      target: "_blank"
+    });
+
+    // TABLA
     autoTable(doc, {
       head: [tableHeaders],
       body: tableData,
       theme: 'grid',
-      styles: { fillColor: [41, 41, 41] },
-      headStyles: { fillColor: [25, 25, 25] },
+      margin: { top: headerHeight + 10 },
+      styles: {
+        fillColor: [41, 41, 41],
+        textColor: [255, 255, 255],
+        fontSize: 9,
+      },
+      headStyles: {
+        fillColor: [25, 25, 25],
+        textColor: [255, 255, 255],
+        fontStyle: 'bold',
+      },
+      alternateRowStyles: {
+        fillColor: [30, 30, 30],
+      },
+      tableLineColor: [100, 100, 100],
+      tableLineWidth: 0.1,
     });
-
-    doc.save("tabla_alertas.pdf");
+  
+    doc.save("Registro_Eventos.pdf");
   };
-
+  
+  
   const customTheme = createTheme({
     components: {
       MuiMenu: {
