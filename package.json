@@ -3,7 +3,8 @@
  "version": "0.0.1",
  "private": true,
  "scripts": {
-  "dev": "NODE_OPTIONS=--max_old_space_size=20096 next dev --turbo -p 3001",
+  "dev": "next dev --turbopack",
+  /*"dev": "NODE_OPTIONS=--max_old_space_size=20096 next dev --turbo -p 3001",*/
   "build": "next build",
   "start": "next start",
   "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
