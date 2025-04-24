@@ -21,3 +21,11 @@
 .pdf-margin {
     margin-bottom: 10px !important;
   }
+
+.nextjs-toast-errors, 
+nextjs-portal,
+#__next-build-watcher {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
