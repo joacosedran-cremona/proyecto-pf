@@ -276,7 +276,8 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
         options: {
           interaction: {
             intersect: false,
-            mode: 'index',
+            mode: 'nearest', // Cambiado de 'index' a 'nearest'
+            axis: 'x'        // Especifica que solo considere el eje X
           },
           responsive: true,
           maintainAspectRatio: false,
@@ -285,7 +286,6 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
               position: 'top',
               labels: {
                 usePointStyle: true,
-                pointStyle: 'circle',
               }
             },
             tooltip: {
