@@ -5,6 +5,6 @@
     "hora": "TIME",
     "exptodas": "EXPORT ALL ROWS",
     "expvisibles": "EXPORT VISIBLE ROWS",
-    "alertas": "ALERTS",
-    "historial": "HISTORICAL"
+    "alertas": "EXTENDED",
+    "historial": "ALERTS HISTORY"
 }

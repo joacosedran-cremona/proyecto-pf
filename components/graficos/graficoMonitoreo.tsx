@@ -378,7 +378,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
             {/* Derecha: Temperaturas */}
             <div className="text-right text-sm">
               <div className={`text-[#FFA500] font-semibold`}>
-              {t('datosMonitoreo.nivelAgua')} <span className="text-white">{equipo.niv_agua.toFixed(0)} mm</span>
+              {t('datosMonitoreo.nivelAgua')} <span className="text-white">{equipo.niv_agua.toFixed(0)}mm</span>
               </div>
               <div className={`text-[#36A2EB] font-semibold`}>
                 {t('datosMonitoreo.tempAgua')} <span className="text-white">{equipo.temp_agua.toFixed(1)}°C</span>

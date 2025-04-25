@@ -179,11 +179,31 @@ const Tabla: React.FC = () => {
   };
   
   const customTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#761122',
+      },
+      background: {
+        default: '#131313 !important',
+        paper: '#131313 !important',
+      },
+      text: {
+        primary: '#d9d9d9',
+        secondary: '#8c8c8c',
+      },
+    },
     components: {
-      MuiMenu: {
+      MuiCssBaseline: {
         styleOverrides: {
-          paper: {
-            backgroundColor: '#131313',
+          body: {
+            backgroundColor: '#131313 !important',
+          },
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: '#131313 !important',
           },
         },
       },
@@ -195,19 +215,10 @@ const Tabla: React.FC = () => {
           displayedRows: { color: '#ffffff' },
         },
       },
-      MuiMenuItem: {
+      MuiMenu: {
         styleOverrides: {
-          root: {
-            color: '#d9d9d9',
-            '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
-            },
-            '&.Mui-selected': {
-              backgroundColor: 'rgba(255, 255, 255, 0.12)',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
-              }
-            },
+          paper: {
+            backgroundColor: '#131313 !important',
           },
         },
       },
@@ -229,9 +240,10 @@ const Tabla: React.FC = () => {
     //Head
     muiTableHeadCellProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
         color: "#d9d9d9",
         fontWeight: "bold",
+        borderBottom: "none", // Eliminar bordes de celdas para evitar duplicación
         '& .MuiDivider-root': {
           backgroundColor: '#FFF5 !important',
           height: '20px',
@@ -239,18 +251,38 @@ const Tabla: React.FC = () => {
             backgroundColor: 'rgb(129, 129, 129) !important',
           },
         },
+        // Estilos específicos para el icono de ordenamiento
+        '& .MuiTableSortLabel-root': {
+          color: '#d9d9d9',
+          '& .MuiTableSortLabel-icon': {
+            color: '#d9d9d9 !important', // Forzar color para el ícono
+          }
+        },
+        // Cuando está activo
+        '& .MuiTableSortLabel-root.Mui-active': {
+          color: '#d9d9d9',
+          '& .MuiTableSortLabel-icon': {
+            color: '#d9d9d9 !important',
+          }
+        },
+        // Para todos los íconos SVG dentro del encabezado
+        '& .MuiSvgIcon-root': {
+          color: '#d9d9d9',
+        }
       },
     },
 
     muiTableHeadRowProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
+        // Agregar borde inferior a la fila de cabecera
+        borderBottom: "1px solid #515151"
       },
     },
 
     muiTopToolbarProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
         position: 'relative',
         '& .MuiInputBase-root': {
           color: '#d9d9d9',
@@ -264,21 +296,23 @@ const Tabla: React.FC = () => {
       },
     },
 
-
     //Body
     muiTableBodyCellProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
         color: "#d9d9d9",
+        borderBottom: "none", // Eliminar bordes de celdas para evitar duplicación
       },
     },
 
     muiTableBodyRowProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
         "&:nth-of-type(odd)": {
-          backgroundColor: "#131313",
-        }
+          backgroundColor: "#131313 !important",
+        },
+        // Agregar borde inferior a cada fila
+        borderBottom: "1px solid #515151"
       },
     },
 
@@ -297,7 +331,7 @@ const Tabla: React.FC = () => {
 
     muiBottomToolbarProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
         color: "#d9d9d9",
         '& .MuiTablePagination-root': {
           color: '#d9d9d9',
@@ -336,20 +370,23 @@ const Tabla: React.FC = () => {
     muiTablePaperProps: {
       elevation: 0,
       sx: {
-        backgroundColor: '#1e1e1e',
+        backgroundColor: '#131313',
         borderRadius: '8px',
       },
     },
 
     muiTableContainerProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
       },
     },
 
     muiSkeletonProps: {
       sx: {
-        backgroundColor: "#131313",
+        backgroundColor: "#131313 !important",
+        '&::after': {
+          background: 'linear-gradient(90deg, transparent, rgba(80, 80, 80, 0.1), transparent)',
+        },
       },
     },
     muiColumnActionsButtonProps: {
@@ -381,7 +418,8 @@ const Tabla: React.FC = () => {
             onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
             startIcon={<FileDownloadIcon />}
             variant="contained"
-            color="primary"
+            color="primary" 
+            sx={{backgroundColor: "#761122"}}
           >
             {t('exptodas')}
           </Button>
@@ -389,7 +427,7 @@ const Tabla: React.FC = () => {
             onClick={() => handleExportRows(table.getRowModel().rows)}
             startIcon={<FileDownloadIcon />}
             variant="outlined"
-            color="primary"
+            color="primary" 
           >
             {t('expvisibles')}
           </Button>
@@ -428,7 +466,9 @@ const Tabla: React.FC = () => {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <MaterialReactTable table={table} />
+      <div className="w-full bg-[#131313] rounded-[15px] p-[20px]">
+        <MaterialReactTable table={table} />
+      </div>
     </ThemeProvider>
   );
 };
