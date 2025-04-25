@@ -9,9 +9,9 @@
     },
     "datosMonitoreo":
     {
-        "tempAgua": "WATER TEMP:",
-        "tempProd": "PROD. TEMP:",
-        "nivelAgua": "WATER LEVEL:",
+        "tempAgua": "WATER T:",
+        "tempProd": "PROD. T:",
+        "nivelAgua": "WATER L:",
         "letraCocina": "K",
         "letraEnfriador": "C"
     },

@@ -253,27 +253,30 @@ export function ImagenLayout() {
                         {equipo.estado}
                       </p>
                     </div>
-                    <div className="mt-[10px]">
+                    <div 
+                      className="mt-[8px]" 
+                      style={{ marginTop: equipo.receta && equipo.receta.length > 7 ? '14px' : '8px' }}
+                    >
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black'}}
                       >
-                        {t('datos.tempActual')}: {equipo.tempProductoActual ?? '-'}
+                        {t('datos.tempActual')}: {equipo.tempProductoActual !== undefined ? `${equipo.tempProductoActual.toFixed(0)}°C` : '-'}
                       </p>
                       <p
                         className="font-bold"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
-                        {t('datos.tempAgua')}: {equipo.tempAguaActual ?? '-'}
+                        {t('datos.tempAgua')}: {equipo.tempAguaActual !== undefined ? `${equipo.tempAguaActual.toFixed(0)}°C` : '-'}
                       </p>
                       <p
-                        className="font-bold"
-                        style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
+                        className="font-bold mt-[1px]"
+                        style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black', lineHeight: '1'}}
                       >
                         {t('datos.receta')}: {equipo.receta ?? '-'}
                       </p>
                       <p
-                        className="font-bold"
+                        className="font-bold mt-[1px]"
                         style={{ fontSize: 'calc(0.7vw + 0.4vh)', textShadow: '1px 1px 2px black' }}
                       >
                         {t('datos.tiempo')}: {equipo.tiempoTranscurrido}

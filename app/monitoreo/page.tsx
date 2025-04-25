@@ -15,36 +15,36 @@ const Monitoreo = () => {
     const { lineaSeleccionada, lineasData } = useLinea();
     const linea = lineas[lineaSeleccionada as keyof typeof lineas];
 
-    // Base classes siempre presentes
-    const baseClasses = "flex flex-col min-h-[650px] h-[90vh] w-[100%] min-w-[720px] items-center justify-center gap-[20px]";
-    
-    // Clases adicionales solo cuando hay datos completos
-    const marginClasses = lineasData && Object.keys(lineasData).length > 0 ? "laptop:mt-[40px] laptop:mb-[40px]" : "";
-
-    // Verificar que realmente tenemos datos antes de aplicar los márgenes
+    // Verificar que realmente tenemos datos
     const hasRealData = lineasData && 
         lineasData[lineaSeleccionada]?.cocinas?.length > 0 && 
         lineasData[lineaSeleccionada]?.enfriadores?.length > 0;
 
     return (
-        <section className={`${baseClasses} ${hasRealData ? marginClasses : ''}`}>
-            <div className="flex w-[100%] justify-between">
+        <section className="flex flex-col h-screen max-h-screen w-full min-w-[720px] overflow-hidden">
+            {/* Header con título y selector - altura fija */}
+            <div className="flex w-full justify-between mb-[10px]">
                 <h1 className="text-2xl font-semibold text-white">{t('monitoreo')}</h1>
                 <div className="w-1/5">
                     <Selector />
                 </div>
             </div>
-
-            <div className="flex flex-row gap-[20px] h-1/2 w-[100%]">
-                {linea.cocinas.map((id) => (
-                    <GraficoMonitoreo key={`equipo-${id}`} id={id} />
-                ))}
-            </div>
+            
+            {/* Contenedor con los gráficos - altura adaptable */}
+            <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+                {/* Contenedor de cocinas - mitad superior */}
+                <div className="flex-1 flex flex-row gap-[20px] min-h-0">
+                    {linea.cocinas.map((id) => (
+                        <GraficoMonitoreo key={`equipo-${id}`} id={id} />
+                    ))}
+                </div>
                 
-            <div className="flex flex-row gap-[20px] h-1/2 w-[100%]">
-                {linea.enfriadores.map((id) => (
-                    <GraficoMonitoreo key={`equipo-${id}`} id={id} />
-                ))}
+                {/* Contenedor de enfriadores - mitad inferior */}
+                <div className="flex-1 flex flex-row gap-[20px] min-h-0">
+                    {linea.enfriadores.map((id) => (
+                        <GraficoMonitoreo key={`equipo-${id}`} id={id} />
+                    ))}
+                </div>
             </div>
         </section>
     );

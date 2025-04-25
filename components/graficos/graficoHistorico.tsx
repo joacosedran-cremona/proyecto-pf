@@ -281,6 +281,13 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
           },
           responsive: true,
           maintainAspectRatio: false,
+          transitions: {
+            zoom: {
+              animation: {
+                duration: 0
+              }
+            }
+          },
           plugins: {
             legend: {
               position: 'top',
@@ -317,15 +324,19 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
               pan: {
                 enabled: true,
                 mode: 'x',
+                speed: 10,
+                threshold: 10
               },
               zoom: {
                 wheel: {
                   enabled: true,
+                  modifierKey: 'ctrl',
                 },
                 pinch: {
                   enabled: true
                 },
                 mode: 'x',
+                sensitivity: 3,
               }
             }
           },

@@ -102,112 +102,138 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                 afterDraw: (chart: Chart, args, opts) => {
                     const ctx = chart.ctx;
                     ctx.save();
-                    // Aumentar el z-index estableciendo el orden de dibujo
-                    ctx.globalCompositeOperation = 'source-over';
                     
+                    // Array para almacenar las posiciones de las etiquetas
                     const labels: Array<{
                         x: number;
                         y: number;
                         width: number;
                         height: number;
+                        datasetIndex: number;
                     }> = [];
             
+                    // Primera pasada: recopilar dimensiones
                     chart.data.datasets.forEach((dataset, i) => {
                         const meta = chart.getDatasetMeta(i);
                         if (!meta.hidden && dataset.data.length > 0) {
                             const lastPoint = meta.data[meta.data.length - 1];
                             const value = dataset.data[dataset.data.length - 1] as { x: number; y: number };
                             
-                            ctx.save();
-                            ctx.fillStyle = dataset.borderColor as string;
                             ctx.font = '14px Arial';
-                            
-                            const text = `${value.y}${dataset.yAxisID === 'y1' ? ' mm' : '°C'}`;
+                            const text = `${value.y.toFixed(1)}${dataset.yAxisID === 'y1' ? ' mm' : '°C'}`;
                             const textWidth = ctx.measureText(text).width;
                             const padding = 4;
                             const labelHeight = 20;
                             
-                            // Calcular posición inicial
-                            let labelX = lastPoint.x + 5; // Reducido de 10 a 5
-                            let labelY = lastPoint.y - 5; // Reducido de 10 a 5
+                            // Posición base - siempre a la derecha del punto
+                            const labelX = lastPoint.x + 5;
+                            const labelY = lastPoint.y - labelHeight/2;
                             
-                            // Ajustar posición vertical si hay solapamiento
-                            const currentLabel = {
+                            // Almacenar información de la etiqueta
+                            labels.push({
                                 x: labelX,
                                 y: labelY,
                                 width: textWidth + (padding * 2),
-                                height: labelHeight
-                            };
-            
-                            // Verificar solapamiento con etiquetas existentes
-                            let overlap = true;
-                            let alternatePosition = false; // Alternar entre izquierda y derecha
-            
-                            while (overlap) {
-                                overlap = false;
-                                for (const label of labels) {
-                                    if (!(currentLabel.x + currentLabel.width < label.x ||
-                                        currentLabel.x > label.x + label.width ||
-                                        currentLabel.y + currentLabel.height < label.y ||
-                                        currentLabel.y > label.y + label.height)) {
-                                        
-                                        if (!alternatePosition) {
-                                            // Mover a la izquierda en el primer solapamiento
-                                            currentLabel.x = lastPoint.x - currentLabel.width - 5;
-                                            alternatePosition = true;
-                                        } else {
-                                            // Si aún hay solapamiento, mover ligeramente hacia arriba
-                                            currentLabel.y -= labelHeight + 2; // Reducido de 5 a 2
-                                            currentLabel.x = lastPoint.x + 5;
-                                            alternatePosition = false;
-                                        }
-                                        overlap = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            
-                            // Agregar la etiqueta actual al array de etiquetas
-                            labels.push(currentLabel);
-                            
-                            // Dibujar el fondo
-                            ctx.fillStyle = dataset.borderColor as string;
-                            ctx.globalAlpha = 0.15;
-                            ctx.beginPath();
-                            ctx.roundRect(
-                                currentLabel.x,
-                                currentLabel.y,
-                                currentLabel.width,
-                                currentLabel.height,
-                                4
-                            );
-                            ctx.fill();
-                            
-                            // Dibujar el borde
-                            ctx.globalAlpha = 0.8;
-                            ctx.strokeStyle = dataset.borderColor as string;
-                            ctx.lineWidth = 1;
-                            ctx.beginPath();
-                            ctx.roundRect(
-                                currentLabel.x,
-                                currentLabel.y,
-                                currentLabel.width,
-                                currentLabel.height,
-                                4
-                            );
-                            ctx.stroke();
-                            
-                            // Dibujar el texto
-                            ctx.fillStyle = '#FFFFFF';
-                            ctx.fillText(
-                                text,
-                                currentLabel.x + padding,
-                                currentLabel.y + 14
-                            );
-                            
-                            ctx.restore();
+                                height: labelHeight,
+                                datasetIndex: i
+                            });
                         }
                     });
+            
+                    // Ordenar etiquetas por posición y en el orden de los datasets
+                    // Primero por su posición vertical aproximada
+                    labels.sort((a, b) => a.y - b.y);
+            
+                    // Segunda pasada: resolver solapamientos
+                    for (let i = 1; i < labels.length; i++) {
+                        const current = labels[i];
+                        
+                        // Verificar solapamiento con todas las etiquetas anteriores
+                        for (let j = 0; j < i; j++) {
+                            const previous = labels[j];
+                            
+                            // Detectar solapamiento horizontal
+                            const horizontalOverlap = !(
+                                current.x + current.width < previous.x ||
+                                current.x > previous.x + previous.width
+                            );
+                            
+                            // Detectar solapamiento vertical
+                            const verticalOverlap = !(
+                                current.y + current.height < previous.y ||
+                                current.y > previous.y + previous.height
+                            );
+                            
+                            // Si hay solapamiento en ambos ejes
+                            if (horizontalOverlap && verticalOverlap) {
+                                // Mover la etiqueta actual hacia abajo lo suficiente para evitar solapamiento
+                                const offset = previous.y + previous.height + 2;
+                                current.y = offset;
+                                
+                                // Reiniciar la verificación con la nueva posición
+                                j = -1; // Comenzará en 0 en la próxima iteración
+                            }
+                        }
+                    }
+            
+                    // Tercera pasada: dibujar las etiquetas con las posiciones ajustadas
+                    labels.forEach((label) => {
+                        const dataset = chart.data.datasets[label.datasetIndex];
+                        const value = dataset.data[dataset.data.length - 1] as { x: number; y: number };
+                        const text = `${value.y.toFixed(1)}${dataset.yAxisID === 'y1' ? ' mm' : '°C'}`;
+                        
+                        // Dibujar el fondo
+                        ctx.fillStyle = dataset.borderColor as string;
+                        ctx.globalAlpha = 0.15;
+                        ctx.beginPath();
+                        ctx.roundRect(
+                            label.x,
+                            label.y,
+                            label.width,
+                            label.height,
+                            4
+                        );
+                        ctx.fill();
+                        
+                        // Dibujar el borde
+                        ctx.globalAlpha = 0.8;
+                        ctx.strokeStyle = dataset.borderColor as string;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.roundRect(
+                            label.x,
+                            label.y,
+                            label.width,
+                            label.height,
+                            4
+                        );
+                        ctx.stroke();
+                        
+                        // Dibujar el texto
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.globalAlpha = 1;
+                        ctx.fillText(
+                            text,
+                            label.x + 4, // padding
+                            label.y + 14  // altura de texto
+                        );
+                        
+                        // Opcional: Dibujar línea conectora desde el punto hasta la etiqueta
+                        const meta = chart.getDatasetMeta(label.datasetIndex);
+                        const lastPoint = meta.data[meta.data.length - 1];
+                        
+                        if (label.y !== lastPoint.y - label.height/2) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = dataset.borderColor as string;
+                            ctx.globalAlpha = 0.5;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(lastPoint.x, lastPoint.y);
+                            ctx.lineTo(label.x - 2, label.y + label.height/2);
+                            ctx.stroke();
+                        }
+                    });
+                    
+                    ctx.restore();
                 }
             };
 
@@ -226,7 +252,13 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                 if (ctx) {
                     const config: ChartConfiguration<'line'> = {
                         type: 'line',
-                        data: chartData,
+                        data: {
+                            datasets: chartData.datasets.map(dataset => ({
+                                ...dataset,
+                                pointRadius: 0,       // Tamaño de los puntos normal (más pequeño)
+                                pointHoverRadius: 3,  // Tamaño al pasar el mouse (ligeramente más grande)
+                            }))
+                        },
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
@@ -269,11 +301,13 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
                                 zoom: {
                                     pan: {
                                         enabled: true,
+                                        modifierKey: 'ctrl',
                                         mode: 'x',
                                     },
                                     zoom: {
                                         wheel: {
                                             enabled: true,
+                                            modifierKey: 'ctrl',
                                         },
                                         pinch: {
                                             enabled: true,

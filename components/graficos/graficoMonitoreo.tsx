@@ -128,7 +128,13 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
                 if (ctx) {
                     const config: ChartConfiguration<'line'> = {
                         type: 'line',
-                        data: chartData,
+                        data: {
+                            datasets: chartData.datasets.map(dataset => ({
+                                ...dataset,
+                                pointRadius: 2,       // Tamaño de los puntos normal (más pequeño)
+                                pointHoverRadius: 4,  // Tamaño al pasar el mouse (ligeramente más grande)
+                            }))
+                        },
                         options: {
                             interaction: {
                                 intersect: false,
@@ -371,14 +377,14 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
       
             {/* Derecha: Temperaturas */}
             <div className="text-right text-sm">
+              <div className={`text-[#FFA500] font-semibold`}>
+              {t('datosMonitoreo.nivelAgua')} <span className="text-white">{equipo.niv_agua.toFixed(0)} mm</span>
+              </div>
               <div className={`text-[#36A2EB] font-semibold`}>
                 {t('datosMonitoreo.tempAgua')} <span className="text-white">{equipo.temp_agua.toFixed(1)}°C</span>
               </div>
               <div className={`text-[#4BC04B] font-semibold`}>
                 {t('datosMonitoreo.tempProd')} <span className="text-white">{equipo.temp_prod.toFixed(1)}°C</span>
-              </div>
-              <div className={`text-[#FFA500] font-semibold`}>
-              {t('datosMonitoreo.nivelAgua')} <span className="text-white">{equipo.niv_agua}mm</span>
               </div>
             </div>
           </div>

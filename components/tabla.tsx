@@ -15,6 +15,8 @@ import autoTable from "jspdf-autotable";
 //Idioma
 import { useTranslation } from "react-i18next";
 
+import { toast } from "sonner";
+
 export type Alerta = {
   key: string;
   description: string;
@@ -83,85 +85,98 @@ const Tabla: React.FC = () => {
   );
 
   const handleExportRows = (rows: MRT_Row<Alerta>[]) => {
-    const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'pt',
-      format: 'A4',
-    });
-  
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const tableData = rows.map(row =>
-      columns.map(col => {
-        const value = row.original[col.accessorKey as keyof Alerta];
-        if (col.accessorKey === 'time' && typeof value === 'string') {
-          const date = new Date(value);
-          return date.toISOString().slice(0, 16).replace("T", " ");
-        }
-        return value;
-      })
-    );
-    const tableHeaders = columns.map((c) => c.header as string);
-    const exportDate = new Date().toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  
-    // CABECERA personalizada
-    const headerHeight = 70;
-    const totalTexto = `Total de registros: ${rows.length}`;
-    doc.setFillColor(19, 19, 19); // Fondo oscuro
-    doc.rect(0, 0, pageWidth, headerHeight, 'F');
-  
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-  
-    doc.text('Fecha de exportación:', 20, 25);
-    doc.text('Contacto: soporte@creminox.com', 20, 40);
-    doc.text(totalTexto, 20, 55);
-  
-    doc.setFont('helvetica', 'normal');
-    doc.text(exportDate, 130, 25);
-  
+    try {
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'pt',
+        format: 'A4',
+      });
+    
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const tableData = rows.map(row =>
+        columns.map(col => {
+          const value = row.original[col.accessorKey as keyof Alerta];
+          if (col.accessorKey === 'time' && typeof value === 'string') {
+            const date = new Date(value);
+            return date.toISOString().slice(0, 16).replace("T", " ");
+          }
+          return value;
+        })
+      );
+      const tableHeaders = columns.map((c) => c.header as string);
+      const exportDate = new Date().toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    
+      // CABECERA personalizada
+      const headerHeight = 70;
+      const totalTexto = `Total de registros: ${rows.length}`;
+      doc.setFillColor(19, 19, 19); // Fondo oscuro
+      doc.rect(0, 0, pageWidth, headerHeight, 'F');
+    
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+    
+      doc.text('Fecha de exportación:', 20, 25);
+      doc.text('Contacto: soporte@creminox.com', 20, 40);
+      doc.text(totalTexto, 20, 55);
+    
+      doc.setFont('helvetica', 'normal');
+      doc.text(exportDate, 130, 25);
+    
+      const logoWidth = 120;
+      const logoHeight = 25;
+      const logoX = pageWidth - logoWidth - 40;
+      const logoY = (headerHeight - logoHeight) / 2;
 
-    const logoWidth = 120;
-    const logoHeight = 25;
-    const logoX = pageWidth - logoWidth - 40;
-    const logoY = (headerHeight - logoHeight) / 2;
+      doc.addImage(logoDataURL, 'PNG', logoX, logoY, logoWidth, logoHeight);
+      doc.link(logoX, logoY, logoWidth, logoHeight, {
+        url: "https://creminox.com",
+        target: "_blank"
+      });
 
-    doc.addImage(logoDataURL, 'PNG', logoX, logoY, logoWidth, logoHeight);
-    doc.link(logoX, logoY, logoWidth, logoHeight, {
-      url: "https://creminox.com",
-      target: "_blank"
-    });
-
-    // TABLA
-    autoTable(doc, {
-      head: [tableHeaders],
-      body: tableData,
-      theme: 'grid',
-      margin: { top: headerHeight + 10 },
-      styles: {
-        fillColor: [41, 41, 41],
-        textColor: [255, 255, 255],
-        fontSize: 9,
-      },
-      headStyles: {
-        fillColor: [25, 25, 25],
-        textColor: [255, 255, 255],
-        fontStyle: 'bold',
-      },
-      alternateRowStyles: {
-        fillColor: [30, 30, 30],
-      },
-      tableLineColor: [100, 100, 100],
-      tableLineWidth: 0.1,
-    });
-  
-    doc.save("Registro_Eventos.pdf");
+      // TABLA
+      autoTable(doc, {
+        head: [tableHeaders],
+        body: tableData,
+        theme: 'grid',
+        margin: { top: headerHeight + 10 },
+        styles: {
+          fillColor: [41, 41, 41],
+          textColor: [255, 255, 255],
+          fontSize: 9,
+        },
+        headStyles: {
+          fillColor: [25, 25, 25],
+          textColor: [255, 255, 255],
+          fontStyle: 'bold',
+        },
+        alternateRowStyles: {
+          fillColor: [30, 30, 30],
+        },
+        tableLineColor: [100, 100, 100],
+        tableLineWidth: 0.1,
+      });
+    
+      doc.save("Registro_Eventos.pdf");
+      
+      // Mostrar toast de éxito
+      toast.success('Éxito', {
+        description: 'PDF descargado correctamente',
+        position: 'bottom-right'
+      });
+    } catch (error) {
+      // Mostrar toast de error si algo falla
+      console.error('Error al generar el PDF:', error);
+      toast.error('Error', {
+        description: error instanceof Error ? error.message : 'Error al generar el PDF',
+        position: 'bottom-right'
+      });
+    }
   };
-  
   
   const customTheme = createTheme({
     components: {
