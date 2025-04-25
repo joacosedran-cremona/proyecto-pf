@@ -11,11 +11,11 @@
     "cicloActivo":
     {
         "titulo": "Ciclo Activo",
-        "paso": "Paso N°",
-        "lote": "N° Lote",
-        "cantTorres": "Cantidad Torres",
+        "paso": "N° Paso:",
+        "lote": "N° Lote:",
+        "cantTorres": "Cantidad Torres:",
         "tiempo": "Tiempo Transcurrido",
-        "tipoFin": "Tipo Fin"
+        "tipoFin": "Modo de Finalizacion:"
     },
     "sectorIO":
     {
