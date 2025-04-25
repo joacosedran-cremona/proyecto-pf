@@ -4,11 +4,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import crem from "@/public/creminox.png";
-import { useTranslation } from 'react-i18next';  
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const router = useRouter();
-
   const { t } = useTranslation('login');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -18,8 +17,8 @@ const Login = () => {
   };
 
   return (
-    <section className="flex w-[100%] h-[90vh] items-center justify-center">
-      <div className="w-auto h-[70%] gap-[15px] flex flex-col items-center justify-between p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
+    <section className="flex min-h-[95vh] w-full items-center justify-center">
+      <div className="w-auto h-[55vh] gap-[15px] flex flex-col items-center justify-between p-[3rem_4rem_2rem_4rem] max-w-[1920px] text-[#D9D9D9] bg-[#131313] rounded-[15px]">
         <Image
           src={crem}
           alt="Creminox"
@@ -51,7 +50,7 @@ const Login = () => {
             type="submit"
             className="bg-[#e82a31] mt-[5px] p-[4px] rounded-[10px] w-[100%] h-1/5 flex items-center justify-center border-none text-[#D9D9D9] font-bold cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
           >
-            Login
+            {t('formulario.acceder')}
           </button>
         </form>
 

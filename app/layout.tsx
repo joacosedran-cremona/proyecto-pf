@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import clsx from "clsx";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { cookies } from 'next/headers';
@@ -26,7 +25,7 @@ export default async function RootLayout({
   return (
     <html className="dark" suppressHydrationWarning lang="en">
       <head />
-      <body className={clsx("min-h-screen bg-grey font-mono antialiased w-[100%]")}>
+      <body className={"min-h-screen bg-grey font-mono antialiased w-[100%] items-center justify-center"}>
         <Providers initialLanguage={initialLanguage}>
             {children}
         </Providers>

@@ -6,6 +6,7 @@
         "recuperar": "Forgot your password? Recover it here.",
         "correo": "E-mail",
         "enviar": "Send",
-        "recordo": "Remembered your password? Log in here."
+        "recordo": "Remembered your password? Log in here.",
+        "acceder": "Login"
     }
 }
