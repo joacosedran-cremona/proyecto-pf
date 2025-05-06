@@ -3,8 +3,11 @@
     "tipo": "TYPE",
     "estado": "STATUS",
     "hora": "TIME",
-    "exptodas": "EXPORT ALL ROWS",
-    "expvisibles": "EXPORT VISIBLE ROWS",
+    "exportar": "EXPORT",
+    "exptodaspdf": "EXPORT ALL ROWS IN PDF",
+    "expvisiblespdf": "EXPORT VISIBLE ROWS IN PDF",
+    "exptodasexcel": "EXPORT ALL ROWS IN EXCEL",
+    "expvisiblesexcel": "EXPORT VISIBLE ROWS IN EXCEL",
     "alertas": "EXTENDED",
     "historial": "ALERTS HISTORY"
 }

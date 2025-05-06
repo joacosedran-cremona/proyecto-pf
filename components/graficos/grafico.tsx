@@ -250,14 +250,40 @@ const Grafico: React.FC<{ contextType: 'cocinas' | 'enfriadores' }> = ({ context
 
                 const ctx = chartRef.current.getContext('2d');
                 if (ctx) {
+                    // Modificar los datasets para añadir el gradient fill solo al nivel de agua
+                    const modifiedDatasets = chartData.datasets.map(dataset => {
+                        if (dataset.label === 'Nivel Agua') {
+                            return {
+                                ...dataset,
+                                pointRadius: 0,
+                                pointHoverRadius: 3,
+                                fill: true,  // Habilitar el relleno solo para este dataset
+                                backgroundColor: (context) => {
+                                    if (!context.chart.chartArea) {
+                                        return dataset.borderColor;
+                                    }
+                                    
+                                    const { ctx, chartArea } = context.chart;
+                                    const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                                    gradient.addColorStop(0, 'rgba(255, 165, 0, 0)');
+                                    gradient.addColorStop(1, 'rgba(255, 165, 0, 0.3)');
+                                    return gradient;
+                                }
+                            };
+                        } else {
+                            return {
+                                ...dataset,
+                                pointRadius: 0,
+                                pointHoverRadius: 3,
+                                fill: false,  // Mantener las otras líneas sin relleno
+                            };
+                        }
+                    });
+
                     const config: ChartConfiguration<'line'> = {
                         type: 'line',
                         data: {
-                            datasets: chartData.datasets.map(dataset => ({
-                                ...dataset,
-                                pointRadius: 0,       // Tamaño de los puntos normal (más pequeño)
-                                pointHoverRadius: 3,  // Tamaño al pasar el mouse (ligeramente más grande)
-                            }))
+                            datasets: modifiedDatasets
                         },
                         options: {
                             responsive: true,

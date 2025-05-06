@@ -265,8 +265,18 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
               label: t('datos.nivelAgua'),
               data: nivelAgua,
               borderColor: 'rgb(255, 165, 0)',
-              backgroundColor: 'rgba(255, 165, 0, 0.5)',
-              fill: false,
+              backgroundColor: (context) => {
+                if (!context.chart.chartArea) {
+                    return 'rgba(255, 165, 0, 0.5)';
+                }
+                
+                const { ctx, chartArea } = context.chart;
+                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                gradient.addColorStop(0, 'rgba(255, 165, 0, 0)');
+                gradient.addColorStop(1, 'rgba(255, 165, 0, 0.3)');
+                return gradient;
+              },
+              fill: true,        // Activar el relleno para el nivel de agua
               tension: 0.4,
               yAxisID: 'y1',
               pointStyle: 'circle',
@@ -324,7 +334,6 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
               pan: {
                 enabled: true,
                 mode: 'x',
-                speed: 10,
                 threshold: 10
               },
               zoom: {
@@ -336,7 +345,6 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
                   enabled: true
                 },
                 mode: 'x',
-                sensitivity: 3,
               }
             }
           },

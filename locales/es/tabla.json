@@ -3,8 +3,11 @@
     "tipo": "TIPO",
     "estado": "ESTADO",
     "hora": "HORA",
-    "exptodas": "EXPORTAR TODAS LAS FILAS",
-    "expvisibles": "EXPORTAR FILAS VISIBLES",
+    "exportar": "EXPORTAR",
+    "exptodaspdf": "EXPORTAR TODAS LAS FILAS EN PDF",
+    "expvisiblespdf": "EXPORTAR FILAS VISIBLES EN PDF",
+    "exptodasexcel": "EXPORTAR TODAS LAS FILAS EN EXCEL",
+    "expvisiblesexcel": "EXPORTAR FILAS VISIBLES EN EXCEL",
     "alertas": "EXTENDIDO",
     "historial": "HISTORIAL DE ALERTAS"
 }

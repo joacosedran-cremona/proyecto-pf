@@ -129,11 +129,34 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
                     const config: ChartConfiguration<'line'> = {
                         type: 'line',
                         data: {
-                            datasets: chartData.datasets.map(dataset => ({
-                                ...dataset,
-                                pointRadius: 2,       // Tamaño de los puntos normal (más pequeño)
-                                pointHoverRadius: 4,  // Tamaño al pasar el mouse (ligeramente más grande)
-                            }))
+                            datasets: chartData.datasets.map(dataset => {
+                                if (dataset.label === 'Nivel Agua') {
+                                    return {
+                                        ...dataset,
+                                        pointRadius: 2,       
+                                        pointHoverRadius: 4,
+                                        fill: true,          // Habilitar relleno solo para nivel de agua
+                                        backgroundColor: (context) => {
+                                            if (!context.chart.chartArea) {
+                                                return dataset.borderColor;
+                                            }
+                                            
+                                            const { ctx, chartArea } = context.chart;
+                                            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                                            gradient.addColorStop(0, 'rgba(255, 165, 0, 0)');
+                                            gradient.addColorStop(1, 'rgba(255, 165, 0, 0.3)');
+                                            return gradient;
+                                        }
+                                    };
+                                } else {
+                                    return {
+                                        ...dataset,
+                                        pointRadius: 2,       
+                                        pointHoverRadius: 4,
+                                        fill: false,         // Mantener las demás líneas sin relleno
+                                    };
+                                }
+                            })
                         },
                         options: {
                             interaction: {

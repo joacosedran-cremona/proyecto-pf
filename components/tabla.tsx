@@ -4,9 +4,10 @@ import React, { useMemo, useState, useEffect } from "react";
 //MUI
 import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row } from "material-react-table";
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, Menu, MenuItem, Tooltip, IconButton } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import logoDataURL from '../public/cremonabase64'; 
+import * as XLSX from 'xlsx';  // Importamos la librería para Excel
 
 //PDF conversor
 import { jsPDF } from "jspdf";
@@ -28,6 +29,18 @@ const Tabla: React.FC = () => {
   const { t } = useTranslation("tabla");
   const [data, setData] = useState<Alerta[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  
+  // Estado para el menú de exportación
+  const [exportMenuAnchorEl, setExportMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const exportMenuOpen = Boolean(exportMenuAnchorEl);
+  
+  const handleExportMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setExportMenuAnchorEl(event.currentTarget);
+  };
+  
+  const handleExportMenuClose = () => {
+    setExportMenuAnchorEl(null);
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -178,6 +191,55 @@ const Tabla: React.FC = () => {
     }
   };
   
+  const handleExportExcel = (rows: MRT_Row<Alerta>[], fileName: string) => {
+    try {
+      // Preparar los datos para Excel
+      const excelData = rows.map(row => {
+        const rowData: Record<string, any> = {};
+        
+        columns.forEach(column => {
+          const key = column.accessorKey as keyof Alerta;
+          let value = row.original[key];
+          
+          // Formatear la fecha si es la columna de tiempo
+          if (key === 'time' && typeof value === 'string') {
+            const date = new Date(value);
+            value = date.toISOString().slice(0, 16).replace("T", " ");
+          }
+          
+          // Usar el header traducido como nombre de columna
+          const headerName = column.header as string;
+          rowData[headerName] = value;
+        });
+        
+        return rowData;
+      });
+      
+      // Crear una hoja de cálculo
+      const workSheet = XLSX.utils.json_to_sheet(excelData);
+      const workBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workBook, workSheet, "Alertas");
+      
+      // Generar y descargar el archivo
+      XLSX.writeFile(workBook, `${fileName}.xlsx`);
+      
+      // Mostrar toast de éxito
+      toast.success('Éxito', {
+        description: 'Excel descargado correctamente',
+        position: 'bottom-right'
+      });
+    } catch (error) {
+      console.error('Error al generar el Excel:', error);
+      toast.error('Error', {
+        description: error instanceof Error ? error.message : 'Error al generar el Excel',
+        position: 'bottom-right'
+      });
+    }
+    
+    // Cerrar el menú después de la exportación
+    handleExportMenuClose();
+  };
+
   const customTheme = createTheme({
     palette: {
       primary: {
@@ -414,23 +476,43 @@ const Tabla: React.FC = () => {
           gridColumn: 1,
           justifyContent: 'flex-start'
         }}>
+          {/* Nuevo botón de exportación con menú */}
           <Button
-            onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
+            id="export-button"
+            aria-controls={exportMenuOpen ? 'export-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={exportMenuOpen ? 'true' : undefined}
+            onClick={handleExportMenuClick}
             startIcon={<FileDownloadIcon />}
             variant="contained"
-            color="primary" 
+            color="primary"
             sx={{backgroundColor: "#761122"}}
           >
-            {t('exptodas')}
+            {t('exportar')}
           </Button>
-          <Button
-            onClick={() => handleExportRows(table.getRowModel().rows)}
-            startIcon={<FileDownloadIcon />}
-            variant="outlined"
-            color="primary" 
+          
+          <Menu
+            id="export-menu"
+            anchorEl={exportMenuAnchorEl}
+            open={exportMenuOpen}
+            onClose={handleExportMenuClose}
+            MenuListProps={{
+              'aria-labelledby': 'export-button',
+            }}
           >
-            {t('expvisibles')}
-          </Button>
+            <MenuItem onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}>
+              {t('exptodaspdf')}
+            </MenuItem>
+            <MenuItem onClick={() => handleExportRows(table.getRowModel().rows)}>
+              {t('expvisiblespdf')}
+            </MenuItem>
+            <MenuItem onClick={() => handleExportExcel(table.getPrePaginationRowModel().rows, "Todas_Alertas")}>
+              {t('exptodasexcel')}
+            </MenuItem>
+            <MenuItem onClick={() => handleExportExcel(table.getRowModel().rows, "Alertas_Visibles")}>
+              {t('expvisiblesexcel')}
+            </MenuItem>
+          </Menu>
         </Box>
 
         {/* Sección central - Título */}
