@@ -3,8 +3,8 @@ import React, { useMemo, useState, useEffect } from "react";
 
 //MUI
 import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row } from "material-react-table";
-import { createTheme, ThemeProvider, useTheme } from '@mui/material';
-import { Box, Button, Typography, Menu, MenuItem, Tooltip, IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material';
+import { Box, Button, Typography, Menu, MenuItem } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import logoDataURL from '../public/cremonabase64'; 
 import * as XLSX from 'xlsx';  // Importamos la librería para Excel
@@ -18,17 +18,56 @@ import { useTranslation } from "react-i18next";
 
 import { toast } from "sonner";
 
-export type Alerta = {
+export interface Alerta {
   key: string;
   description: string;
   type: string;
+  state: string;
   time: string;
+}
+
+interface AlarmaData {
+  id_alarma: number;
+  descripcion: string;
+  tipoAlarma: string;
+  estadoAlarma: boolean;
+  fechaRegistro: string;
+}
+
+// Función auxiliar para resaltar el texto que coincide con el filtro
+const highlightText = (text: string, filter: string): JSX.Element => {
+  if (!filter || filter === '') return <>{text}</>;
+  
+  try {
+    const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    const parts = text.split(regex);
+    
+    return (
+      <>
+        {parts.map((part, i) => {
+          const match = part.toLowerCase() === filter.toLowerCase();
+          return match ? (
+            <span key={i} style={{ backgroundColor: 'rgba(255, 204, 0, 0.4)', color: '#ffffff', fontWeight: 'bold' }}>
+              {part}
+            </span>
+          ) : (
+            <span key={i}>{part}</span>
+          );
+        })}
+      </>
+    );
+  } catch (error) {
+    // Fallback en caso de error con la expresión regular
+    return <>{text}</>;
+  }
 };
 
 const Tabla: React.FC = () => {
   const { t } = useTranslation("tabla");
   const [data, setData] = useState<Alerta[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [columnFilters, setColumnFilters] = useState<{ id: string, value: string }[]>([]);
   
   // Estado para el menú de exportación
   const [exportMenuAnchorEl, setExportMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,60 +81,182 @@ const Tabla: React.FC = () => {
     setExportMenuAnchorEl(null);
   };
 
-  useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
-      try {
-        const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
-        const port = process.env.NEXT_PUBLIC_WS_PORT || '8001';
+  // Configuración del WebSocket
+  const wsUrl = `ws://${process.env.NEXT_PUBLIC_WS_HOST || 'localhost'}:${process.env.NEXT_PUBLIC_WS_PORT || '8001'}/ws/datos`;
 
-        const response = await fetch(`http://${host}:${port}/alarmas`);
-        if (!response.ok) throw new Error("Error en la solicitud");
+  const connectWebSocket = () => {
+    setIsLoading(true);
+    setError(null);
 
-        const apiData = await response.json();
-        const convertedData = apiData.map((alarma: any) => ({
-          key: alarma.id_alarma.toString(),
-          description: alarma.descripcion,
-          type: alarma.tipo,
-          time: alarma.fecha_registro,
-        }));
+    try {
+      const socket = new WebSocket(wsUrl);
 
-        setData(convertedData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      socket.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          
+          // Extraer solo el array de alarmas (último elemento del array principal)
+          const alarmas: AlarmaData[] = Array.isArray(data) && data.length >= 4 ? data[3] : [];
+          
+          if (Array.isArray(alarmas) && alarmas.length > 0) {
+            setData((prevData) => {
+              const updatedData = [...prevData];
 
-    loadData();
-  }, []);
+              alarmas.forEach((alarma) => {
+                // Verificamos que la descripción no esté vacía
+                if (alarma.descripcion && alarma.descripcion.trim() !== "") {
+                  const index = updatedData.findIndex(
+                    (item) => item.key === alarma.id_alarma.toString()
+                  );
 
-  const columns = useMemo<MRT_ColumnDef<Alerta>[]>(
-    () => [
-      {
-        accessorKey: "description",
-        header: t('descripcion'),
-        size: 300,
-      },
-      {
-        accessorKey: "type",
-        header: t('tipo'),
-        size: 150,
-      },
-      {
-        accessorKey: "time",
-        header: t('hora'),
-        size: 200,
-        Cell: ({ cell }) => {
-          const rawDate = new Date(cell.getValue<string>());
-          const formattedDate = rawDate.toISOString().slice(0, 16).replace("T", " ");
-          return formattedDate;
+                  const newItem: Alerta = {
+                    key: alarma.id_alarma.toString(),
+                    description: alarma.descripcion,
+                    type: alarma.tipoAlarma,
+                    state: alarma.estadoAlarma ? "Activo" : "Inactivo",
+                    time: alarma.fechaRegistro,
+                  };
+
+                  if (index !== -1) {
+                    updatedData[index] = newItem;
+                  } else {
+                    updatedData.push(newItem);
+                  }
+                }
+              });
+
+              // Filtrar items con descripción vacía
+              return updatedData.filter(item => item.description && item.description.trim() !== "");
+            });
+            setIsLoading(false);
+          }
+        } catch (err) {
+          setError(t('errorObtencionDatos'));
+          setIsLoading(false);
         }
+      };
+
+      socket.onerror = () => {
+        setError(t('errorObtencionDatos'));
+        setIsLoading(false);
+      };
+
+      return () => {
+        socket.close();
+      };
+    } catch (error) {
+      setError(t('errorConexion'));
+      setIsLoading(false);
+      return () => {};
+    }
+  };
+
+  // Intento inicial con WebSocket
+  useEffect(() => {
+    const cleanup = connectWebSocket();
+    return cleanup;
+  }, [wsUrl]);
+
+  // Fallback a la API fetch si el WebSocket falla
+  useEffect(() => {
+    if (error) {
+      const loadDataFromAPI = async () => {
+        setIsLoading(true);
+        try {
+          const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
+          const port = process.env.NEXT_PUBLIC_WS_PORT || '8001';
+
+          const response = await fetch(`http://${host}:${port}/alarmas`);
+          if (!response.ok) throw new Error("Error en la solicitud");
+
+          const apiData = await response.json();
+          const convertedData = apiData.map((alarma: any) => ({
+            key: alarma.id_alarma.toString(),
+            description: alarma.descripcion,
+            type: alarma.tipo,
+            state: alarma.estadoAlarma ? "Activo" : "Inactivo",
+            time: alarma.fecha_registro,
+          }));
+
+          setData(convertedData);
+          setError(null);
+        } catch (err) {
+          console.error("Error fetching data:", err);
+          setError(t('errorObtencionDatos'));
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      loadDataFromAPI();
+    }
+  }, [error, t]);
+
+  // Extraer valores de filtro para hacer accesibles en las celdas
+  const getFilterValue = (columnId: string): string => {
+    const filter = columnFilters.find(f => f.id === columnId);
+    return filter?.value?.toString().toLowerCase() || '';
+  };
+
+  const columns = useMemo<MRT_ColumnDef<Alerta>[]>(() => [
+    {
+      accessorKey: 'description',
+      header: t('descripcion'),
+      size: 400,
+      Cell: ({ cell, row }) => {
+        const value = cell.getValue<string>() || '';
+        const filterValue = getFilterValue('description');
+        return highlightText(value, filterValue);
       }
-    ],
-    [t]
-  );
+    },
+    {
+      accessorKey: 'type',
+      header: t('tipo'),
+      size: 150,
+      Cell: ({ cell }) => {
+        const value = cell.getValue<string>() || '';
+        const filterValue = getFilterValue('type');
+        return highlightText(value, filterValue);
+      }
+    },
+    {
+      accessorKey: 'state',
+      header: t('estado'),
+      size: 150,
+      Cell: ({ cell }) => {
+        const value = cell.getValue<string>() || '';
+        const filterValue = getFilterValue('state');
+        return highlightText(value, filterValue);
+      }
+    },
+    {
+      accessorKey: 'time',
+      header: t('fechaRegistro'),
+      size: 200,
+      filterVariant: 'text',
+      accessorFn: (row) => {
+        try {
+          const date = new Date(row.time);
+          return date.toISOString().slice(0, 16).replace("T", " ");
+        } catch (error) {
+          console.error("Error formateando fecha:", error);
+          return row.time || "";
+        }
+      },
+      Cell: ({ cell }) => {
+        try {
+          const rawDate = new Date(cell.row.original.time);
+          const formattedDate = rawDate.toISOString().slice(0, 16).replace("T", " ");
+          const filterValue = getFilterValue('time');
+          return highlightText(formattedDate, filterValue);
+        } catch (error) {
+          const value = cell.getValue<string>() || "";
+          const filterValue = getFilterValue('time');
+          return highlightText(value, filterValue);
+        }
+      },
+    },
+  ], [t, columnFilters]);
 
   const handleExportRows = (rows: MRT_Row<Alerta>[]) => {
     try {
@@ -189,6 +350,7 @@ const Tabla: React.FC = () => {
         position: 'bottom-right'
       });
     }
+    handleExportMenuClose();
   };
   
   const handleExportExcel = (rows: MRT_Row<Alerta>[], fileName: string) => {
@@ -290,14 +452,31 @@ const Tabla: React.FC = () => {
   const table = useMaterialReactTable({
     columns,
     data,
-    state: { isLoading },
+    state: { 
+      isLoading,
+      columnFilters // Añadimos el estado de los filtros
+    },
+    onColumnFiltersChange: setColumnFilters, // Conectamos el estado a los cambios
     enableSorting: true,
     enableColumnResizing: true,
+    enableColumnFilters: true,
     columnResizeMode: "onChange",
     layoutMode: "grid",
     initialState: {
-      density: 'spacious'
+      density: 'spacious',
+      showColumnFilters: true,
     },
+    renderEmptyRowsFallback: () => (
+      <Box
+        sx={{
+          textAlign: 'center',
+          padding: '2rem',
+          color: '#d9d9d9'
+        }}
+      >
+        {error || t('noExistenDatos')}
+      </Box>
+    ),
 
     //Head
     muiTableHeadCellProps: {
@@ -350,6 +529,24 @@ const Tabla: React.FC = () => {
           color: '#d9d9d9',
         },
         '& .MuiInputBase-input': {
+          color: '#d9d9d9',
+        },
+        '& .MuiSvgIcon-root': {
+          color: '#d9d9d9',
+        },
+      },
+    },
+
+    // Personalizamos los estilos del filtro
+    muiFilterTextFieldProps: {
+      sx: {
+        '& .MuiInputBase-root': {
+          color: '#d9d9d9',
+        },
+        '& .MuiInputBase-input': {
+          color: '#d9d9d9',
+        },
+        '& .MuiInputLabel-root': {
           color: '#d9d9d9',
         },
         '& .MuiSvgIcon-root': {
@@ -549,6 +746,18 @@ const Tabla: React.FC = () => {
   return (
     <ThemeProvider theme={customTheme}>
       <div className="w-full bg-[#131313] rounded-[15px] p-[20px]">
+        {error && (
+          <div className="mb-4">
+            <Button 
+              onClick={connectWebSocket} 
+              variant="contained" 
+              color="primary" 
+              sx={{backgroundColor: "#761122"}}
+            >
+              {t('reintentar')}
+            </Button>
+          </div>
+        )}
         <MaterialReactTable table={table} />
       </div>
     </ThemeProvider>

@@ -9,5 +9,9 @@
     "exptodasexcel": "EXPORTAR TODAS LAS FILAS EN EXCEL",
     "expvisiblesexcel": "EXPORTAR FILAS VISIBLES EN EXCEL",
     "alertas": "EXTENDIDO",
-    "historial": "HISTORIAL DE ALERTAS"
+    "historial": "HISTORIAL DE ALERTAS",
+    "noSePudieronObtenerDatos": "No se pudieron obtener datos",
+    "fechaRegistro": "Fecha de registro",
+    "noExistenDatos": "No hay datos disponibles",
+    "reintentar": "Reintentar"
 }

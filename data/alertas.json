@@ -1,1402 +1,328 @@
 [
     {
-        "key": 1,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 16:35:00"
+        "nalarma": 1,
+        "id_alarma": 1,
+        "descripcion": "Finalizó ciclo de desmoldeo",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:15:30",
+        "valor": true
     },
     {
-        "key": 2,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Saturday 07:23:59"
+        "nalarma": 2,
+        "id_alarma": 1,
+        "descripcion": "Finalizó ciclo de desmoldeo",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:15:35",
+        "valor": false
     },
     {
-        "key": 3,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 14:11:32"
+        "nalarma": 3,
+        "id_alarma": 1,
+        "descripcion": "Finalizó ciclo de desmoldeo",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:15:40",
+        "valor": true
     },
     {
-        "key": 4,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Friday 13:28:44"
+        "nalarma": 1,
+        "id_alarma": 1,
+        "descripcion": "Finalizó ciclo de desmoldeo",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:15:45",
+        "valor": false
     },
     {
-        "key": 5,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Saturday 17:25:34"
+        "id_alarma": 2,
+        "descripcion": "Torre lista para iniciar encajonado",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:17:45"
     },
     {
-        "key": 6,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 03:47:14"
+        "id_alarma": 3,
+        "descripcion": "Producto desmoldado con éxito",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:20:00"
     },
     {
-        "key": 7,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Sunday 01:18:21"
+        "id_alarma": 4,
+        "descripcion": "Proceso de encajonado iniciado",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:25:30"
     },
     {
-        "key": 8,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 21:29:40"
+        "id_alarma": 5,
+        "descripcion": "Ciclo de limpieza completado",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:30:00"
     },
     {
-        "key": 9,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 15:28:50"
+        "id_alarma": 6,
+        "descripcion": "Nueva torre cargada en la máquina",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:35:15"
     },
     {
-        "key": 10,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 12:02:40"
+        "id_alarma": 7,
+        "descripcion": "Gripper calibrado correctamente",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:40:25"
     },
     {
-        "key": 11,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 15:50:03"
+        "id_alarma": 8,
+        "descripcion": "Proceso pausado por falta de insumos",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:45:40"
     },
     {
-        "key": 12,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 07:40:36"
+        "id_alarma": 9,
+        "descripcion": "Torre desmontada correctamente",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:50:10"
     },
     {
-        "key": 13,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 17:57:22"
+        "id_alarma": 10,
+        "descripcion": "Preparando para reiniciar ciclo",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:55:20"
     },
     {
-        "key": 14,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Tuesday 23:02:58"
+        "id_alarma": 11,
+        "descripcion": "Inspección manual requerida",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T08:58:00"
     },
     {
-        "key": 15,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 12:00:20"
+        "id_alarma": 12,
+        "descripcion": "Fin del turno del operador",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T09:00:30"
     },
     {
-        "key": 16,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 17:09:08"
+        "id_alarma": 13,
+        "descripcion": "Control de calidad completado",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T09:05:00"
     },
     {
-        "key": 17,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Saturday 11:45:05"
+        "id_alarma": 14,
+        "descripcion": "Gripper sin actividad",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T09:10:30"
     },
     {
-        "key": 18,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 02:38:03"
+        "id_alarma": 15,
+        "descripcion": "Esperando nueva torre para iniciar ciclo",
+        "tipo": "Notificación",
+        "fecha_registro": "2025-01-14T09:15:00"
     },
     {
-        "key": 19,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 02:46:31"
+        "id_alarma": 16,
+        "descripcion": "Robot detectó anomalía en el gripper",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:20:10"
     },
     {
-        "key": 20,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 16:04:47"
+        "id_alarma": 17,
+        "descripcion": "Gripper requiere mantenimiento preventivo",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:25:30"
     },
     {
-        "key": 21,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Saturday 23:15:50"
+        "id_alarma": 18,
+        "descripcion": "Producto atorado en el molde",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:30:15"
     },
     {
-        "key": 22,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 16:19:34"
+        "id_alarma": 19,
+        "descripcion": "Temperatura del sistema fuera de rango",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:35:40"
     },
     {
-        "key": 23,
-        "description": "Ciclo Finalizado",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Thursday 10:39:22"
+        "id_alarma": 20,
+        "descripcion": "Fuga de aire detectada en la válvula",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:40:05"
     },
     {
-        "key": 24,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Sunday 15:29:00"
+        "id_alarma": 21,
+        "descripcion": "Mal funcionamiento del sensor de presión",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:45:30"
     },
     {
-        "key": 25,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Friday 16:58:41"
+        "id_alarma": 22,
+        "descripcion": "Sistema de sujeción con baja presión",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:50:45"
     },
     {
-        "key": 26,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Sunday 14:02:33"
+        "id_alarma": 23,
+        "descripcion": "Error de comunicación entre robots",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T09:55:10"
     },
     {
-        "key": 27,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Saturday 18:54:23"
+        "id_alarma": 24,
+        "descripcion": "Fallo en el sistema de visión",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:00:25"
     },
     {
-        "key": 28,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Sunday 06:42:24"
+        "id_alarma": 25,
+        "descripcion": "Falta de material en línea de producción",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:05:40"
     },
     {
-        "key": 29,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 06:05:10"
+        "id_alarma": 26,
+        "descripcion": "Luz de advertencia activada en el panel",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:10:00"
     },
     {
-        "key": 30,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 04:58:00"
+        "id_alarma": 27,
+        "descripcion": "Fallo en el motor de la máquina",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:15:25"
     },
     {
-        "key": 31,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 11:12:08"
+        "id_alarma": 28,
+        "descripcion": "Movimiento no autorizado detectado en la zona de trabajo",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:20:30"
     },
     {
-        "key": 32,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Friday 22:01:13"
+        "id_alarma": 29,
+        "descripcion": "Error en el sistema de transporte de materiales",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:25:50"
     },
     {
-        "key": 33,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Saturday 02:45:45"
+        "id_alarma": 30,
+        "descripcion": "Desviación en el ciclo de producción detectada",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:30:15"
     },
     {
-        "key": 34,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 10:19:17"
+        "id_alarma": 31,
+        "descripcion": "Baja en la eficiencia del robot de paletizado",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:35:35"
     },
     {
-        "key": 35,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 12:08:00"
+        "id_alarma": 32,
+        "descripcion": "Cierre de seguridad no operable",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:40:00"
     },
     {
-        "key": 36,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Friday 18:59:33"
+        "id_alarma": 33,
+        "descripcion": "Peligro por sobrecarga de energía",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:45:20"
     },
     {
-        "key": 37,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 07:32:10"
+        "id_alarma": 34,
+        "descripcion": "Tensión incorrecta en el sistema eléctrico",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:50:45"
     },
     {
-        "key": 38,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Sunday 16:40:43"
+        "id_alarma": 35,
+        "descripcion": "Baja velocidad en la línea de producción",
+        "tipo": "Alerta",
+        "fecha_registro": "2025-01-14T10:55:10"
     },
     {
-        "key": 39,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 17:13:37"
+        "id_alarma": 36,
+        "descripcion": "Error de calibración del sistema de visión",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:00:15"
     },
     {
-        "key": 40,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Saturday 14:59:14"
+        "id_alarma": 37,
+        "descripcion": "Fallo en el motor de desplazamiento del robot",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:05:40"
     },
     {
-        "key": 41,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Saturday 20:25:03"
+        "id_alarma": 38,
+        "descripcion": "Temperatura interna del robot excesiva",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:10:05"
     },
     {
-        "key": 42,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Monday 00:15:14"
+        "id_alarma": 39,
+        "descripcion": "Error en la válvula de aire comprimido",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:15:30"
     },
     {
-        "key": 43,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 23:32:06"
+        "id_alarma": 40,
+        "descripcion": "Fallo de comunicación con el PLC",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:20:50"
     },
     {
-        "key": 44,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 04:21:42"
+        "id_alarma": 41,
+        "descripcion": "Desajuste en el sistema de paletizado",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:25:00"
     },
     {
-        "key": 45,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Monday 22:00:56"
+        "id_alarma": 42,
+        "descripcion": "Falta de material en el transportador",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:30:20"
     },
     {
-        "key": 46,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Friday 23:53:54"
+        "id_alarma": 43,
+        "descripcion": "Falla en el motor de la línea de producción",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:35:40"
     },
     {
-        "key": 47,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 12:27:58"
+        "id_alarma": 44,
+        "descripcion": "Baja presión de aire en la línea de producción",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:40:00"
     },
     {
-        "key": 48,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 11:29:58"
+        "id_alarma": 45,
+        "descripcion": "Error en la calibración de la máquina de encajonado",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:45:20"
     },
     {
-        "key": 49,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Thursday 22:00:12"
+        "id_alarma": 46,
+        "descripcion": "Falta de energía en la unidad de sujeción",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:50:40"
     },
     {
-        "key": 50,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Saturday 16:28:24"
+        "id_alarma": 47,
+        "descripcion": "Sensor de proximidad defectuoso",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T11:55:50"
     },
     {
-        "key": 51,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 10:12:12"
+        "id_alarma": 48,
+        "descripcion": "Sistema de detección de peso fallando",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T12:00:00"
     },
     {
-        "key": 52,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Tuesday 16:24:53"
+        "id_alarma": 49,
+        "descripcion": "Máquina de paletizado fuera de servicio",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T12:05:25"
     },
     {
-        "key": 53,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Monday 09:10:50"
-    },
-    {
-        "key": 54,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 09:17:55"
-    },
-    {
-        "key": 55,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Sunday 16:06:47"
-    },
-    {
-        "key": 56,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Saturday 06:21:07"
-    },
-    {
-        "key": 57,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Monday 10:13:06"
-    },
-    {
-        "key": 58,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 09:57:52"
-    },
-    {
-        "key": 59,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Friday 23:51:12"
-    },
-    {
-        "key": 60,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Thursday 20:40:06"
-    },
-    {
-        "key": 61,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Monday 11:22:43"
-    },
-    {
-        "key": 62,
-        "description": "Ciclo Finalizado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 13:06:47"
-    },
-    {
-        "key": 63,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Thursday 03:11:29"
-    },
-    {
-        "key": 64,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Sunday 05:14:07"
-    },
-    {
-        "key": 65,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 06:25:39"
-    },
-    {
-        "key": 66,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Thursday 11:43:19"
-    },
-    {
-        "key": 67,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Sunday 00:39:35"
-    },
-    {
-        "key": 68,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 05:51:23"
-    },
-    {
-        "key": 69,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 21:12:15"
-    },
-    {
-        "key": 70,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 08:19:00"
-    },
-    {
-        "key": 71,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Saturday 08:16:52"
-    },
-    {
-        "key": 72,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 19:56:02"
-    },
-    {
-        "key": 73,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 03:10:55"
-    },
-    {
-        "key": 74,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Tuesday 07:59:29"
-    },
-    {
-        "key": 75,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 09:45:03"
-    },
-    {
-        "key": 76,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 07:54:12"
-    },
-    {
-        "key": 77,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 20:18:10"
-    },
-    {
-        "key": 78,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 23:22:12"
-    },
-    {
-        "key": 79,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 02:45:36"
-    },
-    {
-        "key": 80,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 17:19:33"
-    },
-    {
-        "key": 81,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Friday 06:28:43"
-    },
-    {
-        "key": 82,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 09:48:51"
-    },
-    {
-        "key": 83,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Thursday 23:28:58"
-    },
-    {
-        "key": 84,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 09:00:53"
-    },
-    {
-        "key": 85,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 21:11:23"
-    },
-    {
-        "key": 86,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 12:55:15"
-    },
-    {
-        "key": 87,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Saturday 22:10:08"
-    },
-    {
-        "key": 88,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Saturday 08:33:12"
-    },
-    {
-        "key": 89,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 06:54:23"
-    },
-    {
-        "key": 90,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 02:55:46"
-    },
-    {
-        "key": 91,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 05:06:33"
-    },
-    {
-        "key": 92,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Sunday 10:52:48"
-    },
-    {
-        "key": 93,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Friday 03:52:40"
-    },
-    {
-        "key": 94,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Friday 16:42:03"
-    },
-    {
-        "key": 95,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 22:44:35"
-    },
-    {
-        "key": 96,
-        "description": "Ciclo Finalizado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 02:16:15"
-    },
-    {
-        "key": 97,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Monday 11:20:45"
-    },
-    {
-        "key": 98,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Saturday 22:42:19"
-    },
-    {
-        "key": 99,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Tuesday 09:37:51"
-    },
-    {
-        "key": 100,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Friday 08:36:24"
-    },
-    {
-        "key": 101,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 16:35:00"
-    },
-    {
-        "key": 102,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Sunday 21:47:55"
-    },
-    {
-        "key": 103,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Friday 18:02:29"
-    },
-    {
-        "key": 104,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 07:59:49"
-    },
-    {
-        "key": 105,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 08:58:20"
-    },
-    {
-        "key": 106,
-        "description": "Ciclo Finalizado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Saturday 06:26:09"
-    },
-    {
-        "key": 107,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Monday 16:57:14"
-    },
-    {
-        "key": 108,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 08:17:09"
-    },
-    {
-        "key": 109,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 11:31:44"
-    },
-    {
-        "key": 110,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 18:13:31"
-    },
-    {
-        "key": 111,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 20:33:43"
-    },
-    {
-        "key": 112,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Thursday 06:28:43"
-    },
-    {
-        "key": 113,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 07:44:40"
-    },
-    {
-        "key": 114,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Saturday 10:16:08"
-    },
-    {
-        "key": 115,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Saturday 09:00:07"
-    },
-    {
-        "key": 116,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Saturday 23:15:08"
-    },
-    {
-        "key": 117,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Tuesday 18:16:37"
-    },
-    {
-        "key": 118,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Saturday 02:24:03"
-    },
-    {
-        "key": 119,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 11:59:04"
-    },
-    {
-        "key": 120,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Friday 17:09:43"
-    },
-    {
-        "key": 121,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 06:55:29"
-    },
-    {
-        "key": 122,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 18:34:17"
-    },
-    {
-        "key": 123,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Sunday 13:22:04"
-    },
-    {
-        "key": 124,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Saturday 14:38:44"
-    },
-    {
-        "key": 125,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 20:27:44"
-    },
-    {
-        "key": 126,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Monday 13:00:12"
-    },
-    {
-        "key": 127,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 14:50:23"
-    },
-    {
-        "key": 128,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 09:54:12"
-    },
-    {
-        "key": 129,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 13:15:01"
-    },
-    {
-        "key": 130,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 15:06:52"
-    },
-    {
-        "key": 131,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Sunday 12:27:36"
-    },
-    {
-        "key": 132,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Monday 19:54:03"
-    },
-    {
-        "key": 133,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 03:45:42"
-    },
-    {
-        "key": 134,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 11:44:51"
-    },
-    {
-        "key": 135,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Tuesday 21:00:34"
-    },
-    {
-        "key": 136,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 07:11:51"
-    },
-    {
-        "key": 137,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Monday 02:58:29"
-    },
-    {
-        "key": 138,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 19:18:09"
-    },
-    {
-        "key": 139,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 12:06:48"
-    },
-    {
-        "key": 140,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 07:37:09"
-    },
-    {
-        "key": 141,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Saturday 22:34:13"
-    },
-    {
-        "key": 142,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 22:48:44"
-    },
-    {
-        "key": 143,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 08:25:55"
-    },
-    {
-        "key": 144,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 16:19:44"
-    },
-    {
-        "key": 145,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Sunday 17:37:35"
-    },
-    {
-        "key": 146,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Friday 13:10:29"
-    },
-    {
-        "key": 147,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 04:29:26"
-    },
-    {
-        "key": 148,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Sunday 15:29:13"
-    },
-    {
-        "key": 149,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Sunday 14:27:36"
-    },
-    {
-        "key": 150,
-        "description": "Ciclo Finalizado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 00:40:44"
-    },
-    {
-        "key": 151,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 11:26:44"
-    },
-    {
-        "key": 152,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 04:59:00"
-    },
-    {
-        "key": 153,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Thursday 07:08:24"
-    },
-    {
-        "key": 154,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Saturday 20:26:48"
-    },
-    {
-        "key": 155,
-        "description": "Presión baja en tuberías",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Friday 15:56:52"
-    },
-    {
-        "key": 156,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 14:31:53"
-    },
-    {
-        "key": 157,
-        "description": "Ciclo Finalizado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Sunday 16:27:02"
-    },
-    {
-        "key": 158,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 14:47:03"
-    },
-    {
-        "key": 159,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 11:31:08"
-    },
-    {
-        "key": 160,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 08:07:04"
-    },
-    {
-        "key": 161,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 11:45:24"
-    },
-    {
-        "key": 162,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Saturday 18:05:35"
-    },
-    {
-        "key": 163,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Saturday 12:40:49"
-    },
-    {
-        "key": 164,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Wednesday 09:39:33"
-    },
-    {
-        "key": 165,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Thursday 13:34:33"
-    },
-    {
-        "key": 166,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Saturday 16:20:36"
-    },
-    {
-        "key": 167,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Sunday 17:03:47"
-    },
-    {
-        "key": 168,
-        "description": "Presión baja en tuberías",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Thursday 14:21:44"
-    },
-    {
-        "key": 169,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Monday 10:47:14"
-    },
-    {
-        "key": 170,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 09:31:22"
-    },
-    {
-        "key": 171,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Monday 09:53:34"
-    },
-    {
-        "key": 172,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Saturday 06:43:03"
-    },
-    {
-        "key": 173,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Thursday 01:09:03"
-    },
-    {
-        "key": 174,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Thursday 08:12:33"
-    },
-    {
-        "key": 175,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Seguridad",
-        "state": "Activo",
-        "time": "2025-02-Tuesday 11:39:10"
-    },
-    {
-        "key": 176,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Monday 07:58:46"
-    },
-    {
-        "key": 177,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Saturday 08:36:36"
-    },
-    {
-        "key": 178,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 09:17:14"
-    },
-    {
-        "key": 179,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 03:41:06"
-    },
-    {
-        "key": 180,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 02:19:32"
-    },
-    {
-        "key": 181,
-        "description": "Ciclo Finalizado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Sunday 18:01:06"
-    },
-    {
-        "key": 182,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 14:23:25"
-    },
-    {
-        "key": 183,
-        "description": "Ciclo Iniciado",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 23:14:29"
-    },
-    {
-        "key": 184,
-        "description": "Ciclo Iniciado",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 09:02:53"
-    },
-    {
-        "key": 185,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Sunday 01:49:51"
-    },
-    {
-        "key": 186,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Saturday 01:14:23"
-    },
-    {
-        "key": 187,
-        "description": "Presión baja en tuberías",
-        "type": "Seguridad",
-        "state": "Inactivo",
-        "time": "2025-02-Saturday 12:38:59"
-    },
-    {
-        "key": 188,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Saturday 19:31:06"
-    },
-    {
-        "key": 189,
-        "description": "Fallo en conexión de red",
-        "type": "Seguridad",
-        "state": "Critico",
-        "time": "2025-02-Tuesday 02:16:34"
-    },
-    {
-        "key": 190,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Wednesday 09:10:40"
-    },
-    {
-        "key": 191,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Falla",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 12:44:58"
-    },
-    {
-        "key": 192,
-        "description": "Fallo en el sistema de refrigeración",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Wednesday 06:26:01"
-    },
-    {
-        "key": 193,
-        "description": "Fallo en conexión de red",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Monday 00:27:37"
-    },
-    {
-        "key": 194,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Critico",
-        "time": "2025-02-Friday 03:38:50"
-    },
-    {
-        "key": 195,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Inactivo",
-        "time": "2025-02-Sunday 19:35:41"
-    },
-    {
-        "key": 196,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Sunday 22:21:05"
-    },
-    {
-        "key": 197,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Saturday 11:31:50"
-    },
-    {
-        "key": 198,
-        "description": "Ciclo Iniciado",
-        "type": "Sistema",
-        "state": "Critico",
-        "time": "2025-02-Monday 12:55:39"
-    },
-    {
-        "key": 199,
-        "description": "Ciclo Finalizado",
-        "type": "Sistema",
-        "state": "Activo",
-        "time": "2025-02-Friday 05:38:09"
-    },
-    {
-        "key": 200,
-        "description": "Fallo en conexión de red",
-        "type": "Falla",
-        "state": "Activo",
-        "time": "2025-02-Monday 14:28:24"
+        "id_alarma": 50,
+        "descripcion": "Fallo en el sensor de temperatura de la torre",
+        "tipo": "Error",
+        "fecha_registro": "2025-01-14T12:10:10"
     }
 ]

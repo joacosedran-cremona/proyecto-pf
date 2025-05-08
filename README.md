@@ -73,3 +73,30 @@ const { data } = useWebSocketContext("mi-endpoint-especifico");
 const endpoint = `${miVariable}-datos`;
 const { data } = useWebSocketContext(endpoint);
 ```
+
+
+
+##Tabla
+    2 consultas
+        1. Por defecto (Websocket): Todos los registros de la fecha actual (hoy)
+
+        2. Filtrado (Websocket/HTTP): Datos filtrados por fechas
+            Date Range Picker, boton de aplicar y boton de limpiar
+        
+        Al limpiar la seleccion de fechas vuelve a la consulta 1.
+    
+    Cada cambio de estado es un elemento nuevo en la lista.
+
+
+##Alarmas Recientes
+    Scrolleable
+    
+    [
+        {
+            "id_alarma": 1,
+            "descripcion": "Finalizó ciclo de desmoldeo",
+            "tipo": "Notificación",
+            "fecha_registro": "2025-01-14T08:15:30",
+            "valor": true
+        }
+    ]

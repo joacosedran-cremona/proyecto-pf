@@ -9,5 +9,9 @@
     "exptodasexcel": "EXPORT ALL ROWS IN EXCEL",
     "expvisiblesexcel": "EXPORT VISIBLE ROWS IN EXCEL",
     "alertas": "EXTENDED",
-    "historial": "ALERTS HISTORY"
+    "historial": "ALERTS HISTORY",
+    "noSePudieronObtenerDatos": "Could not obtain data",
+    "fechaRegistro": "Registration date",
+    "noExistenDatos": "No data available",
+    "reintentar": "Retry"
 }
