@@ -27,5 +27,7 @@
       "enfriador": "Enfriador {{number}} Línea {{line}}"
     },
     "titulo": "COCINAS & ENFRIADORES",
-    "subtitulo": "Paneo General"
+    "subtitulo": "Paneo General",
+    "titulo2": "ALARMAS",
+    "subtitulo2": "Activas"
 }

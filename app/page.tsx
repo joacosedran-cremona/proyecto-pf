@@ -1,25 +1,21 @@
 "use client"
 
-import { ImagenLayout } from "@/components/imagenLayout";
-import { useTranslation } from 'react-i18next';
+import { ImagenLayout } from "@/components/home/imagenLayout";
+import { Alarmas } from "@/components/home/alarmas";
 
 export default function Home() {
-  const { t } = useTranslation('layout');
   return (
-    <section className="laptop:pb-[70px] laptop:pt-[25px] pb-[125px] pt-[50px] flex flex-col w-[100%] h-[50%] items-center justify-center gap-[20px] bg-black rounded-md p-[20px]">
-      <div>
-        <h1
-          className="flex align-center justify-center w-[100%] text-4xl text-white font-semibold"
-        >
-          {t('titulo')}
-        </h1>
-        <p
-          className="flex align-center justify-center w-[100%] text-xl text-white"
-        >
-          {t('subtitulo')}
-        </p>
+    <section className="p-[20px] flex flex-row w-[100%] gap-[20px] items-center bg-black rounded-md">
+      <div className="w-1/6 h-[100%] flex items-center justify-center">
+        <Alarmas />
       </div>
-      <ImagenLayout />
+        
+      <hr className="h-[100%] w-[2px] mx-4 border-none bg-white/30 z-9999"/>
+      
+      {/* Ampliado a w-full en lugar de w-5/6 */}
+      <div className="w-full h-[100%] flex items-center justify-center">
+        <ImagenLayout />
+      </div>
     </section>
   );
 }

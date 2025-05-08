@@ -27,5 +27,7 @@
         "enfriador": "Chiller {{number}} Line {{line}}"
     },
     "titulo": "KITCHENS & CHILLERS",
-    "subtitulo": "General Panel"
+    "subtitulo": "General Panel",
+    "titulo2": "ACTIVE",
+    "subtitulo2": "Alarms"
 }
