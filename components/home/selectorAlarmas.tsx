@@ -1,62 +1,59 @@
 "use client";
 
 import React from "react";
+import { Select, SelectItem } from "@heroui/react";
 
-interface SelectorProps {
-    value: number;
-    onChange: (value: number) => void;
-    isCocina: boolean;
-    selectClasses?: string;
-    optionClasses?: string;
-}
+const Selector = ({ value = 1}) => {
 
-export default function Selector({ value, onChange, isCocina, selectClasses, optionClasses }: SelectorProps) {
-    const maxItems = isCocina ? 6 : 8; // 6 cocinas o 8 enfriadores máximo
-    
-    const options = Array.from({ length: maxItems }, (_, i) => {
-        const displayNumber = i + 1;
-        // Si es enfriador, el valor real será 7-14 en lugar de 1-8
-        const actualValue = isCocina ? displayNumber : displayNumber + 6;
-        
-        return {
-            value: actualValue, // Este es el ID real que se usará
-            label: `${isCocina ? 'Cocina' : 'Enfriador'} ${displayNumber} - L${
-                isCocina
-                    ? (displayNumber <= 3 ? '1' : '2')
-                    : (displayNumber <= 4 ? '1' : '2')
-            }`,
-            visibleNumber: displayNumber
-        };
-    });
-
-    // Validar que el valor esté dentro del rango permitido
-    const validValue = isCocina 
-        ? Math.min(Math.max(1, value), 6)
-        : Math.min(Math.max(7, value), 14);
+    const itemsList = [
+        { id: 1, shortName: "C1", name: "Cocina 1 - L1" },
+        { id: 2, shortName: "C2", name: "Cocina 2 - L1" },
+        { id: 3, shortName: "C3", name: "Cocina 3 - L1" },
+        { id: 4, shortName: "C4", name: "Cocina 4 - L2" },
+        { id: 5, shortName: "C5", name: "Cocina 5 - L2" },
+        { id: 6, shortName: "C6", name: "Cocina 6 - L2" },
+        { id: 7, shortName: "E1", name: "Enfriador 1 - L1" },
+        { id: 8, shortName: "E2", name: "Enfriador 2 - L1" },
+        { id: 9, shortName: "E3", name: "Enfriador 3 - L1" },
+        { id: 10, shortName: "E4", name: "Enfriador 4 - L1" },
+        { id: 11, shortName: "E5", name: "Enfriador 5 - L2" },
+        { id: 12, shortName: "E6", name: "Enfriador 6 - L2" },
+        { id: 13, shortName: "E7", name: "Enfriador 7 - L2" },
+        { id: 14, shortName: "E8", name: "Enfriador 8 - L2" }
+    ];
 
     return (
-        <select
-            value={validValue}
-            onChange={(e) => {
-                const newValue = parseInt(e.target.value);
-                const minValue = isCocina ? 1 : 7;
-                const maxValue = isCocina ? 6 : 14;
-                
-                if (newValue >= minValue && newValue <= maxValue) {
-                    onChange(newValue);
-                }
+        <Select
+            radius="lg"
+            disallowEmptySelection
+            selectedKeys={[value.toString()]}
+            aria-label="Seleccionar equipo"
+            classNames={{
+                trigger: "bg-[#27272a] text-white h-[50px] rounded-lg",
+                value: "text-white",
+                listbox: "bg-black text-white rounded-lg",
+                base: "rounded-lg",
             }}
-            className={selectClasses}
+            renderValue={(items) => {
+                const selected = itemsList.find(i => i.id === Number(items[0]?.key));
+                return (
+                    <div className="text-white">
+                        {selected?.name || "Seleccionar"}
+                    </div>
+                );
+            }}
         >
-            {options.map(option => (
-                <option 
-                    key={option.value} 
-                    value={option.value}
-                    className={optionClasses}
+            {itemsList.map((item) => (
+                <SelectItem 
+                    key={item.id.toString()} 
+                    value={item.id.toString()}
+                    className="text-white hover:bg-gray-800 rounded-lg mx-1 px-2"
                 >
-                    {option.label}
-                </option>
+                    {item.name}
+                </SelectItem>
             ))}
-        </select>
+        </Select>
     );
-}
+};
+
+export default Selector;
