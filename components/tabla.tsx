@@ -18,6 +18,9 @@ import { useTranslation } from "react-i18next";
 
 import { toast } from "sonner";
 
+// Importaciones adicionales necesarias
+import { ColumnFiltersState, OnChangeFn } from "@tanstack/react-table";
+
 export interface Alerta {
   key: string;
   description: string;
@@ -67,7 +70,7 @@ const Tabla: React.FC = () => {
   const [data, setData] = useState<Alerta[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [columnFilters, setColumnFilters] = useState<{ id: string, value: string }[]>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   
   // Estado para el menú de exportación
   const [exportMenuAnchorEl, setExportMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -131,13 +134,13 @@ const Tabla: React.FC = () => {
             setIsLoading(false);
           }
         } catch (err) {
-          setError(t('errorObtencionDatos'));
+          setError(t('noSePudieronObtenerDatos'));
           setIsLoading(false);
         }
       };
 
       socket.onerror = () => {
-        setError(t('errorObtencionDatos'));
+        setError(t('noSePudieronObtenerDatos'));
         setIsLoading(false);
       };
 
@@ -145,7 +148,7 @@ const Tabla: React.FC = () => {
         socket.close();
       };
     } catch (error) {
-      setError(t('errorConexion'));
+      setError(t('error'));
       setIsLoading(false);
       return () => {};
     }
@@ -182,7 +185,7 @@ const Tabla: React.FC = () => {
           setError(null);
         } catch (err) {
           console.error("Error fetching data:", err);
-          setError(t('errorObtencionDatos'));
+          setError(t('noSePudieronObtenerDatos'));
         } finally {
           setIsLoading(false);
         }
@@ -195,7 +198,7 @@ const Tabla: React.FC = () => {
   // Extraer valores de filtro para hacer accesibles en las celdas
   const getFilterValue = (columnId: string): string => {
     const filter = columnFilters.find(f => f.id === columnId);
-    return filter?.value?.toString().toLowerCase() || '';
+    return filter?.value ? String(filter.value).toLowerCase() : '';
   };
 
   const columns = useMemo<MRT_ColumnDef<Alerta>[]>(() => [

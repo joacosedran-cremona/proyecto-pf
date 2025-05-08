@@ -11,7 +11,8 @@
     "alertas": "EXTENDIDO",
     "historial": "HISTORIAL DE ALERTAS",
     "noSePudieronObtenerDatos": "No se pudieron obtener datos",
-    "fechaRegistro": "Fecha de registro",
-    "noExistenDatos": "No hay datos disponibles",
-    "reintentar": "Reintentar"
+    "fechaRegistro": "FECHA DE REGISTRO",
+    "error": "Error",
+    "reintentar": "Reintentar",
+    "noExistenDatos": "No hay datos disponibles"
 }

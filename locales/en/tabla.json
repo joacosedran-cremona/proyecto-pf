@@ -1,17 +1,17 @@
 {
     "descripcion": "DESCRIPTION",
     "tipo": "TYPE",
-    "estado": "STATUS",
-    "hora": "TIME",
-    "exportar": "EXPORT",
-    "exptodaspdf": "EXPORT ALL ROWS IN PDF",
-    "expvisiblespdf": "EXPORT VISIBLE ROWS IN PDF",
-    "exptodasexcel": "EXPORT ALL ROWS IN EXCEL",
-    "expvisiblesexcel": "EXPORT VISIBLE ROWS IN EXCEL",
+    "estado": "STATE",
+    "hora": "FECHA DE REGISTRO",
+    "fechaRegistro": "REGISTER DATE",
+    "exptodaspdf": "EXPORT ALL ROWS TO PDF",
+    "expvisiblespdf": "EXPORT VISIBLE ROWS TO PDF",
+    "exptodasexcel": "EXPORT ALL ROWS TO EXCEL",
+    "expvisiblesexcel": "EXPORT VISIBLE ROWS TO EXCEL",
     "alertas": "EXTENDED",
-    "historial": "ALERTS HISTORY",
+    "historial": "ALERT HISTORY",
     "noSePudieronObtenerDatos": "Could not obtain data",
-    "fechaRegistro": "Registration date",
-    "noExistenDatos": "No data available",
-    "reintentar": "Retry"
+    "error": "Error",
+    "reintentar": "Retry",
+    "noExistenDatos": "No data available"
 }
