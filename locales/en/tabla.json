@@ -13,5 +13,10 @@
     "noSePudieronObtenerDatos": "Could not obtain data",
     "error": "Error",
     "reintentar": "Retry",
-    "noExistenDatos": "No data available"
+    "noExistenDatos": "No data available",
+    "fechaInicio": "START DATE",
+    "fechaFin": "END DATE",
+    "seleccionarFecha": "SELECT DATE",
+    "limpiarFiltros": "CLEAR",
+    "filtrosLimpiados": "Filters Cleared"
 }

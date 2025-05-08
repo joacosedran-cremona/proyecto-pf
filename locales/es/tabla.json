@@ -14,5 +14,10 @@
     "fechaRegistro": "FECHA DE REGISTRO",
     "error": "Error",
     "reintentar": "Reintentar",
-    "noExistenDatos": "No hay datos disponibles"
+    "noExistenDatos": "No hay datos disponibles",
+    "fechaInicio": "Fecha Inicio",
+    "fechaFin": "Fecha Fin",
+    "seleccionarFecha": "seleccionar Fecha",
+    "limpiarFiltros": "Limpiar",
+    "filtrosLimpiados": "Filtros Limpiados"
 }

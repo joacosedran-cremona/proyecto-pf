@@ -6,8 +6,12 @@ import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row 
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Box, Button, Typography, Menu, MenuItem } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff'; // Importamos ícono para limpiar filtros
 import logoDataURL from '../public/cremonabase64'; 
 import * as XLSX from 'xlsx';  // Importamos la librería para Excel
+
+// HeroUI para DateRangePicker
+import { DateRangePicker } from "@heroui/react"; // Ajusta esta importación según la estructura real de HeroUI
 
 //PDF conversor
 import { jsPDF } from "jspdf";
@@ -71,6 +75,18 @@ const Tabla: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  
+  // Nuevo estado para el rango de fechas
+  const [dateRange, setDateRange] = useState<{
+    from: Date | undefined;
+    to: Date | undefined;
+  }>({
+    from: undefined,
+    to: undefined
+  });
+  
+  // Estado para los datos filtrados por fecha
+  const [dateFilteredData, setDateFilteredData] = useState<Alerta[]>([]);
   
   // Estado para el menú de exportación
   const [exportMenuAnchorEl, setExportMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -194,6 +210,49 @@ const Tabla: React.FC = () => {
       loadDataFromAPI();
     }
   }, [error, t]);
+
+  // Función para aplicar filtro de rango de fechas
+  useEffect(() => {
+    if (data.length === 0 || !dateRange.from) {
+      setDateFilteredData(data);
+      return;
+    }
+
+    const fromDate = dateRange.from;
+    const toDate = dateRange.to || new Date();
+
+    // Aseguramos que toDate sea el final del día
+    toDate.setHours(23, 59, 59, 999);
+
+    const filtered = data.filter(item => {
+      try {
+        const itemDate = new Date(item.time);
+        return itemDate >= fromDate && itemDate <= toDate;
+      } catch (e) {
+        return false;
+      }
+    });
+
+    setDateFilteredData(filtered);
+  }, [data, dateRange]);
+
+  // Función para limpiar todos los filtros
+  const handleClearFilters = () => {
+    // Limpiar filtros de columna
+    setColumnFilters([]);
+    
+    // Limpiar filtro de fechas
+    setDateRange({
+      from: undefined,
+      to: undefined
+    });
+    
+    setDateFilteredData(data);
+    
+    toast.success(t('filtrosLimpiados'), {
+      position: 'bottom-right'
+    });
+  };
 
   // Extraer valores de filtro para hacer accesibles en las celdas
   const getFilterValue = (columnId: string): string => {
@@ -454,12 +513,12 @@ const Tabla: React.FC = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data,
+    data: dateFilteredData.length > 0 || (dateRange.from !== undefined) ? dateFilteredData : data,
     state: { 
       isLoading,
-      columnFilters // Añadimos el estado de los filtros
+      columnFilters
     },
-    onColumnFiltersChange: setColumnFilters, // Conectamos el estado a los cambios
+    onColumnFiltersChange: setColumnFilters,
     enableSorting: true,
     enableColumnResizing: true,
     enableColumnFilters: true,
@@ -676,7 +735,7 @@ const Tabla: React.FC = () => {
           gridColumn: 1,
           justifyContent: 'flex-start'
         }}>
-          {/* Nuevo botón de exportación con menú */}
+          {/* Botón de exportación con menú */}
           <Button
             id="export-button"
             aria-controls={exportMenuOpen ? 'export-menu' : undefined}
@@ -700,6 +759,7 @@ const Tabla: React.FC = () => {
               'aria-labelledby': 'export-button',
             }}
           >
+            {/* Opciones de menú sin cambios */}
             <MenuItem onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}>
               {t('exptodaspdf')}
             </MenuItem>
@@ -713,6 +773,37 @@ const Tabla: React.FC = () => {
               {t('expvisiblesexcel')}
             </MenuItem>
           </Menu>
+          
+          {/* DateRangePicker de HeroUI */}
+          <Box sx={{ minWidth: '300px', position: 'relative', display: 'flex', alignItems: 'center' }}>
+            <DateRangePicker
+              value={dateRange}
+              onChange={setDateRange}
+              locale={{
+                startDate: t('fechaInicio'),
+                endDate: t('fechaFin'),
+                selectDate: t('seleccionarFecha')
+              }}
+              className="bg-[#1e1e1e] text-[#d9d9d9] border-[#515151] rounded-md"
+            />
+          </Box>
+          
+          {/* Botón para limpiar filtros */}
+          <Button
+            onClick={handleClearFilters}
+            startIcon={<FilterAltOffIcon />}
+            variant="outlined"
+            sx={{
+              color: '#d9d9d9',
+              borderColor: '#515151',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                borderColor: '#d9d9d9'
+              }
+            }}
+          >
+            {t('limpiarFiltros')}
+          </Button>
         </Box>
 
         {/* Sección central - Título */}
