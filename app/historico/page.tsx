@@ -6,7 +6,7 @@ import Productividad from "@/components/productividad/productividad";
 import Selector from "@/components/selectores/selectorHistorico";
 import DatePicker from "@/ui/datePicker"
 import BotonExcel from "@/components/botones/botonExcel";
-import BotonPDF from "@/components/botones/botonPDF";
+import BotonPDF from "@/components/botones/botonInforme";
 import BotonAplicar from "@/components/botones/botonAplicar";
 import { useTranslation } from 'react-i18next';
 
@@ -152,7 +152,7 @@ export default function Historico() {
       <div className="flex flex-row items-center justify-between bg-black p-[8px] w-[100%] rounded-md">
         <div className="flex gap-[10px] ml-[10px]">
           <BotonPDF 
-              selectClasses="bg-red-700/50 hover:bg-red-800 min-h-[40px]"
+              selectClasses="min-h-[40px]"
               equipo={getEquipmentDisplayName(selectedId, selectedType)}
               cicloId={selectedCicloId}
           />

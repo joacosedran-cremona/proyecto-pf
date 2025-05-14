@@ -85,7 +85,7 @@ export default function BotonesDescarga({ startDate, endDate }) {
             link.setAttribute("download", `productividad_${startDate}_to_${endDate}.xlsx`);
             document.body.appendChild(link);
             link.click();
-            link.parentNode.removeChild(link);
+            link.parentNode?.removeChild(link);
             window.URL.revokeObjectURL(url);
         } catch (error) {
         }

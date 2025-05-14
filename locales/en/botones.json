@@ -2,5 +2,6 @@
     "excel": "Download Excel",
     "pdf": "Download PDF",
     "aplicar": "Apply",
-    "fecha": "Select a date range"
+    "fecha": "Select a date range",
+    "informe": "Download Report"
 }

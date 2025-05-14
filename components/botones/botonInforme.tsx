@@ -5,7 +5,6 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
 import logoDataURL from '../../public/cremonabase64';
-import * as XLSX from 'xlsx';
 
 interface BotonInformeProps {
     selectClasses?: string;
@@ -15,6 +14,24 @@ interface BotonInformeProps {
 
 export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonInformeProps) {
     const { t } = useTranslation('botones');
+
+    const formatDateForTable = (dateString: string | null | undefined) => {
+        if (!dateString) return '';
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const seconds = date.getSeconds().toString().padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        } catch (e) {
+            return dateString;
+        }
+    };
 
     const handleInformeDownload = async () => {
         if (!equipo || !cicloId) {
@@ -26,8 +43,7 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
         }
     
         try {
-            // 1. Capturar la imagen del gráfico
-            const graphContainer = document.querySelector('.grafico-historico');
+            const graphContainer = document.querySelector('.grafico-historico') as HTMLElement;
             
             if (!graphContainer) {
                 throw new Error('No se encontró el gráfico histórico');
@@ -46,72 +62,63 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
             
             const imgData = canvas.toDataURL('image/png');
     
-            // 2. Obtener los datos de Excel
             const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
-            const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
+            const port = process.env.NEXT_PUBLIC_WS_PORT || '8001';
+            
+            const apiUrl = `http://${host}:${port}/historico-graficos/${equipo}/${cicloId}`;
 
             const response = await fetch(
-                `http://${host}:${port}/historico-graficos/${equipo}/descargar/${cicloId}`,
+                apiUrl,
                 {
                     method: "GET",
                     headers: { 
-                        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                        'Accept': 'application/json',
                     },
                 }
             );
 
             if (!response.ok) {
                 const errorText = await response.text();
-                throw new Error(`Error en la descarga: ${response.status} - ${errorText}`);
+                let detailedError = errorText;
+                try {
+                    const errorJson = JSON.parse(errorText);
+                    detailedError = errorJson.detail || errorJson.message || errorText;
+                } catch (e) {}
+                throw new Error(`Error al obtener datos de la API (${response.status}): ${detailedError}`);
             }
 
-            const excelBlob = await response.blob();
-            const excelArrayBuffer = await excelBlob.arrayBuffer();
+            const apiData = await response.json();
 
-            // 3. Procesar Excel para insertarlo en el PDF
-            const workbook = XLSX.read(excelArrayBuffer, { type: 'array' });
-            
-            // Configurar dimensiones para PDF en orientación horizontal
-            const imgWidth = 287; // A4 landscape width in mm
+            const imgWidth = 287;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            const metadataHeight = 20; // altura del área de metadata
+            const metadataHeight = 20;
             
-            // Crear PDF en orientación horizontal
             const pdf = new jsPDF({
                 orientation: 'landscape',
                 unit: 'mm',
                 format: 'a4'
             });
             
-            // PÁGINA 1: Gráfico
-            // Agregar la imagen del gráfico
             pdf.addImage(imgData, 'PNG', 5, 25, imgWidth, imgHeight);
             
-            // Agregar fondo negro para metadata
-            pdf.setFillColor(19, 19, 19);
-            pdf.rect(0, 0, 297, metadataHeight, 'F'); // rectangle negro en la parte superior
+            pdf.rect(0, 0, 297, metadataHeight, 'F');
 
-            // Configurar fuente para texto en negrita
             pdf.setFont('helvetica', 'bold');
             pdf.setFontSize(10);
             pdf.setTextColor(255, 255, 255);
 
-            // Agregar labels en negrita
             pdf.text('Equipo:', 5, 11);
             pdf.text('Ciclo:', 5, 16);
             pdf.text('Fecha de exportación:', 5, 6);
 
-            // Configurar fuente para texto normal
             pdf.setFont('helvetica', 'normal');
 
-            // Agregar valores en texto normal
             const currentDate = new Date().toLocaleDateString('es-ES', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
             
-            // Calcular posición X para los valores (después de los labels)
             pdf.text(equipo, 20, 11);
             pdf.text(cicloId.toString(), 16, 16);
             pdf.text(currentDate, 44, 6);
@@ -121,100 +128,155 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
             pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
             pdf.link(252, 4, 40, 12, {url: "https://creminox.com", target: '_blank'});
             
-            // PÁGINAS ADICIONALES: Datos del Excel
-            // Iterar sobre cada hoja del Excel
-            for (let i = 0; i < workbook.SheetNames.length; i++) {
-                const sheetName = workbook.SheetNames[i];
-                const worksheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            const jsonData: string[][] = [];
+            const generalData = apiData.general || {};
+            
+            const tableHeaders = [
+                "ID_CICLO", "EQUIPO", "LOTE", "ESTADO CICLO", "NOMBRE RECETA",
+                "TEMP. AGUA [°C]", "TEMP. PROD. [°C]", "NIVEL AGUA [mm]", "FECHA REGISTRO"
+            ];
+            jsonData.push(tableHeaders);
+
+            const temperaturaAguaData = apiData["Temperatura agua"] || [];
+            const temperaturaProductoData = apiData["Temperatura producto"] || [];
+            const nivelAguaData = apiData["Nivel agua"] || [];
+
+            const temperaturaAguaMap = new Map(temperaturaAguaData.map((item: any) => [item.fechaRegistro, item.valor]));
+            const temperaturaProductoMap = new Map(temperaturaProductoData.map((item: any) => [item.fechaRegistro, item.valor]));
+            const nivelAguaMap = new Map(nivelAguaData.map((item: any) => [item.fechaRegistro, item.valor]));
+
+            const allTimestamps = new Set<string>();
+            temperaturaAguaData.forEach((item: any) => allTimestamps.add(item.fechaRegistro));
+            temperaturaProductoData.forEach((item: any) => allTimestamps.add(item.fechaRegistro));
+            nivelAguaData.forEach((item: any) => allTimestamps.add(item.fechaRegistro));
+
+            const sortedTimestamps = Array.from(allTimestamps).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+            for (const ts of sortedTimestamps) {
+                const row = [
+                    String(generalData.id_ciclo || cicloId || ''),
+                    String(equipo || ''),
+                    String(generalData.ciclo_lote || ''),
+                    "Finalizado INC",
+                    String(generalData.receta || ''),
+                    String(temperaturaAguaMap.get(ts) ?? ''),
+                    String(temperaturaProductoMap.get(ts) ?? ''),
+                    String(nivelAguaMap.get(ts) ?? ''),
+                    formatDateForTable(ts)
+                ];
+                jsonData.push(row);
+            }
+
+            if (jsonData.length > 1 && jsonData[0] && jsonData[0].length > 0) {
+                pdf.addPage();
                 
-                if (jsonData.length > 0) {
-                    // Agregar una nueva página para cada hoja del Excel
-                    pdf.addPage();
-                    
-                    // Agregar encabezado similar al de la primera página
-                    pdf.setFillColor(19, 19, 19);
-                    pdf.rect(0, 0, 297, metadataHeight, 'F');
-                    pdf.setFont('helvetica', 'bold');
-                    pdf.setTextColor(255, 255, 255);
-                    pdf.text(`Datos: ${sheetName}`, 5, 11);
-                    pdf.text('Equipo:', 100, 11);
-                    pdf.text('Ciclo:', 100, 16);
-                    pdf.setFont('helvetica', 'normal');
-                    pdf.text(equipo, 115, 11);
-                    pdf.text(cicloId.toString(), 111, 16);
-                    pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
-                    
-                    // Configurar tabla
-                    const startY = 30;
-                    const cellWidth = 25;
-                    const cellHeight = 8;
-                    const margin = 10;
-                    const maxCols = Math.floor((297 - 2 * margin) / cellWidth);
-                    
-                    // Calcular cuántas columnas podemos mostrar
-                    const numCols = Math.min(maxCols, jsonData[0]?.length || 0);
-                    
-                    // Dibujar encabezados
-                    pdf.setFont('helvetica', 'bold');
-                    pdf.setTextColor(0, 0, 0);
-                    pdf.setFillColor(220, 220, 220);
-                    
-                    for (let col = 0; col < numCols; col++) {
-                        const x = margin + col * cellWidth;
-                        pdf.rect(x, startY, cellWidth, cellHeight, 'F');
-                        pdf.text(
-                            String(jsonData[0][col] || ''),
-                            x + 2,
-                            startY + cellHeight / 2 + 1,
-                            { maxWidth: cellWidth - 4 }
-                        );
-                    }
-                    
-                    // Dibujar datos
-                    pdf.setFont('helvetica', 'normal');
-                    let currentY = startY + cellHeight;
-                    
-                    for (let row = 1; row < jsonData.length; row++) {
-                        // Añadir nueva página si es necesario
-                        if (currentY > 200) {
-                            pdf.addPage();
-                            currentY = startY;
-                            
-                            // Repetir encabezados en la nueva página
-                            pdf.setFont('helvetica', 'bold');
-                            pdf.setFillColor(220, 220, 220);
-                            for (let col = 0; col < numCols; col++) {
-                                const x = margin + col * cellWidth;
-                                pdf.rect(x, currentY, cellWidth, cellHeight, 'F');
-                                pdf.text(
-                                    String(jsonData[0][col] || ''),
-                                    x + 2,
-                                    currentY + cellHeight / 2 + 1,
-                                    { maxWidth: cellWidth - 4 }
-                                );
-                            }
-                            currentY += cellHeight;
-                            pdf.setFont('helvetica', 'normal');
-                        }
+                pdf.rect(0, 0, 297, metadataHeight, 'F'); // Encabezado de página
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(10); 
+                pdf.setTextColor(255, 255, 255); // Texto blanco para encabezado de página
+                pdf.text(`Datos del Ciclo`, 5, 11); 
+                pdf.text('Equipo:', 100, 11);
+                pdf.text('Ciclo:', 100, 16);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text(equipo || '', 115, 11);
+                pdf.text(cicloId?.toString() || '', 111, 16);
+                pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
+                
+                const tableStartY = metadataHeight + 5; 
+                const cellHeight = 6; 
+                const margin = 5; 
+                const pageWidth = 297; 
+                const tableWidth = pageWidth - 2 * margin; 
+
+                const numCols = jsonData[0].length; 
+                const cellWidth = tableWidth / numCols; 
+
+                const tableFontSize = 6.5; 
+                const textPadding = 1; 
+                const textMaxWidth = Math.max(1, cellWidth - (2 * textPadding)); 
+                const textYOffset = cellHeight / 2 + tableFontSize / 3.5;
+
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(tableFontSize);
+                
+                for (let col = 0; col < numCols; col++) {
+                    const x = margin + col * cellWidth;
+                    pdf.setFillColor(220, 220, 220); // Fondo gris claro para CADA celda de cabecera
+                    pdf.setTextColor(0, 0, 0);       // Texto NEGRO para CADA celda de cabecera
+                    pdf.rect(x, tableStartY, cellWidth, cellHeight, 'FD'); // 'FD' para rellenar y dibujar borde
+                    pdf.text(
+                        String(jsonData[0][col] || ''), 
+                        x + textPadding,
+                        tableStartY + textYOffset,
+                        { maxWidth: textMaxWidth, align: 'left' }
+                    );
+                }
+                
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(tableFontSize);
+                pdf.setTextColor(0, 0, 0); // Texto de datos NEGRO
+
+                let currentY = tableStartY + cellHeight;
+                const pageBottomMargin = 10; 
+                const maxContentHeightOnPage = 210 - pageBottomMargin - metadataHeight; 
+
+                for (let rowIdx = 1; rowIdx < jsonData.length; rowIdx++) { 
+                    if (currentY + cellHeight > maxContentHeightOnPage) {
+                        pdf.addPage();
                         
-                        // Dibujar celdas
+                        pdf.rect(0, 0, 297, metadataHeight, 'F'); // Encabezado de página nueva
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(10); 
+                        pdf.setTextColor(255, 255, 255); // Texto blanco para encabezado de página nueva
+                        pdf.text(`Datos del Ciclo (cont.)`, 5, 11);
+                        pdf.text('Equipo:', 100, 11);
+                        pdf.text('Ciclo:', 100, 16);
+                        pdf.setFont('helvetica', 'normal');
+                        pdf.text(equipo || '', 115, 11);
+                        pdf.text(cicloId?.toString() || '', 111, 16);
+                        pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
+                        
+                        currentY = tableStartY; 
+                        
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(tableFontSize);
+
                         for (let col = 0; col < numCols; col++) {
                             const x = margin + col * cellWidth;
-                            pdf.rect(x, currentY, cellWidth, cellHeight);
+                            pdf.setFillColor(220, 220, 220); // Fondo gris claro para CADA celda de cabecera
+                            pdf.setTextColor(0, 0, 0);       // Texto NEGRO para CADA celda de cabecera
+                            pdf.rect(x, currentY, cellWidth, cellHeight, 'FD'); // 'FD' para rellenar y dibujar borde
                             pdf.text(
-                                String(jsonData[row][col] || ''),
-                                x + 2,
-                                currentY + cellHeight / 2 + 1,
-                                { maxWidth: cellWidth - 4 }
+                                String(jsonData[0][col] || ''),
+                                x + textPadding,
+                                currentY + textYOffset,
+                                { maxWidth: textMaxWidth, align: 'left' }
                             );
                         }
                         currentY += cellHeight;
+                        pdf.setFont('helvetica', 'normal'); 
+                        pdf.setTextColor(0, 0, 0); // Texto de datos NEGRO
+                        pdf.setFontSize(tableFontSize);
                     }
+                    
+                    for (let col = 0; col < numCols; col++) {
+                        const x = margin + col * cellWidth;
+                        pdf.rect(x, currentY, cellWidth, cellHeight, 'S'); 
+                        const cellValue = String(jsonData[rowIdx][col] || '');
+                        pdf.text(
+                            cellValue,
+                            x + textPadding,
+                            currentY + textYOffset,
+                            { maxWidth: textMaxWidth, align: 'left' }
+                        );
+                    }
+                    currentY += cellHeight;
                 }
+            } else {
+                pdf.addPage();
+                pdf.text("No hay datos tabulares disponibles para este ciclo.", 10, metadataHeight + 10);
             }
 
-            // Descargar el PDF
             pdf.save(`Informe_${equipo}_Ciclo-${cicloId}.pdf`);
     
             toast.success('Éxito', {
@@ -223,8 +285,9 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
             });
         } catch (error) {
             console.error('Error al generar el informe:', error);
+            const errorMessage = error instanceof Error ? error.message : 'Error desconocido al generar el informe';
             toast.error('Error', {
-                description: error instanceof Error ? error.message : 'Error al generar el informe',
+                description: errorMessage,
                 position: 'bottom-right'
             });
         }
