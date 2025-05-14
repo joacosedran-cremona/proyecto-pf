@@ -35,8 +35,8 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
 
     const handleInformeDownload = async () => {
         if (!equipo || !cicloId) {
-            toast.error('Error', {
-                description: 'Seleccione un equipo y un ciclo para descargar',
+            toast.error(t('errorTitulo'), {
+                description: t('seleccioneEquipoCicloError'),
                 position: 'bottom-right'
             });
             return;
@@ -46,7 +46,7 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
             const graphContainer = document.querySelector('.grafico-historico') as HTMLElement;
             
             if (!graphContainer) {
-                throw new Error('No se encontró el gráfico histórico');
+                throw new Error(t('graficoNoEncontradoError'));
             }
     
             const canvas = await html2canvas(graphContainer, {
@@ -84,7 +84,7 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
                     const errorJson = JSON.parse(errorText);
                     detailedError = errorJson.detail || errorJson.message || errorText;
                 } catch (e) {}
-                throw new Error(`Error al obtener datos de la API (${response.status}): ${detailedError}`);
+                throw new Error(t('apiError', { status: response.status, error: detailedError }));
             }
 
             const apiData = await response.json();
@@ -107,9 +107,9 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
             pdf.setFontSize(10);
             pdf.setTextColor(255, 255, 255);
 
-            pdf.text('Equipo:', 5, 11);
-            pdf.text('Ciclo:', 5, 16);
-            pdf.text('Fecha de exportación:', 5, 6);
+            pdf.text(t('pdfEquipo'), 5, 11);
+            pdf.text(t('pdfCiclo'), 5, 16);
+            pdf.text(t('pdfFechaExportacion'), 5, 6);
 
             pdf.setFont('helvetica', 'normal');
 
@@ -119,9 +119,9 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
                 day: 'numeric'
             });
             
-            pdf.text(equipo, 20, 11);
-            pdf.text(cicloId.toString(), 16, 16);
-            pdf.text(currentDate, 44, 6);
+            pdf.text(equipo, 30, 11); // Ajustado de 20 a 35
+            pdf.text(cicloId.toString(), 30, 16);
+            pdf.text(currentDate, 30, 6);
 
             const logoWidth = 40;
             const logoHeight = 10;
@@ -132,8 +132,8 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
             const generalData = apiData.general || {};
             
             const tableHeaders = [
-                "ID_CICLO", "EQUIPO", "LOTE", "ESTADO CICLO", "NOMBRE RECETA",
-                "TEMP. AGUA [°C]", "TEMP. PROD. [°C]", "NIVEL AGUA [mm]", "FECHA REGISTRO"
+                t('pdfHeaderIdCiclo'), t('pdfHeaderEquipo'), t('pdfHeaderLote'), t('pdfHeaderEstadoCiclo'), t('pdfHeaderNombreReceta'),
+                t('pdfHeaderTempAgua'), t('pdfHeaderTempProd'), t('pdfHeaderNivelAgua'), t('pdfHeaderFechaRegistro')
             ];
             jsonData.push(tableHeaders);
 
@@ -157,7 +157,7 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
                     String(generalData.id_ciclo || cicloId || ''),
                     String(equipo || ''),
                     String(generalData.ciclo_lote || ''),
-                    "Finalizado INC",
+                    t('pdfEstadoCicloValor'),
                     String(generalData.receta || ''),
                     String(temperaturaAguaMap.get(ts) ?? ''),
                     String(temperaturaProductoMap.get(ts) ?? ''),
@@ -174,11 +174,11 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
                 pdf.setFont('helvetica', 'bold');
                 pdf.setFontSize(10); 
                 pdf.setTextColor(255, 255, 255); // Texto blanco para encabezado de página
-                pdf.text(`Datos del Ciclo`, 5, 11); 
-                pdf.text('Equipo:', 100, 11);
-                pdf.text('Ciclo:', 100, 16);
+                pdf.text(t('pdfDatosDelCiclo'), 5, 11); 
+                pdf.text(t('pdfEquipo'), 100, 11);
+                pdf.text(t('pdfCiclo'), 100, 16);
                 pdf.setFont('helvetica', 'normal');
-                pdf.text(equipo || '', 115, 11);
+                pdf.text(equipo || '', 130, 11); // Ajustado de 115 a 130
                 pdf.text(cicloId?.toString() || '', 111, 16);
                 pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
                 
@@ -228,11 +228,11 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
                         pdf.setFont('helvetica', 'bold');
                         pdf.setFontSize(10); 
                         pdf.setTextColor(255, 255, 255); // Texto blanco para encabezado de página nueva
-                        pdf.text(`Datos del Ciclo (cont.)`, 5, 11);
-                        pdf.text('Equipo:', 100, 11);
-                        pdf.text('Ciclo:', 100, 16);
+                        pdf.text(t('pdfDatosDelCicloCont'), 5, 11);
+                        pdf.text(t('pdfEquipo'), 100, 11);
+                        pdf.text(t('pdfCiclo'), 100, 16);
                         pdf.setFont('helvetica', 'normal');
-                        pdf.text(equipo || '', 115, 11);
+                        pdf.text(equipo || '', 130, 11); // Ajustado de 115 a 130
                         pdf.text(cicloId?.toString() || '', 111, 16);
                         pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
                         
@@ -274,19 +274,19 @@ export default function BotonInforme({ selectClasses, equipo, cicloId }: BotonIn
                 }
             } else {
                 pdf.addPage();
-                pdf.text("No hay datos tabulares disponibles para este ciclo.", 10, metadataHeight + 10);
+                pdf.text(t('datosTabularesNoDisponibles'), 10, metadataHeight + 10);
             }
 
-            pdf.save(`Informe_${equipo}_Ciclo-${cicloId}.pdf`);
+            pdf.save(`${t('nombreArchivoInforme')}_${equipo}_Ciclo-${cicloId}.pdf`);
     
-            toast.success('Éxito', {
-                description: 'Informe PDF descargado correctamente',
+            toast.success(t('exitoTitulo'), {
+                description: t('informeDescargadoExito'),
                 position: 'bottom-right'
             });
         } catch (error) {
-            console.error('Error al generar el informe:', error);
-            const errorMessage = error instanceof Error ? error.message : 'Error desconocido al generar el informe';
-            toast.error('Error', {
+            console.error(t('errorGenerarInformeConsola'), error);
+            const errorMessage = error instanceof Error ? error.message : t('errorGenerarInformeDesconocido');
+            toast.error(t('errorTitulo'), {
                 description: errorMessage,
                 position: 'bottom-right'
             });
