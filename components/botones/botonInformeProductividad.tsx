@@ -59,11 +59,10 @@ export default function BotonInformeProductividad({
             }
 
             const canvas = await html2canvas(productivityContainer, {
-                scale: 2, 
+                scale: 3, // Aumentado de 2 a 3 para mejor calidad
                 logging: false,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: '#000000', 
                 ignoreElements: (element) => {
                     return element.classList.contains('pdf-ignore') ||
                            element.classList.contains('recharts-tooltip-wrapper') ||
@@ -110,7 +109,7 @@ export default function BotonInformeProductividad({
                 format: 'a4'
             });
 
-            const metadataHeight = 20; 
+            const metadataHeight = 25; // Altura para la información adicional
             const margin = 5;
             const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
@@ -138,7 +137,7 @@ export default function BotonInformeProductividad({
             pdf.addImage(logoDataURL, 'PNG', pageWidth - logoWidth - margin, margin, logoWidth, logoHeight);
             pdf.link(pageWidth - logoWidth - margin, margin -1, logoWidth, logoHeight + 2, {url: "https://creminox.com", target: '_blank'});
 
-            const imgPdfWidth = contentWidth;
+            const imgPdfWidth = 359; // Ancho fijo para la imagen
             const imgPdfHeight = (canvas.height * imgPdfWidth) / canvas.width;
             const imgY = metadataHeight + margin;
             
