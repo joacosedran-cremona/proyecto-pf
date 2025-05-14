@@ -4,9 +4,8 @@ import React, { useState, useEffect } from "react";
 import GraficoHistorico from "@/components/graficos/graficoHistorico";
 import Productividad from "@/components/productividad/productividad";
 import Selector from "@/components/selectores/selectorHistorico";
-import DatePicker from "@/ui/datePicker"
-import BotonExcel from "@/components/botones/botonExcel";
-import BotonPDF from "@/components/botones/botonInforme";
+import DatePicker from "@/ui/datePicker";
+import BotonInforme from "@/components/botones/botonInforme";
 import BotonAplicar from "@/components/botones/botonAplicar";
 import { useTranslation } from 'react-i18next';
 
@@ -151,15 +150,10 @@ export default function Historico() {
     <section className="flex flex-col w-[100%] items-center justify-center gap-[20px]">
       <div className="flex flex-row items-center justify-between bg-black p-[8px] w-[100%] rounded-md">
         <div className="flex gap-[10px] ml-[10px]">
-          <BotonPDF 
+          <BotonInforme
               selectClasses="min-h-[40px]"
               equipo={getEquipmentDisplayName(selectedId, selectedType)}
               cicloId={selectedCicloId}
-          />
-          <BotonExcel 
-            selectClasses="bg-green-700 hover:bg-green-800 min-h-[40px]"
-            equipo={getEquipmentDisplayName(selectedId, selectedType)}
-            cicloId={selectedCicloId}
           />
         </div>
 

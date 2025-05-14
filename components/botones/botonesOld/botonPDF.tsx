@@ -4,104 +4,100 @@ import { useTranslation } from 'react-i18next';
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
-import logoDataURL from '../../public/cremonabase64';
+import logoDataURL from '../../../public/cremonabase64'; // Importa la data URL de la imagen
 
 interface BotonPDFProps {
     selectClasses?: string;
-    lineaId?: number;
-    equipoId?: number;
+    equipo?: string;
+    cicloId?: number | null;
 }
 
-export default function BotonPDF({ selectClasses, lineaId, equipoId }: BotonPDFProps) {
+export default function BotonPDF({ selectClasses, equipo, cicloId }: BotonPDFProps) {
     const { t } = useTranslation('botones');
 
-    const getLineaName = (id: number | undefined) => {
-        switch(id) {
-            case 15: return "Línea 1";
-            case 16: return "Línea 2";
-            default: return "Todas las líneas";
-        }
-    };
-
-    const getEquipoName = (id: number | undefined) => {
-        if (!id || id === 30) return "Todos los equipos";
-        return id <= 6 ? `Cocina ${id}` : `Enfriador ${id-6}`;
-    };
-
     const handlePdfDownload = async () => {
+        if (!equipo || !cicloId) {
+            toast.error('Error', {
+                description: 'Seleccione un equipo y un ciclo para descargar',
+                position: 'bottom-right'
+            });
+            return;
+        }
+    
         try {
-            const productivityContainer = document.querySelector('.productividad-container');
+            // Específicamente buscamos el contenedor del gráfico histórico
+            const graphContainer = document.querySelector('.grafico-historico');
             
-            if (!productivityContainer) {
-                throw new Error('No se encontró el contenedor de productividad');
+            if (!graphContainer) {
+                throw new Error('No se encontró el gráfico histórico');
             }
     
-            const canvas = await html2canvas(productivityContainer, {
+            const canvas = await html2canvas(graphContainer, {
                 scale: 3,
+                backgroundColor: '#000000',
                 logging: false,
                 useCORS: true,
                 allowTaint: true,
                 ignoreElements: (element) => {
-                    return element.classList.contains('pdf-ignore') || 
-                           element.classList.contains('recharts-tooltip-wrapper') ||
-                           element.classList.contains('ciclos-image') ||
-                           element.classList.contains('product-tooltip');
+                    return element.classList.contains('pdf-ignore');
                 }
             });
             
             const imgData = canvas.toDataURL('image/png');
     
             // Configurar dimensiones para orientación horizontal
-            const imgWidth = 359;
+            const imgWidth = 287; // A4 landscape width in mm
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            const pageHeight = imgHeight + 35;
+            const pageHeight = imgHeight + 30; // A4 landscape height in mm
     
+            // Crear PDF en orientación horizontal
             const pdf = new jsPDF({
                 orientation: 'landscape',
                 unit: 'mm',
                 format: [pageHeight, 297]
             });
     
-            // Metadatos
-            const metadataHeight = 25; // Increased height for additional info
+            // Agregar la imagen del gráfico
+            pdf.addImage(imgData, 'PNG', 5, 25, imgWidth, imgHeight);
+            
+            // Agregar fondo negro para metadata
+            const metadataHeight = 20; // altura del área de metadata
             pdf.setFillColor(19, 19, 19);
-            pdf.rect(0, 0, 297, metadataHeight, 'F');
+            pdf.rect(0, 0, 297, metadataHeight, 'F'); // rectangle negro en la parte superior
 
-            // Configurar texto en negrita
+            // Configurar fuente para texto en negrita
             pdf.setFont('helvetica', 'bold');
             pdf.setFontSize(10);
             pdf.setTextColor(255, 255, 255);
 
-            // Labels
-            pdf.text('Fecha de exportación:', 5, 8);
-            pdf.text('Línea:', 5, 13);
-            pdf.text('Equipo:', 5, 18);
+            // Agregar labels en negrita
+            pdf.text('Equipo:', 5, 11);
+            pdf.text('Ciclo:', 5, 16);
+            pdf.text('Fecha de exportación:', 5, 6);
 
-            // Texto normal
+            // Configurar fuente para texto normal
             pdf.setFont('helvetica', 'normal');
 
-            // Valores
+            // Agregar valores en texto normal
             const currentDate = new Date().toLocaleDateString('es-ES', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
+            
+            // Calcular posición X para los valores (después de los labels)
+            pdf.text(equipo, 20, 11);
+            pdf.text(cicloId.toString(), 16, 16);
+            pdf.text(currentDate, 44, 6);
 
-            pdf.text(currentDate, 44, 8);
-            pdf.text(getLineaName(lineaId), 17, 13);
-            pdf.text(getEquipoName(equipoId), 20, 18);
-
-            // Logo
             const logoWidth = 40;
             const logoHeight = 10;
             pdf.addImage(logoDataURL, 'PNG', 252, 5, logoWidth, logoHeight);
-            pdf.link(252, 4, 40, 12, {url: "https://creminox.com", target: '_blank'});
+            pdf.link(252, 4, 40, 12, {url: "https://creminox.com", target: '_blank'});  
 
-            // Adjust image position due to increased metadata height
-            pdf.addImage(imgData, 'PNG', 5, 30, imgWidth, imgHeight);
 
-            // Descargar PDF
-            pdf.save(`Productividad_${currentDate}.pdf`);
+            // Descargar el PDF
+            pdf.save(`${equipo}_Ciclo-${cicloId}.pdf`);
     
             toast.success('Éxito', {
                 description: 'PDF descargado correctamente',

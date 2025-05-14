@@ -5,8 +5,7 @@ import Selector from "../selectores/selectorLineasProductividad";
 import SelectorEquipos from "../selectores/selectorEquipo";
 import DatePicker from "@/ui/datePickerProductividad";
 import ButtonAplicar from "../botones/botonAplicarProductividad";
-import ButtonPDF from "../botones/botonPDFProductividad";
-import ButtonExcel from "../botones/botonExcelProductividad";
+import BotonInformeProductividad from "../botones/botonInformeProductividad"; // Importar el nuevo botón
 import { useTranslation } from 'react-i18next';  
 
 interface FiltroPeriodoProps {
@@ -16,7 +15,7 @@ interface FiltroPeriodoProps {
         lineaId: number,
         equipoId: number,
         dato_enviado?: number,
-        isUserInitiated?: boolean // Add this flag
+        isUserInitiated?: boolean 
     }) => void;
 }
 
@@ -34,17 +33,14 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
     const [datoEnviado, setDatoEnviado] = useState<number>(0);
     const { t } = useTranslation('productividad');
   
-    // Remove this useEffect that's overriding your date selections
-    // The parent component already handles the initial load
-  
     useEffect(() => {
         // Calcula el datoEnviado basado en las condiciones
         let dato = 0;
-        if (selectedLinea === 0) {
+        if (selectedLinea === 0) { // Completo (todas las líneas)
             dato = 0;
-        } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo === 30) {
+        } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo === 30) { // Línea específica, todos los equipos
             dato = selectedLinea;
-        } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo >= 1 && selectedEquipo <= 14) {
+        } else if ((selectedLinea === 15 || selectedLinea === 16) && selectedEquipo >= 1 && selectedEquipo <= 14) { // Línea específica, equipo específico
             dato = selectedEquipo;
         }
         setDatoEnviado(dato);
@@ -58,8 +54,8 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
 
     const handleLineaChange = (value: number) => {
         setSelectedLinea(value);
-        if (value === 0) {
-            setSelectedEquipo(30); // Reset equipo when linea is Completo
+        if (value === 0) { // Si se selecciona "Completo" para línea
+            setSelectedEquipo(30); // Resetear equipo a "Todos los equipos"
         }
     };
 
@@ -78,14 +74,14 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
             lineaId: selectedLinea,
             equipoId: selectedEquipo,
             dato_enviado: datoEnviado,
-            isUserInitiated: true // Mark this as user initiated
+            isUserInitiated: true 
         });
     };
 
     return (
         <div className="flex flex-col items-center justify-center h-[100%] gap-[15px]">
             <h2 className="flex items-center justify-center text-xl text-white font-bold">{t('filtro.titulo')}</h2>
-            <h2 className="flex items-center justify-center text-l text-white mt-[-18]">{t('filtro.subtitulo')}</h2>
+            <h2 className="flex items-center justify-center text-l text-white mt-[-18px]">{t('filtro.subtitulo')}</h2>
 
             <div className="flex w-[100%] h-1/5">
                 <Selector onLineaChange={handleLineaChange} />
@@ -115,16 +111,12 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
                     dato_enviado={datoEnviado}
                     onApplyFilters={handleApply}
                 />
-                <ButtonPDF 
-                    selectClasses="h-1/4" 
+                <BotonInformeProductividad
+                    selectClasses="h-1/4"
                     lineaId={selectedLinea}
                     equipoId={selectedEquipo}
-                />
-                <ButtonExcel 
-                    selectClasses="h-1/4"
                     startDate={startDate}
                     endDate={endDate}
-                    dato_enviado={datoEnviado}
                 />
             </div>
         </div>
