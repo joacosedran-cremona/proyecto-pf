@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 interface Header2Props {
@@ -15,19 +15,19 @@ interface OpcionBoton {
 }
 
 const Header2: React.FC<Header2Props> = ({ currentPath }) => {
-  const { t } = useTranslation('header');
+  const { t } = useTranslation("header");
 
   const opcionesBotones: OpcionBoton[] = [
     {
       id: 1,
       path: "/cocinas",
-      text: t('header2.botones.cocinas'),
+      text: t("header2.botones.cocinas"),
       styleClass: "text-orange text-2xl",
     },
     {
       id: 2,
       path: "/enfriadores",
-      text: t('header2.botones.enfriadores'),
+      text: t("header2.botones.enfriadores"),
       styleClass: "text-blue text-2xl",
     },
   ];
@@ -39,16 +39,19 @@ const Header2: React.FC<Header2Props> = ({ currentPath }) => {
         <ul className="flex flex-row w-1/2 h-[100%] items-center justify-center">
           {opcionesBotones.map(({ id, path, text, styleClass }) => {
             const colorClase = styleClass
-              .split(' ')
-              .find(className => className.startsWith('text-'))
-              ?.replace('text-', 'border-');
+              .split(" ")
+              .find((className) => className.startsWith("text-"))
+              ?.replace("text-", "border-");
 
             return (
-              <li 
-                key={id} 
+              <li
+                key={id}
                 className="flex flex-row w-[100%] h-[100%] items-center justify-center relative"
               >
-                <Link href={path} className="flex justify-center gap-[5px] h-[100%] items-center">
+                <Link
+                  href={path}
+                  className="flex justify-center gap-[5px] h-[100%] items-center"
+                >
                   <span className={styleClass}>{text}</span>
                 </Link>
                 {currentPath === path && (

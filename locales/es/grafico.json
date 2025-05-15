@@ -1,77 +1,67 @@
 {
-    "datos":
-    {
-        "tempIngreso": "Temperatura de Ingreso",
-        "tempAgua": "Temperatura del Agua",
-        "tempIng": "Temperatura del Producto",
-        "nivelAgua": "Nivel Agua",
-        "temperatura": "Temperatura"
-    },
-    "datosMonitoreo":
-    {
-        "tempAgua": "T. AGUA:",
-        "tempProd": "T. PROD:",
-        "nivelAgua": "N. AGUA:",
-        "letraCocina": "C",
-        "letraEnfriador": "E"
-    },
-    "graficoHistorico":
-    {
-        "titulo": "GRÁFICO",
-        "lote": "LOTE:",
-        "ciclo": "CICLO ACTUAL:",
-        "botonCiclos": "Mostrar Ciclos",
-        "botonZoom": "Reiniciar Zoom"
-    },
-    "datosHistorico":
-    {
-        "tempProd": "Temp. Prod",
-        "tempAgua": "Temp. Agua",
-        "nivelAgua": "Nivel Agua",
-        "hInicio": "H. Inicio:",
-        "hFin": "H. Fin:",
-        "tiempoTrans": "T. Trans:"
-    },
-    "filtroPeriodo":
-    {
-        "titulo": "FILTRAR POR",
-        "subtitulo": "PERIODO"
-    },
-    "ejes":
-    {
-        "x": "Tiempo (hh:mm)",
-        "xLinea": "Tiempo (hh:mm)",
-        "y": "Temperatura (°C)",
-        "y1": "Nivel de agua (mm)"
-    },
-    "error":
-    {
-        "titulo": "FALLA",
-        "mensaje": "Equipo suspendido"
-    },
-    "inactividad":
-    {
-        "titulo": "INACTIVO",
-        "mensaje": "Esperando conexión"
-    },
-    "finalizado":
-    {
-        "titulo": "FINALIZADO",
-        "mensaje": "El equipo ha finalizado su ciclo."
-    },
-    "equipo":
-    {
-        "cocina": "Cocina",
-        "enfriador": "Enfriador",
-        "desconocido": "Equipo desconocido"
-    },
-    "estado": "ESTADO:",
-    "tiempo": "TIEMPO:",
-    "tooltip": "Tiempo Transcurrido",
-    "tituloGrafico": "Datos de los sensores",
-    "subtituloGrafico": "en tiempo real",
-    "reiniciarZoom": "Reiniciar Zoom",
-    "cargando": "Cargando...",
-    "equipoNoEncontrado": "Equipo no encontrado",
-    "cargandoGrafico": "Renderizando gráfico..."
+  "datos": {
+    "tempIngreso": "Temperatura de Ingreso",
+    "tempAgua": "Temperatura del Agua",
+    "tempIng": "Temperatura del Producto",
+    "nivelAgua": "Nivel Agua",
+    "temperatura": "Temperatura"
+  },
+  "datosMonitoreo": {
+    "tempAgua": "T. AGUA:",
+    "tempProd": "T. PROD:",
+    "nivelAgua": "N. AGUA:",
+    "letraCocina": "C",
+    "letraEnfriador": "E"
+  },
+  "graficoHistorico": {
+    "titulo": "GRÁFICO",
+    "lote": "LOTE:",
+    "ciclo": "CICLO ACTUAL:",
+    "botonCiclos": "Mostrar Ciclos",
+    "botonZoom": "Reiniciar Zoom"
+  },
+  "datosHistorico": {
+    "tempProd": "Temp. Prod",
+    "tempAgua": "Temp. Agua",
+    "nivelAgua": "Nivel Agua",
+    "hInicio": "H. Inicio:",
+    "hFin": "H. Fin:",
+    "tiempoTrans": "T. Trans:"
+  },
+  "filtroPeriodo": {
+    "titulo": "FILTRAR POR",
+    "subtitulo": "PERIODO"
+  },
+  "ejes": {
+    "x": "Tiempo (hh:mm)",
+    "xLinea": "Tiempo (hh:mm)",
+    "y": "Temperatura (°C)",
+    "y1": "Nivel de agua (mm)"
+  },
+  "error": {
+    "titulo": "FALLA",
+    "mensaje": "Equipo suspendido"
+  },
+  "inactividad": {
+    "titulo": "INACTIVO",
+    "mensaje": "Esperando conexión"
+  },
+  "finalizado": {
+    "titulo": "FINALIZADO",
+    "mensaje": "El equipo ha finalizado su ciclo."
+  },
+  "equipo": {
+    "cocina": "Cocina",
+    "enfriador": "Enfriador",
+    "desconocido": "Equipo desconocido"
+  },
+  "estado": "ESTADO:",
+  "tiempo": "TIEMPO:",
+  "tooltip": "Tiempo Transcurrido",
+  "tituloGrafico": "Datos de los sensores",
+  "subtituloGrafico": "en tiempo real",
+  "reiniciarZoom": "Reiniciar Zoom",
+  "cargando": "Cargando...",
+  "equipoNoEncontrado": "Equipo no encontrado",
+  "cargandoGrafico": "Renderizando gráfico..."
 }

@@ -1,12 +1,19 @@
-"use client"
+"use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useWebSocketContext } from "@/context/WebSocketContext";
 
 interface InfoEquipo {
-  tipo: 'COCINA' | 'ENFRIADOR';
+  tipo: "COCINA" | "ENFRIADOR";
   id: number;
-  estado: 'ACTIVO' | 'INACTIVO' | 'FALLA' | 'OPERATIVO' | 'FINALIZADO' | 'PRE OPERATIVO' | 'PRE OPERATIVO';
+  estado:
+    | "ACTIVO"
+    | "INACTIVO"
+    | "FALLA"
+    | "OPERATIVO"
+    | "FINALIZADO"
+    | "PRE OPERATIVO"
+    | "PRE OPERATIVO";
   temp_agua: number;
   temp_prod: number;
   temp_ingreso: number;
@@ -56,33 +63,43 @@ export const LineaProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (data) {
-      const datosCocinas = data['datos-cocinas'] || [];
-      const datosEnfriadores = data['datos-enfriadores'] || [];
+      const datosCocinas = data["datos-cocinas"] || [];
+      const datosEnfriadores = data["datos-enfriadores"] || [];
 
       // Organizar datos por líneas
       const linea1 = {
-        cocinas: datosCocinas.filter(([info]: [InfoEquipo, any]) => [1, 2, 3].includes(info.id)),
-        enfriadores: datosEnfriadores.filter(([info]: [InfoEquipo, any]) => [7, 8, 9, 10].includes(info.id))
+        cocinas: datosCocinas.filter(([info]: [InfoEquipo, any]) =>
+          [1, 2, 3].includes(info.id),
+        ),
+        enfriadores: datosEnfriadores.filter(([info]: [InfoEquipo, any]) =>
+          [7, 8, 9, 10].includes(info.id),
+        ),
       };
 
       const linea2 = {
-        cocinas: datosCocinas.filter(([info]: [InfoEquipo, any]) => [4, 5, 6].includes(info.id)),
-        enfriadores: datosEnfriadores.filter(([info]: [InfoEquipo, any]) => [11, 12, 13, 14].includes(info.id))
+        cocinas: datosCocinas.filter(([info]: [InfoEquipo, any]) =>
+          [4, 5, 6].includes(info.id),
+        ),
+        enfriadores: datosEnfriadores.filter(([info]: [InfoEquipo, any]) =>
+          [11, 12, 13, 14].includes(info.id),
+        ),
       };
 
       setLineasData({
         1: linea1,
-        2: linea2
+        2: linea2,
       });
     }
   }, [data]);
 
   return (
-    <LineaContext.Provider value={{ 
-      lineaSeleccionada, 
-      setLineaSeleccionada, 
-      lineasData 
-    }}>
+    <LineaContext.Provider
+      value={{
+        lineaSeleccionada,
+        setLineaSeleccionada,
+        lineasData,
+      }}
+    >
       {children}
     </LineaContext.Provider>
   );

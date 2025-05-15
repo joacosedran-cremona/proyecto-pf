@@ -1,24 +1,20 @@
 {
-    "filtro":
-    {
-        "titulo": "FILTRADO DE FECHAS",
-        "subtitulo": "POR PERIODO"
-    },
-    "metrica":
-    {
-        "ciclos": "Ciclos realizados",
-        "produccion": "Producción total"
-    },
-    "barraProductos":
-    {
-        "texto": "de produccion por producto"
-    },
-    "barraCiclos":
-    {
-        "texto": "de efectividad en los ciclos",
-        "correctos": "Correctos",
-        "incorrectos": "Incorrectos",
-        "ciclos": "ciclos"
-    },
-    "titulo": "PRODUCTIVIDAD"
+  "filtro": {
+    "titulo": "FILTRADO DE FECHAS",
+    "subtitulo": "POR PERIODO"
+  },
+  "metrica": {
+    "ciclos": "Ciclos realizados",
+    "produccion": "Producción total"
+  },
+  "barraProductos": {
+    "texto": "de produccion por producto"
+  },
+  "barraCiclos": {
+    "texto": "de efectividad en los ciclos",
+    "correctos": "Correctos",
+    "incorrectos": "Incorrectos",
+    "ciclos": "ciclos"
+  },
+  "titulo": "PRODUCTIVIDAD"
 }

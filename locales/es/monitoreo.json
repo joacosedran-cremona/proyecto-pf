@@ -1,38 +1,34 @@
 {
-    "estadoEquipo":
-    {
-        "titulo": "Estado Equipo",
-        "tempIngreso": "Temp. Ingreso",
-        "tempAgua": "Temp. Agua",
-        "tempIng": "Temp. Ingreso",
-        "tempProd": "Temp. Producto",
-        "nivelAgua": "Nivel Agua"
-    },
-    "cicloActivo":
-    {
-        "titulo": "Ciclo Activo",
-        "paso": "N° Paso:",
-        "lote": "N° Lote:",
-        "cantTorres": "Cantidad Torres:",
-        "tiempo": "Tiempo Transcurrido",
-        "tipoFin": "Modo de Finalizacion:"
-    },
-    "sectorIO":
-    {
-        "titulo": "Sector IO",
-        "bomba": "Bomba Recirculacion",
-        "entradaAgua": "Entrada Agua",
-        "filtroSuccion": "Válvula Filtro Agua",
+  "estadoEquipo": {
+    "titulo": "Estado Equipo",
+    "tempIngreso": "Temp. Ingreso",
+    "tempAgua": "Temp. Agua",
+    "tempIng": "Temp. Ingreso",
+    "tempProd": "Temp. Producto",
+    "nivelAgua": "Nivel Agua"
+  },
+  "cicloActivo": {
+    "titulo": "Ciclo Activo",
+    "paso": "N° Paso:",
+    "lote": "N° Lote:",
+    "cantTorres": "Cantidad Torres:",
+    "tiempo": "Tiempo Transcurrido",
+    "tipoFin": "Modo de Finalizacion:"
+  },
+  "sectorIO": {
+    "titulo": "Sector IO",
+    "bomba": "Bomba Recirculacion",
+    "entradaAgua": "Entrada Agua",
+    "filtroSuccion": "Válvula Filtro Agua",
 
-        "valvulaAmoniaco": "Intercambiadora de Frío",
-        "vaporSerp": "Vapor Serpentina",
-        "vaporVivo": "Vapor Vivo",
-        "vaporLim":"Vapor Vivo Limpieza"
-    },
-    "titulo":
-    {
-        "receta": "Receta",
-        "estado": "Estado"
-    },
-    "monitoreo": "MONITOREO DE EQUIPOS"
+    "valvulaAmoniaco": "Intercambiadora de Frío",
+    "vaporSerp": "Vapor Serpentina",
+    "vaporVivo": "Vapor Vivo",
+    "vaporLim": "Vapor Vivo Limpieza"
+  },
+  "titulo": {
+    "receta": "Receta",
+    "estado": "Estado"
+  },
+  "monitoreo": "MONITOREO DE EQUIPOS"
 }

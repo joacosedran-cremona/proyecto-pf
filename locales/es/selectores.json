@@ -1,29 +1,26 @@
 {
-    "cocinas":
-    {
-        "cocina1": "Cocina 1 - L1",
-        "cocina2": "Cocina 2 - L1",
-        "cocina3": "Cocina 3 - L1",
-        "cocina4": "Cocina 4 - L2",
-        "cocina5": "Cocina 5 - L2",
-        "cocina6": "Cocina 6 - L2"
-    },
-    "enfriadores":
-    {
-        "enfriador1": "Enfriador 1 - L1",
-        "enfriador2": "Enfriador 2 - L1",
-        "enfriador3": "Enfriador 3 - L1",
-        "enfriador4": "Enfriador 4 - L1",
-        "enfriador5": "Enfriador 5 - L2",
-        "enfriador6": "Enfriador 6 - L2",
-        "enfriador7": "Enfriador 7 - L2",
-        "enfriador8": "Enfriador 8 - L2"
-    },
-    "lineas":
-    {
-        "linea1": "Línea 1",
-        "linea2": "Línea 2",
-        "linea3": "Completo"
-    },
-    "select": "Seleccione un equipo"
+  "cocinas": {
+    "cocina1": "Cocina 1 - L1",
+    "cocina2": "Cocina 2 - L1",
+    "cocina3": "Cocina 3 - L1",
+    "cocina4": "Cocina 4 - L2",
+    "cocina5": "Cocina 5 - L2",
+    "cocina6": "Cocina 6 - L2"
+  },
+  "enfriadores": {
+    "enfriador1": "Enfriador 1 - L1",
+    "enfriador2": "Enfriador 2 - L1",
+    "enfriador3": "Enfriador 3 - L1",
+    "enfriador4": "Enfriador 4 - L1",
+    "enfriador5": "Enfriador 5 - L2",
+    "enfriador6": "Enfriador 6 - L2",
+    "enfriador7": "Enfriador 7 - L2",
+    "enfriador8": "Enfriador 8 - L2"
+  },
+  "lineas": {
+    "linea1": "Línea 1",
+    "linea2": "Línea 2",
+    "linea3": "Completo"
+  },
+  "select": "Seleccione un equipo"
 }

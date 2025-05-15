@@ -19,7 +19,7 @@ module.exports = {
         1365: "1365px",
         1050: "1050px",
         545: "545px",
-        'laptop': {'raw': '(min-height: 800px) and (max-height: 900px)'}
+        laptop: { raw: "(min-height: 800px) and (max-height: 900px)" },
       },
       colors: {
         orange: "#EF8225",
@@ -38,10 +38,10 @@ module.exports = {
         black: "#131313",
         footerbg: "#2C2C2C",
 
-        yellowGraph:"#FFA500",
-        blueGraph:"#36A2EB",
-        greenGraph:"#4BC04B",
-        
+        yellowGraph: "#FFA500",
+        blueGraph: "#36A2EB",
+        greenGraph: "#4BC04B",
+
         redState: "#F00",
         yellowState: "#bfbf8b",
         greenState: "#9cbb97",

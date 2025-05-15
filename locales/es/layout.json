@@ -1,33 +1,33 @@
 {
-    "datos": {
-      "tempActual": "Temp. Prod.",
-      "tempAgua": "Temp. Agua",
-      "tempIng": "Temp. Ingreso",
-      "receta": "Receta",
-      "tiempo": "Tiempo"
-    },
-    "equipos": {
-      "cocina1": "C1L1",
-      "cocina2": "C2L1",
-      "cocina3": "C3L1",
-      "cocina4": "C4L2",
-      "cocina5": "C5L2",
-      "cocina6": "C6L2",
-      "enfriador1": "E1L1",
-      "enfriador2": "E2L1",
-      "enfriador3": "E3L1",
-      "enfriador4": "E4L1",
-      "enfriador5": "E5L2",
-      "enfriador6": "E6L2",
-      "enfriador7": "E7L2",
-      "enfriador8": "E8L2"
-    },
-    "tooltip": {
-      "cocina": "Cocina {{number}} Línea {{line}}",
-      "enfriador": "Enfriador {{number}} Línea {{line}}"
-    },
-    "titulo": "COCINAS & ENFRIADORES",
-    "subtitulo": "Paneo General",
-    "titulo2": "ALARMAS",
-    "subtitulo2": "Activas"
+  "datos": {
+    "tempActual": "Temp. Prod.",
+    "tempAgua": "Temp. Agua",
+    "tempIng": "Temp. Ingreso",
+    "receta": "Receta",
+    "tiempo": "Tiempo"
+  },
+  "equipos": {
+    "cocina1": "C1L1",
+    "cocina2": "C2L1",
+    "cocina3": "C3L1",
+    "cocina4": "C4L2",
+    "cocina5": "C5L2",
+    "cocina6": "C6L2",
+    "enfriador1": "E1L1",
+    "enfriador2": "E2L1",
+    "enfriador3": "E3L1",
+    "enfriador4": "E4L1",
+    "enfriador5": "E5L2",
+    "enfriador6": "E6L2",
+    "enfriador7": "E7L2",
+    "enfriador8": "E8L2"
+  },
+  "tooltip": {
+    "cocina": "Cocina {{number}} Línea {{line}}",
+    "enfriador": "Enfriador {{number}} Línea {{line}}"
+  },
+  "titulo": "COCINAS & ENFRIADORES",
+  "subtitulo": "Paneo General",
+  "titulo2": "ALARMAS",
+  "subtitulo2": "Activas"
 }

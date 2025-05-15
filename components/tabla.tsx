@@ -2,13 +2,18 @@
 import React, { useMemo, useState, useEffect } from "react";
 
 //MUI
-import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef, MRT_Row } from "material-react-table";
-import { createTheme, ThemeProvider } from '@mui/material';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+  MRT_Row,
+} from "material-react-table";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { Box, Button, Typography, Menu, MenuItem } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import FilterAltOffIcon from '@mui/icons-material/FilterAltOff'; // Importamos ícono para limpiar filtros
-import logoDataURL from '../public/cremonabase64'; 
-import * as XLSX from 'xlsx';  // Importamos la librería para Excel
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"; // Importamos ícono para limpiar filtros
+import logoDataURL from "../public/cremonabase64";
+import * as XLSX from "xlsx"; // Importamos la librería para Excel
 
 // HeroUI para DateRangePicker
 import { DateRangePicker } from "@heroui/react"; // Ajusta esta importación según la estructura real de HeroUI
@@ -43,18 +48,28 @@ interface AlarmaData {
 
 // Función auxiliar para resaltar el texto que coincide con el filtro
 const highlightText = (text: string, filter: string): JSX.Element => {
-  if (!filter || filter === '') return <>{text}</>;
-  
+  if (!filter || filter === "") return <>{text}</>;
+
   try {
-    const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    const regex = new RegExp(
+      `(${filter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+      "gi",
+    );
     const parts = text.split(regex);
-    
+
     return (
       <>
         {parts.map((part, i) => {
           const match = part.toLowerCase() === filter.toLowerCase();
           return match ? (
-            <span key={i} style={{ backgroundColor: 'rgba(255, 204, 0, 0.4)', color: '#ffffff', fontWeight: 'bold' }}>
+            <span
+              key={i}
+              style={{
+                backgroundColor: "rgba(255, 204, 0, 0.4)",
+                color: "#ffffff",
+                fontWeight: "bold",
+              }}
+            >
               {part}
             </span>
           ) : (
@@ -75,33 +90,36 @@ const Tabla: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  
+
   // Nuevo estado para el rango de fechas
   const [dateRange, setDateRange] = useState<{
     from: Date | undefined;
     to: Date | undefined;
   }>({
     from: undefined,
-    to: undefined
+    to: undefined,
   });
-  
+
   // Estado para los datos filtrados por fecha
   const [dateFilteredData, setDateFilteredData] = useState<Alerta[]>([]);
-  
+
   // Estado para el menú de exportación
-  const [exportMenuAnchorEl, setExportMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [exportMenuAnchorEl, setExportMenuAnchorEl] =
+    useState<null | HTMLElement>(null);
   const exportMenuOpen = Boolean(exportMenuAnchorEl);
-  
-  const handleExportMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+  const handleExportMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     setExportMenuAnchorEl(event.currentTarget);
   };
-  
+
   const handleExportMenuClose = () => {
     setExportMenuAnchorEl(null);
   };
 
   // Configuración del WebSocket
-  const wsUrl = `ws://${process.env.NEXT_PUBLIC_WS_HOST || 'localhost'}:${process.env.NEXT_PUBLIC_WS_PORT || '8001'}/ws/datos`;
+  const wsUrl = `ws://${process.env.NEXT_PUBLIC_WS_HOST || "localhost"}:${process.env.NEXT_PUBLIC_WS_PORT || "8001"}/ws/datos`;
 
   const connectWebSocket = () => {
     setIsLoading(true);
@@ -113,10 +131,11 @@ const Tabla: React.FC = () => {
       socket.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
-          
+
           // Extraer solo el array de alarmas (último elemento del array principal)
-          const alarmas: AlarmaData[] = Array.isArray(data) && data.length >= 4 ? data[3] : [];
-          
+          const alarmas: AlarmaData[] =
+            Array.isArray(data) && data.length >= 4 ? data[3] : [];
+
           if (Array.isArray(alarmas) && alarmas.length > 0) {
             setData((prevData) => {
               const updatedData = [...prevData];
@@ -125,7 +144,7 @@ const Tabla: React.FC = () => {
                 // Verificamos que la descripción no esté vacía
                 if (alarma.descripcion && alarma.descripcion.trim() !== "") {
                   const index = updatedData.findIndex(
-                    (item) => item.key === alarma.id_alarma.toString()
+                    (item) => item.key === alarma.id_alarma.toString(),
                   );
 
                   const newItem: Alerta = {
@@ -145,18 +164,20 @@ const Tabla: React.FC = () => {
               });
 
               // Filtrar items con descripción vacía
-              return updatedData.filter(item => item.description && item.description.trim() !== "");
+              return updatedData.filter(
+                (item) => item.description && item.description.trim() !== "",
+              );
             });
             setIsLoading(false);
           }
         } catch (err) {
-          setError(t('noSePudieronObtenerDatos'));
+          setError(t("noSePudieronObtenerDatos"));
           setIsLoading(false);
         }
       };
 
       socket.onerror = () => {
-        setError(t('noSePudieronObtenerDatos'));
+        setError(t("noSePudieronObtenerDatos"));
         setIsLoading(false);
       };
 
@@ -164,7 +185,7 @@ const Tabla: React.FC = () => {
         socket.close();
       };
     } catch (error) {
-      setError(t('error'));
+      setError(t("error"));
       setIsLoading(false);
       return () => {};
     }
@@ -182,8 +203,8 @@ const Tabla: React.FC = () => {
       const loadDataFromAPI = async () => {
         setIsLoading(true);
         try {
-          const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
-          const port = process.env.NEXT_PUBLIC_WS_PORT || '8001';
+          const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost";
+          const port = process.env.NEXT_PUBLIC_WS_PORT || "8001";
 
           const response = await fetch(`http://${host}:${port}/alarmas`);
           if (!response.ok) throw new Error("Error en la solicitud");
@@ -201,7 +222,7 @@ const Tabla: React.FC = () => {
           setError(null);
         } catch (err) {
           console.error("Error fetching data:", err);
-          setError(t('noSePudieronObtenerDatos'));
+          setError(t("noSePudieronObtenerDatos"));
         } finally {
           setIsLoading(false);
         }
@@ -224,7 +245,7 @@ const Tabla: React.FC = () => {
     // Aseguramos que toDate sea el final del día
     toDate.setHours(23, 59, 59, 999);
 
-    const filtered = data.filter(item => {
+    const filtered = data.filter((item) => {
       try {
         const itemDate = new Date(item.time);
         return itemDate >= fromDate && itemDate <= toDate;
@@ -240,145 +261,151 @@ const Tabla: React.FC = () => {
   const handleClearFilters = () => {
     // Limpiar filtros de columna
     setColumnFilters([]);
-    
+
     // Limpiar filtro de fechas
     setDateRange({
       from: undefined,
-      to: undefined
+      to: undefined,
     });
-    
+
     setDateFilteredData(data);
-    
-    toast.success(t('filtrosLimpiados'), {
-      position: 'bottom-right'
+
+    toast.success(t("filtrosLimpiados"), {
+      position: "bottom-right",
     });
   };
 
   // Extraer valores de filtro para hacer accesibles en las celdas
   const getFilterValue = (columnId: string): string => {
-    const filter = columnFilters.find(f => f.id === columnId);
-    return filter?.value ? String(filter.value).toLowerCase() : '';
+    const filter = columnFilters.find((f) => f.id === columnId);
+    return filter?.value ? String(filter.value).toLowerCase() : "";
   };
 
-  const columns = useMemo<MRT_ColumnDef<Alerta>[]>(() => [
-    {
-      accessorKey: 'description',
-      header: t('descripcion'),
-      size: 400,
-      Cell: ({ cell, row }) => {
-        const value = cell.getValue<string>() || '';
-        const filterValue = getFilterValue('description');
-        return highlightText(value, filterValue);
-      }
-    },
-    {
-      accessorKey: 'type',
-      header: t('tipo'),
-      size: 150,
-      Cell: ({ cell }) => {
-        const value = cell.getValue<string>() || '';
-        const filterValue = getFilterValue('type');
-        return highlightText(value, filterValue);
-      }
-    },
-    {
-      accessorKey: 'state',
-      header: t('estado'),
-      size: 150,
-      Cell: ({ cell }) => {
-        const value = cell.getValue<string>() || '';
-        const filterValue = getFilterValue('state');
-        return highlightText(value, filterValue);
-      }
-    },
-    {
-      accessorKey: 'time',
-      header: t('fechaRegistro'),
-      size: 200,
-      filterVariant: 'text',
-      accessorFn: (row) => {
-        try {
-          const date = new Date(row.time);
-          return date.toISOString().slice(0, 16).replace("T", " ");
-        } catch (error) {
-          console.error("Error formateando fecha:", error);
-          return row.time || "";
-        }
-      },
-      Cell: ({ cell }) => {
-        try {
-          const rawDate = new Date(cell.row.original.time);
-          const formattedDate = rawDate.toISOString().slice(0, 16).replace("T", " ");
-          const filterValue = getFilterValue('time');
-          return highlightText(formattedDate, filterValue);
-        } catch (error) {
+  const columns = useMemo<MRT_ColumnDef<Alerta>[]>(
+    () => [
+      {
+        accessorKey: "description",
+        header: t("descripcion"),
+        size: 400,
+        Cell: ({ cell, row }) => {
           const value = cell.getValue<string>() || "";
-          const filterValue = getFilterValue('time');
+          const filterValue = getFilterValue("description");
           return highlightText(value, filterValue);
-        }
+        },
       },
-    },
-  ], [t, columnFilters]);
+      {
+        accessorKey: "type",
+        header: t("tipo"),
+        size: 150,
+        Cell: ({ cell }) => {
+          const value = cell.getValue<string>() || "";
+          const filterValue = getFilterValue("type");
+          return highlightText(value, filterValue);
+        },
+      },
+      {
+        accessorKey: "state",
+        header: t("estado"),
+        size: 150,
+        Cell: ({ cell }) => {
+          const value = cell.getValue<string>() || "";
+          const filterValue = getFilterValue("state");
+          return highlightText(value, filterValue);
+        },
+      },
+      {
+        accessorKey: "time",
+        header: t("fechaRegistro"),
+        size: 200,
+        filterVariant: "text",
+        accessorFn: (row) => {
+          try {
+            const date = new Date(row.time);
+            return date.toISOString().slice(0, 16).replace("T", " ");
+          } catch (error) {
+            console.error("Error formateando fecha:", error);
+            return row.time || "";
+          }
+        },
+        Cell: ({ cell }) => {
+          try {
+            const rawDate = new Date(cell.row.original.time);
+            const formattedDate = rawDate
+              .toISOString()
+              .slice(0, 16)
+              .replace("T", " ");
+            const filterValue = getFilterValue("time");
+            return highlightText(formattedDate, filterValue);
+          } catch (error) {
+            const value = cell.getValue<string>() || "";
+            const filterValue = getFilterValue("time");
+            return highlightText(value, filterValue);
+          }
+        },
+      },
+    ],
+    [t, columnFilters],
+  );
 
   const handleExportRows = (rows: MRT_Row<Alerta>[]) => {
     try {
       const doc = new jsPDF({
-        orientation: 'portrait',
-        unit: 'pt',
-        format: 'A4',
+        orientation: "portrait",
+        unit: "pt",
+        format: "A4",
       });
-    
+
       const pageWidth = doc.internal.pageSize.getWidth();
-      const tableData = rows.map(row =>
-        columns.map(col => {
+      const tableData = rows.map((row) =>
+        columns.map((col) => {
           const value = row.original[col.accessorKey as keyof Alerta];
-          if (col.accessorKey === 'time' && typeof value === 'string') {
+          if (col.accessorKey === "time" && typeof value === "string") {
             const date = new Date(value);
             return date.toISOString().slice(0, 16).replace("T", " ");
           }
           return value;
-        })
+        }),
       );
       const tableHeaders = columns.map((c) => c.header as string);
-      const exportDate = new Date().toLocaleDateString('es-ES', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+      const exportDate = new Date().toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
-    
+
       // CABECERA personalizada
       const headerHeight = 70;
       const totalTexto = `Total de registros: ${rows.length}`;
       doc.setFillColor(19, 19, 19); // Fondo oscuro
-      doc.rect(0, 0, pageWidth, headerHeight, 'F');
-    
+      doc.rect(0, 0, pageWidth, headerHeight, "F");
+
       doc.setTextColor(255, 255, 255);
-      doc.setFont('helvetica', 'bold');
+      doc.setFont("helvetica", "bold");
       doc.setFontSize(10);
-    
-      doc.text('Fecha de exportación:', 20, 25);
-      doc.text('Contacto: soporte@creminox.com', 20, 40);
+
+      doc.text("Fecha de exportación:", 20, 25);
+      doc.text("Contacto: soporte@creminox.com", 20, 40);
       doc.text(totalTexto, 20, 55);
-    
-      doc.setFont('helvetica', 'normal');
+
+      doc.setFont("helvetica", "normal");
       doc.text(exportDate, 130, 25);
-    
+
       const logoWidth = 120;
       const logoHeight = 25;
       const logoX = pageWidth - logoWidth - 40;
       const logoY = (headerHeight - logoHeight) / 2;
 
-      doc.addImage(logoDataURL, 'PNG', logoX, logoY, logoWidth, logoHeight);
+      doc.addImage(logoDataURL, "PNG", logoX, logoY, logoWidth, logoHeight);
       doc.link(logoX, logoY, logoWidth, logoHeight, {
         url: "https://creminox.com",
-        target: "_blank"
+        target: "_blank",
       });
 
       // TABLA
       autoTable(doc, {
         head: [tableHeaders],
         body: tableData,
-        theme: 'grid',
+        theme: "grid",
         margin: { top: headerHeight + 10 },
         styles: {
           fillColor: [41, 41, 41],
@@ -388,7 +415,7 @@ const Tabla: React.FC = () => {
         headStyles: {
           fillColor: [25, 25, 25],
           textColor: [255, 255, 255],
-          fontStyle: 'bold',
+          fontStyle: "bold",
         },
         alternateRowStyles: {
           fillColor: [30, 30, 30],
@@ -396,70 +423,72 @@ const Tabla: React.FC = () => {
         tableLineColor: [100, 100, 100],
         tableLineWidth: 0.1,
       });
-    
+
       doc.save("Registro_Eventos.pdf");
-      
+
       // Mostrar toast de éxito
-      toast.success('Éxito', {
-        description: 'PDF descargado correctamente',
-        position: 'bottom-right'
+      toast.success("Éxito", {
+        description: "PDF descargado correctamente",
+        position: "bottom-right",
       });
     } catch (error) {
       // Mostrar toast de error si algo falla
-      console.error('Error al generar el PDF:', error);
-      toast.error('Error', {
-        description: error instanceof Error ? error.message : 'Error al generar el PDF',
-        position: 'bottom-right'
+      console.error("Error al generar el PDF:", error);
+      toast.error("Error", {
+        description:
+          error instanceof Error ? error.message : "Error al generar el PDF",
+        position: "bottom-right",
       });
     }
     handleExportMenuClose();
   };
-  
+
   const handleExportExcel = (rows: MRT_Row<Alerta>[], fileName: string) => {
     try {
       // Preparar los datos para Excel
-      const excelData = rows.map(row => {
+      const excelData = rows.map((row) => {
         const rowData: Record<string, any> = {};
-        
-        columns.forEach(column => {
+
+        columns.forEach((column) => {
           const key = column.accessorKey as keyof Alerta;
           let value = row.original[key];
-          
+
           // Formatear la fecha si es la columna de tiempo
-          if (key === 'time' && typeof value === 'string') {
+          if (key === "time" && typeof value === "string") {
             const date = new Date(value);
             value = date.toISOString().slice(0, 16).replace("T", " ");
           }
-          
+
           // Usar el header traducido como nombre de columna
           const headerName = column.header as string;
           rowData[headerName] = value;
         });
-        
+
         return rowData;
       });
-      
+
       // Crear una hoja de cálculo
       const workSheet = XLSX.utils.json_to_sheet(excelData);
       const workBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workBook, workSheet, "Alertas");
-      
+
       // Generar y descargar el archivo
       XLSX.writeFile(workBook, `${fileName}.xlsx`);
-      
+
       // Mostrar toast de éxito
-      toast.success('Éxito', {
-        description: 'Excel descargado correctamente',
-        position: 'bottom-right'
+      toast.success("Éxito", {
+        description: "Excel descargado correctamente",
+        position: "bottom-right",
       });
     } catch (error) {
-      console.error('Error al generar el Excel:', error);
-      toast.error('Error', {
-        description: error instanceof Error ? error.message : 'Error al generar el Excel',
-        position: 'bottom-right'
+      console.error("Error al generar el Excel:", error);
+      toast.error("Error", {
+        description:
+          error instanceof Error ? error.message : "Error al generar el Excel",
+        position: "bottom-right",
       });
     }
-    
+
     // Cerrar el menú después de la exportación
     handleExportMenuClose();
   };
@@ -467,44 +496,44 @@ const Tabla: React.FC = () => {
   const customTheme = createTheme({
     palette: {
       primary: {
-        main: '#761122',
+        main: "#761122",
       },
       background: {
-        default: '#131313 !important',
-        paper: '#131313 !important',
+        default: "#131313 !important",
+        paper: "#131313 !important",
       },
       text: {
-        primary: '#d9d9d9',
-        secondary: '#8c8c8c',
+        primary: "#d9d9d9",
+        secondary: "#8c8c8c",
       },
     },
     components: {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            backgroundColor: '#131313 !important',
+            backgroundColor: "#131313 !important",
           },
         },
       },
       MuiPaper: {
         styleOverrides: {
           root: {
-            backgroundColor: '#131313 !important',
+            backgroundColor: "#131313 !important",
           },
         },
       },
       MuiTablePagination: {
         styleOverrides: {
-          selectLabel: { color: '#ffffff' },
-          selectRoot: { color: '#ffffff' },
-          selectIcon: { color: '#ffffff' },
-          displayedRows: { color: '#ffffff' },
+          selectLabel: { color: "#ffffff" },
+          selectRoot: { color: "#ffffff" },
+          selectIcon: { color: "#ffffff" },
+          displayedRows: { color: "#ffffff" },
         },
       },
       MuiMenu: {
         styleOverrides: {
           paper: {
-            backgroundColor: '#131313 !important',
+            backgroundColor: "#131313 !important",
           },
         },
       },
@@ -513,10 +542,13 @@ const Tabla: React.FC = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data: dateFilteredData.length > 0 || (dateRange.from !== undefined) ? dateFilteredData : data,
-    state: { 
+    data:
+      dateFilteredData.length > 0 || dateRange.from !== undefined
+        ? dateFilteredData
+        : data,
+    state: {
       isLoading,
-      columnFilters
+      columnFilters,
     },
     onColumnFiltersChange: setColumnFilters,
     enableSorting: true,
@@ -525,18 +557,18 @@ const Tabla: React.FC = () => {
     columnResizeMode: "onChange",
     layoutMode: "grid",
     initialState: {
-      density: 'spacious',
+      density: "spacious",
       showColumnFilters: true,
     },
     renderEmptyRowsFallback: () => (
       <Box
         sx={{
-          textAlign: 'center',
-          padding: '2rem',
-          color: '#d9d9d9'
+          textAlign: "center",
+          padding: "2rem",
+          color: "#d9d9d9",
         }}
       >
-        {error || t('noExistenDatos')}
+        {error || t("noExistenDatos")}
       </Box>
     ),
 
@@ -547,31 +579,31 @@ const Tabla: React.FC = () => {
         color: "#d9d9d9",
         fontWeight: "bold",
         borderBottom: "none", // Eliminar bordes de celdas para evitar duplicación
-        '& .MuiDivider-root': {
-          backgroundColor: '#FFF5 !important',
-          height: '20px',
-          '&:hover': {
-            backgroundColor: 'rgb(129, 129, 129) !important',
+        "& .MuiDivider-root": {
+          backgroundColor: "#FFF5 !important",
+          height: "20px",
+          "&:hover": {
+            backgroundColor: "rgb(129, 129, 129) !important",
           },
         },
         // Estilos específicos para el icono de ordenamiento
-        '& .MuiTableSortLabel-root': {
-          color: '#d9d9d9',
-          '& .MuiTableSortLabel-icon': {
-            color: '#d9d9d9 !important', // Forzar color para el ícono
-          }
+        "& .MuiTableSortLabel-root": {
+          color: "#d9d9d9",
+          "& .MuiTableSortLabel-icon": {
+            color: "#d9d9d9 !important", // Forzar color para el ícono
+          },
         },
         // Cuando está activo
-        '& .MuiTableSortLabel-root.Mui-active': {
-          color: '#d9d9d9',
-          '& .MuiTableSortLabel-icon': {
-            color: '#d9d9d9 !important',
-          }
+        "& .MuiTableSortLabel-root.Mui-active": {
+          color: "#d9d9d9",
+          "& .MuiTableSortLabel-icon": {
+            color: "#d9d9d9 !important",
+          },
         },
         // Para todos los íconos SVG dentro del encabezado
-        '& .MuiSvgIcon-root': {
-          color: '#d9d9d9',
-        }
+        "& .MuiSvgIcon-root": {
+          color: "#d9d9d9",
+        },
       },
     },
 
@@ -579,22 +611,22 @@ const Tabla: React.FC = () => {
       sx: {
         backgroundColor: "#131313 !important",
         // Agregar borde inferior a la fila de cabecera
-        borderBottom: "1px solid #515151"
+        borderBottom: "1px solid #515151",
       },
     },
 
     muiTopToolbarProps: {
       sx: {
         backgroundColor: "#131313 !important",
-        position: 'relative',
-        '& .MuiInputBase-root': {
-          color: '#d9d9d9',
+        position: "relative",
+        "& .MuiInputBase-root": {
+          color: "#d9d9d9",
         },
-        '& .MuiInputBase-input': {
-          color: '#d9d9d9',
+        "& .MuiInputBase-input": {
+          color: "#d9d9d9",
         },
-        '& .MuiSvgIcon-root': {
-          color: '#d9d9d9',
+        "& .MuiSvgIcon-root": {
+          color: "#d9d9d9",
         },
       },
     },
@@ -602,17 +634,17 @@ const Tabla: React.FC = () => {
     // Personalizamos los estilos del filtro
     muiFilterTextFieldProps: {
       sx: {
-        '& .MuiInputBase-root': {
-          color: '#d9d9d9',
+        "& .MuiInputBase-root": {
+          color: "#d9d9d9",
         },
-        '& .MuiInputBase-input': {
-          color: '#d9d9d9',
+        "& .MuiInputBase-input": {
+          color: "#d9d9d9",
         },
-        '& .MuiInputLabel-root': {
-          color: '#d9d9d9',
+        "& .MuiInputLabel-root": {
+          color: "#d9d9d9",
         },
-        '& .MuiSvgIcon-root': {
-          color: '#d9d9d9',
+        "& .MuiSvgIcon-root": {
+          color: "#d9d9d9",
         },
       },
     },
@@ -633,66 +665,64 @@ const Tabla: React.FC = () => {
           backgroundColor: "#131313 !important",
         },
         // Agregar borde inferior a cada fila
-        borderBottom: "1px solid #515151"
+        borderBottom: "1px solid #515151",
       },
     },
 
-
     //Footer
     muiTableFooterProps: {
-      sx : {
-        '& .MuiInputLabel-root': {
-          color: '#d9d9d9',
+      sx: {
+        "& .MuiInputLabel-root": {
+          color: "#d9d9d9",
         },
-        '& .MuiFormLabel-root': {
-          color: '#d9d9d9',
-        }
-      }
+        "& .MuiFormLabel-root": {
+          color: "#d9d9d9",
+        },
+      },
     },
 
     muiBottomToolbarProps: {
       sx: {
         backgroundColor: "#131313 !important",
         color: "#d9d9d9",
-        '& .MuiTablePagination-root': {
-          color: '#d9d9d9',
+        "& .MuiTablePagination-root": {
+          color: "#d9d9d9",
         },
-        '& .MuiSelect-icon': {
-          color: '#d9d9d9',
+        "& .MuiSelect-icon": {
+          color: "#d9d9d9",
         },
-        '& .MuiInputBase-input': {
-          color: '#d9d9d9',
+        "& .MuiInputBase-input": {
+          color: "#d9d9d9",
         },
-        '& .MuiSvgIcon-root': {
-          color: '#d9d9d9',
+        "& .MuiSvgIcon-root": {
+          color: "#d9d9d9",
         },
-        '& .MuiInputLabel-root': {
-          color: '#d9d9d9 !important',
+        "& .MuiInputLabel-root": {
+          color: "#d9d9d9 !important",
         },
-        '& .MuiFormLabel-root': {
-          color: '#d9d9d9 !important',
-        }
+        "& .MuiFormLabel-root": {
+          color: "#d9d9d9 !important",
+        },
       },
     },
-
 
     //Pagination
     muiTableProps: {
       sx: {
-        '& .MuiInputLabel-root': {
-          color: '#d9d9d9 !important',
+        "& .MuiInputLabel-root": {
+          color: "#d9d9d9 !important",
         },
-        '& .MuiSelect-select, & .MuiSelect-icon': {
-          color: '#d9d9d9',
-        }
+        "& .MuiSelect-select, & .MuiSelect-icon": {
+          color: "#d9d9d9",
+        },
       },
     },
 
     muiTablePaperProps: {
       elevation: 0,
       sx: {
-        backgroundColor: '#131313',
-        borderRadius: '8px',
+        backgroundColor: "#131313",
+        borderRadius: "8px",
       },
     },
 
@@ -705,134 +735,170 @@ const Tabla: React.FC = () => {
     muiSkeletonProps: {
       sx: {
         backgroundColor: "#131313 !important",
-        '&::after': {
-          background: 'linear-gradient(90deg, transparent, rgba(80, 80, 80, 0.1), transparent)',
+        "&::after": {
+          background:
+            "linear-gradient(90deg, transparent, rgba(80, 80, 80, 0.1), transparent)",
         },
       },
     },
     muiColumnActionsButtonProps: {
       sx: {
-        color: '#d9d9d9',
-        '&:hover': {
-          backgroundColor: 'rgba(255, 255, 255, 0.1)'
-        }
-      }
+        color: "#d9d9d9",
+        "&:hover": {
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
+        },
+      },
     },
 
     renderTopToolbarCustomActions: ({ table }) => (
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr',
-        width: '100%',
-        alignItems: 'center',
-        position: 'relative',
-        gap: 1,
-      }}>
-        {/* Sección izquierda - Botones */}
-        <Box sx={{
-          display: 'flex',
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr auto 1fr",
+          width: "100%",
+          alignItems: "center",
+          position: "relative",
           gap: 1,
-          gridColumn: 1,
-          justifyContent: 'flex-start'
-        }}>
+        }}
+      >
+        {/* Sección izquierda - Botones */}
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            gridColumn: 1,
+            justifyContent: "flex-start",
+          }}
+        >
           {/* Botón de exportación con menú */}
           <Button
             id="export-button"
-            aria-controls={exportMenuOpen ? 'export-menu' : undefined}
+            aria-controls={exportMenuOpen ? "export-menu" : undefined}
             aria-haspopup="true"
-            aria-expanded={exportMenuOpen ? 'true' : undefined}
+            aria-expanded={exportMenuOpen ? "true" : undefined}
             onClick={handleExportMenuClick}
             startIcon={<FileDownloadIcon />}
             variant="contained"
             color="primary"
-            sx={{backgroundColor: "#761122"}}
+            sx={{ backgroundColor: "#761122" }}
           >
-            {t('exportar')}
+            {t("exportar")}
           </Button>
-          
+
           <Menu
             id="export-menu"
             anchorEl={exportMenuAnchorEl}
             open={exportMenuOpen}
             onClose={handleExportMenuClose}
             MenuListProps={{
-              'aria-labelledby': 'export-button',
+              "aria-labelledby": "export-button",
             }}
           >
             {/* Opciones de menú sin cambios */}
-            <MenuItem onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}>
-              {t('exptodaspdf')}
+            <MenuItem
+              onClick={() =>
+                handleExportRows(table.getPrePaginationRowModel().rows)
+              }
+            >
+              {t("exptodaspdf")}
             </MenuItem>
-            <MenuItem onClick={() => handleExportRows(table.getRowModel().rows)}>
-              {t('expvisiblespdf')}
+            <MenuItem
+              onClick={() => handleExportRows(table.getRowModel().rows)}
+            >
+              {t("expvisiblespdf")}
             </MenuItem>
-            <MenuItem onClick={() => handleExportExcel(table.getPrePaginationRowModel().rows, "Todas_Alertas")}>
-              {t('exptodasexcel')}
+            <MenuItem
+              onClick={() =>
+                handleExportExcel(
+                  table.getPrePaginationRowModel().rows,
+                  "Todas_Alertas",
+                )
+              }
+            >
+              {t("exptodasexcel")}
             </MenuItem>
-            <MenuItem onClick={() => handleExportExcel(table.getRowModel().rows, "Alertas_Visibles")}>
-              {t('expvisiblesexcel')}
+            <MenuItem
+              onClick={() =>
+                handleExportExcel(table.getRowModel().rows, "Alertas_Visibles")
+              }
+            >
+              {t("expvisiblesexcel")}
             </MenuItem>
           </Menu>
-          
+
           {/* DateRangePicker de HeroUI */}
-          <Box sx={{ minWidth: '300px', position: 'relative', display: 'flex', alignItems: 'center' }}>
+          <Box
+            sx={{
+              minWidth: "300px",
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <DateRangePicker
               value={dateRange}
               onChange={setDateRange}
               locale={{
-                startDate: t('fechaInicio'),
-                endDate: t('fechaFin'),
-                selectDate: t('seleccionarFecha')
+                startDate: t("fechaInicio"),
+                endDate: t("fechaFin"),
+                selectDate: t("seleccionarFecha"),
               }}
               className="bg-[#1e1e1e] text-[#d9d9d9] border-[#515151] rounded-md"
             />
           </Box>
-          
+
           {/* Botón para limpiar filtros */}
           <Button
             onClick={handleClearFilters}
             startIcon={<FilterAltOffIcon />}
             variant="outlined"
             sx={{
-              color: '#d9d9d9',
-              borderColor: '#515151',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                borderColor: '#d9d9d9'
-              }
+              color: "#d9d9d9",
+              borderColor: "#515151",
+              "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                borderColor: "#d9d9d9",
+              },
             }}
           >
-            {t('limpiarFiltros')}
+            {t("limpiarFiltros")}
           </Button>
         </Box>
 
         {/* Sección central - Título */}
-        <Box sx={{
-          gridColumn: 2,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          pointerEvents: 'none',
-          marginLeft: 25,
-        }}>
-          <Typography variant="h4" sx={{
-            color: '#d9d9d9',
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            marginBottom: '-5px'
-          }}>
-            {t('historial')}
+        <Box
+          sx={{
+            gridColumn: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            pointerEvents: "none",
+            marginLeft: 25,
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              color: "#d9d9d9",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              marginBottom: "-5px",
+            }}
+          >
+            {t("historial")}
           </Typography>
-          <Typography variant="subtitle1" sx={{ color: '#d9d9d9' }}>
-            {t('alertas')}
+          <Typography variant="subtitle1" sx={{ color: "#d9d9d9" }}>
+            {t("alertas")}
           </Typography>
         </Box>
 
         {/* Sección derecha - Espacio reservado para componentes de la tabla */}
-        <Box sx={{
-          gridColumn: 3,
-          visibility: 'hidden' // Mantiene el espacio reservado
-        }} />
+        <Box
+          sx={{
+            gridColumn: 3,
+            visibility: "hidden", // Mantiene el espacio reservado
+          }}
+        />
       </Box>
     ),
   });
@@ -842,13 +908,13 @@ const Tabla: React.FC = () => {
       <div className="w-full bg-[#131313] rounded-[15px] p-[20px]">
         {error && (
           <div className="mb-4">
-            <Button 
-              onClick={connectWebSocket} 
-              variant="contained" 
-              color="primary" 
-              sx={{backgroundColor: "#761122"}}
+            <Button
+              onClick={connectWebSocket}
+              variant="contained"
+              color="primary"
+              sx={{ backgroundColor: "#761122" }}
             >
-              {t('reintentar')}
+              {t("reintentar")}
             </Button>
           </div>
         )}

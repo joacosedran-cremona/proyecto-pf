@@ -1,29 +1,26 @@
 {
-    "cocinas":
-    {
-        "cocina1": "K1L1",
-        "cocina2": "K2L1",
-        "cocina3": "K3L1",
-        "cocina4": "K1L2",
-        "cocina5": "K2L2",
-        "cocina6": "K3L2"
-    },
-    "enfriadores":
-    {
-        "enfriador1": "C1L1",
-        "enfriador2": "C2L1",
-        "enfriador3": "C3L1",
-        "enfriador4": "C4L1",
-        "enfriador5": "C1L2",
-        "enfriador6": "C2L2",
-        "enfriador7": "C3L2",
-        "enfriador8": "C4L2"
-    },
-    "lineas":
-    {
-        "linea1": "Line 1",
-        "linea2": "Line 2",
-        "linea3": "Line 3"
-    },
-    "select": "Select equipment"
+  "cocinas": {
+    "cocina1": "K1L1",
+    "cocina2": "K2L1",
+    "cocina3": "K3L1",
+    "cocina4": "K1L2",
+    "cocina5": "K2L2",
+    "cocina6": "K3L2"
+  },
+  "enfriadores": {
+    "enfriador1": "C1L1",
+    "enfriador2": "C2L1",
+    "enfriador3": "C3L1",
+    "enfriador4": "C4L1",
+    "enfriador5": "C1L2",
+    "enfriador6": "C2L2",
+    "enfriador7": "C3L2",
+    "enfriador8": "C4L2"
+  },
+  "lineas": {
+    "linea1": "Line 1",
+    "linea2": "Line 2",
+    "linea3": "Line 3"
+  },
+  "select": "Select equipment"
 }

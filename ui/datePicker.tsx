@@ -1,13 +1,13 @@
-import {DateRangePicker} from "@heroui/react";
-import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { DateRangePicker } from "@heroui/react";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
 interface DatePickerProps {
   onDateChange?: (startDate: string | null, endDate: string | null) => void;
 }
 
 export default function DatePicker({ onDateChange }: DatePickerProps) {
-  const { t } = useTranslation('botones');
+  const { t } = useTranslation("botones");
   const [dateRange, setDateRange] = useState<{
     startDate: Date | null;
     endDate: Date | null;
@@ -26,7 +26,7 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
 
   const formatToYYYYMMDD = (date: Date | null): string | null => {
     if (!date) return null;
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split("T")[0];
   };
 
   const handleDateChange = (range: { start: any; end: any }) => {
@@ -35,12 +35,12 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
       const endDate = convertToDate(range?.end);
 
       if (startDate && isNaN(startDate.getTime())) {
-        console.error('Invalid start date');
+        console.error("Invalid start date");
         return;
       }
 
       if (endDate && isNaN(endDate.getTime())) {
-        console.error('Invalid end date');
+        console.error("Invalid end date");
         return;
       }
 
@@ -53,12 +53,14 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
         onDateChange(formattedStart, formattedEnd);
       }
     } catch (error) {
-      console.error('Error processing dates:', error);
+      console.error("Error processing dates:", error);
     }
   };
-    return <DateRangePicker
-                className="h-[50px]"
-                label={t('fecha')}
-                onChange={(range) => handleDateChange(range)}
-            />;
+  return (
+    <DateRangePicker
+      className="h-[50px]"
+      label={t("fecha")}
+      onChange={(range) => handleDateChange(range)}
+    />
+  );
 }

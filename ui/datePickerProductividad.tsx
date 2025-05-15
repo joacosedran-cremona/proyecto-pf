@@ -1,6 +1,6 @@
-import {DateRangePicker} from "@heroui/react";
-import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { DateRangePicker } from "@heroui/react";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
 interface DatePickerProps {
   selectClasses?: string;
@@ -9,14 +9,16 @@ interface DatePickerProps {
   defaultEndDate?: string;
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ 
-  selectClasses, 
+const DatePicker: React.FC<DatePickerProps> = ({
+  selectClasses,
   onDateChange,
   defaultStartDate,
-  defaultEndDate
+  defaultEndDate,
 }) => {
-  const { t } = useTranslation('botones');
-  const [startDate, setStartDate] = useState<string | null>(defaultStartDate || null);
+  const { t } = useTranslation("botones");
+  const [startDate, setStartDate] = useState<string | null>(
+    defaultStartDate || null,
+  );
   const [endDate, setEndDate] = useState<string | null>(defaultEndDate || null);
 
   // Only set the initial values once, not on every defaultDate change
@@ -41,7 +43,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   const formatToYYYYMMDD = (date: Date | null): string | null => {
     if (!date) return null;
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split("T")[0];
   };
 
   const handleDateChange = (range: { start: any; end: any }) => {
@@ -50,12 +52,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
       const endDateObj = convertToDate(range?.end);
 
       if (startDateObj && isNaN(startDateObj.getTime())) {
-        console.error('Invalid start date');
+        console.error("Invalid start date");
         return;
       }
 
       if (endDateObj && isNaN(endDateObj.getTime())) {
-        console.error('Invalid end date');
+        console.error("Invalid end date");
         return;
       }
 
@@ -70,16 +72,18 @@ const DatePicker: React.FC<DatePickerProps> = ({
         onDateChange(formattedStart, formattedEnd);
       }
     } catch (error) {
-      console.error('Error processing dates:', error);
+      console.error("Error processing dates:", error);
     }
   };
-  
-  return <DateRangePicker
-            label={t('fecha')}
-            onChange={(range) => handleDateChange(range)}
-            // You may need to add a value prop based on startDate and endDate
-            // if your DateRangePicker component supports controlled behavior
-          />;
-}
+
+  return (
+    <DateRangePicker
+      label={t("fecha")}
+      onChange={(range) => handleDateChange(range)}
+      // You may need to add a value prop based on startDate and endDate
+      // if your DateRangePicker component supports controlled behavior
+    />
+  );
+};
 
 export default DatePicker;

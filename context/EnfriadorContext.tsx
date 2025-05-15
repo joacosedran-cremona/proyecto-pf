@@ -1,7 +1,7 @@
 "use client";
 
-import React, { createContext, useContext } from 'react';
-import { useWebSocketContext } from './WebSocketContext';
+import React, { createContext, useContext } from "react";
+import { useWebSocketContext } from "./WebSocketContext";
 
 interface EnfriadorInfo {
   tipo: string;
@@ -50,22 +50,31 @@ interface EnfriadorContextType {
   error: string | null;
 }
 
-const EnfriadorContext = createContext<EnfriadorContextType | undefined>(undefined);
+const EnfriadorContext = createContext<EnfriadorContextType | undefined>(
+  undefined,
+);
 
-export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) => {
+export const EnfriadorProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const { data, isConnected, error } = useWebSocketContext();
-  
-  const enfriadores = data?.['datos-enfriadores']?.map((item: any[]) => ({
-    info: item[0],
-    detalles: item[1]
-  })) || [];
+
+  const enfriadores =
+    data?.["datos-enfriadores"]?.map((item: any[]) => ({
+      info: item[0],
+      detalles: item[1],
+    })) || [];
 
   return (
-    <EnfriadorContext.Provider value={{ 
-      enfriadores, 
-      isLoading: !isConnected,
-      error 
-    }}>
+    <EnfriadorContext.Provider
+      value={{
+        enfriadores,
+        isLoading: !isConnected,
+        error,
+      }}
+    >
       {children}
     </EnfriadorContext.Provider>
   );
@@ -74,7 +83,9 @@ export const EnfriadorProvider = ({ children }: { children: React.ReactNode }) =
 export function useEnfriadorContext() {
   const context = useContext(EnfriadorContext);
   if (!context) {
-    throw new Error('useEnfriadorContext debe ser usado dentro de un EnfriadorProvider');
+    throw new Error(
+      "useEnfriadorContext debe ser usado dentro de un EnfriadorProvider",
+    );
   }
   return context;
 }

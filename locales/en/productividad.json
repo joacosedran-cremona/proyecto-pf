@@ -1,24 +1,20 @@
 {
-    "filtro":
-    {
-        "titulo": "DATE FILTERING",
-        "subtitulo": "BY PERIOD"
-    },
-    "metrica":
-    {
-        "ciclos": "Completed cycles",
-        "produccion": "Total production"
-    },
-    "barraProductos":
-    {
-        "texto": "of production per product"
-    },
-    "barraCiclos":
-    {
-        "texto": "of cycle effectiveness",
-        "correctos": "Completed",
-        "incorrectos": "Incomplete",
-        "ciclos": "cycles"
-    },
-    "titulo": "PRODUCTIVITY"
+  "filtro": {
+    "titulo": "DATE FILTERING",
+    "subtitulo": "BY PERIOD"
+  },
+  "metrica": {
+    "ciclos": "Completed cycles",
+    "produccion": "Total production"
+  },
+  "barraProductos": {
+    "texto": "of production per product"
+  },
+  "barraCiclos": {
+    "texto": "of cycle effectiveness",
+    "correctos": "Completed",
+    "incorrectos": "Incomplete",
+    "ciclos": "cycles"
+  },
+  "titulo": "PRODUCTIVITY"
 }

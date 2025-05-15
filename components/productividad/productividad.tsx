@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Metrics from "./metrica";
-import BarraProductos from './barraProductos';
+import BarraProductos from "./barraProductos";
 import BarraCiclos from "./barraCiclos";
 import FiltroPeriodo from "./filtroPeriodo";
-import { toast } from 'sonner';
+import { toast } from "sonner";
 
 interface ProductoRealizado {
   NombreProducto: string;
@@ -49,10 +49,10 @@ interface FilterData {
 }
 
 const Productividad = () => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
   const lastWeek = new Date();
   lastWeek.setDate(lastWeek.getDate() - 7);
-  const lastWeekFormatted = lastWeek.toISOString().split('T')[0];
+  const lastWeekFormatted = lastWeek.toISOString().split("T")[0];
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const [data, setData] = useState<FixedData>({
@@ -60,7 +60,7 @@ const Productividad = () => {
     ciclosCorrectos: 0,
     ciclosIncorrectos: 0,
     produccionTotal: 0,
-    ProductosRealizados: []
+    ProductosRealizados: [],
   });
   const [dateRange, setDateRange] = useState<DateRange>({
     start: lastWeekFormatted,
@@ -76,7 +76,7 @@ const Productividad = () => {
         lineaId: 0,
         equipoId: 30,
         dato_enviado: 0,
-        isUserInitiated: false // Mark this as NOT user initiated
+        isUserInitiated: false, // Mark this as NOT user initiated
       });
       setIsInitialLoad(false);
     }
@@ -84,84 +84,91 @@ const Productividad = () => {
 
   const handleApplyFilters = async (filterData: FilterData) => {
     if (!filterData.startDate || !filterData.endDate) return;
-  
+
     try {
-        const formattedStartDate = filterData.startDate.split('T')[0];
-        const formattedEndDate = filterData.endDate.split('T')[0];
-        const dato = filterData.dato_enviado || 0;
-  
-        const host = process.env.NEXT_PUBLIC_WS_HOST || 'localhost';
-        const port = process.env.NEXT_PUBLIC_WS_PORT || '8000';
-        console.log('Consultando API con fechas:', formattedStartDate, formattedEndDate);
-  
-        const url = `http://${host}:${port}/historico-productividad/${dato}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`;
-        
-        const response = await fetch(url);
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Server response:', errorText);
-            throw new Error(`HTTP error! status: ${response.status}`);
+      const formattedStartDate = filterData.startDate.split("T")[0];
+      const formattedEndDate = filterData.endDate.split("T")[0];
+      const dato = filterData.dato_enviado || 0;
+
+      const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost";
+      const port = process.env.NEXT_PUBLIC_WS_PORT || "8000";
+      console.log(
+        "Consultando API con fechas:",
+        formattedStartDate,
+        formattedEndDate,
+      );
+
+      const url = `http://${host}:${port}/historico-productividad/${dato}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`;
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server response:", errorText);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const apiData: ApiResponse = await response.json();
+
+      // Check if data is empty or null
+      if (
+        !apiData ||
+        (apiData.ciclos_realizados === 0 &&
+          apiData.produccion_total === 0 &&
+          apiData.ciclos_correctos === 0 &&
+          apiData.ciclos_incorrectos === 0 &&
+          (!apiData.productos_realizados ||
+            apiData.productos_realizados.length === 0))
+      ) {
+        // Only show toast error if this is a user-initiated action
+        if (filterData.isUserInitiated) {
+          toast.error(
+            "No existen reportes de productividad en el lapso de las fechas indicadas.",
+          );
         }
-        
-        const apiData: ApiResponse = await response.json();
-        
-        // Check if data is empty or null
-        if (!apiData || 
-            (apiData.ciclos_realizados === 0 && 
-             apiData.produccion_total === 0 && 
-             apiData.ciclos_correctos === 0 && 
-             apiData.ciclos_incorrectos === 0 && 
-             (!apiData.productos_realizados || apiData.productos_realizados.length === 0))) {
-            
-            // Only show toast error if this is a user-initiated action
-            if (filterData.isUserInitiated) {
-                toast.error("No existen reportes de productividad en el lapso de las fechas indicadas.");
-            }
-            return;
-        }
-  
-        setData({
-            ciclosRealizados: apiData.ciclos_realizados,
-            ciclosCorrectos: apiData.ciclos_correctos,
-            ciclosIncorrectos: apiData.ciclos_incorrectos,
-            produccionTotal: apiData.produccion_total,
-            ProductosRealizados: apiData.productos_realizados.map(prod => ({
-                NombreProducto: prod.nombre_receta,
-                pesoTotal: prod.capacidad_receta,
-                cantidadCiclos: prod.cantidad_ciclos,
-                tiempoTotal: 0
-            }))
-        });
-  
-        setDateRange({
-            start: formattedStartDate,
-            end: formattedEndDate
-        });
-  
+        return;
+      }
+
+      setData({
+        ciclosRealizados: apiData.ciclos_realizados,
+        ciclosCorrectos: apiData.ciclos_correctos,
+        ciclosIncorrectos: apiData.ciclos_incorrectos,
+        produccionTotal: apiData.produccion_total,
+        ProductosRealizados: apiData.productos_realizados.map((prod) => ({
+          NombreProducto: prod.nombre_receta,
+          pesoTotal: prod.capacidad_receta,
+          cantidadCiclos: prod.cantidad_ciclos,
+          tiempoTotal: 0,
+        })),
+      });
+
+      setDateRange({
+        start: formattedStartDate,
+        end: formattedEndDate,
+      });
     } catch (error) {
-        console.error("Error fetching data:", error);
-        if (error instanceof Error) {
-            console.error("Error details:", error.message);
-            // Only show toast error if this is a user-initiated action
-            if (filterData.isUserInitiated) {
-                toast.error("Error al obtener los datos de productividad");
-            }
+      console.error("Error fetching data:", error);
+      if (error instanceof Error) {
+        console.error("Error details:", error.message);
+        // Only show toast error if this is a user-initiated action
+        if (filterData.isUserInitiated) {
+          toast.error("Error al obtener los datos de productividad");
         }
+      }
     }
   };
 
   return (
     <div className="productividad-container flex flex-row h-[100%] gap-[20px]">
       <div className="bg-black p-[20px] w-4/5 rounded-md">
-        <Metrics 
+        <Metrics
           ciclosRealizados={data.ciclosRealizados}
           produccionTotal={data.produccionTotal}
-          dateRange={dateRange} 
+          dateRange={dateRange}
         />
         <hr className="my-[20px] border-[2px]" />
         <BarraProductos data={data} />
         <hr className="my-[20px] border-[2px]" />
-        <BarraCiclos 
+        <BarraCiclos
           ciclosCorrectos={data.ciclosCorrectos}
           ciclosIncorrectos={data.ciclosIncorrectos}
         />

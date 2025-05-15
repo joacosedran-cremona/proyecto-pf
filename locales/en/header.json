@@ -1,25 +1,20 @@
 {
-    "header1":
-    {
-        "titulo": "Pilot Plant - IFFA Frankfurt 2025"
-    },
-    "header2":
-    {
-        "botones":
-        {
-            "cocinas": "KITCHENS",
-            "enfriadores": "CHILLERS"
-        }
-    },
-    "menu":
-    {
-        "home": "Home",
-        "monitoreo": "Monitoring",
-        "historico": "Historic"
-    },
-    "deslogueo":
-    {
-        "estado": "Active session",
-        "botonsesion": "Log out"
+  "header1": {
+    "titulo": "Pilot Plant - IFFA Frankfurt 2025"
+  },
+  "header2": {
+    "botones": {
+      "cocinas": "KITCHENS",
+      "enfriadores": "CHILLERS"
     }
+  },
+  "menu": {
+    "home": "Home",
+    "monitoreo": "Monitoring",
+    "historico": "Historic"
+  },
+  "deslogueo": {
+    "estado": "Active session",
+    "botonsesion": "Log out"
+  }
 }

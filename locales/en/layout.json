@@ -1,33 +1,33 @@
 {
-    "datos": {
-        "tempActual": "Prod. Temp",
-        "tempAgua": "Water Temp",
-        "tempIng": "Inlet Temp",
-        "receta": "Recipe",
-        "tiempo": "Time "
-    },
-    "equipos": {
-        "cocina1": "K1L1",
-        "cocina2": "K2L1",
-        "cocina3": "K3L1",
-        "cocina4": "K4L2",
-        "cocina5": "K5L2",
-        "cocina6": "K6L2",
-        "enfriador1": "C1L1",
-        "enfriador2": "C2L1",
-        "enfriador3": "C3L1",
-        "enfriador4": "C4L1",
-        "enfriador5": "C5L2",
-        "enfriador6": "C6L2",
-        "enfriador7": "C7L2",
-        "enfriador8": "C8L2"
-    },
-    "tooltip": {
-        "cocina": "Kitchen {{number}} Line {{line}}",
-        "enfriador": "Chiller {{number}} Line {{line}}"
-    },
-    "titulo": "KITCHENS & CHILLERS",
-    "subtitulo": "General Panel",
-    "titulo2": "ACTIVE",
-    "subtitulo2": "Alarms"
+  "datos": {
+    "tempActual": "Prod. Temp",
+    "tempAgua": "Water Temp",
+    "tempIng": "Inlet Temp",
+    "receta": "Recipe",
+    "tiempo": "Time "
+  },
+  "equipos": {
+    "cocina1": "K1L1",
+    "cocina2": "K2L1",
+    "cocina3": "K3L1",
+    "cocina4": "K4L2",
+    "cocina5": "K5L2",
+    "cocina6": "K6L2",
+    "enfriador1": "C1L1",
+    "enfriador2": "C2L1",
+    "enfriador3": "C3L1",
+    "enfriador4": "C4L1",
+    "enfriador5": "C5L2",
+    "enfriador6": "C6L2",
+    "enfriador7": "C7L2",
+    "enfriador8": "C8L2"
+  },
+  "tooltip": {
+    "cocina": "Kitchen {{number}} Line {{line}}",
+    "enfriador": "Chiller {{number}} Line {{line}}"
+  },
+  "titulo": "KITCHENS & CHILLERS",
+  "subtitulo": "General Panel",
+  "titulo2": "ACTIVE",
+  "subtitulo2": "Alarms"
 }

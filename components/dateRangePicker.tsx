@@ -1,14 +1,17 @@
-import {DateRangePicker} from "@heroui/react";
-import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { DateRangePicker } from "@heroui/react";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
 interface DatePickerProps {
   selectClasses?: string;
   onDateChange?: (startDate: string | null, endDate: string | null) => void;
 }
 
-export default function DatePicker({ selectClasses, onDateChange }: DatePickerProps) {
-  const { t } = useTranslation('botones');
+export default function DatePicker({
+  selectClasses,
+  onDateChange,
+}: DatePickerProps) {
+  const { t } = useTranslation("botones");
   const [dateRange, setDateRange] = useState<{
     startDate: Date | null;
     endDate: Date | null;
@@ -27,7 +30,7 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
 
   const formatToYYYYMMDD = (date: Date | null): string | null => {
     if (!date) return null;
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split("T")[0];
   };
 
   const handleDateChange = (range: { start: any; end: any }) => {
@@ -36,12 +39,12 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
       const endDate = convertToDate(range?.end);
 
       if (startDate && isNaN(startDate.getTime())) {
-        console.error('Invalid start date');
+        console.error("Invalid start date");
         return;
       }
 
       if (endDate && isNaN(endDate.getTime())) {
-        console.error('Invalid end date');
+        console.error("Invalid end date");
         return;
       }
 
@@ -54,7 +57,7 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
         onDateChange(formattedStart, formattedEnd);
       }
     } catch (error) {
-      console.error('Error processing dates:', error);
+      console.error("Error processing dates:", error);
     }
   };
 
@@ -69,7 +72,8 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
             headerWrapper: "bg-background",
             prevButton: "border-[1px] border-default-200 rounded-small",
             nextButton: "border-[1px] border-default-200 rounded-small",
-            gridHeader: "bg-background shadow-none border-b-[1px] border-default-100",
+            gridHeader:
+              "bg-background shadow-none border-b-[1px] border-default-100",
             cellButton: [
               "data-[today=true]:bg-default-100",
               "data-[selected=true]:bg-primary",
@@ -77,7 +81,7 @@ export default function DatePicker({ selectClasses, onDateChange }: DatePickerPr
             ],
           },
         }}
-        placeholder={t('fecha')}
+        placeholder={t("fecha")}
         className={selectClasses}
         value={dateRange}
         onChange={(range) => handleDateChange(range)}

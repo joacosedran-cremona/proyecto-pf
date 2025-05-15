@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Spinner } from "@heroui/react";
-import { toast } from 'sonner';
+import React, { useEffect, useState } from "react";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+  Spinner,
+} from "@heroui/react";
+import { toast } from "sonner";
 
 interface Ciclo {
   id_ciclo: number;
@@ -19,13 +27,13 @@ interface TablaCiclosProps {
   onTableClose?: () => void; // Añadir esta prop
 }
 
-const TablaCiclos: React.FC<TablaCiclosProps> = ({ 
-  fechaInicio, 
-  fechaFin, 
-  equipo, 
+const TablaCiclos: React.FC<TablaCiclosProps> = ({
+  fechaInicio,
+  fechaFin,
+  equipo,
   selectedCicloId,
   onCicloSelect,
-  onTableClose 
+  onTableClose,
 }) => {
   const [ciclos, setCiclos] = useState<Ciclo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,7 +41,7 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
   const [showTable, setShowTable] = useState(true);
   // Inicializar selectedKeys con el ciclo actual si existe
   const [selectedKeys, setSelectedKeys] = useState(
-    new Set(selectedCicloId ? [selectedCicloId.toString()] : [])
+    new Set(selectedCicloId ? [selectedCicloId.toString()] : []),
   );
 
   useEffect(() => {
@@ -43,27 +51,27 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
         const host = process.env.NEXT_PUBLIC_WS_HOST;
         const port = process.env.NEXT_PUBLIC_WS_PORT;
         const url = `http://${host}:${port}/historico-graficos/${equipo}?fecha_inicio=${fechaInicio}&fecha_fin=${fechaFin}`;
-        
+
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (!response.ok || error || !data || data.length === 0) {
           if (onTableClose) {
             onTableClose(); // Llamar a onTableClose cuando no hay datos
           }
-          toast.error('Error al obtener sus ciclos', {
-            description: 'No existen datos en el equipo/fecha ingresada',
-            position: 'bottom-right',
+          toast.error("Error al obtener sus ciclos", {
+            description: "No existen datos en el equipo/fecha ingresada",
+            position: "bottom-right",
             id: `no-data-${fechaInicio}-${fechaFin}-${equipo}`, // Unique ID based on parameters
           });
           return null;
         }
-        
+
         setCiclos(data);
         setError(null);
       } catch (error) {
-        console.error('Error:', error);
-        setError(error instanceof Error ? error.message : 'Error desconocido');
+        console.error("Error:", error);
+        setError(error instanceof Error ? error.message : "Error desconocido");
       } finally {
         setLoading(false);
       }
@@ -90,21 +98,26 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
     return null;
   }
 
-return (
+  return (
     <div className="max-h-[600px] overflow-y-auto overflow-x-hidden">
-      <Table 
+      <Table
         aria-label="Tabla de ciclos"
         selectionMode="single"
         selectedKeys={selectedKeys}
         onSelectionChange={(keys) => {
           const selection = new Set(keys);
           setSelectedKeys(selection);
-          
+
           const selectedId = Array.from(selection)[0];
-          const cicloSeleccionado = ciclos.find(c => c.id_ciclo.toString() === selectedId?.toString());
-          
+          const cicloSeleccionado = ciclos.find(
+            (c) => c.id_ciclo.toString() === selectedId?.toString(),
+          );
+
           if (cicloSeleccionado && onCicloSelect) {
-            console.log('🎯 Ciclo seleccionado en Tabla:', cicloSeleccionado.id_ciclo);
+            console.log(
+              "🎯 Ciclo seleccionado en Tabla:",
+              cicloSeleccionado.id_ciclo,
+            );
             onCicloSelect(cicloSeleccionado);
           }
         }}
@@ -118,11 +131,18 @@ return (
         </TableHeader>
         <TableBody>
           {ciclos.map((ciclo) => (
-            <TableRow key={ciclo.id_ciclo} className="text-sm hover:bg-gray-700/50 cursor-pointer">
+            <TableRow
+              key={ciclo.id_ciclo}
+              className="text-sm hover:bg-gray-700/50 cursor-pointer"
+            >
               <TableCell>{ciclo.id_ciclo}</TableCell>
               <TableCell>{ciclo.lote}</TableCell>
-              <TableCell>{new Date(ciclo.fecha_inicio).toLocaleDateString('es-ES')}</TableCell>
-              <TableCell>{new Date(ciclo.fecha_fin).toLocaleDateString('es-ES')}</TableCell>
+              <TableCell>
+                {new Date(ciclo.fecha_inicio).toLocaleDateString("es-ES")}
+              </TableCell>
+              <TableCell>
+                {new Date(ciclo.fecha_fin).toLocaleDateString("es-ES")}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -1,328 +1,328 @@
 [
-    {
-        "nalarma": 1,
-        "id_alarma": 1,
-        "descripcion": "Finalizó ciclo de desmoldeo",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:15:30",
-        "valor": true
-    },
-    {
-        "nalarma": 2,
-        "id_alarma": 1,
-        "descripcion": "Finalizó ciclo de desmoldeo",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:15:35",
-        "valor": false
-    },
-    {
-        "nalarma": 3,
-        "id_alarma": 1,
-        "descripcion": "Finalizó ciclo de desmoldeo",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:15:40",
-        "valor": true
-    },
-    {
-        "nalarma": 1,
-        "id_alarma": 1,
-        "descripcion": "Finalizó ciclo de desmoldeo",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:15:45",
-        "valor": false
-    },
-    {
-        "id_alarma": 2,
-        "descripcion": "Torre lista para iniciar encajonado",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:17:45"
-    },
-    {
-        "id_alarma": 3,
-        "descripcion": "Producto desmoldado con éxito",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:20:00"
-    },
-    {
-        "id_alarma": 4,
-        "descripcion": "Proceso de encajonado iniciado",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:25:30"
-    },
-    {
-        "id_alarma": 5,
-        "descripcion": "Ciclo de limpieza completado",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:30:00"
-    },
-    {
-        "id_alarma": 6,
-        "descripcion": "Nueva torre cargada en la máquina",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:35:15"
-    },
-    {
-        "id_alarma": 7,
-        "descripcion": "Gripper calibrado correctamente",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:40:25"
-    },
-    {
-        "id_alarma": 8,
-        "descripcion": "Proceso pausado por falta de insumos",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:45:40"
-    },
-    {
-        "id_alarma": 9,
-        "descripcion": "Torre desmontada correctamente",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:50:10"
-    },
-    {
-        "id_alarma": 10,
-        "descripcion": "Preparando para reiniciar ciclo",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:55:20"
-    },
-    {
-        "id_alarma": 11,
-        "descripcion": "Inspección manual requerida",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T08:58:00"
-    },
-    {
-        "id_alarma": 12,
-        "descripcion": "Fin del turno del operador",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T09:00:30"
-    },
-    {
-        "id_alarma": 13,
-        "descripcion": "Control de calidad completado",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T09:05:00"
-    },
-    {
-        "id_alarma": 14,
-        "descripcion": "Gripper sin actividad",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T09:10:30"
-    },
-    {
-        "id_alarma": 15,
-        "descripcion": "Esperando nueva torre para iniciar ciclo",
-        "tipo": "Notificación",
-        "fecha_registro": "2025-01-14T09:15:00"
-    },
-    {
-        "id_alarma": 16,
-        "descripcion": "Robot detectó anomalía en el gripper",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:20:10"
-    },
-    {
-        "id_alarma": 17,
-        "descripcion": "Gripper requiere mantenimiento preventivo",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:25:30"
-    },
-    {
-        "id_alarma": 18,
-        "descripcion": "Producto atorado en el molde",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:30:15"
-    },
-    {
-        "id_alarma": 19,
-        "descripcion": "Temperatura del sistema fuera de rango",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:35:40"
-    },
-    {
-        "id_alarma": 20,
-        "descripcion": "Fuga de aire detectada en la válvula",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:40:05"
-    },
-    {
-        "id_alarma": 21,
-        "descripcion": "Mal funcionamiento del sensor de presión",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:45:30"
-    },
-    {
-        "id_alarma": 22,
-        "descripcion": "Sistema de sujeción con baja presión",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:50:45"
-    },
-    {
-        "id_alarma": 23,
-        "descripcion": "Error de comunicación entre robots",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T09:55:10"
-    },
-    {
-        "id_alarma": 24,
-        "descripcion": "Fallo en el sistema de visión",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:00:25"
-    },
-    {
-        "id_alarma": 25,
-        "descripcion": "Falta de material en línea de producción",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:05:40"
-    },
-    {
-        "id_alarma": 26,
-        "descripcion": "Luz de advertencia activada en el panel",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:10:00"
-    },
-    {
-        "id_alarma": 27,
-        "descripcion": "Fallo en el motor de la máquina",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:15:25"
-    },
-    {
-        "id_alarma": 28,
-        "descripcion": "Movimiento no autorizado detectado en la zona de trabajo",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:20:30"
-    },
-    {
-        "id_alarma": 29,
-        "descripcion": "Error en el sistema de transporte de materiales",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:25:50"
-    },
-    {
-        "id_alarma": 30,
-        "descripcion": "Desviación en el ciclo de producción detectada",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:30:15"
-    },
-    {
-        "id_alarma": 31,
-        "descripcion": "Baja en la eficiencia del robot de paletizado",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:35:35"
-    },
-    {
-        "id_alarma": 32,
-        "descripcion": "Cierre de seguridad no operable",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:40:00"
-    },
-    {
-        "id_alarma": 33,
-        "descripcion": "Peligro por sobrecarga de energía",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:45:20"
-    },
-    {
-        "id_alarma": 34,
-        "descripcion": "Tensión incorrecta en el sistema eléctrico",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:50:45"
-    },
-    {
-        "id_alarma": 35,
-        "descripcion": "Baja velocidad en la línea de producción",
-        "tipo": "Alerta",
-        "fecha_registro": "2025-01-14T10:55:10"
-    },
-    {
-        "id_alarma": 36,
-        "descripcion": "Error de calibración del sistema de visión",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:00:15"
-    },
-    {
-        "id_alarma": 37,
-        "descripcion": "Fallo en el motor de desplazamiento del robot",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:05:40"
-    },
-    {
-        "id_alarma": 38,
-        "descripcion": "Temperatura interna del robot excesiva",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:10:05"
-    },
-    {
-        "id_alarma": 39,
-        "descripcion": "Error en la válvula de aire comprimido",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:15:30"
-    },
-    {
-        "id_alarma": 40,
-        "descripcion": "Fallo de comunicación con el PLC",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:20:50"
-    },
-    {
-        "id_alarma": 41,
-        "descripcion": "Desajuste en el sistema de paletizado",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:25:00"
-    },
-    {
-        "id_alarma": 42,
-        "descripcion": "Falta de material en el transportador",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:30:20"
-    },
-    {
-        "id_alarma": 43,
-        "descripcion": "Falla en el motor de la línea de producción",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:35:40"
-    },
-    {
-        "id_alarma": 44,
-        "descripcion": "Baja presión de aire en la línea de producción",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:40:00"
-    },
-    {
-        "id_alarma": 45,
-        "descripcion": "Error en la calibración de la máquina de encajonado",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:45:20"
-    },
-    {
-        "id_alarma": 46,
-        "descripcion": "Falta de energía en la unidad de sujeción",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:50:40"
-    },
-    {
-        "id_alarma": 47,
-        "descripcion": "Sensor de proximidad defectuoso",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T11:55:50"
-    },
-    {
-        "id_alarma": 48,
-        "descripcion": "Sistema de detección de peso fallando",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T12:00:00"
-    },
-    {
-        "id_alarma": 49,
-        "descripcion": "Máquina de paletizado fuera de servicio",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T12:05:25"
-    },
-    {
-        "id_alarma": 50,
-        "descripcion": "Fallo en el sensor de temperatura de la torre",
-        "tipo": "Error",
-        "fecha_registro": "2025-01-14T12:10:10"
-    }
+  {
+    "nalarma": 1,
+    "id_alarma": 1,
+    "descripcion": "Finalizó ciclo de desmoldeo",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:15:30",
+    "valor": true
+  },
+  {
+    "nalarma": 2,
+    "id_alarma": 1,
+    "descripcion": "Finalizó ciclo de desmoldeo",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:15:35",
+    "valor": false
+  },
+  {
+    "nalarma": 3,
+    "id_alarma": 1,
+    "descripcion": "Finalizó ciclo de desmoldeo",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:15:40",
+    "valor": true
+  },
+  {
+    "nalarma": 1,
+    "id_alarma": 1,
+    "descripcion": "Finalizó ciclo de desmoldeo",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:15:45",
+    "valor": false
+  },
+  {
+    "id_alarma": 2,
+    "descripcion": "Torre lista para iniciar encajonado",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:17:45"
+  },
+  {
+    "id_alarma": 3,
+    "descripcion": "Producto desmoldado con éxito",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:20:00"
+  },
+  {
+    "id_alarma": 4,
+    "descripcion": "Proceso de encajonado iniciado",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:25:30"
+  },
+  {
+    "id_alarma": 5,
+    "descripcion": "Ciclo de limpieza completado",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:30:00"
+  },
+  {
+    "id_alarma": 6,
+    "descripcion": "Nueva torre cargada en la máquina",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:35:15"
+  },
+  {
+    "id_alarma": 7,
+    "descripcion": "Gripper calibrado correctamente",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:40:25"
+  },
+  {
+    "id_alarma": 8,
+    "descripcion": "Proceso pausado por falta de insumos",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:45:40"
+  },
+  {
+    "id_alarma": 9,
+    "descripcion": "Torre desmontada correctamente",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:50:10"
+  },
+  {
+    "id_alarma": 10,
+    "descripcion": "Preparando para reiniciar ciclo",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:55:20"
+  },
+  {
+    "id_alarma": 11,
+    "descripcion": "Inspección manual requerida",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T08:58:00"
+  },
+  {
+    "id_alarma": 12,
+    "descripcion": "Fin del turno del operador",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T09:00:30"
+  },
+  {
+    "id_alarma": 13,
+    "descripcion": "Control de calidad completado",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T09:05:00"
+  },
+  {
+    "id_alarma": 14,
+    "descripcion": "Gripper sin actividad",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T09:10:30"
+  },
+  {
+    "id_alarma": 15,
+    "descripcion": "Esperando nueva torre para iniciar ciclo",
+    "tipo": "Notificación",
+    "fecha_registro": "2025-01-14T09:15:00"
+  },
+  {
+    "id_alarma": 16,
+    "descripcion": "Robot detectó anomalía en el gripper",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:20:10"
+  },
+  {
+    "id_alarma": 17,
+    "descripcion": "Gripper requiere mantenimiento preventivo",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:25:30"
+  },
+  {
+    "id_alarma": 18,
+    "descripcion": "Producto atorado en el molde",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:30:15"
+  },
+  {
+    "id_alarma": 19,
+    "descripcion": "Temperatura del sistema fuera de rango",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:35:40"
+  },
+  {
+    "id_alarma": 20,
+    "descripcion": "Fuga de aire detectada en la válvula",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:40:05"
+  },
+  {
+    "id_alarma": 21,
+    "descripcion": "Mal funcionamiento del sensor de presión",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:45:30"
+  },
+  {
+    "id_alarma": 22,
+    "descripcion": "Sistema de sujeción con baja presión",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:50:45"
+  },
+  {
+    "id_alarma": 23,
+    "descripcion": "Error de comunicación entre robots",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T09:55:10"
+  },
+  {
+    "id_alarma": 24,
+    "descripcion": "Fallo en el sistema de visión",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:00:25"
+  },
+  {
+    "id_alarma": 25,
+    "descripcion": "Falta de material en línea de producción",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:05:40"
+  },
+  {
+    "id_alarma": 26,
+    "descripcion": "Luz de advertencia activada en el panel",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:10:00"
+  },
+  {
+    "id_alarma": 27,
+    "descripcion": "Fallo en el motor de la máquina",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:15:25"
+  },
+  {
+    "id_alarma": 28,
+    "descripcion": "Movimiento no autorizado detectado en la zona de trabajo",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:20:30"
+  },
+  {
+    "id_alarma": 29,
+    "descripcion": "Error en el sistema de transporte de materiales",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:25:50"
+  },
+  {
+    "id_alarma": 30,
+    "descripcion": "Desviación en el ciclo de producción detectada",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:30:15"
+  },
+  {
+    "id_alarma": 31,
+    "descripcion": "Baja en la eficiencia del robot de paletizado",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:35:35"
+  },
+  {
+    "id_alarma": 32,
+    "descripcion": "Cierre de seguridad no operable",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:40:00"
+  },
+  {
+    "id_alarma": 33,
+    "descripcion": "Peligro por sobrecarga de energía",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:45:20"
+  },
+  {
+    "id_alarma": 34,
+    "descripcion": "Tensión incorrecta en el sistema eléctrico",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:50:45"
+  },
+  {
+    "id_alarma": 35,
+    "descripcion": "Baja velocidad en la línea de producción",
+    "tipo": "Alerta",
+    "fecha_registro": "2025-01-14T10:55:10"
+  },
+  {
+    "id_alarma": 36,
+    "descripcion": "Error de calibración del sistema de visión",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:00:15"
+  },
+  {
+    "id_alarma": 37,
+    "descripcion": "Fallo en el motor de desplazamiento del robot",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:05:40"
+  },
+  {
+    "id_alarma": 38,
+    "descripcion": "Temperatura interna del robot excesiva",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:10:05"
+  },
+  {
+    "id_alarma": 39,
+    "descripcion": "Error en la válvula de aire comprimido",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:15:30"
+  },
+  {
+    "id_alarma": 40,
+    "descripcion": "Fallo de comunicación con el PLC",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:20:50"
+  },
+  {
+    "id_alarma": 41,
+    "descripcion": "Desajuste en el sistema de paletizado",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:25:00"
+  },
+  {
+    "id_alarma": 42,
+    "descripcion": "Falta de material en el transportador",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:30:20"
+  },
+  {
+    "id_alarma": 43,
+    "descripcion": "Falla en el motor de la línea de producción",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:35:40"
+  },
+  {
+    "id_alarma": 44,
+    "descripcion": "Baja presión de aire en la línea de producción",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:40:00"
+  },
+  {
+    "id_alarma": 45,
+    "descripcion": "Error en la calibración de la máquina de encajonado",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:45:20"
+  },
+  {
+    "id_alarma": 46,
+    "descripcion": "Falta de energía en la unidad de sujeción",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:50:40"
+  },
+  {
+    "id_alarma": 47,
+    "descripcion": "Sensor de proximidad defectuoso",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T11:55:50"
+  },
+  {
+    "id_alarma": 48,
+    "descripcion": "Sistema de detección de peso fallando",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T12:00:00"
+  },
+  {
+    "id_alarma": 49,
+    "descripcion": "Máquina de paletizado fuera de servicio",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T12:05:25"
+  },
+  {
+    "id_alarma": 50,
+    "descripcion": "Fallo en el sensor de temperatura de la torre",
+    "tipo": "Error",
+    "fecha_registro": "2025-01-14T12:10:10"
+  }
 ]

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { createContext, useContext } from 'react';
-import { useWebSocketContext } from './WebSocketContext';
+import React, { createContext, useContext } from "react";
+import { useWebSocketContext } from "./WebSocketContext";
 
 interface CocinaInfo {
   tipo: string;
@@ -54,18 +54,21 @@ const CocinaContext = createContext<CocinaContextType | undefined>(undefined);
 
 export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, isConnected, error } = useWebSocketContext();
-  
-  const cocinas = data?.['datos-cocinas']?.map((item: any[]) => ({
-    info: item[0],
-    detalles: item[1]
-  })) || [];
+
+  const cocinas =
+    data?.["datos-cocinas"]?.map((item: any[]) => ({
+      info: item[0],
+      detalles: item[1],
+    })) || [];
 
   return (
-    <CocinaContext.Provider value={{ 
-      cocinas, 
-      isLoading: !isConnected,
-      error 
-    }}>
+    <CocinaContext.Provider
+      value={{
+        cocinas,
+        isLoading: !isConnected,
+        error,
+      }}
+    >
       {children}
     </CocinaContext.Provider>
   );
@@ -74,7 +77,9 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
 export function useCocinaContext() {
   const context = useContext(CocinaContext);
   if (!context) {
-    throw new Error('useCocinaContext debe ser usado dentro de un CocinaProvider');
+    throw new Error(
+      "useCocinaContext debe ser usado dentro de un CocinaProvider",
+    );
   }
   return context;
 }

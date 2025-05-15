@@ -14,19 +14,18 @@ import LayoutHandler from "@/components/LayoutHandler";
 
 import { WebSocketProvider } from "@/context/WebSocketContext";
 
-import { I18nextProvider } from 'react-i18next';
-import { i18n } from '@/i18n';
+import { I18nextProvider } from "react-i18next";
+import { i18n } from "@/i18n";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 
-
 export interface ProvidersProps {
-  initialLanguage: string; 
+  initialLanguage: string;
   children: React.ReactNode;
   themeProps?: ThemeProviderProps;
 }
@@ -39,7 +38,11 @@ declare module "@react-types/shared" {
   }
 }
 
-export function Providers({ initialLanguage, children, themeProps }: ProvidersProps) {
+export function Providers({
+  initialLanguage,
+  children,
+  themeProps,
+}: ProvidersProps) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
@@ -51,17 +54,17 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
     if (!i18n.isInitialized) {
       i18n.init({
         lng: initialLanguage,
-        fallbackLng: 'es'
+        fallbackLng: "es",
       });
     }
 
     const handleLanguageChange = (lng: string) => {
-      localStorage.setItem('selectedLanguage', lng);
+      localStorage.setItem("selectedLanguage", lng);
       document.cookie = `selectedLanguage=${lng}; path=/`;
     };
 
-    i18n.on('languageChanged', handleLanguageChange);
-    return () => i18n.off('languageChanged', handleLanguageChange);
+    i18n.on("languageChanged", handleLanguageChange);
+    return () => i18n.off("languageChanged", handleLanguageChange);
   }, [initialLanguage]);
 
   return (
@@ -69,20 +72,20 @@ export function Providers({ initialLanguage, children, themeProps }: ProvidersPr
       <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
         <I18nextProvider i18n={i18n}>
           {mounted && (
-          <LayoutHandler>
-            <ProtectedRoute>
-            <WebSocketProvider>
-              <LineaProvider>
-                <CocinaProvider>
-                  <EnfriadorProvider>
-                    <Toaster richColors />
-                      {children}
-                    <Toaster richColors />
-                  </EnfriadorProvider>
-                </CocinaProvider>
-              </LineaProvider>
-            </WebSocketProvider>
-            </ProtectedRoute>
+            <LayoutHandler>
+              <ProtectedRoute>
+                <WebSocketProvider>
+                  <LineaProvider>
+                    <CocinaProvider>
+                      <EnfriadorProvider>
+                        <Toaster richColors />
+                        {children}
+                        <Toaster richColors />
+                      </EnfriadorProvider>
+                    </CocinaProvider>
+                  </LineaProvider>
+                </WebSocketProvider>
+              </ProtectedRoute>
             </LayoutHandler>
           )}
         </I18nextProvider>

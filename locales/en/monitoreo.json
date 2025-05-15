@@ -1,37 +1,33 @@
 {
-    "estadoEquipo":
-    {
-        "titulo": "Equipment Status",
-        "tempIngreso": "Inlet Temp.",
-        "tempAgua": "Water Temp.",
-        "tempIng": "Inlet Temp",
-        "tempProd": "Product Temp",
-        "nivelAgua": "Water Level"
-    },
-    "cicloActivo":
-    {
-        "titulo": "Active Cycle",
-        "paso": "Step N°",
-        "lote": "Lot N°",
-        "cantTorres": "Number of Towers",
-        "tiempo": "Elapsed Time",
-        "tipoFin": "End Type"
-    },
-    "sectorIO":
-    {
-        "titulo": "IO Sector",
-        "bomba": "Recirculation Pump",
-        "entradaAgua": "Water Inlet",
-        "filtroSuccion": "Water Filter Valve",
-        "valvulaAmoniaco": "Cooling Exchanger",
-        "vaporSerp": "Coil Steam",
-        "vaporVivo": "Live Steam",
-        "vaporLim":"Cleaning Live Steam"
-    },
-    "titulo":
-    {
-        "receta": "Recipe",
-        "estado": "Status"
-    },
-    "monitoreo": "EQUIPMENT MONITORING"
+  "estadoEquipo": {
+    "titulo": "Equipment Status",
+    "tempIngreso": "Inlet Temp.",
+    "tempAgua": "Water Temp.",
+    "tempIng": "Inlet Temp",
+    "tempProd": "Product Temp",
+    "nivelAgua": "Water Level"
+  },
+  "cicloActivo": {
+    "titulo": "Active Cycle",
+    "paso": "Step N°",
+    "lote": "Lot N°",
+    "cantTorres": "Number of Towers",
+    "tiempo": "Elapsed Time",
+    "tipoFin": "End Type"
+  },
+  "sectorIO": {
+    "titulo": "IO Sector",
+    "bomba": "Recirculation Pump",
+    "entradaAgua": "Water Inlet",
+    "filtroSuccion": "Water Filter Valve",
+    "valvulaAmoniaco": "Cooling Exchanger",
+    "vaporSerp": "Coil Steam",
+    "vaporVivo": "Live Steam",
+    "vaporLim": "Cleaning Live Steam"
+  },
+  "titulo": {
+    "receta": "Recipe",
+    "estado": "Status"
+  },
+  "monitoreo": "EQUIPMENT MONITORING"
 }

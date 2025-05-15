@@ -1,20 +1,27 @@
 import React from "react";
-import { useTranslation } from 'react-i18next';  
+import { useTranslation } from "react-i18next";
 
 interface BarraCiclosProps {
   ciclosCorrectos: number;
   ciclosIncorrectos: number;
 }
 
-const BarraCiclos: React.FC<BarraCiclosProps> = ({ ciclosCorrectos, ciclosIncorrectos }) => {
+const BarraCiclos: React.FC<BarraCiclosProps> = ({
+  ciclosCorrectos,
+  ciclosIncorrectos,
+}) => {
   const totalCiclos = ciclosCorrectos + ciclosIncorrectos;
-  const porcentajeCorrectos = totalCiclos > 0 ? Math.round((ciclosCorrectos / totalCiclos) * 100) : 0;
-  const porcentajeIncorrectos = totalCiclos > 0 ? Math.round((ciclosIncorrectos / totalCiclos) * 100) : 0;
-  const { t } = useTranslation('productividad');
+  const porcentajeCorrectos =
+    totalCiclos > 0 ? Math.round((ciclosCorrectos / totalCiclos) * 100) : 0;
+  const porcentajeIncorrectos =
+    totalCiclos > 0 ? Math.round((ciclosIncorrectos / totalCiclos) * 100) : 0;
+  const { t } = useTranslation("productividad");
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-white">% {t('barraCiclos.texto')}</h2>
+      <h2 className="text-xl font-bold text-white">
+        % {t("barraCiclos.texto")}
+      </h2>
       <div className="flex h-[20px] rounded-[5px] overflow-hidden bg-[#444] mb-[15px]">
         <div
           className="h-[100%] bg-green"
@@ -29,13 +36,13 @@ const BarraCiclos: React.FC<BarraCiclosProps> = ({ ciclosCorrectos, ciclosIncorr
         <div className="flex items-center my-[5px] mx-[10px]">
           <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-green"></span>
           <p className="text-white">
-            {`${t('barraCiclos.correctos')} - ${porcentajeCorrectos}% [${ciclosCorrectos} ${t('barraCiclos.ciclos')}]`}
+            {`${t("barraCiclos.correctos")} - ${porcentajeCorrectos}% [${ciclosCorrectos} ${t("barraCiclos.ciclos")}]`}
           </p>
         </div>
         <div className="flex items-center my-[5px] mx-[10px]">
           <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-red"></span>
           <p className="text-white">
-            {`${t('barraCiclos.incorrectos')} - ${porcentajeIncorrectos}% [${ciclosIncorrectos} ${t('barraCiclos.ciclos')}]`}
+            {`${t("barraCiclos.incorrectos")} - ${porcentajeIncorrectos}% [${ciclosIncorrectos} ${t("barraCiclos.ciclos")}]`}
           </p>
         </div>
       </div>

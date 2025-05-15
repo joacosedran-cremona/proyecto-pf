@@ -1,618 +1,618 @@
 {
-    "datos-cocinas": [
-        [
-            {
-                "tipo": "COCINA",
-                "id": 1,
-                "estado": "FINALIZADO",
-                "temp_agua": 1,
-                "temp_prod": 1,
-                "temp_ingreso": 1,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Jamon",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_cocina": 1,
-                "num_receta": 1,
-                "nom_receta": "Jamon",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": true,
-                        "bomba_recirculacion": false,
-                        "vapor_serpentina": false,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo": true,
-                        "vapor_vivo_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
+  "datos-cocinas": [
+    [
+      {
+        "tipo": "COCINA",
+        "id": 1,
+        "estado": "FINALIZADO",
+        "temp_agua": 1,
+        "temp_prod": 1,
+        "temp_ingreso": 1,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Jamon",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_cocina": 1,
+        "num_receta": 1,
+        "nom_receta": "Jamon",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": true,
+            "bomba_recirculacion": false,
+            "vapor_serpentina": false,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo": true,
+            "vapor_vivo_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
         ],
-        [
-            {
-                "tipo": "COCINA",
-                "id": 2,
-                "estado": "INACTIVO",
-                "temp_agua": 1,
-                "temp_prod": 1,
-                "temp_ingreso": 2,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Pate",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_cocina": 2,
-                "num_receta": 1,
-                "nom_receta": "Pate",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": true,
-                        "bomba_recirculacion": false,
-                        "vapor_serpentina": false,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo": true,
-                        "vapor_vivo_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ],
-        [
-            {
-                "tipo": "COCINA",
-                "id": 3,
-                "estado": "FINALIZADO",
-                "temp_agua": 1,
-                "temp_prod": 1,
-                "temp_ingreso": 3,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Paleta",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_cocina": 3,
-                "num_receta": 1,
-                "nom_receta": "Paleta",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": true,
-                        "bomba_recirculacion": false,
-                        "vapor_serpentina": false,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo": true,
-                        "vapor_vivo_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ],
-        [
-            {
-                "tipo": "COCINA",
-                "id": 4,
-                "estado": "PRE OPERATIVO",
-                "temp_agua": 2,
-                "temp_prod": 1,
-                "temp_ingreso": 4,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Paleta",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_cocina": 4,
-                "num_receta": 1,
-                "nom_receta": "Paleta",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": true,
-                        "bomba_recirculacion": false,
-                        "vapor_serpentina": false,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo": true,
-                        "vapor_vivo_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": [
-                    {
-                        "id_historial": 1,
-                        "tiempo": "2025-04-11 10:49:54",
-                        "temp_agua": 1,
-                        "temp_ingreso": 1,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 2,
-                        "tiempo": "2025-04-11 10:50:04",
-                        "temp_agua": 1,
-                        "temp_ingreso": 1,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 3,
-                        "tiempo": "2025-04-11 10:50:14",
-                        "temp_agua": 1,
-                        "temp_ingreso": 1,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 4,
-                        "tiempo": "2025-04-11 10:50:24",
-                        "temp_agua": 1,
-                        "temp_ingreso": 1,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 5,
-                        "tiempo": "2025-04-11 10:50:35",
-                        "temp_agua": 1,
-                        "temp_ingreso": 1,
-                        "estado": "PRE OPERATIVO"
-                    }
-                ]
-            }
-        ],
-        [
-            {
-                "tipo": "COCINA",
-                "id": 5,
-                "estado": "FINALIZADO",
-                "temp_agua": 2,
-                "temp_prod": 1,
-                "temp_ingreso": 5,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Pate",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_cocina": 5,
-                "num_receta": 1,
-                "nom_receta": "Pate",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": true,
-                        "bomba_recirculacion": false,
-                        "vapor_serpentina": false,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo": true,
-                        "vapor_vivo_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ],
-        [
-            {
-                "tipo": "COCINA",
-                "id": 6,
-                "estado": "OPERATIVO",
-                "temp_agua": 2,
-                "temp_prod": 1,
-                "temp_ingreso": 6,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Pate",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_cocina": 6,
-                "num_receta": 1,
-                "nom_receta": "Pate",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": true,
-                        "bomba_recirculacion": false,
-                        "vapor_serpentina": false,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo": true,
-                        "vapor_vivo_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ]
+        "historial": []
+      }
     ],
-    "datos-enfriadores": [
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 7,
-                "estado": "FALLA",
-                "temp_agua": 1,
-                "temp_prod": 1,
-                "temp_ingreso": 1,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Jamon",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 1,
-                "num_receta": 1,
-                "nom_receta": "Jamon",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
+    [
+      {
+        "tipo": "COCINA",
+        "id": 2,
+        "estado": "INACTIVO",
+        "temp_agua": 1,
+        "temp_prod": 1,
+        "temp_ingreso": 2,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_cocina": 2,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": true,
+            "bomba_recirculacion": false,
+            "vapor_serpentina": false,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo": true,
+            "vapor_vivo_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
         ],
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 8,
-                "estado": "PRE OPERATIVO",
-                "temp_agua": 1,
-                "temp_prod": 1,
-                "temp_ingreso": 2,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Pate",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 2,
-                "num_receta": 1,
-                "nom_receta": "Pate",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": [
-                    {
-                        "id_historial": 1,
-                        "tiempo": "2025-04-11 10:48:52",
-                        "temp_agua": 1,
-                        "temp_ingreso": 2,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 2,
-                        "tiempo": "2025-04-11 10:49:02",
-                        "temp_agua": 1,
-                        "temp_ingreso": 2,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 3,
-                        "tiempo": "2025-04-11 10:49:12",
-                        "temp_agua": 1,
-                        "temp_ingreso": 2,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 4,
-                        "tiempo": "2025-04-11 10:49:23",
-                        "temp_agua": 1,
-                        "temp_ingreso": 2,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 5,
-                        "tiempo": "2025-04-11 10:49:33",
-                        "temp_agua": 1,
-                        "temp_ingreso": 2,
-                        "estado": "PRE OPERATIVO"
-                    }
-                ]
-            }
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "COCINA",
+        "id": 3,
+        "estado": "FINALIZADO",
+        "temp_agua": 1,
+        "temp_prod": 1,
+        "temp_ingreso": 3,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Paleta",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_cocina": 3,
+        "num_receta": 1,
+        "nom_receta": "Paleta",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": true,
+            "bomba_recirculacion": false,
+            "vapor_serpentina": false,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo": true,
+            "vapor_vivo_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
         ],
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 9,
-                "estado": "PRE OPERATIVO",
-                "temp_agua": 1,
-                "temp_prod": 1,
-                "temp_ingreso": 3,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Pate",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 3,
-                "num_receta": 1,
-                "nom_receta": "Pate",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": [
-                    {
-                        "id_historial": 1,
-                        "tiempo": "2025-04-11 10:48:52",
-                        "temp_agua": 1,
-                        "temp_ingreso": 3,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 2,
-                        "tiempo": "2025-04-11 10:49:02",
-                        "temp_agua": 1,
-                        "temp_ingreso": 3,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 3,
-                        "tiempo": "2025-04-11 10:49:12",
-                        "temp_agua": 1,
-                        "temp_ingreso": 3,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 4,
-                        "tiempo": "2025-04-11 10:49:23",
-                        "temp_agua": 1,
-                        "temp_ingreso": 3,
-                        "estado": "PRE OPERATIVO"
-                    },
-                    {
-                        "id_historial": 5,
-                        "tiempo": "2025-04-11 10:49:33",
-                        "temp_agua": 1,
-                        "temp_ingreso": 3,
-                        "estado": "PRE OPERATIVO"
-                    }
-                ]
-            }
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "COCINA",
+        "id": 4,
+        "estado": "PRE OPERATIVO",
+        "temp_agua": 2,
+        "temp_prod": 1,
+        "temp_ingreso": 4,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Paleta",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_cocina": 4,
+        "num_receta": 1,
+        "nom_receta": "Paleta",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": true,
+            "bomba_recirculacion": false,
+            "vapor_serpentina": false,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo": true,
+            "vapor_vivo_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
         ],
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 10,
-                "estado": "INACTIVO",
-                "temp_agua": 1,
-                "temp_prod": 1,
-                "temp_ingreso": 4,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Paleta",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 4,
-                "num_receta": 1,
-                "nom_receta": "Paleta",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ],
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 11,
-                "estado": "OPERATIVO",
-                "temp_agua": 2,
-                "temp_prod": 1,
-                "temp_ingreso": 5,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Jamon",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 5,
-                "num_receta": 1,
-                "nom_receta": "Jamon",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ],
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 12,
-                "estado": "INACTIVO",
-                "temp_agua": 2,
-                "temp_prod": 1,
-                "temp_ingreso": 6,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Pate",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 6,
-                "num_receta": 1,
-                "nom_receta": "Pate",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ],
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 13,
-                "estado": "OPERATIVO",
-                "temp_agua": 2,
-                "temp_prod": 1,
-                "temp_ingreso": 7,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Jamon",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 7,
-                "num_receta": 1,
-                "nom_receta": "Jamon",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
-        ],
-        [
-            {
-                "tipo": "ENFRIADOR",
-                "id": 14,
-                "estado": "FALLA",
-                "temp_agua": 2,
-                "temp_prod": 1,
-                "temp_ingreso": 8,
-                "temp_chiller": 1,
-                "niv_agua": 1,
-                "receta": "Paleta",
-                "receta_paso_actual": 1,
-                "tiempoTranscurrido": 1
-            },
-            {
-                "num_enfriador": 8,
-                "num_receta": 1,
-                "nom_receta": "Paleta",
-                "cant_torres": 1,
-                "tipo_fin": "TIEMPO",
-                "sector_io": [
-                    {
-                        "filtro_succion_agua": false,
-                        "entrada_agua": false,
-                        "bomba_recirculacion": false,
-                        "valvula_amoniaco": true,
-                        "vapor_serpentina_acc": true,
-                        "vapor_vivo_lim": true,
-                        "vapor_vivo_lim_acc": true,
-                        "tapa_estado": true,
-                        "tapa_estado_acc": "REPOSO"
-                    }
-                ],
-                "historial": []
-            }
+        "historial": [
+          {
+            "id_historial": 1,
+            "tiempo": "2025-04-11 10:49:54",
+            "temp_agua": 1,
+            "temp_ingreso": 1,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 2,
+            "tiempo": "2025-04-11 10:50:04",
+            "temp_agua": 1,
+            "temp_ingreso": 1,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 3,
+            "tiempo": "2025-04-11 10:50:14",
+            "temp_agua": 1,
+            "temp_ingreso": 1,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 4,
+            "tiempo": "2025-04-11 10:50:24",
+            "temp_agua": 1,
+            "temp_ingreso": 1,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 5,
+            "tiempo": "2025-04-11 10:50:35",
+            "temp_agua": 1,
+            "temp_ingreso": 1,
+            "estado": "PRE OPERATIVO"
+          }
         ]
+      }
+    ],
+    [
+      {
+        "tipo": "COCINA",
+        "id": 5,
+        "estado": "FINALIZADO",
+        "temp_agua": 2,
+        "temp_prod": 1,
+        "temp_ingreso": 5,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_cocina": 5,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": true,
+            "bomba_recirculacion": false,
+            "vapor_serpentina": false,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo": true,
+            "vapor_vivo_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "COCINA",
+        "id": 6,
+        "estado": "OPERATIVO",
+        "temp_agua": 2,
+        "temp_prod": 1,
+        "temp_ingreso": 6,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_cocina": 6,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": true,
+            "bomba_recirculacion": false,
+            "vapor_serpentina": false,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo": true,
+            "vapor_vivo_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
     ]
+  ],
+  "datos-enfriadores": [
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 7,
+        "estado": "FALLA",
+        "temp_agua": 1,
+        "temp_prod": 1,
+        "temp_ingreso": 1,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Jamon",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 1,
+        "num_receta": 1,
+        "nom_receta": "Jamon",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 8,
+        "estado": "PRE OPERATIVO",
+        "temp_agua": 1,
+        "temp_prod": 1,
+        "temp_ingreso": 2,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 2,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": [
+          {
+            "id_historial": 1,
+            "tiempo": "2025-04-11 10:48:52",
+            "temp_agua": 1,
+            "temp_ingreso": 2,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 2,
+            "tiempo": "2025-04-11 10:49:02",
+            "temp_agua": 1,
+            "temp_ingreso": 2,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 3,
+            "tiempo": "2025-04-11 10:49:12",
+            "temp_agua": 1,
+            "temp_ingreso": 2,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 4,
+            "tiempo": "2025-04-11 10:49:23",
+            "temp_agua": 1,
+            "temp_ingreso": 2,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 5,
+            "tiempo": "2025-04-11 10:49:33",
+            "temp_agua": 1,
+            "temp_ingreso": 2,
+            "estado": "PRE OPERATIVO"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 9,
+        "estado": "PRE OPERATIVO",
+        "temp_agua": 1,
+        "temp_prod": 1,
+        "temp_ingreso": 3,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 3,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": [
+          {
+            "id_historial": 1,
+            "tiempo": "2025-04-11 10:48:52",
+            "temp_agua": 1,
+            "temp_ingreso": 3,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 2,
+            "tiempo": "2025-04-11 10:49:02",
+            "temp_agua": 1,
+            "temp_ingreso": 3,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 3,
+            "tiempo": "2025-04-11 10:49:12",
+            "temp_agua": 1,
+            "temp_ingreso": 3,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 4,
+            "tiempo": "2025-04-11 10:49:23",
+            "temp_agua": 1,
+            "temp_ingreso": 3,
+            "estado": "PRE OPERATIVO"
+          },
+          {
+            "id_historial": 5,
+            "tiempo": "2025-04-11 10:49:33",
+            "temp_agua": 1,
+            "temp_ingreso": 3,
+            "estado": "PRE OPERATIVO"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 10,
+        "estado": "INACTIVO",
+        "temp_agua": 1,
+        "temp_prod": 1,
+        "temp_ingreso": 4,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Paleta",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 4,
+        "num_receta": 1,
+        "nom_receta": "Paleta",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 11,
+        "estado": "OPERATIVO",
+        "temp_agua": 2,
+        "temp_prod": 1,
+        "temp_ingreso": 5,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Jamon",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 5,
+        "num_receta": 1,
+        "nom_receta": "Jamon",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 12,
+        "estado": "INACTIVO",
+        "temp_agua": 2,
+        "temp_prod": 1,
+        "temp_ingreso": 6,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Pate",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 6,
+        "num_receta": 1,
+        "nom_receta": "Pate",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 13,
+        "estado": "OPERATIVO",
+        "temp_agua": 2,
+        "temp_prod": 1,
+        "temp_ingreso": 7,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Jamon",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 7,
+        "num_receta": 1,
+        "nom_receta": "Jamon",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
+    ],
+    [
+      {
+        "tipo": "ENFRIADOR",
+        "id": 14,
+        "estado": "FALLA",
+        "temp_agua": 2,
+        "temp_prod": 1,
+        "temp_ingreso": 8,
+        "temp_chiller": 1,
+        "niv_agua": 1,
+        "receta": "Paleta",
+        "receta_paso_actual": 1,
+        "tiempoTranscurrido": 1
+      },
+      {
+        "num_enfriador": 8,
+        "num_receta": 1,
+        "nom_receta": "Paleta",
+        "cant_torres": 1,
+        "tipo_fin": "TIEMPO",
+        "sector_io": [
+          {
+            "filtro_succion_agua": false,
+            "entrada_agua": false,
+            "bomba_recirculacion": false,
+            "valvula_amoniaco": true,
+            "vapor_serpentina_acc": true,
+            "vapor_vivo_lim": true,
+            "vapor_vivo_lim_acc": true,
+            "tapa_estado": true,
+            "tapa_estado_acc": "REPOSO"
+          }
+        ],
+        "historial": []
+      }
+    ]
+  ]
 }

@@ -3,5 +3,5 @@
 import EquipoPage from "@/components/equiposPage";
 
 export default function EnfriadoresPage() {
-    return <EquipoPage type="enfriador" />;
+  return <EquipoPage type="enfriador" />;
 }

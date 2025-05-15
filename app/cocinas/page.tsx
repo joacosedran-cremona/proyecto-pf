@@ -3,5 +3,5 @@
 import EquipoPage from "@/components/equiposPage";
 
 export default function CocinasPage() {
-    return <EquipoPage type="cocina" />;
+  return <EquipoPage type="cocina" />;
 }

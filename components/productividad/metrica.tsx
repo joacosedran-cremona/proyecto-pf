@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { useTranslation } from 'react-i18next';  
+import { useTranslation } from "react-i18next";
 
 interface DateRange {
   start: string;
@@ -15,12 +15,16 @@ interface MetricsProps {
   dateRange: DateRange;
 }
 
-const Metrics: React.FC<MetricsProps> = ({ ciclosRealizados, produccionTotal, dateRange }) => {
-  const { t } = useTranslation('productividad');
+const Metrics: React.FC<MetricsProps> = ({
+  ciclosRealizados,
+  produccionTotal,
+  dateRange,
+}) => {
+  const { t } = useTranslation("productividad");
   const metrics = [
-    { 
-      id: 1, 
-      titulo: t('metrica.ciclos'), 
+    {
+      id: 1,
+      titulo: t("metrica.ciclos"),
       dato: (
         <span className="flex items-center gap-2 mb-[3px]">
           {ciclosRealizados}
@@ -32,14 +36,15 @@ const Metrics: React.FC<MetricsProps> = ({ ciclosRealizados, produccionTotal, da
             className="ciclos-image ml-[-3px] mt-[20px]"
           />
         </span>
-      )
+      ),
     },
     {
       id: 2,
-      titulo: t('metrica.produccion'),
+      titulo: t("metrica.produccion"),
       dato: (
         <span>
-          {produccionTotal.toFixed(2)} <span className="text-xl ml-[-8px] mb-[3px]">Tn</span>
+          {produccionTotal.toFixed(2)}{" "}
+          <span className="text-xl ml-[-8px] mb-[3px]">Tn</span>
         </span>
       ),
     },
@@ -47,7 +52,7 @@ const Metrics: React.FC<MetricsProps> = ({ ciclosRealizados, produccionTotal, da
 
   return (
     <div>
-      <h2 className="text-3xl text-white font-bold mb-[-3px]">{t('titulo')}</h2>
+      <h2 className="text-3xl text-white font-bold mb-[-3px]">{t("titulo")}</h2>
       <div>
         <span className="text-l text-orange">{dateRange.start}</span>
         <span className="text-l text-white"> - </span>
@@ -59,9 +64,7 @@ const Metrics: React.FC<MetricsProps> = ({ ciclosRealizados, produccionTotal, da
             <div className="flex items-center justify-center text-5xl text-white font-bold">
               {m.dato}
             </div>
-            <div className="text-2xl text-white">
-              {m.titulo}
-            </div>
+            <div className="text-2xl text-white">{m.titulo}</div>
           </div>
         ))}
       </div>

@@ -1,22 +1,24 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 import Navbar from "@/components/header_Footer/navbar";
 import Footer from "@/components/header_Footer/footer";
 import clsx from "clsx";
 
 function LayoutHandler({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  
-  const isLoginRoute = ['/login', '/login/recuperacion'].includes(pathname);
+
+  const isLoginRoute = ["/login", "/login/recuperacion"].includes(pathname);
 
   return (
     <div className="flex flex-col w-[100%] min-h-screen">
       {!isLoginRoute && <Navbar />}
-      <main className={clsx(
-        "min-h-screen w-[100%] bg-grey p-[20px]",
-        !isLoginRoute && "pt-[85px]"
-      )}>
+      <main
+        className={clsx(
+          "min-h-screen w-[100%] bg-grey p-[20px]",
+          !isLoginRoute && "pt-[85px]",
+        )}
+      >
         {children}
       </main>
       {!isLoginRoute && <Footer />}

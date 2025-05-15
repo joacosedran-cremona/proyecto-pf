@@ -19,7 +19,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     };
 
     checkAuth();
-    
+
     window.addEventListener("popstate", checkAuth);
     return () => window.removeEventListener("popstate", checkAuth);
   }, [router]);

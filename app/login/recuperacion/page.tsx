@@ -4,11 +4,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import crem from "@/public/creminox.png";
-import { useTranslation } from 'react-i18next';  
+import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
-
-  const { t } = useTranslation('login')
+  const { t } = useTranslation("login");
 
   return (
     <section className="flex w-[100%] h-[90vh] items-center justify-center">
@@ -18,11 +17,11 @@ const ForgotPassword = () => {
           alt="Creminox"
           className="flex w-[60%] p-[0px] h-auto"
         />
-        
+
         <form className="w-[100%] h-3/5 flex flex-col justify-evenly">
           <div className="flex flex-col gap-[5px] h-1/3">
             <label className="flex font-bold text-[17px] tracking-[0.5px]">
-              {t('formulario.correo')}
+              {t("formulario.correo")}
             </label>
             <input
               type="text"
@@ -30,28 +29,28 @@ const ForgotPassword = () => {
             />
           </div>
 
-          <button 
+          <button
             type="submit"
             className="bg-[#e82a31] p-[4px] rounded-[10px] w-[100%] h-1/6 flex items-center justify-center border-none text-[#D9D9D9] font-bold cursor-pointer disabled:bg-[#a82328] disabled:cursor-not-allowed"
           >
-            <Link 
+            <Link
               href="../login"
               className="w-[100%] flex text-center justify-center text-white"
             >
-              {t('formulario.enviar')}
+              {t("formulario.enviar")}
             </Link>
           </button>
         </form>
 
-        <Link 
-            href="../login"
-            className="w-[100%] flex text-center justify-center text-[#5d5d5d]"
-          >
-            {t('formulario.recordo')}
+        <Link
+          href="../login"
+          className="w-[100%] flex text-center justify-center text-[#5d5d5d]"
+        >
+          {t("formulario.recordo")}
         </Link>
       </div>
     </section>
   );
-}
+};
 
 export default ForgotPassword;
