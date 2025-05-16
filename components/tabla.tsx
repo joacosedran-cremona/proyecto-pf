@@ -12,7 +12,6 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { Box, Button, Typography, Menu, MenuItem } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"; // Importamos ícono para limpiar filtros
-import logoDataURL from "../public/cremonabase64";
 import * as XLSX from "xlsx"; // Importamos la librería para Excel
 
 // HeroUI para DateRangePicker
@@ -24,11 +23,12 @@ import autoTable from "jspdf-autotable";
 
 //Idioma
 import { useTranslation } from "react-i18next";
-
 import { toast } from "sonner";
 
 // Importaciones adicionales necesarias
-import { ColumnFiltersState, OnChangeFn } from "@tanstack/react-table";
+import { ColumnFiltersState } from "@tanstack/react-table";
+
+import logoDataURL from "../public/cremonabase64";
 
 export interface Alerta {
   key: string;
@@ -61,6 +61,7 @@ const highlightText = (text: string, filter: string): JSX.Element => {
       <>
         {parts.map((part, i) => {
           const match = part.toLowerCase() === filter.toLowerCase();
+
           return match ? (
             <span
               key={i}
@@ -187,6 +188,7 @@ const Tabla: React.FC = () => {
     } catch (error) {
       setError(t("error"));
       setIsLoading(false);
+
       return () => {};
     }
   };
@@ -194,6 +196,7 @@ const Tabla: React.FC = () => {
   // Intento inicial con WebSocket
   useEffect(() => {
     const cleanup = connectWebSocket();
+
     return cleanup;
   }, [wsUrl]);
 
@@ -207,6 +210,7 @@ const Tabla: React.FC = () => {
           const port = process.env.NEXT_PUBLIC_WS_PORT || "8001";
 
           const response = await fetch(`http://${host}:${port}/alarmas`);
+
           if (!response.ok) throw new Error("Error en la solicitud");
 
           const apiData = await response.json();
@@ -236,6 +240,7 @@ const Tabla: React.FC = () => {
   useEffect(() => {
     if (data.length === 0 || !dateRange.from) {
       setDateFilteredData(data);
+
       return;
     }
 
@@ -248,6 +253,7 @@ const Tabla: React.FC = () => {
     const filtered = data.filter((item) => {
       try {
         const itemDate = new Date(item.time);
+
         return itemDate >= fromDate && itemDate <= toDate;
       } catch (e) {
         return false;
@@ -278,6 +284,7 @@ const Tabla: React.FC = () => {
   // Extraer valores de filtro para hacer accesibles en las celdas
   const getFilterValue = (columnId: string): string => {
     const filter = columnFilters.find((f) => f.id === columnId);
+
     return filter?.value ? String(filter.value).toLowerCase() : "";
   };
 
@@ -290,6 +297,7 @@ const Tabla: React.FC = () => {
         Cell: ({ cell, row }) => {
           const value = cell.getValue<string>() || "";
           const filterValue = getFilterValue("description");
+
           return highlightText(value, filterValue);
         },
       },
@@ -300,6 +308,7 @@ const Tabla: React.FC = () => {
         Cell: ({ cell }) => {
           const value = cell.getValue<string>() || "";
           const filterValue = getFilterValue("type");
+
           return highlightText(value, filterValue);
         },
       },
@@ -310,6 +319,7 @@ const Tabla: React.FC = () => {
         Cell: ({ cell }) => {
           const value = cell.getValue<string>() || "";
           const filterValue = getFilterValue("state");
+
           return highlightText(value, filterValue);
         },
       },
@@ -321,9 +331,11 @@ const Tabla: React.FC = () => {
         accessorFn: (row) => {
           try {
             const date = new Date(row.time);
+
             return date.toISOString().slice(0, 16).replace("T", " ");
           } catch (error) {
             console.error("Error formateando fecha:", error);
+
             return row.time || "";
           }
         },
@@ -335,10 +347,12 @@ const Tabla: React.FC = () => {
               .slice(0, 16)
               .replace("T", " ");
             const filterValue = getFilterValue("time");
+
             return highlightText(formattedDate, filterValue);
           } catch (error) {
             const value = cell.getValue<string>() || "";
             const filterValue = getFilterValue("time");
+
             return highlightText(value, filterValue);
           }
         },
@@ -359,10 +373,13 @@ const Tabla: React.FC = () => {
       const tableData = rows.map((row) =>
         columns.map((col) => {
           const value = row.original[col.accessorKey as keyof Alerta];
+
           if (col.accessorKey === "time" && typeof value === "string") {
             const date = new Date(value);
+
             return date.toISOString().slice(0, 16).replace("T", " ");
           }
+
           return value;
         }),
       );
@@ -376,6 +393,7 @@ const Tabla: React.FC = () => {
       // CABECERA personalizada
       const headerHeight = 70;
       const totalTexto = `Total de registros: ${rows.length}`;
+
       doc.setFillColor(19, 19, 19); // Fondo oscuro
       doc.rect(0, 0, pageWidth, headerHeight, "F");
 
@@ -456,11 +474,13 @@ const Tabla: React.FC = () => {
           // Formatear la fecha si es la columna de tiempo
           if (key === "time" && typeof value === "string") {
             const date = new Date(value);
+
             value = date.toISOString().slice(0, 16).replace("T", " ");
           }
 
           // Usar el header traducido como nombre de columna
           const headerName = column.header as string;
+
           rowData[headerName] = value;
         });
 
@@ -470,6 +490,7 @@ const Tabla: React.FC = () => {
       // Crear una hoja de cálculo
       const workSheet = XLSX.utils.json_to_sheet(excelData);
       const workBook = XLSX.utils.book_new();
+
       XLSX.utils.book_append_sheet(workBook, workSheet, "Alertas");
 
       // Generar y descargar el archivo
@@ -772,27 +793,27 @@ const Tabla: React.FC = () => {
         >
           {/* Botón de exportación con menú */}
           <Button
-            id="export-button"
             aria-controls={exportMenuOpen ? "export-menu" : undefined}
-            aria-haspopup="true"
             aria-expanded={exportMenuOpen ? "true" : undefined}
-            onClick={handleExportMenuClick}
-            startIcon={<FileDownloadIcon />}
-            variant="contained"
+            aria-haspopup="true"
             color="primary"
+            id="export-button"
+            startIcon={<FileDownloadIcon />}
             sx={{ backgroundColor: "#761122" }}
+            variant="contained"
+            onClick={handleExportMenuClick}
           >
             {t("exportar")}
           </Button>
 
           <Menu
-            id="export-menu"
-            anchorEl={exportMenuAnchorEl}
-            open={exportMenuOpen}
-            onClose={handleExportMenuClose}
             MenuListProps={{
               "aria-labelledby": "export-button",
             }}
+            anchorEl={exportMenuAnchorEl}
+            id="export-menu"
+            open={exportMenuOpen}
+            onClose={handleExportMenuClose}
           >
             {/* Opciones de menú sin cambios */}
             <MenuItem
@@ -836,22 +857,20 @@ const Tabla: React.FC = () => {
             }}
           >
             <DateRangePicker
-              value={dateRange}
-              onChange={setDateRange}
+              className="bg-[#1e1e1e] text-[#d9d9d9] border-[#515151] rounded-md"
               locale={{
                 startDate: t("fechaInicio"),
                 endDate: t("fechaFin"),
                 selectDate: t("seleccionarFecha"),
               }}
-              className="bg-[#1e1e1e] text-[#d9d9d9] border-[#515151] rounded-md"
+              value={dateRange}
+              onChange={setDateRange}
             />
           </Box>
 
           {/* Botón para limpiar filtros */}
           <Button
-            onClick={handleClearFilters}
             startIcon={<FilterAltOffIcon />}
-            variant="outlined"
             sx={{
               color: "#d9d9d9",
               borderColor: "#515151",
@@ -860,6 +879,8 @@ const Tabla: React.FC = () => {
                 borderColor: "#d9d9d9",
               },
             }}
+            variant="outlined"
+            onClick={handleClearFilters}
           >
             {t("limpiarFiltros")}
           </Button>
@@ -877,17 +898,17 @@ const Tabla: React.FC = () => {
           }}
         >
           <Typography
-            variant="h4"
             sx={{
               color: "#d9d9d9",
               fontSize: "1.5rem",
               fontWeight: "bold",
               marginBottom: "-5px",
             }}
+            variant="h4"
           >
             {t("historial")}
           </Typography>
-          <Typography variant="subtitle1" sx={{ color: "#d9d9d9" }}>
+          <Typography sx={{ color: "#d9d9d9" }} variant="subtitle1">
             {t("alertas")}
           </Typography>
         </Box>
@@ -909,10 +930,10 @@ const Tabla: React.FC = () => {
         {error && (
           <div className="mb-4">
             <Button
-              onClick={connectWebSocket}
-              variant="contained"
               color="primary"
               sx={{ backgroundColor: "#761122" }}
+              variant="contained"
+              onClick={connectWebSocket}
             >
               {t("reintentar")}
             </Button>

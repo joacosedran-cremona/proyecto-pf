@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 import Selector from "../selectores/selectorLineasProductividad";
 import SelectorEquipos from "../selectores/selectorEquipo";
-import DatePicker from "@/ui/datePickerProductividad";
 import ButtonAplicar from "../botones/botonAplicarProductividad";
 import BotonInformeProductividad from "../botones/botonInformeProductividad"; // Importar el nuevo botón
-import { useTranslation } from "react-i18next";
+
+import DatePicker from "@/ui/datePickerProductividad";
 
 interface FiltroPeriodoProps {
   onApplyFilters: (data: {
@@ -23,6 +25,7 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
   // Inicializar con fechas por defecto
   const today = new Date().toISOString().split("T")[0];
   const lastWeek = new Date();
+
   lastWeek.setDate(lastWeek.getDate() - 7);
   const lastWeekFormatted = lastWeek.toISOString().split("T")[0];
 
@@ -36,6 +39,7 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
   useEffect(() => {
     // Calcula el datoEnviado basado en las condiciones
     let dato = 0;
+
     if (selectedLinea === 0) {
       // Completo (todas las líneas)
       dato = 0;
@@ -104,34 +108,34 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
 
       <div className="flex w-[100%] h-1/5">
         <SelectorEquipos
-          onEquipoChange={handleEquipoChange}
           disabled={selectedLinea === 0}
           lineaSeleccionada={selectedLinea}
+          onEquipoChange={handleEquipoChange}
         />
       </div>
 
       <div className="flex flex-col w-[100%] h-4/5 gap-[10px]">
         <DatePicker
+          defaultEndDate={today}
+          defaultStartDate={lastWeekFormatted}
           selectClasses="h-1/4"
           onDateChange={handleDateChange}
-          defaultStartDate={lastWeekFormatted}
-          defaultEndDate={today}
         />
         <ButtonAplicar
+          dato_enviado={datoEnviado}
+          endDate={endDate}
+          equipoId={selectedEquipo}
+          lineaId={selectedLinea}
           selectClasses="h-1/4"
           startDate={startDate}
-          endDate={endDate}
-          lineaId={selectedLinea}
-          equipoId={selectedEquipo}
-          dato_enviado={datoEnviado}
           onApplyFilters={handleApply}
         />
         <BotonInformeProductividad
-          selectClasses="h-1/4"
-          lineaId={selectedLinea}
-          equipoId={selectedEquipo}
-          startDate={startDate}
           endDate={endDate}
+          equipoId={selectedEquipo}
+          lineaId={selectedLinea}
+          selectClasses="h-1/4"
+          startDate={startDate}
         />
       </div>
     </div>

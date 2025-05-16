@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
+
 import logoDataURL from "../../../public/cremonabase64"; // Importa la data URL de la imagen
 
 interface BotonPDFProps {
@@ -25,6 +26,7 @@ export default function BotonPDF({
         description: "Seleccione un equipo y un ciclo para descargar",
         position: "bottom-right",
       });
+
       return;
     }
 
@@ -66,6 +68,7 @@ export default function BotonPDF({
 
       // Agregar fondo negro para metadata
       const metadataHeight = 20; // altura del área de metadata
+
       pdf.setFillColor(19, 19, 19);
       pdf.rect(0, 0, 297, metadataHeight, "F"); // rectangle negro en la parte superior
 
@@ -96,6 +99,7 @@ export default function BotonPDF({
 
       const logoWidth = 40;
       const logoHeight = 10;
+
       pdf.addImage(logoDataURL, "PNG", 252, 5, logoWidth, logoHeight);
       pdf.link(252, 4, 40, 12, {
         url: "https://creminox.com",
@@ -121,10 +125,10 @@ export default function BotonPDF({
 
   return (
     <Button
-      radius="md"
-      color="danger"
-      variant="ghost"
       className={`text-danger ${selectClasses || "h-1/5"} min-w-[130px]`}
+      color="danger"
+      radius="md"
+      variant="ghost"
       onClick={handlePdfDownload}
     >
       <FaFilePdf style={{ marginRight: "8px" }} />

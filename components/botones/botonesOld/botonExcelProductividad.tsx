@@ -44,6 +44,7 @@ export default function BotonExcel({
 
       if (!response.ok) {
         const errorText = await response.text();
+
         throw new Error(
           `Error en la descarga: ${response.status} - ${errorText}`,
         );
@@ -54,6 +55,7 @@ export default function BotonExcel({
       const filename = `productividad_${formattedStartDate}_${formattedEndDate}.xlsx`;
 
       const link = document.createElement("a");
+
       link.href = url;
       link.setAttribute("download", filename);
       document.body.appendChild(link);
@@ -79,10 +81,10 @@ export default function BotonExcel({
 
   return (
     <Button
-      radius="md"
-      color="success"
-      variant="ghost"
       className={`text-success ${selectClasses || "h-1/5"} min-w-[130px]`}
+      color="success"
+      radius="md"
+      variant="ghost"
       onClick={handleExcelDownload}
     >
       <FaFileExcel style={{ marginRight: "8px" }} />

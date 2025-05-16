@@ -36,9 +36,11 @@ export const transformData = (
 
   if (!equipo) {
     const cachedData = localStorage.getItem(`equipo-${equipoId}`);
+
     if (cachedData) {
       return JSON.parse(cachedData);
     }
+
     return {
       labels: [],
       datasets: [],
@@ -50,6 +52,7 @@ export const transformData = (
 
   const getTimestamp = (dateStr: string) => {
     const date = new Date(dateStr);
+
     return Math.floor(date.getTime() / 1000);
   };
 

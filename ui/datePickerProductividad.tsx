@@ -43,6 +43,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   const formatToYYYYMMDD = (date: Date | null): string | null => {
     if (!date) return null;
+
     return date.toISOString().split("T")[0];
   };
 
@@ -53,11 +54,13 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       if (startDateObj && isNaN(startDateObj.getTime())) {
         console.error("Invalid start date");
+
         return;
       }
 
       if (endDateObj && isNaN(endDateObj.getTime())) {
         console.error("Invalid end date");
+
         return;
       }
 

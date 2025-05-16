@@ -1,6 +1,7 @@
 import React from "react";
-import { getColorClass } from "@/utils/logicaColores";
 import { useTranslation } from "react-i18next";
+
+import { getColorClass } from "@/utils/logicaColores";
 
 interface CicloActivoProps {
   datosCiclo: { label: string; value: string | number | null }[];

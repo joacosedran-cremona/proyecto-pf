@@ -3,7 +3,8 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
-import { VscAccount, VscBell } from "react-icons/vsc";
+import { VscBell } from "react-icons/vsc";
+
 import DropdownBanderas from "@/components/traduccion/dropdownBanderas";
 import Desloguear from "@/components/botones/desloguear";
 
@@ -30,8 +31,8 @@ const opcionesIconos: OpcionIcono[] = [
     url: "/alertas",
     icon: (
       <Link
-        href="/alertas"
         className="group relative flex items-center justify-center w-[25px] h-[25px] transition-all duration-200 ease-in-out"
+        href="/alertas"
       >
         {/* Efecto de glow */}
         <div className="absolute inset-0 rounded-[100%] bg-gray-400/0 group-hover:bg-gray-400/20 transition-all duration-200 ease-in-out group-hover:scale-150 pointer-events-none" />
@@ -70,8 +71,8 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
           {opcionesMenu.map(({ id, url, text }) => (
             <li key={id} className="h-[100%]">
               <Link
-                href={url}
                 className={currentPath === url ? "activeLink" : ""}
+                href={url}
               >
                 <span>{text}</span>
               </Link>
@@ -80,15 +81,15 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
           <div className="h-[100%] min-w-[105px] w-[105px] hidden 1050:block">
             <Link
               href="https://creminox.com"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <Image
-                className="h-[100%] w-[105px]"
-                src="/creminox.png"
                 alt="Creminox"
-                width={1000}
+                className="h-[100%] w-[105px]"
                 height={1000}
+                src="/creminox.png"
+                width={1000}
               />
             </Link>
           </div>

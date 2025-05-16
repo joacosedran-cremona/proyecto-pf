@@ -1,6 +1,6 @@
 import { DateRangePicker } from "@heroui/react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface DatePickerProps {
   onDateChange?: (startDate: string | null, endDate: string | null) => void;
@@ -26,6 +26,7 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
 
   const formatToYYYYMMDD = (date: Date | null): string | null => {
     if (!date) return null;
+
     return date.toISOString().split("T")[0];
   };
 
@@ -36,11 +37,13 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
 
       if (startDate && isNaN(startDate.getTime())) {
         console.error("Invalid start date");
+
         return;
       }
 
       if (endDate && isNaN(endDate.getTime())) {
         console.error("Invalid end date");
+
         return;
       }
 
@@ -56,6 +59,7 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
       console.error("Error processing dates:", error);
     }
   };
+
   return (
     <DateRangePicker
       className="h-[50px]"

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
+
 import { useWebSocketContext } from "./WebSocketContext";
 
 interface EnfriadorInfo {
@@ -82,10 +83,12 @@ export const EnfriadorProvider = ({
 
 export function useEnfriadorContext() {
   const context = useContext(EnfriadorContext);
+
   if (!context) {
     throw new Error(
       "useEnfriadorContext debe ser usado dentro de un EnfriadorProvider",
     );
   }
+
   return context;
 }

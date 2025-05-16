@@ -42,12 +42,12 @@ export default function BotonAplicar({
 
   return (
     <Button
-      radius="md"
-      color="default"
-      variant="ghost"
       className={`${selectClasses} min-w-[40px] ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
-      onClick={handleClick}
+      color="default"
       disabled={isDisabled}
+      radius="md"
+      variant="ghost"
+      onClick={handleClick}
     >
       <FaSearch style={{ color: isDisabled ? "#999" : "grey" }} />
     </Button>

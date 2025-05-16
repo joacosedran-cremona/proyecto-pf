@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
+
 import ContenedorAlertas from "./contenedorAlertas";
 
 export function Alarmas() {
   const { t } = useTranslation("layout");
+
   return (
     <div className="w-[100%] h-[100%]">
       <div className="h-[8%]">

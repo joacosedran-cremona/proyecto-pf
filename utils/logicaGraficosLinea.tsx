@@ -46,9 +46,11 @@ export const transformData = (
   // Si no hay datos, intentar recuperar del localStorage
   if (!equipo) {
     const cachedData = localStorage.getItem(`equipo-${id}`);
+
     if (cachedData) {
       return JSON.parse(cachedData);
     }
+
     return { labels: [], datasets: [] };
   }
 
@@ -58,6 +60,7 @@ export const transformData = (
   // Función para convertir fecha string a timestamp en segundos
   const getTimestamp = (dateStr: string) => {
     const date = new Date(dateStr);
+
     return Math.floor(date.getTime() / 1000);
   };
 
@@ -82,6 +85,7 @@ export const transformData = (
   // Procesar datos del historial
   historialOrdenado.forEach((paso) => {
     const tiempoRelativo = getTimestamp(paso.tiempo) - tiempoInicial;
+
     tiempos.push(tiempoRelativo);
 
     if (

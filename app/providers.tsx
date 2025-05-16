@@ -1,27 +1,21 @@
 "use client";
 
-import * as React from "react";
-
 import type { ThemeProviderProps } from "next-themes";
+
+import * as React from "react";
 import { HeroUIProvider } from "@heroui/system";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { I18nextProvider } from "react-i18next";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Toaster } from "sonner";
 
 import { CocinaProvider } from "@/context/CocinaContext";
 import { EnfriadorProvider } from "@/context/EnfriadorContext";
 import { LineaProvider } from "@/context/LineaContext";
-
 import LayoutHandler from "@/components/LayoutHandler";
-
 import { WebSocketProvider } from "@/context/WebSocketContext";
-
-import { I18nextProvider } from "react-i18next";
 import { i18n } from "@/i18n";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-import { Toaster } from "sonner";
-
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 export interface ProvidersProps {
@@ -64,12 +58,13 @@ export function Providers({
     };
 
     i18n.on("languageChanged", handleLanguageChange);
+
     return () => i18n.off("languageChanged", handleLanguageChange);
   }, [initialLanguage]);
 
   return (
     <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
+      <NextThemesProvider enableSystem attribute="class" defaultTheme="dark">
         <I18nextProvider i18n={i18n}>
           {mounted && (
             <LayoutHandler>

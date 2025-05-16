@@ -29,11 +29,11 @@ const Metrics: React.FC<MetricsProps> = ({
         <span className="flex items-center gap-2 mb-[3px]">
           {ciclosRealizados}
           <Image
-            src="/ciclo.png"
             alt="Ciclo"
-            width={24}
-            height={24}
             className="ciclos-image ml-[-3px] mt-[20px]"
+            height={24}
+            src="/ciclo.png"
+            width={24}
           />
         </span>
       ),

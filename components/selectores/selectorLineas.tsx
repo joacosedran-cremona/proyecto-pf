@@ -1,7 +1,8 @@
 "use client";
 
-import { useLinea, type LineaId } from "@/context/LineaContext";
 import { useTranslation } from "react-i18next";
+
+import { useLinea, type LineaId } from "@/context/LineaContext";
 
 interface SelectorProps {
   selectClasses?: string;
@@ -22,15 +23,15 @@ const Selector: React.FC<SelectorProps> = ({ selectClasses }) => {
 
   return (
     <select
+      className={selectClasses || defaultClasses}
       value={lineaSeleccionada}
       onChange={(e) => setLineaSeleccionada(Number(e.target.value) as LineaId)}
-      className={selectClasses || defaultClasses}
     >
       {lineaList.map((linea) => (
         <option
           key={linea.id}
-          value={linea.id}
           className="p-[2px] text-white hover:text-white bg-black font-bold"
+          value={linea.id}
         >
           {linea.name}
         </option>

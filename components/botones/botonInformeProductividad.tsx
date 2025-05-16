@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
+
 import logoDataURL from "../../public/cremonabase64"; // Asegúrate que esta ruta es correcta
 
 interface ProductoRealizadoAPI {
@@ -51,6 +52,7 @@ export default function BotonInformeProductividad({
 
   const getEquipoName = (id?: number) => {
     if (!id || id === 30) return t("todosLosEquipos", "Todos los equipos");
+
     return id <= 6
       ? `${t("cocina", "Cocina")} ${id}`
       : `${t("enfriador", "Enfriador")} ${id - 6}`;
@@ -61,6 +63,7 @@ export default function BotonInformeProductividad({
       const productivityContainer = document.querySelector(
         ".productividad-container",
       ) as HTMLElement;
+
       if (!productivityContainer) {
         throw new Error(
           t(
@@ -91,6 +94,7 @@ export default function BotonInformeProductividad({
 
       const today = new Date().toISOString().split("T")[0];
       const sevenDaysAgo = new Date();
+
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
       const sevenDaysAgoFormatted = sevenDaysAgo.toISOString().split("T")[0];
 
@@ -111,8 +115,10 @@ export default function BotonInformeProductividad({
       if (!response.ok) {
         const errorText = await response.text();
         let detailedError = errorText;
+
         try {
           const errorJson = JSON.parse(errorText);
+
           detailedError = errorJson.detail || errorJson.message || errorText;
         } catch (e) {}
         throw new Error(
@@ -156,6 +162,7 @@ export default function BotonInformeProductividad({
         month: "long",
         day: "numeric",
       });
+
       pdf.text(
         `${t("pdf.fechaExportacion", "Fecha de exportación")}: ${currentDate}`,
         margin,
@@ -165,6 +172,7 @@ export default function BotonInformeProductividad({
       pdf.setFont("helvetica", "normal");
       const lineaText = `${t("pdf.linea", "Línea")}: ${getLineaName(lineaId)}`;
       const equipoText = `${t("pdf.equipo", "Equipo")}: ${getEquipoName(equipoId)}`;
+
       pdf.text(lineaText, pageWidth / 2 - 30, 8);
       pdf.text(equipoText, pageWidth / 2 - 30, 14);
 
@@ -204,6 +212,7 @@ export default function BotonInformeProductividad({
         const pageTitle = isContinuation
           ? t("pdf.datosProductividadCont", "Datos de Productividad (Cont.)")
           : t("pdf.datosProductividad", "Datos de Productividad");
+
         pdf.text(pageTitle, margin, 8);
         pdf.text(
           `${t("pdf.periodo", "Periodo")}: ${formattedStartDate} - ${formattedEndDate}`,
@@ -253,6 +262,7 @@ export default function BotonInformeProductividad({
         `${t("pdf.ciclosCorrectos", "Ciclos Correctos")}: ${apiData.ciclos_correctos}`,
         `${t("pdf.ciclosIncorrectos", "Ciclos Incorrectos")}: ${apiData.ciclos_incorrectos}`,
       ];
+
       generalData.forEach((line) => {
         if (currentY > pageHeight - margin - 10) {
           pdf.addPage();
@@ -305,6 +315,7 @@ export default function BotonInformeProductividad({
           pdf.setFontSize(tableFontSize);
           for (let col = 0; col < numCols; col++) {
             const x = margin + col * cellWidth;
+
             pdf.setFillColor(220, 220, 220);
             pdf.setTextColor(0, 0, 0);
             pdf.rect(x, yPos, cellWidth, cellHeight, "FD");
@@ -315,6 +326,7 @@ export default function BotonInformeProductividad({
               { maxWidth: cellWidth - 2 * textPadding, align: "left" },
             );
           }
+
           return yPos + cellHeight;
         };
 
@@ -337,8 +349,10 @@ export default function BotonInformeProductividad({
 
           for (let colIdx = 0; colIdx < numCols; colIdx++) {
             const x = margin + colIdx * cellWidth;
+
             pdf.rect(x, currentY, cellWidth, cellHeight, "S");
             const cellValue = String(row[colIdx] || "");
+
             pdf.text(cellValue, x + textPadding, currentY + textYOffset, {
               maxWidth: cellWidth - 2 * textPadding,
               align: "left",
@@ -363,6 +377,7 @@ export default function BotonInformeProductividad({
       }
 
       const nombreArchivo = `${t("nombreArchivoProductividad", "Informe_Productividad")}_${getEquipoName(equipoId)}_${formattedStartDate}_a_${formattedEndDate}.pdf`;
+
       pdf.save(nombreArchivo);
 
       toast.success(t("exitoTitulo", "Éxito"), {
@@ -387,6 +402,7 @@ export default function BotonInformeProductividad({
               "errorGenerarInformeDesconocido",
               "Ocurrió un error desconocido al generar el informe.",
             );
+
       toast.error(t("errorTitulo", "Error"), {
         description: errorMessage,
         position: "bottom-right",
@@ -396,10 +412,10 @@ export default function BotonInformeProductividad({
 
   return (
     <Button
-      radius="md"
-      color="primary"
-      variant="ghost"
       className={`text-primary ${selectClasses || "h-1/5"} min-w-[180px]`}
+      color="primary"
+      radius="md"
+      variant="ghost"
       onClick={handleInformeUnificadoDownload}
     >
       <FaFilePdf style={{ marginRight: "8px" }} />

@@ -3,6 +3,7 @@ import { Button } from "@heroui/react";
 import { FaFilePdf, FaFileExcel } from "react-icons/fa";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+
 import logoDataURL from "@/public/cremonabase64"; // Importa la data URL de la imagen
 
 export default function BotonesDescarga({ startDate, endDate }) {
@@ -52,6 +53,7 @@ export default function BotonesDescarga({ startDate, endDate }) {
 
       const logoWidth = 40;
       const logoHeight = 10;
+
       pdf.addImage(logoDataURL, "PNG", 245, 15, logoWidth, logoHeight);
 
       // Añadir texto "EFA - Proyecto" debajo del logo
@@ -98,6 +100,7 @@ export default function BotonesDescarga({ startDate, endDate }) {
       const url = window.URL.createObjectURL(blob);
 
       const link = document.createElement("a");
+
       link.href = url;
       link.setAttribute(
         "download",

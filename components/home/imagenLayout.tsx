@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { Image } from "@heroui/image";
 import Link from "next/link";
 import { Tooltip } from "@heroui/tooltip";
+
 import { useWebSocketContext } from "@/context/WebSocketContext";
 import { useCocinaContext } from "@/context/CocinaContext";
 import { useEnfriadorContext } from "@/context/EnfriadorContext";
@@ -92,12 +93,14 @@ const sectionConfig = {
 
 function getEstadoColor(estado: string): string {
   const estadoUpper = estado.toUpperCase();
+
   if (estadoUpper === "FALLA") return "#C13D";
   if (["OPERATIVO", "PRE OPERATIVO", "PRE OPERATIVO"].includes(estadoUpper))
     return "#9b9D";
   if (estadoUpper === "PAUSA") return "#BB8D";
   if (estadoUpper === "FINALIZADO") return "#9bbD";
   if (estadoUpper === "INACTIVO") return "#666D";
+
   return "black";
 }
 
@@ -115,6 +118,7 @@ export function ImagenLayout() {
     ) => {
       return config.map(({ id, key, position, line }) => {
         const translatedName = t(`equipos.${key}`, { defaultValue: key });
+
         return {
           id: type === "enfriadores" ? id : id,
           name: translatedName,
@@ -146,6 +150,7 @@ export function ImagenLayout() {
 
     if (tipoEquipo === "COCINA") {
       const cocina = cocinas.find((c) => c.info.id === section.id);
+
       if (cocina) {
         return {
           tipo: "COCINA",
@@ -159,6 +164,7 @@ export function ImagenLayout() {
       }
     } else {
       const enfriador = enfriadores.find((e) => e.info.id === section.id);
+
       if (enfriador) {
         return {
           tipo: "ENFRIADOR",
@@ -192,13 +198,14 @@ export function ImagenLayout() {
 
       <div className="relative w-full flex-grow">
         <Image
+          alt="Imagen de prueba"
           className="w-full h-full object-contain z-1 min-h-[80vh]"
           src="/layout.png"
-          alt="Imagen de prueba"
         />
 
         {sections.map((section) => {
           const equipo = getEquipoData(section);
+
           console.log(`Renderizando sección ${section.key}:`, {
             section,
             equipoEncontrado: equipo,
@@ -217,6 +224,7 @@ export function ImagenLayout() {
           ].find((conf) => conf.key === section.key);
 
           let numeroMostrado = sectionConfigItem?.id || "1";
+
           if (tipoEquipo === "enfriador") {
             numeroMostrado = (sectionConfigItem?.id || 0) - 6;
           }
@@ -224,13 +232,13 @@ export function ImagenLayout() {
           const lineaEquipo = sectionConfigItem?.line || "1";
 
           return (
-            <Link key={section.id} href={href} className="z-999">
+            <Link key={section.id} className="z-999" href={href}>
               <Tooltip
-                placement="top"
                 content={t(`tooltip.${tipoEquipo}`, {
                   number: tipoEquipo === "cocina" ? section.id : section.id - 6,
                   line: lineaEquipo,
                 })}
+                placement="top"
               >
                 <span
                   className={`absolute shadow border z-999 rounded-md p-[2px] flex flex-col justify-between ${

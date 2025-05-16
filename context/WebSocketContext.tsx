@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
+
 import useWebSocket from "@/services/websocket";
 
 interface WebSocketContextType {
@@ -36,10 +37,12 @@ export const WebSocketProvider = ({
 
 export function useWebSocketContext() {
   const context = useContext(WebSocketContext);
+
   if (!context) {
     throw new Error(
       "useWebSocketContext debe ser usado dentro de un WebSocketProvider",
     );
   }
+
   return context;
 }

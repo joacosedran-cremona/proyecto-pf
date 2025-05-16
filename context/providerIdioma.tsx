@@ -16,6 +16,7 @@ export const LanguageProvider = ({
     const lang =
       localStorage.getItem("selectedLanguage") ||
       document.cookie.match(/selectedLanguage=([^;]+)/)?.[1];
+
     if (lang && i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }

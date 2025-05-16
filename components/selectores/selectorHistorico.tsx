@@ -54,10 +54,7 @@ const Selector: React.FC<SelectorProps> = ({
 
   return (
     <Select
-      radius="lg"
       disallowEmptySelection
-      selectedKeys={[value.toString()]}
-      onChange={handleChange}
       aria-label="Seleccionar equipo"
       className={`min-w-[150px] ${selectClasses}`}
       classNames={{
@@ -66,18 +63,22 @@ const Selector: React.FC<SelectorProps> = ({
         listbox: "bg-black text-white rounded-lg",
         base: "rounded-lg",
       }}
+      radius="lg"
       renderValue={(items) => {
         const selected = itemsList.find((i) => i.id === Number(items[0]?.key));
+
         return (
           <div className="text-white">{selected?.name || "Seleccionar"}</div>
         );
       }}
+      selectedKeys={[value.toString()]}
+      onChange={handleChange}
     >
       {itemsList.map((item) => (
         <SelectItem
           key={item.id.toString()}
-          value={item.id.toString()}
           className="text-white hover:bg-gray-800 rounded-lg mx-1 px-2"
+          value={item.id.toString()}
         >
           {item.name}
         </SelectItem>

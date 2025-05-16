@@ -1,6 +1,10 @@
 "use client";
 
 // Componentes
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
+
 import Selector from "./selectores/selectorEquipos";
 import Grafico from "./graficos/grafico";
 import CicloActivo from "./monitoreoIndividual/cicloActivo";
@@ -12,13 +16,11 @@ import { getColorClass } from "@/utils/logicaColores";
 import { displayData } from "@/utils/displayData";
 
 // Idioma
-import { useTranslation } from "react-i18next";
 
 // Contextos y navegación
-import { useSearchParams } from "next/navigation";
+
 import { useCocinaContext } from "@/context/CocinaContext";
 import { useEnfriadorContext } from "@/context/EnfriadorContext";
-import { useMemo } from "react";
 import { SectorIOType } from "@/types/sectorIO";
 
 interface EquipoPageProps {
@@ -154,12 +156,14 @@ export default function EquipoPage({ type }: EquipoPageProps) {
 
   const handleSelectionChange = (newId: number) => {
     const searchParams = new URLSearchParams(window.location.search);
+
     searchParams.set("id", String(newId));
     window.history.pushState(null, "", `?${searchParams.toString()}`);
   };
 
   const formattedDisplayData = (value: string | number, unit?: string) => {
     if (value === "N/A") return value;
+
     return unit ? `${value} ${unit}` : value;
   };
 
@@ -169,11 +173,11 @@ export default function EquipoPage({ type }: EquipoPageProps) {
       <div className="flex w-[100%] h-[100%] gap-[20px]">
         <div className="w-1/3">
           <Selector
+            isCocina={isCocina}
+            optionClasses="p-[2px] bg-black font-bold"
+            selectClasses={`w-[100%] h-[100%] bg-[#1f1f1f] px-[20px] border-b-[2px] ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
             value={currentId}
             onChange={handleSelectionChange}
-            isCocina={isCocina}
-            selectClasses={`w-[100%] h-[100%] bg-[#1f1f1f] px-[20px] border-b-[2px] ${borderColor} focus:outline-none text-lg text-${color} hover:text-${color} transition-colors cursor-pointer`}
-            optionClasses="p-[2px] bg-black font-bold"
           />
         </div>
         <p
@@ -195,17 +199,17 @@ export default function EquipoPage({ type }: EquipoPageProps) {
             <div className="bg-black flex flex-col p-[20px] w-[100%] h-[100%] rounded-md">
               <EstadoEquipo
                 datos={datosEquipo}
+                displayData={formattedDisplayData}
                 getColorClass={(label, value) =>
                   getColorClass(labelToKeyMap[label] || "", value, color)
                 }
-                displayData={formattedDisplayData}
               />
             </div>
             <div className="bg-black flex flex-col p-[20px] w-[100%] h-[100%] rounded-md">
               <CicloActivo
                 datosCiclo={datosCiclo}
-                displayData={displayData}
                 defaultColor={color}
+                displayData={displayData}
               />
             </div>
           </div>

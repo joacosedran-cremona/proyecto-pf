@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
+
 import logoDataURL from "../../public/cremonabase64";
 
 interface BotonInformeProps {
@@ -23,6 +24,7 @@ export default function BotonInforme({
     if (!dateString) return "";
     try {
       const date = new Date(dateString);
+
       if (isNaN(date.getTime())) return dateString;
 
       const year = date.getFullYear();
@@ -31,6 +33,7 @@ export default function BotonInforme({
       const hours = date.getHours().toString().padStart(2, "0");
       const minutes = date.getMinutes().toString().padStart(2, "0");
       const seconds = date.getSeconds().toString().padStart(2, "0");
+
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     } catch (e) {
       return dateString;
@@ -43,6 +46,7 @@ export default function BotonInforme({
         description: t("seleccioneEquipoCicloError"),
         position: "bottom-right",
       });
+
       return;
     }
 
@@ -83,8 +87,10 @@ export default function BotonInforme({
       if (!response.ok) {
         const errorText = await response.text();
         let detailedError = errorText;
+
         try {
           const errorJson = JSON.parse(errorText);
+
           detailedError = errorJson.detail || errorJson.message || errorText;
         } catch (e) {}
         throw new Error(
@@ -130,6 +136,7 @@ export default function BotonInforme({
 
       const logoWidth = 40;
       const logoHeight = 10;
+
       pdf.addImage(logoDataURL, "PNG", 252, 5, logoWidth, logoHeight);
       pdf.link(252, 4, 40, 12, {
         url: "https://creminox.com",
@@ -150,6 +157,7 @@ export default function BotonInforme({
         t("pdfHeaderNivelAgua"),
         t("pdfHeaderFechaRegistro"),
       ];
+
       jsonData.push(tableHeaders);
 
       const temperaturaAguaData = apiData["Temperatura agua"] || [];
@@ -173,6 +181,7 @@ export default function BotonInforme({
       );
 
       const allTimestamps = new Set<string>();
+
       temperaturaAguaData.forEach((item: any) =>
         allTimestamps.add(item.fechaRegistro),
       );
@@ -199,6 +208,7 @@ export default function BotonInforme({
           String(nivelAguaMap.get(ts) ?? ""),
           formatDateForTable(ts),
         ];
+
         jsonData.push(row);
       }
 
@@ -236,6 +246,7 @@ export default function BotonInforme({
 
         for (let col = 0; col < numCols; col++) {
           const x = margin + col * cellWidth;
+
           pdf.setFillColor(220, 220, 220); // Fondo gris claro para CADA celda de cabecera
           pdf.setTextColor(0, 0, 0); // Texto NEGRO para CADA celda de cabecera
           pdf.rect(x, tableStartY, cellWidth, cellHeight, "FD"); // 'FD' para rellenar y dibujar borde
@@ -278,6 +289,7 @@ export default function BotonInforme({
 
             for (let col = 0; col < numCols; col++) {
               const x = margin + col * cellWidth;
+
               pdf.setFillColor(220, 220, 220); // Fondo gris claro para CADA celda de cabecera
               pdf.setTextColor(0, 0, 0); // Texto NEGRO para CADA celda de cabecera
               pdf.rect(x, currentY, cellWidth, cellHeight, "FD"); // 'FD' para rellenar y dibujar borde
@@ -296,8 +308,10 @@ export default function BotonInforme({
 
           for (let col = 0; col < numCols; col++) {
             const x = margin + col * cellWidth;
+
             pdf.rect(x, currentY, cellWidth, cellHeight, "S");
             const cellValue = String(jsonData[rowIdx][col] || "");
+
             pdf.text(cellValue, x + textPadding, currentY + textYOffset, {
               maxWidth: textMaxWidth,
               align: "left",
@@ -322,6 +336,7 @@ export default function BotonInforme({
         error instanceof Error
           ? error.message
           : t("errorGenerarInformeDesconocido");
+
       toast.error(t("errorTitulo"), {
         description: errorMessage,
         position: "bottom-right",
@@ -331,10 +346,10 @@ export default function BotonInforme({
 
   return (
     <Button
-      radius="md"
-      color="primary"
-      variant="ghost"
       className={`text-primary ${selectClasses || "h-1/5"} min-w-[160px]`}
+      color="primary"
+      radius="md"
+      variant="ghost"
       onClick={handleInformeDownload}
     >
       <FaFilePdf style={{ marginRight: "8px" }} />

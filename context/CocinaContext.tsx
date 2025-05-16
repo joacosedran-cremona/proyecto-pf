@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
+
 import { useWebSocketContext } from "./WebSocketContext";
 
 interface CocinaInfo {
@@ -76,10 +77,12 @@ export const CocinaProvider = ({ children }: { children: React.ReactNode }) => {
 
 export function useCocinaContext() {
   const context = useContext(CocinaContext);
+
   if (!context) {
     throw new Error(
       "useCocinaContext debe ser usado dentro de un CocinaProvider",
     );
   }
+
   return context;
 }

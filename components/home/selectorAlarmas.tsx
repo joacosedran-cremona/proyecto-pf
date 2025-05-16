@@ -23,9 +23,7 @@ const Selector = ({ value = 1 }) => {
 
   return (
     <Select
-      radius="lg"
       disallowEmptySelection
-      selectedKeys={[value.toString()]}
       aria-label="Seleccionar equipo"
       classNames={{
         trigger: "bg-[#27272a] text-white h-[50px] rounded-lg",
@@ -33,18 +31,21 @@ const Selector = ({ value = 1 }) => {
         listbox: "bg-black text-white rounded-lg",
         base: "rounded-lg",
       }}
+      radius="lg"
       renderValue={(items) => {
         const selected = itemsList.find((i) => i.id === Number(items[0]?.key));
+
         return (
           <div className="text-white">{selected?.name || "Seleccionar"}</div>
         );
       }}
+      selectedKeys={[value.toString()]}
     >
       {itemsList.map((item) => (
         <SelectItem
           key={item.id.toString()}
-          value={item.id.toString()}
           className="text-white hover:bg-gray-800 rounded-lg mx-1 px-2"
+          value={item.id.toString()}
         >
           {item.name}
         </SelectItem>

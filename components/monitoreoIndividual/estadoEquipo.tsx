@@ -25,6 +25,7 @@ const EstadoEquipo: React.FC<EstadoEquipoProps> = ({
     if (displayData) {
       return displayData(value, unit);
     }
+
     return unit ? `${value} ${unit}` : value;
   };
 

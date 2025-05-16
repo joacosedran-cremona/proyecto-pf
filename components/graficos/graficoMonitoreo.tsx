@@ -3,7 +3,6 @@
 //React
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation"; // Agregar este import
-
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 //ChartJs
@@ -11,14 +10,14 @@ import { Chart, registerables, ChartConfiguration, Plugin } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 
 //Context y Funciones
-import { useLinea, type LineaId } from "@/context/LineaContext";
+import { useTranslation } from "react-i18next";
+
+import { useLinea } from "@/context/LineaContext";
 import { transformData } from "@/utils/logicaGraficosLinea";
 
 //HeroUI
-import { Button } from "@heroui/react";
 
 //Idioma
-import { useTranslation } from "react-i18next";
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -72,6 +71,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
 
   const handleClick = () => {
     const path = id <= 6 ? `/cocinas?id=${id}` : `/enfriadores?id=${id}`;
+
     router.push(path);
   };
 
@@ -79,6 +79,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
     if (!lineasData) {
       // Verificar si hay datos en caché
       const cachedData = localStorage.getItem(`equipo-${id}`);
+
       if (cachedData) {
         setHasCachedData(true);
         setLoading(false);
@@ -86,6 +87,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
         setHasCachedData(false);
         setLoading(true);
       }
+
       return;
     }
 
@@ -94,6 +96,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
 
     try {
       const image = new Image();
+
       image.src = "/creminox.png";
 
       const plugin: Plugin = {
@@ -102,6 +105,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
           if (image.complete) {
             const ctx = chart.ctx;
             const { top, left, width, height } = chart.chartArea;
+
             ctx.save();
             ctx.globalAlpha = 0.2;
 
@@ -130,6 +134,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
         }
 
         const ctx = chartRef.current.getContext("2d");
+
         if (ctx) {
           const config: ChartConfiguration<"line"> = {
             type: "line",
@@ -153,8 +158,10 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
                         0,
                         chartArea.top,
                       );
+
                       gradient.addColorStop(0, "rgba(255, 165, 0, 0)");
                       gradient.addColorStop(1, "rgba(255, 165, 0, 0.3)");
+
                       return gradient;
                     },
                   };
@@ -414,7 +421,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
           </div>
           <div className="text-sm leading-tight">
             <div>
-              <span className="font-semibold"></span> {equipo.receta}
+              <span className="font-semibold" /> {equipo.receta}
             </div>
             <div>
               <span className="font-semibold">{t("estado")}</span>{" "}

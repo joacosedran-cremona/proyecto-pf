@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+
 import { useWebSocketContext } from "@/context/WebSocketContext";
 
 interface InfoEquipo {
@@ -107,8 +108,10 @@ export const LineaProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useLinea = () => {
   const context = useContext(LineaContext);
+
   if (!context) {
     throw new Error("useLinea debe ser usado dentro de un LineaProvider");
   }
+
   return context;
 };

@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiMapPin } from "react-icons/fi";
 import { CiMail } from "react-icons/ci";
-import { FaFacebook, FaLinkedin } from "react-icons/fa";
 
 interface FooterOption {
   id: number;
@@ -43,8 +42,8 @@ const Footer: React.FC = () => {
               <Link
                 className="flex flex-row items-center h-[100%] gap-[10px]"
                 href={link}
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 {icono}
                 <p className="items-center text-white">{texto}</p>
@@ -57,15 +56,15 @@ const Footer: React.FC = () => {
           <Link
             className="flex w-auto h-[100%] p-[0px] justify-center items-center"
             href="https://creminox.com"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <Image
-              src="/creminox-logo.png"
               alt="Creminox logo"
               className="h-1/2 w-auto"
-              width={2000}
               height={2000}
+              src="/creminox-logo.png"
+              width={2000}
             />
           </Link>
         </div>
@@ -79,8 +78,8 @@ const Footer: React.FC = () => {
               <Link
                 className="flex flex-row items-center h-[100%] gap-[15px]"
                 href={link}
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 <p className="items-center text-white">{texto}</p>
                 {icono}

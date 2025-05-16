@@ -1,9 +1,10 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 import { useLinea } from "@/context/LineaContext";
 import GraficoMonitoreo from "@/components/graficos/graficoMonitoreo";
 import Selector from "@/components/selectores/selectorLineas";
-import { useTranslation } from "react-i18next";
 
 const lineas = {
   1: { cocinas: [1, 2, 3], enfriadores: [7, 8, 9, 10] },

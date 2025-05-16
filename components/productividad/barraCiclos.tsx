@@ -26,21 +26,21 @@ const BarraCiclos: React.FC<BarraCiclosProps> = ({
         <div
           className="h-[100%] bg-green"
           style={{ width: `${porcentajeCorrectos}%` }}
-        ></div>
+        />
         <div
           className="h-[100%] bg-red"
           style={{ width: `${porcentajeIncorrectos}%` }}
-        ></div>
+        />
       </div>
       <div className="flex justify-around flex-wrap">
         <div className="flex items-center my-[5px] mx-[10px]">
-          <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-green"></span>
+          <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-green" />
           <p className="text-white">
             {`${t("barraCiclos.correctos")} - ${porcentajeCorrectos}% [${ciclosCorrectos} ${t("barraCiclos.ciclos")}]`}
           </p>
         </div>
         <div className="flex items-center my-[5px] mx-[10px]">
-          <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-red"></span>
+          <span className="w-[15px] h-[15px] rounded-[3px] mr-[5px] bg-red" />
           <p className="text-white">
             {`${t("barraCiclos.incorrectos")} - ${porcentajeIncorrectos}% [${ciclosIncorrectos} ${t("barraCiclos.ciclos")}]`}
           </p>

@@ -6,5 +6,6 @@ export const displayData = (
 ): string | number | boolean => {
   if (data === "N/A" || data === null) return "N/A";
   if (typeof data === "boolean") return data ? "True" : "False";
+
   return unit ? `${data} ${unit}` : data;
 };

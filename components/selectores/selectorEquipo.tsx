@@ -52,23 +52,25 @@ const Selector: React.FC<SelectorProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = e.target.value;
+
     setSelectedEquipo(selectedId);
     const equipo = equipoList.find((eq) => eq.id === selectedId);
+
     onEquipoChange(equipo?.value ?? 30);
   };
 
   return (
     <select
+      className={`${selectClasses || "bg-[#0001] h-[100%] w-[100%] px-[20px] border-b-2 border-white focus:border-white focus:outline-none text-lg text-white hover:text-white transition-colors cursor-pointer"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+      disabled={disabled}
       value={selectedEquipo}
       onChange={handleChange}
-      disabled={disabled}
-      className={`${selectClasses || "bg-[#0001] h-[100%] w-[100%] px-[20px] border-b-2 border-white focus:border-white focus:outline-none text-lg text-white hover:text-white transition-colors cursor-pointer"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
     >
       {equipoList.map((equipo) => (
         <option
           key={equipo.id}
-          value={equipo.id}
           className="p-[2px] text-white hover:text-white bg-black font-bold"
+          value={equipo.id}
         >
           {equipo.name}
         </option>

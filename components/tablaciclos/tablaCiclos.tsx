@@ -64,6 +64,7 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
             position: "bottom-right",
             id: `no-data-${fechaInicio}-${fechaFin}-${equipo}`, // Unique ID based on parameters
           });
+
           return null;
         }
 
@@ -102,10 +103,12 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
     <div className="max-h-[600px] overflow-y-auto overflow-x-hidden">
       <Table
         aria-label="Tabla de ciclos"
-        selectionMode="single"
+        className="min-w-[600px] bg-black/50 backdrop-blur-sm text-white"
         selectedKeys={selectedKeys}
+        selectionMode="single"
         onSelectionChange={(keys) => {
           const selection = new Set(keys);
+
           setSelectedKeys(selection);
 
           const selectedId = Array.from(selection)[0];
@@ -121,7 +124,6 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
             onCicloSelect(cicloSeleccionado);
           }
         }}
-        className="min-w-[600px] bg-black/50 backdrop-blur-sm text-white"
       >
         <TableHeader>
           <TableColumn>ID</TableColumn>

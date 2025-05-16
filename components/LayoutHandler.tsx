@@ -1,9 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
+
 import Navbar from "@/components/header_Footer/navbar";
 import Footer from "@/components/header_Footer/footer";
-import clsx from "clsx";
 
 function LayoutHandler({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

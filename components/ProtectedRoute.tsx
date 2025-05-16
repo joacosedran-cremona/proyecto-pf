@@ -13,6 +13,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   useEffect(() => {
     const checkAuth = (): void => {
       const access = sessionStorage.getItem("access");
+
       if (!access || access !== "permitido") {
         router.push("/login");
       }
@@ -21,6 +22,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     checkAuth();
 
     window.addEventListener("popstate", checkAuth);
+
     return () => window.removeEventListener("popstate", checkAuth);
   }, [router]);
 

@@ -1,6 +1,6 @@
 import { DateRangePicker } from "@heroui/react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface DatePickerProps {
   selectClasses?: string;
@@ -30,6 +30,7 @@ export default function DatePicker({
 
   const formatToYYYYMMDD = (date: Date | null): string | null => {
     if (!date) return null;
+
     return date.toISOString().split("T")[0];
   };
 
@@ -40,11 +41,13 @@ export default function DatePicker({
 
       if (startDate && isNaN(startDate.getTime())) {
         console.error("Invalid start date");
+
         return;
       }
 
       if (endDate && isNaN(endDate.getTime())) {
         console.error("Invalid end date");
+
         return;
       }
 
@@ -64,7 +67,6 @@ export default function DatePicker({
   return (
     <div className={selectClasses}>
       <DateRangePicker
-        size="lg"
         aria-label="Seleccionar rango de fechas"
         calendarProps={{
           classNames: {
@@ -81,8 +83,9 @@ export default function DatePicker({
             ],
           },
         }}
-        placeholder={t("fecha")}
         className={selectClasses}
+        placeholder={t("fecha")}
+        size="lg"
         value={dateRange}
         onChange={(range) => handleDateChange(range)}
       />

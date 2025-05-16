@@ -15,10 +15,10 @@ export default function BotonAplicar({
 
   return (
     <Button
-      radius="md"
-      color="default"
-      variant="ghost"
       className={`${selectClasses} min-w-[50px] min-h-[50px]`}
+      color="default"
+      radius="md"
+      variant="ghost"
       onClick={onClick}
     >
       <FaSearch style={{ color: "grey" }} />

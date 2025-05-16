@@ -4,8 +4,9 @@ import zoomPlugin from "chartjs-plugin-zoom";
 import { Button, Spinner } from "@heroui/react";
 import "chartjs-adapter-date-fns";
 import { es } from "date-fns/locale";
-import TablaCiclos from "@/components/tablaciclos/tablaCiclos";
 import { useTranslation } from "react-i18next";
+
+import TablaCiclos from "@/components/tablaciclos/tablaCiclos";
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -33,6 +34,7 @@ const getEquipmentName = (type: string, id: number): string => {
 
   // Determinar la línea
   let linea = "L1";
+
   if (
     (type === "cocinas" && id > 3) ||
     (type === "enfriadores" && adjustedId > 4)
@@ -42,6 +44,7 @@ const getEquipmentName = (type: string, id: number): string => {
 
   // Construir el nombre del equipo directamente sin usar el mapeo
   const equipmentType = type === "cocinas" ? "Cocina" : "Enfriador";
+
   return `${equipmentType} ${adjustedId}-${linea}`;
 };
 
@@ -139,6 +142,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
         // Si no hay ciclo seleccionado, no hacer la petición
         if (externalSelectedCicloId === null) {
           setIsLoading(false);
+
           return;
         }
 
@@ -149,6 +153,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
         const url = `http://${host}:${port}/historico-graficos/${equipmentName}/${externalSelectedCicloId}`;
 
         const response = await fetch(url);
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -161,6 +166,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
           if (onTableClose) {
             onTableClose();
           }
+
           return; // Termina la ejecución si no hay datos
         }
 
@@ -183,6 +189,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
         if (isMounted) setIsLoading(false);
       }
     };
+
     fetchData();
 
     return () => {
@@ -195,6 +202,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
     if (!data || !chartRef.current) return;
 
     const ctx = chartRef.current.getContext("2d");
+
     if (!ctx) return;
 
     if (chartInstanceRef.current) {
@@ -203,6 +211,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
 
     // Agregar el plugin de la imagen de fondo
     const image = new Image();
+
     image.src = "/creminox.png";
 
     const plugin: Plugin = {
@@ -211,6 +220,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
         if (image.complete) {
           const ctx = chart.ctx;
           const { top, left, width, height } = chart.chartArea;
+
           ctx.save();
           ctx.globalAlpha = 0.1;
 
@@ -283,8 +293,10 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
                 0,
                 chartArea.top,
               );
+
               gradient.addColorStop(0, "rgba(255, 165, 0, 0)");
               gradient.addColorStop(1, "rgba(255, 165, 0, 0.3)");
+
               return gradient;
             },
             fill: true, // Activar el relleno para el nivel de agua
@@ -442,6 +454,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
 
   const formatDate = (date: string) => {
     const d = new Date(date);
+
     return d.toLocaleDateString("es-ES", {
       year: "numeric",
       month: "2-digit",
@@ -451,6 +464,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
 
   const formatTime = (date: string) => {
     const d = new Date(date);
+
     return d.toLocaleTimeString("es-ES", {
       hour: "2-digit",
       minute: "2-digit",
@@ -478,16 +492,16 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
       {/* Botones de control */}
       <div className="absolute top-[35px] right-[35px] flex gap-[20px] z-[20px] pdf-ignore">
         <Button
-          onClick={() => setShowTable(!showTable)}
           className="text-white bg-grey/100 hover:bg-lightGrey/25 px-[10px] py-[20px] rounded-md backdrop-blur-sm border border-grey/50"
+          onClick={() => setShowTable(!showTable)}
         >
           {showTable
             ? t("graficoHistorico.botonCiclos")
             : t("graficoHistorico.botonCiclos")}
         </Button>
         <Button
-          onClick={resetZoom}
           className="text-white bg-grey/100 hover:bg-lightGrey/25 px-[10px] py-[20px] rounded-md backdrop-blur-sm border border-grey/50"
+          onClick={resetZoom}
         >
           {t("graficoHistorico.botonZoom")}
         </Button>
@@ -599,7 +613,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
 
       {/* Gráfico y Tabla */}
       <div className="relative w-[100%] h-[calc(100%)]">
-        <canvas ref={chartRef}></canvas>
+        <canvas ref={chartRef} />
 
         {(showTable || showTableOnLoad) &&
           !error &&
@@ -613,11 +627,10 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
               />
               <div className="relative z-20 bg-black/80 p-[4px] rounded-lg border border-gray-700">
                 <TablaCiclos
-                  fechaInicio={startDate || "2000-01-01"}
-                  fechaFin={endDate || "2100-01-01"}
                   equipo={getEquipmentName(contextType, id)}
+                  fechaFin={endDate || "2100-01-01"}
+                  fechaInicio={startDate || "2000-01-01"}
                   selectedCicloId={internalSelectedCicloId}
-                  onTableClose={handleTableClose} // Pasar la función
                   onCicloSelect={(ciclo) => {
                     if (ciclo && ciclo.id_ciclo) {
                       setInternalSelectedCicloId(ciclo.id_ciclo);
@@ -627,6 +640,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
                       handleTableClose();
                     }
                   }}
+                  onTableClose={handleTableClose} // Pasar la función
                 />
               </div>
             </div>
@@ -635,4 +649,5 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
     </div>
   );
 };
+
 export default GraficoHistorico;

@@ -1,7 +1,9 @@
 import "@/styles/globals.css";
-import { Providers } from "./providers";
-import { siteConfig } from "@/config/site";
 import { cookies } from "next/headers";
+
+import { Providers } from "./providers";
+
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: {
@@ -23,7 +25,7 @@ export default async function RootLayout({
   const initialLanguage = cookieStore.get("selectedLanguage")?.value || "es";
 
   return (
-    <html className="dark" suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning className="dark" lang="en">
       <head />
       <body
         className={

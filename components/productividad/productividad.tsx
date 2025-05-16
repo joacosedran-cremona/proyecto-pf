@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
+
 import Metrics from "./metrica";
 import BarraProductos from "./barraProductos";
 import BarraCiclos from "./barraCiclos";
 import FiltroPeriodo from "./filtroPeriodo";
-import { toast } from "sonner";
 
 interface ProductoRealizado {
   NombreProducto: string;
@@ -51,6 +52,7 @@ interface FilterData {
 const Productividad = () => {
   const today = new Date().toISOString().split("T")[0];
   const lastWeek = new Date();
+
   lastWeek.setDate(lastWeek.getDate() - 7);
   const lastWeekFormatted = lastWeek.toISOString().split("T")[0];
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -92,6 +94,7 @@ const Productividad = () => {
 
       const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost";
       const port = process.env.NEXT_PUBLIC_WS_PORT || "8000";
+
       console.log(
         "Consultando API con fechas:",
         formattedStartDate,
@@ -101,8 +104,10 @@ const Productividad = () => {
       const url = `http://${host}:${port}/historico-productividad/${dato}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`;
 
       const response = await fetch(url);
+
       if (!response.ok) {
         const errorText = await response.text();
+
         console.error("Server response:", errorText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -125,6 +130,7 @@ const Productividad = () => {
             "No existen reportes de productividad en el lapso de las fechas indicadas.",
           );
         }
+
         return;
       }
 
@@ -162,8 +168,8 @@ const Productividad = () => {
       <div className="bg-black p-[20px] w-4/5 rounded-md">
         <Metrics
           ciclosRealizados={data.ciclosRealizados}
-          produccionTotal={data.produccionTotal}
           dateRange={dateRange}
+          produccionTotal={data.produccionTotal}
         />
         <hr className="my-[20px] border-[2px]" />
         <BarraProductos data={data} />

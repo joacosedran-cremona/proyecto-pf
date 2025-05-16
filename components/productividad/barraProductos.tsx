@@ -26,15 +26,18 @@ const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
   const generarColorAleatorio = (): string => {
     const letras = "23456789ABCDE";
     let color = "#";
+
     for (let i = 0; i < 6; i++) {
       color += letras[Math.floor(Math.random() * 13)];
     }
+
     return color;
   };
 
   const productos = data.ProductosRealizados.map((producto) => {
     // Calcular el porcentaje usando la producción total en kg
     const porcentaje = (producto.pesoTotal * 100) / produccionTotalEnKg;
+
     return {
       nombre: producto.NombreProducto,
       peso: producto.pesoTotal + "kg",
@@ -72,7 +75,7 @@ const BarraProductos: React.FC<ProductBarProps> = ({ data }) => {
             <span
               className="w-[15px] h-[15px] rounded-[3px] mr-[5px]"
               style={{ backgroundColor: producto.color }}
-            ></span>
+            />
             <p className="text-white">{`${producto.nombre} - ${producto.porcentaje}% (${producto.peso})`}</p>
           </div>
         ))}

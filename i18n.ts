@@ -3,31 +3,22 @@ import { initReactI18next } from "react-i18next";
 
 import esHeader from "./locales/es/header.json";
 import enHeader from "./locales/en/header.json";
-
 import esLayout from "./locales/es/layout.json";
 import enLayout from "./locales/en/layout.json";
-
 import esMonitoreo from "./locales/es/monitoreo.json";
 import enMonitoreo from "./locales/en/monitoreo.json";
-
 import esGrafico from "./locales/es/grafico.json";
 import enGrafico from "./locales/en/grafico.json";
-
 import esSelectores from "./locales/es/selectores.json";
 import enSelectores from "./locales/en/selectores.json";
-
 import esBotones from "./locales/es/botones.json";
 import enBotones from "./locales/en/botones.json";
-
 import esHistAlert from "./locales/es/hist_alert_tit.json";
 import enHistAlert from "./locales/en/hist_alert_tit.json";
-
 import esTabla from "./locales/es/tabla.json";
 import enTabla from "./locales/en/tabla.json";
-
 import esProductividad from "./locales/es/productividad.json";
 import enProductividad from "./locales/en/productividad.json";
-
 import esLogin from "./locales/es/login.json";
 import enLogin from "./locales/en/login.json";
 

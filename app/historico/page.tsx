@@ -1,17 +1,19 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 import GraficoHistorico from "@/components/graficos/graficoHistorico";
 import Productividad from "@/components/productividad/productividad";
 import Selector from "@/components/selectores/selectorHistorico";
 import DatePicker from "@/ui/datePicker";
 import BotonInforme from "@/components/botones/botonInforme";
 import BotonAplicar from "@/components/botones/botonAplicar";
-import { useTranslation } from "react-i18next";
 
 function getEquipmentDisplayName(id: number, type: "cocina" | "enfriador") {
   // Determinar el sufijo L1/L2 correctamente
   let linea = "L1";
+
   if ((type === "cocina" && id > 3) || (type === "enfriador" && id > 10)) {
     linea = "L2";
   }
@@ -68,6 +70,7 @@ export default function Historico() {
 
       // Determinar el sufijo L1/L2 correctamente
       let linea = "L1";
+
       if (
         (equipmentType === "cocina" && tempSelectedValue > 3) ||
         (equipmentType === "enfriador" && tempSelectedValue > 10)
@@ -93,10 +96,12 @@ export default function Historico() {
 
       if (response.ok) {
         const data = await response.json();
+
         if (data && data.length > 0) {
           const lastCiclo = data.reduce((max: any, ciclo: any) =>
             ciclo.id_ciclo > max.id_ciclo ? ciclo : max,
           );
+
           setSelectedCicloId(lastCiclo.id_ciclo);
           setSelectedId(tempSelectedValue);
           setSelectedType(equipmentType);
@@ -159,9 +164,9 @@ export default function Historico() {
       <div className="flex flex-row items-center justify-between bg-black p-[8px] w-[100%] rounded-md">
         <div className="flex gap-[10px] ml-[10px]">
           <BotonInforme
-            selectClasses="min-h-[40px]"
-            equipo={getEquipmentDisplayName(selectedId, selectedType)}
             cicloId={selectedCicloId}
+            equipo={getEquipmentDisplayName(selectedId, selectedType)}
+            selectClasses="min-h-[40px]"
           />
         </div>
 
@@ -174,9 +179,9 @@ export default function Historico() {
 
         <div className="flex gap-[5px] items-center pr-[10px]">
           <Selector
+            selectClasses="text-white hover:bg-gray-700"
             value={tempSelectedValue}
             onChange={handleChange}
-            selectClasses="text-white hover:bg-gray-700"
           />
           <DatePicker onDateChange={handleDateChange} />
           <BotonAplicar
@@ -189,13 +194,13 @@ export default function Historico() {
       <div className="w-[100%] h-[80vh]">
         <GraficoHistorico
           contextType={selectedType === "cocina" ? "cocinas" : "enfriadores"}
-          id={selectedId}
-          startDate={tempDateRange.startDate}
           endDate={tempDateRange.endDate}
-          showTableOnLoad={!showGraphic} // Cambiado para que se sincronice con el estado
-          onTableClose={() => setShowGraphic(true)}
-          onCicloSelect={handleCicloSelect}
+          id={selectedId}
           selectedCicloId={selectedCicloId}
+          showTableOnLoad={!showGraphic} // Cambiado para que se sincronice con el estado
+          startDate={tempDateRange.startDate}
+          onCicloSelect={handleCicloSelect}
+          onTableClose={() => setShowGraphic(true)}
         />
       </div>
       <div className="w-[100%] h-auto">

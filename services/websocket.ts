@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
+
 import { WS_CONFIG } from "@/config/websocket";
 
 export default function useWebSocket(pollId: string) {
@@ -19,6 +20,7 @@ export default function useWebSocket(pollId: string) {
 
       const wsUrl = `ws://${WS_CONFIG.HOST}:${WS_CONFIG.PORT}/ws/${pollId}`;
       const socket = new WebSocket(wsUrl);
+
       socketRef.current = socket;
 
       socket.onopen = () => {
@@ -30,6 +32,7 @@ export default function useWebSocket(pollId: string) {
       socket.onmessage = (event) => {
         try {
           const message = JSON.parse(event.data);
+
           setData(message);
         } catch (err) {
           setError("Error al procesar el mensaje recibido");

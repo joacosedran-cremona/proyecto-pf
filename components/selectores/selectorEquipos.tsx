@@ -46,6 +46,7 @@ export default function Selector({
 
   return (
     <select
+      className={selectClasses}
       value={validValue}
       onChange={(e) => {
         const newValue = parseInt(e.target.value);
@@ -56,13 +57,12 @@ export default function Selector({
           onChange(newValue);
         }
       }}
-      className={selectClasses}
     >
       {options.map((option) => (
         <option
           key={option.value}
-          value={option.value}
           className={optionClasses}
+          value={option.value}
         >
           {option.label}
         </option>

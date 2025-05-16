@@ -8,15 +8,16 @@ import { Chart, registerables, ChartConfiguration, Plugin } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 
 //Context y Funciones
+import { Button } from "@heroui/react";
+import { useTranslation } from "react-i18next";
+
 import { useWebSocketContext } from "@/context/WebSocketContext";
 import { transformData } from "@/utils/logicaGraficos";
 import { clearStoredData } from "@/utils/logicaGraficos";
 
 //HeroUI
-import { Button } from "@heroui/react";
 
 //Idioma
-import { useTranslation } from "react-i18next";
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -61,6 +62,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
     if (!data || !isConnected) {
       // Verificar si hay datos en caché
       const cachedData = localStorage.getItem(`equipo-${currentId}`);
+
       if (cachedData) {
         setHasCachedData(true);
         setLoading(false);
@@ -68,6 +70,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
         setHasCachedData(false);
         setLoading(true);
       }
+
       return;
     }
 
@@ -76,6 +79,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
 
     try {
       const image = new Image();
+
       image.src = "/creminox.png";
 
       const plugin: Plugin = {
@@ -84,6 +88,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
           if (image.complete) {
             const ctx = chart.ctx;
             const { top, left, width, height } = chart.chartArea;
+
             ctx.save();
             ctx.globalAlpha = 0.2;
 
@@ -104,6 +109,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
         id: "endPointLabels",
         afterDraw: (chart: Chart, args, opts) => {
           const ctx = chart.ctx;
+
           ctx.save();
 
           // Array para almacenar las posiciones de las etiquetas
@@ -118,6 +124,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
           // Primera pasada: recopilar dimensiones
           chart.data.datasets.forEach((dataset, i) => {
             const meta = chart.getDatasetMeta(i);
+
             if (!meta.hidden && dataset.data.length > 0) {
               const lastPoint = meta.data[meta.data.length - 1];
               const value = dataset.data[dataset.data.length - 1] as {
@@ -174,6 +181,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
               if (horizontalOverlap && verticalOverlap) {
                 // Mover la etiqueta actual hacia abajo lo suficiente para evitar solapamiento
                 const offset = previous.y + previous.height + 2;
+
                 current.y = offset;
 
                 // Reiniciar la verificación con la nueva posición
@@ -246,6 +254,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
         }
 
         const ctx = chartRef.current.getContext("2d");
+
         if (ctx) {
           // Modificar los datasets para añadir el gradient fill solo al nivel de agua
           const modifiedDatasets = chartData.datasets.map((dataset) => {
@@ -267,8 +276,10 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
                     0,
                     chartArea.top,
                   );
+
                   gradient.addColorStop(0, "rgba(255, 165, 0, 0)");
                   gradient.addColorStop(1, "rgba(255, 165, 0, 0.3)");
+
                   return gradient;
                 },
               };
@@ -556,10 +567,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
 
   return (
     <div className="bg-black p-[20px] h-[100%] w-[100%] rounded-md relative">
-      <canvas
-        ref={chartRef}
-        className="block w-[100%] h-[100%] max-h-screen"
-      ></canvas>
+      <canvas ref={chartRef} className="block w-[100%] h-[100%] max-h-screen" />
       {loading && !hasCachedData && (
         <div className="flex absolute items-center justify-center h-[100%] w-[100%]">
           <div className="text-center">
@@ -569,6 +577,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
         </div>
       )}
       <Button
+        className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-[3px] rounded-md"
         style={{
           backgroundColor: "#333",
           border: "1px solid #CCC",
@@ -581,7 +590,6 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
           fontSize: "17px",
         }}
         onClick={resetZoom}
-        className="absolute top-[20px] right-[20px] text-white bg-grey hover:text-black hover:bg-lightGrey px-[3px] rounded-md"
       >
         {t("reiniciarZoom")}
       </Button>
