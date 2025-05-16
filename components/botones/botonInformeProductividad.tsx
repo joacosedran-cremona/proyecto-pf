@@ -120,7 +120,7 @@ export default function BotonInformeProductividad({
           const errorJson = JSON.parse(errorText);
 
           detailedError = errorJson.detail || errorJson.message || errorText;
-        } catch (e) {}
+        } catch {}
         throw new Error(
           t(
             "error.apiProductividad",
@@ -388,13 +388,6 @@ export default function BotonInformeProductividad({
         position: "bottom-right",
       });
     } catch (error) {
-      console.error(
-        t(
-          "errorGenerarInformeConsola",
-          "Error al generar informe de productividad:",
-        ),
-        error,
-      );
       const errorMessage =
         error instanceof Error
           ? error.message

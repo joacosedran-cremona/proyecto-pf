@@ -6,7 +6,6 @@ import { Image } from "@heroui/image";
 import Link from "next/link";
 import { Tooltip } from "@heroui/tooltip";
 
-import { useWebSocketContext } from "@/context/WebSocketContext";
 import { useCocinaContext } from "@/context/CocinaContext";
 import { useEnfriadorContext } from "@/context/EnfriadorContext";
 
@@ -20,39 +19,12 @@ interface Equipo {
   tiempoTranscurrido: string;
 }
 
-interface Linea {
-  id: number;
-  equipos: Equipo[];
-}
-
-interface EquiposData {
-  lineas: Linea[];
-}
-
 interface Section {
   id: number;
   name: string;
   key: string;
   path: string;
   style: React.CSSProperties;
-}
-
-interface LayoutTranslations {
-  titulo: string;
-  subtitulo: string;
-  datos: {
-    tempAgua: string;
-    tempIng: string;
-    receta: string;
-    tiempo: string;
-  };
-  equipos: {
-    [key: string]: string;
-  };
-  tooltip: {
-    cocina: string;
-    enfriador: string;
-  };
 }
 
 const h = "25%";
@@ -106,7 +78,6 @@ function getEstadoColor(estado: string): string {
 
 export function ImagenLayout() {
   const { t } = useTranslation("layout");
-  const { isConnected } = useWebSocketContext();
   const { cocinas } = useCocinaContext();
   const { enfriadores } = useEnfriadorContext();
 
@@ -206,11 +177,6 @@ export function ImagenLayout() {
         {sections.map((section) => {
           const equipo = getEquipoData(section);
 
-          console.log(`Renderizando sección ${section.key}:`, {
-            section,
-            equipoEncontrado: equipo,
-          });
-
           const equipoNum = section.id;
           const href = `${section.path}?id=${equipoNum}`;
           const recuadroStyle: React.CSSProperties = {
@@ -223,16 +189,21 @@ export function ImagenLayout() {
             tipoEquipo === "cocina" ? "cocinas" : "enfriadores"
           ].find((conf) => conf.key === section.key);
 
-          let numeroMostrado = sectionConfigItem?.id || "1";
-
-          if (tipoEquipo === "enfriador") {
-            numeroMostrado = (sectionConfigItem?.id || 0) - 6;
-          }
-
           const lineaEquipo = sectionConfigItem?.line || "1";
 
           return (
-            <Link key={section.id} className="z-999" href={href}>
+            <Link
+              key={section.id}
+              className="z-999"
+              href={href}
+              onClick={() => {
+                if (tipoEquipo === "cocina") {
+                  localStorage.setItem("lastCocinaId", String(section.id));
+                } else {
+                  localStorage.setItem("lastEnfriadorId", String(section.id));
+                }
+              }}
+            >
               <Tooltip
                 content={t(`tooltip.${tipoEquipo}`, {
                   number: tipoEquipo === "cocina" ? section.id : section.id - 6,
@@ -256,17 +227,7 @@ export function ImagenLayout() {
                     ...recuadroStyle,
                     color: "white",
                     fontFamily: "sans-serif",
-                    textShadow: "1px 1px 2px rgba(0,0,0,0.8)", // emula contorno
-                  }}
-                  onClick={() => {
-                    if (tipoEquipo === "cocina") {
-                      localStorage.setItem("lastCocinaId", String(section.id));
-                    } else {
-                      localStorage.setItem(
-                        "lastEnfriadorId",
-                        String(section.id),
-                      );
-                    }
+                    textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
                   }}
                 >
                   {equipo && (

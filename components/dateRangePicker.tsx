@@ -40,14 +40,10 @@ export default function DatePicker({
       const endDate = convertToDate(range?.end);
 
       if (startDate && isNaN(startDate.getTime())) {
-        console.error("Invalid start date");
-
         return;
       }
 
       if (endDate && isNaN(endDate.getTime())) {
-        console.error("Invalid end date");
-
         return;
       }
 
@@ -59,9 +55,7 @@ export default function DatePicker({
       if (onDateChange) {
         onDateChange(formattedStart, formattedEnd);
       }
-    } catch (error) {
-      console.error("Error processing dates:", error);
-    }
+    } catch {}
   };
 
   return (

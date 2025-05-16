@@ -61,7 +61,6 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
   }, [selectedLinea, selectedEquipo]);
 
   const handleDateChange = (start: string | null, end: string | null) => {
-    console.log("Nuevas fechas seleccionadas:", start, end);
     setStartDate(start);
     setEndDate(end);
   };
@@ -80,8 +79,6 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
 
   const handleApply = () => {
     if (!startDate || !endDate) return;
-
-    console.log("Aplicando filtros con fechas:", startDate, endDate);
 
     onApplyFilters({
       startDate,

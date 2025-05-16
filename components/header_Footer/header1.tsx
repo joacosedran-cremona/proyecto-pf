@@ -57,7 +57,7 @@ const Header1: React.FC<Header1Props> = ({ currentPath }) => {
   return (
     <nav className="fixed top-[0px] left-[0px] right-[0px] z-[950] flex flex-row w-[100%] p-[20px] h-[65px] bg-[#EEE]">
       <div className="flex flex-row h-[100%] w-[30%] justify-start gap-[30px]">
-        {opcionesIconos.map(({ id, url, icon }) => (
+        {opcionesIconos.map(({ id, icon }) => (
           <div key={id}>{icon}</div>
         ))}
       </div>

@@ -68,7 +68,6 @@ export default function BotonExcel({
         position: "bottom-right",
       });
     } catch (error) {
-      console.error("Error al descargar el archivo Excel:", error);
       toast.error("Error", {
         description:
           error instanceof Error

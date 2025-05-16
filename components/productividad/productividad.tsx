@@ -95,22 +95,9 @@ const Productividad = () => {
       const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost";
       const port = process.env.NEXT_PUBLIC_WS_PORT || "8000";
 
-      console.log(
-        "Consultando API con fechas:",
-        formattedStartDate,
-        formattedEndDate,
-      );
-
       const url = `http://${host}:${port}/historico-productividad/${dato}?fecha_inicio=${formattedStartDate}&fecha_fin=${formattedEndDate}`;
 
       const response = await fetch(url);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-
-        console.error("Server response:", errorText);
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
 
       const apiData: ApiResponse = await response.json();
 
@@ -152,9 +139,7 @@ const Productividad = () => {
         end: formattedEndDate,
       });
     } catch (error) {
-      console.error("Error fetching data:", error);
       if (error instanceof Error) {
-        console.error("Error details:", error.message);
         // Only show toast error if this is a user-initiated action
         if (filterData.isUserInitiated) {
           toast.error("Error al obtener los datos de productividad");

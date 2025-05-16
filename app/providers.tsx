@@ -32,11 +32,7 @@ declare module "@react-types/shared" {
   }
 }
 
-export function Providers({
-  initialLanguage,
-  children,
-  themeProps,
-}: ProvidersProps) {
+export function Providers({ initialLanguage, children }: ProvidersProps) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 

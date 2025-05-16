@@ -148,9 +148,7 @@ export const transformData = (
   // Guardar en localStorage
   try {
     localStorage.setItem(`equipo-${id}`, JSON.stringify(chartData));
-  } catch (error) {
-    console.warn("Error al guardar datos en localStorage:", error);
-  }
+  } catch {}
 
   return chartData;
 };

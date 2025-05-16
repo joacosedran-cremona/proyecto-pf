@@ -4,11 +4,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation"; // Agregar este import
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-
 //ChartJs
 import { Chart, registerables, ChartConfiguration, Plugin } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
-
 //Context y Funciones
 import { useTranslation } from "react-i18next";
 
@@ -337,16 +335,10 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
         }
       }
       setLoading(false);
-    } catch (error) {
+    } catch {
       setLoading(true);
     }
   }, [lineasData, lineaSeleccionada, id, t, isFirstLoad]);
-
-  const resetZoom = () => {
-    if (chartInstanceRef.current) {
-      chartInstanceRef.current.resetZoom();
-    }
-  };
 
   // Buscar el equipo en los datos de la línea seleccionada
   const equipos = lineasData?.[lineaSeleccionada]?.[contextType] || [];
@@ -406,7 +398,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
   }
 
   return (
-    <div
+    <button
       className="bg-black p-[6px] h-[100%] w-[100%] rounded-md relative text-white cursor-pointer hover:bg-black/80 transition-colors"
       onClick={handleClick}
     >
@@ -461,7 +453,7 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
           </div>
         </div>
       )}
-    </div>
+    </button>
   );
 };
 

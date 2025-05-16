@@ -14,11 +14,7 @@ import SectorIO from "./monitoreoIndividual/sectorIO";
 // Funciones
 import { getColorClass } from "@/utils/logicaColores";
 import { displayData } from "@/utils/displayData";
-
-// Idioma
-
 // Contextos y navegación
-
 import { useCocinaContext } from "@/context/CocinaContext";
 import { useEnfriadorContext } from "@/context/EnfriadorContext";
 import { SectorIOType } from "@/types/sectorIO";

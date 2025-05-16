@@ -35,7 +35,7 @@ export default function BotonInforme({
       const seconds = date.getSeconds().toString().padStart(2, "0");
 
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    } catch (e) {
+    } catch {
       return dateString;
     }
   };
@@ -92,7 +92,7 @@ export default function BotonInforme({
           const errorJson = JSON.parse(errorText);
 
           detailedError = errorJson.detail || errorJson.message || errorText;
-        } catch (e) {}
+        } catch {}
         throw new Error(
           t("apiError", { status: response.status, error: detailedError }),
         );
@@ -331,7 +331,6 @@ export default function BotonInforme({
         position: "bottom-right",
       });
     } catch (error) {
-      console.error(t("errorGenerarInformeConsola"), error);
       const errorMessage =
         error instanceof Error
           ? error.message

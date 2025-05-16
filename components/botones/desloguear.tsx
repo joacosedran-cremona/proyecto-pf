@@ -5,10 +5,10 @@ import { VscAccount } from "react-icons/vsc";
 import { useTranslation } from "react-i18next";
 
 interface DesloguearProps {
-  username?: string;
+  _username?: string;
 }
 
-const Desloguear: React.FC<DesloguearProps> = ({ username = "Usuario" }) => {
+const Desloguear: React.FC<DesloguearProps> = ({ _username = "Usuario" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("header");

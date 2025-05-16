@@ -2,11 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
-
 //ChartJs
 import { Chart, registerables, ChartConfiguration, Plugin } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
-
 //Context y Funciones
 import { Button } from "@heroui/react";
 import { useTranslation } from "react-i18next";
@@ -107,7 +105,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
 
       const endPointLabelsPlugin: Plugin = {
         id: "endPointLabels",
-        afterDraw: (chart: Chart, args, opts) => {
+        afterDraw: (chart: Chart, _args, _opts) => {
           const ctx = chart.ctx;
 
           ctx.save();
@@ -480,7 +478,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
         }
       }
       setLoading(false);
-    } catch (error) {
+    } catch {
       setLoading(true);
     }
   }, [data, isConnected, currentId, contextType, t, isFirstLoad]);

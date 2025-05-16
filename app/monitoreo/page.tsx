@@ -17,7 +17,7 @@ const Monitoreo = () => {
   const linea = lineas[lineaSeleccionada as keyof typeof lineas];
 
   // Verificar que realmente tenemos datos
-  const hasRealData =
+  const _hasRealData =
     lineasData &&
     lineasData[lineaSeleccionada]?.cocinas?.length > 0 &&
     lineasData[lineaSeleccionada]?.enfriadores?.length > 0;

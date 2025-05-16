@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Select, SelectItem } from "@heroui/react";
 
 interface SelectorProps {
@@ -15,8 +14,7 @@ const Selector: React.FC<SelectorProps> = ({
   onChange,
   selectClasses,
 }) => {
-  const { t } = useTranslation("selectores");
-  const [internalValue, setInternalValue] = React.useState<number>(value);
+  const [_internalValue, setInternalValue] = React.useState<number>(value);
 
   const itemsList = [
     { id: 1, shortName: "C1", name: "Cocina 1 - L1" },

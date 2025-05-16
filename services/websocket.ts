@@ -34,7 +34,7 @@ export default function useWebSocket(pollId: string) {
           const message = JSON.parse(event.data);
 
           setData(message);
-        } catch (err) {
+        } catch {
           setError("Error al procesar el mensaje recibido");
         }
       };
@@ -58,7 +58,7 @@ export default function useWebSocket(pollId: string) {
         setError("Error en la conexión WebSocket");
         socket.close();
       };
-    } catch (error) {
+    } catch {
       setError("Error al crear la conexión WebSocket");
       setIsConnected(false);
     }

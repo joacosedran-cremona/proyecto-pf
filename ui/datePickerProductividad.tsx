@@ -3,23 +3,23 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 
 interface DatePickerProps {
-  selectClasses?: string;
   onDateChange: (start: string | null, end: string | null) => void;
   defaultStartDate?: string;
   defaultEndDate?: string;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
-  selectClasses,
   onDateChange,
   defaultStartDate,
   defaultEndDate,
 }) => {
   const { t } = useTranslation("botones");
-  const [startDate, setStartDate] = useState<string | null>(
+  const [_startDate, setStartDate] = useState<string | null>(
     defaultStartDate || null,
   );
-  const [endDate, setEndDate] = useState<string | null>(defaultEndDate || null);
+  const [_endDate, setEndDate] = useState<string | null>(
+    defaultEndDate || null,
+  );
 
   // Only set the initial values once, not on every defaultDate change
   useEffect(() => {
@@ -53,14 +53,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
       const endDateObj = convertToDate(range?.end);
 
       if (startDateObj && isNaN(startDateObj.getTime())) {
-        console.error("Invalid start date");
-
         return;
       }
 
       if (endDateObj && isNaN(endDateObj.getTime())) {
-        console.error("Invalid end date");
-
         return;
       }
 
@@ -74,9 +70,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       if (onDateChange) {
         onDateChange(formattedStart, formattedEnd);
       }
-    } catch (error) {
-      console.error("Error processing dates:", error);
-    }
+    } catch {}
   };
 
   return (

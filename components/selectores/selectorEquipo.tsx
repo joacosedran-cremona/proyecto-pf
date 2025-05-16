@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 interface SelectorProps {
   selectClasses?: string;
@@ -16,7 +15,6 @@ const Selector: React.FC<SelectorProps> = ({
   disabled = false,
   lineaSeleccionada = 15,
 }) => {
-  const { t } = useTranslation("selectores");
   const [selectedEquipo, setSelectedEquipo] = useState<string>("todos");
 
   const equiposLinea1 = [

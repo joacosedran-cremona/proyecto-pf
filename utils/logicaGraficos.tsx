@@ -47,7 +47,7 @@ export const transformData = (
     };
   }
 
-  const [info, detalles] = equipo;
+  const [_info, detalles] = equipo;
   const historial = detalles.historial || [];
 
   const getTimestamp = (dateStr: string) => {
@@ -86,17 +86,6 @@ export const transformData = (
     if (typeof item.niv_agua === "number" && !isNaN(item.niv_agua)) {
       nivAguaData.push({ x: tiempoRelativo, y: item.niv_agua });
     }
-  });
-
-  console.log("Datos procesados:", {
-    tempAguaData: tempAguaData.length,
-    tempProdData: tempProdData.length,
-    nivAguaData: nivAguaData.length,
-    primerDato: {
-      agua: tempAguaData[0]?.y,
-      prod: tempProdData[0]?.y,
-      niv: nivAguaData[0]?.y,
-    },
   });
 
   const chartData = {
@@ -139,9 +128,7 @@ export const transformData = (
 
   try {
     localStorage.setItem(`equipo-${equipoId}`, JSON.stringify(chartData));
-  } catch (error) {
-    console.warn("Error al guardar datos en localStorage:", error);
-  }
+  } catch {}
 
   return chartData;
 };

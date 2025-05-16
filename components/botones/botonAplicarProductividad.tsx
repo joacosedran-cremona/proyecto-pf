@@ -1,6 +1,5 @@
 import { Button } from "@heroui/react";
 import { FaSearch } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
 
 interface BotonAplicarProps {
   selectClasses?: string;
@@ -27,7 +26,6 @@ export default function BotonAplicar({
   dato_enviado,
   onApplyFilters,
 }: BotonAplicarProps) {
-  const { t } = useTranslation("botones");
   const isDisabled = !startDate || !endDate;
 
   const handleClick = () => {

@@ -126,7 +126,6 @@ export default function BotonPDF({
         position: "bottom-right",
       });
     } catch (error) {
-      console.error("Error al generar el PDF:", error);
       toast.error("Error", {
         description:
           error instanceof Error ? error.message : "Error al generar el PDF",

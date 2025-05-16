@@ -11,7 +11,7 @@ import TablaCiclos from "@/components/tablaciclos/tablaCiclos";
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
-const equipmentMapping: Record<string, string> = {
+const _equipmentMapping: Record<string, string> = {
   C1: "Cocina 1-L1",
   C2: "Cocina 2-L1",
   C3: "Cocina 3-L1",
@@ -105,7 +105,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
   const chartInstanceRef = useRef<Chart<"line"> | null>(null);
   const [data, setData] = useState<HistoricoData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
+  const [_selectedCicloId, _setSelectedCicloId] = useState<number | null>(null);
   const [showTable, setShowTable] = useState(showTableOnLoad);
   const [internalSelectedCicloId, setInternalSelectedCicloId] = useState<
     number | null
@@ -177,7 +177,6 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
           setData(jsonData);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
         setError(
           error instanceof Error ? error.message : "Error al cargar los datos",
         );
@@ -621,7 +620,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
           data.general &&
           Object.keys(data).length > 0 && (
             <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div
+              <button
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm"
                 onClick={handleTableClose}
               />

@@ -1,6 +1,5 @@
 //React
 import React, { useMemo, useState, useEffect } from "react";
-
 //MUI
 import {
   MaterialReactTable,
@@ -13,18 +12,14 @@ import { Box, Button, Typography, Menu, MenuItem } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"; // Importamos ícono para limpiar filtros
 import * as XLSX from "xlsx"; // Importamos la librería para Excel
-
 // HeroUI para DateRangePicker
 import { DateRangePicker } from "@heroui/react"; // Ajusta esta importación según la estructura real de HeroUI
-
 //PDF conversor
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
-
 //Idioma
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-
 // Importaciones adicionales necesarias
 import { ColumnFiltersState } from "@tanstack/react-table";
 
@@ -79,7 +74,7 @@ const highlightText = (text: string, filter: string): JSX.Element => {
         })}
       </>
     );
-  } catch (error) {
+  } catch {
     // Fallback en caso de error con la expresión regular
     return <>{text}</>;
   }
@@ -171,7 +166,7 @@ const Tabla: React.FC = () => {
             });
             setIsLoading(false);
           }
-        } catch (err) {
+        } catch {
           setError(t("noSePudieronObtenerDatos"));
           setIsLoading(false);
         }
@@ -185,7 +180,7 @@ const Tabla: React.FC = () => {
       return () => {
         socket.close();
       };
-    } catch (error) {
+    } catch {
       setError(t("error"));
       setIsLoading(false);
 
@@ -224,8 +219,7 @@ const Tabla: React.FC = () => {
 
           setData(convertedData);
           setError(null);
-        } catch (err) {
-          console.error("Error fetching data:", err);
+        } catch {
           setError(t("noSePudieronObtenerDatos"));
         } finally {
           setIsLoading(false);
@@ -255,7 +249,7 @@ const Tabla: React.FC = () => {
         const itemDate = new Date(item.time);
 
         return itemDate >= fromDate && itemDate <= toDate;
-      } catch (e) {
+      } catch {
         return false;
       }
     });
@@ -294,7 +288,7 @@ const Tabla: React.FC = () => {
         accessorKey: "description",
         header: t("descripcion"),
         size: 400,
-        Cell: ({ cell, row }) => {
+        Cell: ({ cell }) => {
           const value = cell.getValue<string>() || "";
           const filterValue = getFilterValue("description");
 
@@ -333,9 +327,7 @@ const Tabla: React.FC = () => {
             const date = new Date(row.time);
 
             return date.toISOString().slice(0, 16).replace("T", " ");
-          } catch (error) {
-            console.error("Error formateando fecha:", error);
-
+          } catch {
             return row.time || "";
           }
         },
@@ -349,7 +341,7 @@ const Tabla: React.FC = () => {
             const filterValue = getFilterValue("time");
 
             return highlightText(formattedDate, filterValue);
-          } catch (error) {
+          } catch {
             const value = cell.getValue<string>() || "";
             const filterValue = getFilterValue("time");
 
@@ -451,7 +443,6 @@ const Tabla: React.FC = () => {
       });
     } catch (error) {
       // Mostrar toast de error si algo falla
-      console.error("Error al generar el PDF:", error);
       toast.error("Error", {
         description:
           error instanceof Error ? error.message : "Error al generar el PDF",
@@ -502,7 +493,6 @@ const Tabla: React.FC = () => {
         position: "bottom-right",
       });
     } catch (error) {
-      console.error("Error al generar el Excel:", error);
       toast.error("Error", {
         description:
           error instanceof Error ? error.message : "Error al generar el Excel",

@@ -31,7 +31,7 @@ export default function Historico() {
   const [selectedType, setSelectedType] = useState<"cocina" | "enfriador">(
     "cocina",
   );
-  const [graphData, setGraphData] = useState<any>(null);
+  const [_graphData, _setGraphData] = useState<any>(null);
   const [tempSelectedValue, setTempSelectedValue] = useState(1);
   const [showGraphic, setShowGraphic] = useState(true);
   const [selectedCicloId, setSelectedCicloId] = useState<number | null>(null);
@@ -43,15 +43,6 @@ export default function Historico() {
     startDate: "2000-01-01",
     endDate: "2100-01-01",
   });
-
-  useEffect(() => {
-    console.log("🚀 Valores iniciales:", {
-      id: tempSelectedValue,
-      cicloId: selectedCicloId, // Agregar log del ciclo
-      fecha_inicio: tempDateRange.startDate,
-      fecha_fin: tempDateRange.endDate,
-    });
-  }, []);
 
   const handleDateChange = (
     startDate: string | null,
@@ -106,19 +97,12 @@ export default function Historico() {
           setSelectedId(tempSelectedValue);
           setSelectedType(equipmentType);
           setShowGraphic(false);
-        } else {
-          // No se encontraron ciclos
-          console.log("No se encontraron ciclos para el equipo seleccionado");
-          // Opcional: mostrar una notificación o mensaje al usuario
         }
       }
-    } catch (error) {
-      console.error("❌ Error al procesar los datos:", error);
-    }
+    } catch {}
   };
 
   const handleCicloSelect = (cicloId: number) => {
-    console.log("🎯 Ciclo seleccionado en Page:", cicloId);
     setSelectedCicloId(cicloId);
     setShowGraphic(true);
   };
@@ -147,10 +131,7 @@ export default function Historico() {
           );
 
           setSelectedCicloId(lastCiclo.id_ciclo);
-          console.log("🔄 Último ciclo encontrado:", lastCiclo.id_ciclo);
         }
-      } catch (error) {
-        console.error("Error fetching last ciclo:", error);
       } finally {
         setIsInitialLoad(false);
       }

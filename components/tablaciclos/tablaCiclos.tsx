@@ -38,7 +38,7 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
   const [ciclos, setCiclos] = useState<Ciclo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showTable, setShowTable] = useState(true);
+  const [_showTable, _setShowTable] = useState(true);
   // Inicializar selectedKeys con el ciclo actual si existe
   const [selectedKeys, setSelectedKeys] = useState(
     new Set(selectedCicloId ? [selectedCicloId.toString()] : []),
@@ -71,7 +71,6 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
         setCiclos(data);
         setError(null);
       } catch (error) {
-        console.error("Error:", error);
         setError(error instanceof Error ? error.message : "Error desconocido");
       } finally {
         setLoading(false);
@@ -117,10 +116,6 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
           );
 
           if (cicloSeleccionado && onCicloSelect) {
-            console.log(
-              "🎯 Ciclo seleccionado en Tabla:",
-              cicloSeleccionado.id_ciclo,
-            );
             onCicloSelect(cicloSeleccionado);
           }
         }}

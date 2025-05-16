@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 interface SelectorProps {
   selectClasses?: string;
@@ -12,7 +11,6 @@ const Selector: React.FC<SelectorProps> = ({
   selectClasses,
   onLineaChange,
 }) => {
-  const { t } = useTranslation("selectores");
   const [selectedLinea, setSelectedLinea] = useState<number>(3);
 
   const lineaList = [
