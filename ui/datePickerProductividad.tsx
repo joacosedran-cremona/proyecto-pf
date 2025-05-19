@@ -21,14 +21,22 @@ const DatePicker: React.FC<DatePickerProps> = ({
     defaultEndDate || null,
   );
 
-  // Only set the initial values once, not on every defaultDate change
+  // Set default date (today) when component mounts if no defaults provided
   useEffect(() => {
     if (defaultStartDate && defaultEndDate) {
-      // Initialize with defaults, but don't call onDateChange here
       setStartDate(defaultStartDate);
       setEndDate(defaultEndDate);
+    } else {
+      const today = new Date();
+      const formattedToday = formatToYYYYMMDD(today);
+
+      setStartDate(formattedToday);
+      setEndDate(formattedToday);
+      if (onDateChange) {
+        onDateChange(formattedToday, formattedToday);
+      }
     }
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   const convertToDate = (temporalObj: any): Date | null => {
     if (!temporalObj) return null;
@@ -47,16 +55,42 @@ const DatePicker: React.FC<DatePickerProps> = ({
     return date.toISOString().split("T")[0];
   };
 
-  const handleDateChange = (range: { start: any; end: any }) => {
+  const handleDateChange = (range: any) => {
     try {
-      const startDateObj = convertToDate(range?.start);
-      const endDateObj = convertToDate(range?.end);
+      // Si range es null, usar la fecha actual
+      if (!range) {
+        const today = new Date();
+        const formattedToday = formatToYYYYMMDD(today);
 
-      if (startDateObj && isNaN(startDateObj.getTime())) {
+        setStartDate(formattedToday);
+
+        setEndDate(formattedToday);
+        if (onDateChange) {
+          onDateChange(formattedToday, formattedToday);
+        }
+
         return;
       }
 
-      if (endDateObj && isNaN(endDateObj.getTime())) {
+      const startDateObj = convertToDate(range.start);
+      const endDateObj = convertToDate(range.end);
+
+      // Si alguna fecha no es válida, usar la fecha actual
+      if (
+        !startDateObj ||
+        !endDateObj ||
+        isNaN(startDateObj.getTime()) ||
+        isNaN(endDateObj.getTime())
+      ) {
+        const today = new Date();
+        const formattedToday = formatToYYYYMMDD(today);
+
+        setStartDate(formattedToday);
+        setEndDate(formattedToday);
+        if (onDateChange) {
+          onDateChange(formattedToday, formattedToday);
+        }
+
         return;
       }
 
@@ -70,17 +104,20 @@ const DatePicker: React.FC<DatePickerProps> = ({
       if (onDateChange) {
         onDateChange(formattedStart, formattedEnd);
       }
-    } catch {}
+    } catch {
+      // Si ocurre un error, usar la fecha actual
+      const today = new Date();
+      const formattedToday = formatToYYYYMMDD(today);
+
+      setStartDate(formattedToday);
+      setEndDate(formattedToday);
+      if (onDateChange) {
+        onDateChange(formattedToday, formattedToday);
+      }
+    }
   };
 
-  return (
-    <DateRangePicker
-      label={t("fecha")}
-      onChange={(range) => handleDateChange(range)}
-      // You may need to add a value prop based on startDate and endDate
-      // if your DateRangePicker component supports controlled behavior
-    />
-  );
+  return <DateRangePicker label={t("fecha")} onChange={handleDateChange} />;
 };
 
 export default DatePicker;

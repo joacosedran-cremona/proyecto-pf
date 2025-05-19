@@ -1,8 +1,8 @@
 interface Paso {
   id_historial: number;
   tiempo: string;
-  temp_agua: number;
-  temp_prod: number; // Añadir este campo
+  temp_agua: number | "N/A";
+  temp_prod: number | "N/A";
   temp_ingreso?: number;
   niv_agua: number;
   estado: string;
@@ -90,6 +90,7 @@ export const transformData = (
 
     if (
       paso.temp_agua !== null &&
+      paso.temp_agua !== undefined &&
       paso.temp_agua !== "N/A" &&
       typeof paso.temp_agua === "number"
     ) {
@@ -99,6 +100,7 @@ export const transformData = (
     // Usar temp_prod directamente del historial
     if (
       paso.temp_prod !== null &&
+      paso.temp_prod !== undefined &&
       paso.temp_prod !== "N/A" &&
       typeof paso.temp_prod === "number"
     ) {

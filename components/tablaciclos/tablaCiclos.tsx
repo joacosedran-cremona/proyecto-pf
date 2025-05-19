@@ -106,13 +106,16 @@ const TablaCiclos: React.FC<TablaCiclosProps> = ({
         selectedKeys={selectedKeys}
         selectionMode="single"
         onSelectionChange={(keys) => {
-          const selection = new Set(keys);
+          // Convertir las claves a string antes de asignarlas al estado
+          const stringKeys = new Set(
+            Array.from(keys).map((key) => key.toString()),
+          );
 
-          setSelectedKeys(selection);
+          setSelectedKeys(stringKeys);
 
-          const selectedId = Array.from(selection)[0];
+          const selectedId = Array.from(stringKeys)[0];
           const cicloSeleccionado = ciclos.find(
-            (c) => c.id_ciclo.toString() === selectedId?.toString(),
+            (c) => c.id_ciclo.toString() === selectedId,
           );
 
           if (cicloSeleccionado && onCicloSelect) {

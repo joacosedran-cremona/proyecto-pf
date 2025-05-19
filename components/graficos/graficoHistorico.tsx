@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Chart, registerables, ChartConfiguration, Plugin } from "chart.js";
+import {
+  Chart,
+  registerables,
+  ChartConfiguration,
+  Plugin,
+  TooltipItem,
+  ScriptableContext,
+} from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 import { Button, Spinner } from "@heroui/react";
 import "chartjs-adapter-date-fns";
@@ -88,6 +95,12 @@ interface HistoricoData {
     fecha_inicio: string;
     fecha_fin: string;
     receta: string;
+    temp_producto_max: number; // Añadido
+    temp_producto_min: number; // Añadido
+    temp_agua_max: number; // Añadido
+    temp_agua_min: number; // Añadido
+    nivel_agua_max: number; // Añadido
+    nivel_agua_min: number; // Añadido
   };
 }
 
@@ -252,7 +265,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
       y: item.valor,
     }));
 
-    const config: ChartConfiguration = {
+    const config: ChartConfiguration<"line"> = {
       type: "line",
       data: {
         datasets: [
@@ -280,7 +293,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
             label: t("datos.nivelAgua"),
             data: nivelAgua,
             borderColor: "rgb(255, 165, 0)",
-            backgroundColor: (context) => {
+            backgroundColor: (context: ScriptableContext<"line">) => {
               if (!context.chart.chartArea) {
                 return "rgba(255, 165, 0, 0.5)";
               }
@@ -329,7 +342,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
           },
           tooltip: {
             callbacks: {
-              title: (context) => {
+              title: (context: TooltipItem<"line">[]) => {
                 const date = new Date(context[0].parsed.x);
                 const hours = date.getHours();
                 const minutes = date.getMinutes();
@@ -338,7 +351,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
 
                 return `${t("tooltip")}: ${timeFormatted}`;
               },
-              label: (context) => {
+              label: (context: TooltipItem<"line">) => {
                 const datasetLabel = context.dataset.label || "";
                 const value = context.parsed.y;
                 const yAxisID = context.dataset.yAxisID;
@@ -428,7 +441,7 @@ const GraficoHistorico: React.FC<GraficoProps> = ({
       plugins: [plugin],
     };
 
-    chartInstanceRef.current = new Chart(ctx, config);
+    chartInstanceRef.current = new Chart(ctx, config) as Chart<"line">;
 
     return () => {
       if (chartInstanceRef.current) {

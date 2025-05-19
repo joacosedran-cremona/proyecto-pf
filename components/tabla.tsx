@@ -8,12 +8,18 @@ import {
   MRT_Row,
 } from "material-react-table";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { Box, Button, Typography, Menu, MenuItem } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Menu,
+  MenuItem,
+  TextField,
+  Stack,
+} from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff"; // Importamos ícono para limpiar filtros
 import * as XLSX from "xlsx"; // Importamos la librería para Excel
-// HeroUI para DateRangePicker
-import { DateRangePicker } from "@heroui/react"; // Ajusta esta importación según la estructura real de HeroUI
 //PDF conversor
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -25,6 +31,7 @@ import { ColumnFiltersState } from "@tanstack/react-table";
 
 import logoDataURL from "../public/cremonabase64";
 
+// Definimos la interfaz Alerta (descomentada)
 export interface Alerta {
   key: string;
   description: string;
@@ -103,6 +110,78 @@ const Tabla: React.FC = () => {
   const [exportMenuAnchorEl, setExportMenuAnchorEl] =
     useState<null | HTMLElement>(null);
   const exportMenuOpen = Boolean(exportMenuAnchorEl);
+
+  // Implementamos el componente InlineDateRangePicker con elementos nativos
+  const InlineDateRangePicker = () => {
+    return (
+      <Stack alignItems="center" direction="row" spacing={2}>
+        <TextField
+          InputLabelProps={{
+            shrink: true,
+          }}
+          label={t("fechaInicio")}
+          size="small"
+          sx={{
+            "& .MuiInputBase-root": { color: "#d9d9d9" },
+            "& .MuiInputLabel-root": { color: "#d9d9d9" },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#515151",
+            },
+            "& .MuiSvgIcon-root": { color: "#d9d9d9" },
+            minWidth: "150px",
+          }}
+          type="date"
+          value={
+            dateRange.from
+              ? new Date(dateRange.from).toISOString().split("T")[0]
+              : ""
+          }
+          onChange={(e) => {
+            const newDate = e.target.value
+              ? new Date(e.target.value)
+              : undefined;
+
+            setDateRange({
+              ...dateRange,
+              from: newDate,
+            });
+          }}
+        />
+        <TextField
+          InputLabelProps={{
+            shrink: true,
+          }}
+          label={t("fechaFin")}
+          size="small"
+          sx={{
+            "& .MuiInputBase-root": { color: "#d9d9d9" },
+            "& .MuiInputLabel-root": { color: "#d9d9d9" },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#515151",
+            },
+            "& .MuiSvgIcon-root": { color: "#d9d9d9" },
+            minWidth: "150px",
+          }}
+          type="date"
+          value={
+            dateRange.to
+              ? new Date(dateRange.to).toISOString().split("T")[0]
+              : ""
+          }
+          onChange={(e) => {
+            const newDate = e.target.value
+              ? new Date(e.target.value)
+              : undefined;
+
+            setDateRange({
+              ...dateRange,
+              to: newDate,
+            });
+          }}
+        />
+      </Stack>
+    );
+  };
 
   const handleExportMenuClick = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -232,30 +311,44 @@ const Tabla: React.FC = () => {
 
   // Función para aplicar filtro de rango de fechas
   useEffect(() => {
-    if (data.length === 0 || !dateRange.from) {
+    if (data.length === 0) {
       setDateFilteredData(data);
 
       return;
     }
 
-    const fromDate = dateRange.from;
-    const toDate = dateRange.to || new Date();
+    // Si no hay fechas seleccionadas, mostrar todos los datos
+    if (!dateRange.from && !dateRange.to) {
+      setDateFilteredData(data);
 
-    // Aseguramos que toDate sea el final del día
-    toDate.setHours(23, 59, 59, 999);
+      return;
+    }
 
-    const filtered = data.filter((item) => {
-      try {
-        const itemDate = new Date(item.time);
+    try {
+      const fromDate = dateRange.from ? new Date(dateRange.from) : new Date(0); // fecha mínima si no hay from
+      const toDate = dateRange.to ? new Date(dateRange.to) : new Date(); // fecha actual si no hay to
 
-        return itemDate >= fromDate && itemDate <= toDate;
-      } catch {
-        return false;
+      // Aseguramos que toDate sea el final del día para incluir todo el día seleccionado
+      if (dateRange.to) {
+        toDate.setHours(23, 59, 59, 999);
       }
-    });
 
-    setDateFilteredData(filtered);
-  }, [data, dateRange]);
+      const filtered = data.filter((item) => {
+        try {
+          const itemDate = new Date(item.time);
+
+          return itemDate >= fromDate && itemDate <= toDate;
+        } catch {
+          return false;
+        }
+      });
+
+      setDateFilteredData(filtered);
+    } catch {
+      // En caso de error, mostrar todos los datos
+      setDateFilteredData(data);
+    }
+  }, [data, dateRange.from, dateRange.to]);
 
   // Función para limpiar todos los filtros
   const handleClearFilters = () => {
@@ -837,7 +930,7 @@ const Tabla: React.FC = () => {
             </MenuItem>
           </Menu>
 
-          {/* DateRangePicker de HeroUI */}
+          {/* Selector de rango de fechas integrado */}
           <Box
             sx={{
               minWidth: "300px",
@@ -846,16 +939,7 @@ const Tabla: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <DateRangePicker
-              className="bg-[#1e1e1e] text-[#d9d9d9] border-[#515151] rounded-md"
-              locale={{
-                startDate: t("fechaInicio"),
-                endDate: t("fechaFin"),
-                selectDate: t("seleccionarFecha"),
-              }}
-              value={dateRange}
-              onChange={setDateRange}
-            />
+            <InlineDateRangePicker />
           </Box>
 
           {/* Botón para limpiar filtros */}

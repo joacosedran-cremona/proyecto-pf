@@ -30,10 +30,21 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
     return date.toISOString().split("T")[0];
   };
 
-  const handleDateChange = (range: { start: any; end: any }) => {
+  // Simplificamos la firma para evitar errores de tipos
+  const handleDateChange = (range: any) => {
+    // Manejar explícitamente el caso null
+    if (!range) {
+      setDateRange({ startDate: null, endDate: null });
+      if (onDateChange) {
+        onDateChange(null, null);
+      }
+
+      return;
+    }
+
     try {
-      const startDate = convertToDate(range?.start);
-      const endDate = convertToDate(range?.end);
+      const startDate = convertToDate(range.start);
+      const endDate = convertToDate(range.end);
 
       if (startDate && isNaN(startDate.getTime())) {
         return;
@@ -58,7 +69,7 @@ export default function DatePicker({ onDateChange }: DatePickerProps) {
     <DateRangePicker
       className="h-[50px]"
       label={t("fecha")}
-      onChange={(range) => handleDateChange(range)}
+      onChange={handleDateChange}
     />
   );
 }

@@ -115,7 +115,6 @@ const FiltroPeriodo: React.FC<FiltroPeriodoProps> = ({ onApplyFilters }) => {
         <DatePicker
           defaultEndDate={today}
           defaultStartDate={lastWeekFormatted}
-          selectClasses="h-1/4"
           onDateChange={handleDateChange}
         />
         <ButtonAplicar

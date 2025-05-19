@@ -2,10 +2,17 @@
 
 //React
 import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation"; // Agregar este import
+import { useRouter } from "next/navigation";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 //ChartJs
-import { Chart, registerables, ChartConfiguration, Plugin } from "chart.js";
+import {
+  Chart,
+  registerables,
+  ChartConfiguration,
+  Plugin,
+  ChartDataset,
+  ScriptableContext,
+} from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 //Context y Funciones
 import { useTranslation } from "react-i18next";
@@ -13,13 +20,11 @@ import { useTranslation } from "react-i18next";
 import { useLinea } from "@/context/LineaContext";
 import { transformData } from "@/utils/logicaGraficosLinea";
 
-//HeroUI
-
-//Idioma
-
+// Registrar los plugins
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
 
+// Mantener tus interfaces originales
 interface InfoEquipo {
   tipo: "COCINA" | "ENFRIADOR";
   id: number;
@@ -120,11 +125,20 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
         },
       };
 
+      // Usar aserciones de tipo para pasar los datos a transformData
+      // Esto le dice a TypeScript que confíe en que los datos son compatibles
       const chartData = transformData(
         id,
-        lineaActual?.cocinas || [],
-        lineaActual?.enfriadores || [],
+        (lineaActual?.cocinas as any) || [],
+        (lineaActual?.enfriadores as any) || [],
       );
+
+      // Configurar tensión para líneas curvas
+      if (chartData && chartData.datasets) {
+        chartData.datasets.forEach((dataset: ChartDataset<"line">) => {
+          dataset.tension = 0.4; // Esto creará curvas suaves
+        });
+      }
 
       if (chartRef.current) {
         if (chartInstanceRef.current) {
@@ -137,41 +151,46 @@ const GraficoMonitoreo: React.FC<{ id: number }> = ({ id }) => {
           const config: ChartConfiguration<"line"> = {
             type: "line",
             data: {
-              datasets: chartData.datasets.map((dataset) => {
-                if (dataset.label === "Nivel Agua") {
-                  return {
+              datasets: chartData.datasets.map(
+                (dataset: ChartDataset<"line">) => {
+                  const baseConfig = {
                     ...dataset,
                     pointRadius: 2,
                     pointHoverRadius: 4,
-                    fill: true, // Habilitar relleno solo para nivel de agua
-                    backgroundColor: (context) => {
-                      if (!context.chart.chartArea) {
-                        return dataset.borderColor;
-                      }
-
-                      const { ctx, chartArea } = context.chart;
-                      const gradient = ctx.createLinearGradient(
-                        0,
-                        chartArea.bottom,
-                        0,
-                        chartArea.top,
-                      );
-
-                      gradient.addColorStop(0, "rgba(255, 165, 0, 0)");
-                      gradient.addColorStop(1, "rgba(255, 165, 0, 0.3)");
-
-                      return gradient;
-                    },
+                    tension: 0.4, // Mantener esta propiedad en cada dataset
                   };
-                } else {
-                  return {
-                    ...dataset,
-                    pointRadius: 2,
-                    pointHoverRadius: 4,
-                    fill: false, // Mantener las demás líneas sin relleno
-                  };
-                }
-              }),
+
+                  if (dataset.label === "Nivel Agua") {
+                    return {
+                      ...baseConfig,
+                      fill: true,
+                      backgroundColor: (context: ScriptableContext<"line">) => {
+                        if (!context.chart.chartArea) {
+                          return dataset.borderColor;
+                        }
+
+                        const { ctx, chartArea } = context.chart;
+                        const gradient = ctx.createLinearGradient(
+                          0,
+                          chartArea.bottom,
+                          0,
+                          chartArea.top,
+                        );
+
+                        gradient.addColorStop(0, "rgba(255, 165, 0, 0)");
+                        gradient.addColorStop(1, "rgba(255, 165, 0, 0.3)");
+
+                        return gradient;
+                      },
+                    };
+                  } else {
+                    return {
+                      ...baseConfig,
+                      fill: false,
+                    };
+                  }
+                },
+              ),
             },
             options: {
               interaction: {

@@ -16,7 +16,7 @@
   "noExistenDatos": "No data available",
   "fechaInicio": "START DATE",
   "fechaFin": "END DATE",
-  "seleccionarFecha": "SELECT DATE",
+  "seleccionarFechas": "SELECT DATE",
   "limpiarFiltros": "CLEAR",
   "filtrosLimpiados": "Filters Cleared"
 }
