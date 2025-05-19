@@ -3,19 +3,23 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 //ChartJs
-import { Chart, registerables, ChartConfiguration, Plugin } from "chart.js";
+import {
+  Chart,
+  registerables,
+  ChartConfiguration,
+  Plugin,
+  ChartDataset,
+  ScriptableContext,
+  TooltipItem,
+} from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
-//Context y Funciones
+// Context y Funciones
 import { Button } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
 import { useWebSocketContext } from "@/context/WebSocketContext";
 import { transformData } from "@/utils/logicaGraficos";
 import { clearStoredData } from "@/utils/logicaGraficos";
-
-//HeroUI
-
-//Idioma
 
 Chart.register(...registerables);
 Chart.register(zoomPlugin);
@@ -35,6 +39,12 @@ interface InfoEquipo {
   num_cocina?: number;
   num_enfriador?: number;
 }
+
+// Usar una intersección de tipos en lugar de extensión
+type CustomChartDataset = ChartDataset<"line", any[]> & {
+  yAxisID?: string;
+  borderColor?: string | CanvasGradient;
+};
 
 const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
   contextType,
@@ -131,7 +141,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
               };
 
               ctx.font = "14px Arial";
-              const text = `${value.y.toFixed(1)}${dataset.yAxisID === "y1" ? " mm" : "°C"}`;
+              const text = `${value.y.toFixed(1)}${(dataset as CustomChartDataset).yAxisID === "y1" ? " mm" : "°C"}`;
               const textWidth = ctx.measureText(text).width;
               const padding = 4;
               const labelHeight = 20;
@@ -195,7 +205,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
               x: number;
               y: number;
             };
-            const text = `${value.y.toFixed(1)}${dataset.yAxisID === "y1" ? " mm" : "°C"}`;
+            const text = `${value.y.toFixed(1)}${(dataset as CustomChartDataset).yAxisID === "y1" ? " mm" : "°C"}`;
 
             // Dibujar el fondo
             ctx.fillStyle = dataset.borderColor as string;
@@ -255,41 +265,43 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
 
         if (ctx) {
           // Modificar los datasets para añadir el gradient fill solo al nivel de agua
-          const modifiedDatasets = chartData.datasets.map((dataset) => {
-            if (dataset.label === "Nivel Agua") {
-              return {
-                ...dataset,
-                pointRadius: 0,
-                pointHoverRadius: 3,
-                fill: true, // Habilitar el relleno solo para este dataset
-                backgroundColor: (context) => {
-                  if (!context.chart.chartArea) {
-                    return dataset.borderColor;
-                  }
+          const modifiedDatasets = chartData.datasets.map(
+            (dataset: ChartDataset<"line", any[]>) => {
+              if (dataset.label === "Nivel Agua") {
+                return {
+                  ...dataset,
+                  pointRadius: 0,
+                  pointHoverRadius: 3,
+                  fill: true, // Habilitar el relleno solo para este dataset
+                  backgroundColor: (context: ScriptableContext<"line">) => {
+                    if (!context.chart.chartArea) {
+                      return dataset.borderColor;
+                    }
 
-                  const { ctx, chartArea } = context.chart;
-                  const gradient = ctx.createLinearGradient(
-                    0,
-                    chartArea.bottom,
-                    0,
-                    chartArea.top,
-                  );
+                    const { ctx, chartArea } = context.chart;
+                    const gradient = ctx.createLinearGradient(
+                      0,
+                      chartArea.bottom,
+                      0,
+                      chartArea.top,
+                    );
 
-                  gradient.addColorStop(0, "rgba(255, 165, 0, 0)");
-                  gradient.addColorStop(1, "rgba(255, 165, 0, 0.3)");
+                    gradient.addColorStop(0, "rgba(255, 165, 0, 0)");
+                    gradient.addColorStop(1, "rgba(255, 165, 0, 0.3)");
 
-                  return gradient;
-                },
-              };
-            } else {
-              return {
-                ...dataset,
-                pointRadius: 0,
-                pointHoverRadius: 3,
-                fill: false, // Mantener las otras líneas sin relleno
-              };
-            }
-          });
+                    return gradient;
+                  },
+                };
+              } else {
+                return {
+                  ...dataset,
+                  pointRadius: 0,
+                  pointHoverRadius: 3,
+                  fill: false, // Mantener las otras líneas sin relleno
+                };
+              }
+            },
+          );
 
           const config: ChartConfiguration<"line"> = {
             type: "line",
@@ -354,7 +366,7 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
                 },
                 tooltip: {
                   callbacks: {
-                    title: (context) => {
+                    title: (context: TooltipItem<"line">[]) => {
                       const totalSeconds = Math.floor(context[0].parsed.x);
                       const hours = Math.floor(totalSeconds / 3600);
                       const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -363,10 +375,11 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
 
                       return `${t("tooltip")}: ${timeFormatted}`;
                     },
-                    label: (context) => {
+                    label: (context: TooltipItem<"line">) => {
                       const datasetLabel = context.dataset.label || "";
                       const value = context.parsed.y;
-                      const yAxisID = context.dataset.yAxisID;
+                      const yAxisID = (context.dataset as CustomChartDataset)
+                        .yAxisID;
 
                       return `${datasetLabel}: ${value}${yAxisID === "y1" ? " mm" : "°C"}`;
                     },
@@ -525,23 +538,6 @@ const Grafico: React.FC<{ contextType: "cocinas" | "enfriadores" }> = ({
       </div>
     );
   }
-  /*
-    if (equipo.estado === 'FINALIZADO') {
-        const nombreEquipo = contextType === 'cocinas' && 'num_cocina' in equipo
-            ? `${t('equipo.cocina')} ${equipo.num_cocina}`
-            : contextType === 'enfriadores' && 'num_enfriador' in equipo
-            ? `${t('equipo.enfriador')} ${equipo.num_enfriador}`
-            : t('equipo.desconocido');
-
-        return (
-            <div className="bg-midGrey p-[20px] h-[100%] w-[100%] rounded-md flex flex-col items-center justify-center text-white gap-[20px]">
-                <AiOutlineExclamationCircle className="w-auto h-1/4" />
-                <p className="text-3xl text-white">{nombreEquipo} - {t('finalizado.titulo')}</p>
-                <p className="text-xl text-white">{t('finalizado.mensaje')}</p>
-            </div>
-        );
-    }
-*/
   if (equipo.estado === "FALLA") {
     const nombreEquipo =
       contextType === "cocinas" && "num_cocina" in equipo

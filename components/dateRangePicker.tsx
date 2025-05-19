@@ -1,6 +1,12 @@
 import { DateRangePicker } from "@heroui/react";
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { CalendarDate } from "@internationalized/date";
+
+// Definimos nuestro propio tipo para el rango de fechas
+interface DateRange {
+  start: CalendarDate;
+  end: CalendarDate;
+}
 
 interface DatePickerProps {
   selectClasses?: string;
@@ -11,11 +17,34 @@ export default function DatePicker({
   selectClasses,
   onDateChange,
 }: DatePickerProps) {
-  const { t } = useTranslation("botones");
-  const [dateRange, setDateRange] = useState<{
-    startDate: Date | null;
-    endDate: Date | null;
-  }>({ startDate: null, endDate: null });
+  // Usamos nuestro tipo personalizado DateRange
+  const [dateRange, setDateRange] = useState<DateRange | null>(null);
+
+  // Establecer el día actual como valor predeterminado al cargar
+  useEffect(() => {
+    // Crear una fecha actual usando CalendarDate con los parámetros correctos
+    const today = new CalendarDate(
+      new Date().getFullYear(),
+      new Date().getMonth() + 1,
+      new Date().getDate(),
+    );
+
+    // Crear un rango donde inicio y fin son el día actual
+    const initialRange: DateRange = {
+      start: today,
+      end: today,
+    };
+
+    setDateRange(initialRange);
+
+    // También notificar al componente padre sobre este valor inicial
+    if (onDateChange) {
+      const currentDate = new Date();
+      const formattedDate = formatToYYYYMMDD(currentDate);
+
+      onDateChange(formattedDate, formattedDate);
+    }
+  }, [onDateChange]);
 
   const convertToDate = (temporalObj: any): Date | null => {
     if (!temporalObj) return null;
@@ -34,10 +63,15 @@ export default function DatePicker({
     return date.toISOString().split("T")[0];
   };
 
-  const handleDateChange = (range: { start: any; end: any }) => {
+  // Corregir la firma de la función para usar nuestro tipo DateRange
+  const handleDateChange = (range: DateRange | null) => {
+    if (!range) return;
+
     try {
-      const startDate = convertToDate(range?.start);
-      const endDate = convertToDate(range?.end);
+      setDateRange(range);
+
+      const startDate = convertToDate(range.start);
+      const endDate = convertToDate(range.end);
 
       if (startDate && isNaN(startDate.getTime())) {
         return;
@@ -46,8 +80,6 @@ export default function DatePicker({
       if (endDate && isNaN(endDate.getTime())) {
         return;
       }
-
-      setDateRange({ startDate, endDate });
 
       const formattedStart = formatToYYYYMMDD(startDate);
       const formattedEnd = formatToYYYYMMDD(endDate);
@@ -78,10 +110,9 @@ export default function DatePicker({
           },
         }}
         className={selectClasses}
-        placeholder={t("fecha")}
         size="lg"
         value={dateRange}
-        onChange={(range) => handleDateChange(range)}
+        onChange={handleDateChange}
       />
     </div>
   );
