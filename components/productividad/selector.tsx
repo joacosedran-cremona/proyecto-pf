@@ -18,7 +18,12 @@ const Selector: React.FC = () => {
                 hover:text-white transition-colors cursor-pointer
             "
       value={lineaSeleccionada}
-      onChange={(e) => setLineaSeleccionada(Number(e.target.value))}
+      onChange={(e) => {
+        // Convertimos el valor numérico al tipo esperado por LineaId
+        const value = Number(e.target.value);
+
+        setLineaSeleccionada(value as any); // Usamos type assertion para convertir al tipo esperado
+      }}
     >
       {lineaList.map((linea) => (
         <option

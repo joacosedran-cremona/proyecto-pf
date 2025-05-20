@@ -45,8 +45,8 @@ interface FilterData {
   endDate: string | null;
   lineaId: number;
   equipoId: number;
-  dato_enviado: number;
-  isUserInitiated?: boolean; // Add this flag
+  dato_enviado?: number;
+  isUserInitiated?: boolean;
 }
 
 const Productividad = () => {
@@ -71,14 +71,13 @@ const Productividad = () => {
 
   useEffect(() => {
     if (isInitialLoad) {
-      // Hacer la consulta inicial con los valores por defecto
       handleApplyFilters({
         startDate: lastWeekFormatted,
         endDate: today,
         lineaId: 0,
         equipoId: 30,
         dato_enviado: 0,
-        isUserInitiated: false, // Mark this as NOT user initiated
+        isUserInitiated: false,
       });
       setIsInitialLoad(false);
     }
@@ -90,7 +89,7 @@ const Productividad = () => {
     try {
       const formattedStartDate = filterData.startDate.split("T")[0];
       const formattedEndDate = filterData.endDate.split("T")[0];
-      const dato = filterData.dato_enviado || 0;
+      const dato = filterData.dato_enviado ?? 0; // Usar el operador nullish coalescing para proporcionar un valor por defecto
 
       const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost";
       const port = process.env.NEXT_PUBLIC_WS_PORT || "8000";

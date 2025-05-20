@@ -1,3 +1,4 @@
+"use client";
 //React
 import React, { useMemo, useState, useEffect } from "react";
 //MUI

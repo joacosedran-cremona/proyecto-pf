@@ -4,6 +4,7 @@
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 import Selector from "./selectores/selectorEquipos";
 import Grafico from "./graficos/grafico";
@@ -28,6 +29,7 @@ export default function EquipoPage({ type }: EquipoPageProps) {
   const searchParams = useSearchParams();
   const { cocinas } = useCocinaContext();
   const { enfriadores } = useEnfriadorContext();
+  const router = useRouter();
 
   // Obtener ID del equipo seleccionado
   const currentId =
@@ -151,10 +153,7 @@ export default function EquipoPage({ type }: EquipoPageProps) {
   }, [equipo, isCocina, t]);
 
   const handleSelectionChange = (newId: number) => {
-    const searchParams = new URLSearchParams(window.location.search);
-
-    searchParams.set("id", String(newId));
-    window.history.pushState(null, "", `?${searchParams.toString()}`);
+    router.push(`?id=${newId}`);
   };
 
   const formattedDisplayData = (value: string | number, unit?: string) => {

@@ -1,5 +1,7 @@
 "use client";
-import Tabla from "@/components/tabla";
+import dynamic from "next/dynamic";
+
+const Tabla = dynamic(() => import("@/components/tabla"), { ssr: false });
 
 export default function Home() {
   return (

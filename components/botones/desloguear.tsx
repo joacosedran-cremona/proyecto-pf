@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { VscAccount } from "react-icons/vsc";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 interface DesloguearProps {
   _username?: string;
@@ -12,6 +13,7 @@ const Desloguear: React.FC<DesloguearProps> = ({ _username = "Usuario" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("header");
+  const router = useRouter();
 
   // Cerrar dropdown cuando se hace click fuera
   useEffect(() => {
@@ -30,7 +32,7 @@ const Desloguear: React.FC<DesloguearProps> = ({ _username = "Usuario" }) => {
   }, []);
 
   const handleLogout = () => {
-    window.location.href = "/login";
+    router.push("/login");
   };
 
   return (
