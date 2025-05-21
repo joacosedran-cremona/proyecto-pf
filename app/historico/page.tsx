@@ -1,14 +1,35 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-import GraficoHistorico from "@/components/graficos/graficoHistorico";
-import Productividad from "@/components/productividad/productividad";
-import Selector from "@/components/selectores/selectorHistorico";
-import DatePicker from "@/ui/datePicker";
-import BotonInforme from "@/components/botones/botonInforme";
-import BotonAplicar from "@/components/botones/botonAplicar";
+const GraficoHistorico = dynamic(
+  () => import("@/components/graficos/graficoHistorico"),
+  { ssr: false },
+);
+
+const Productividad = dynamic(
+  () => import("@/components/productividad/productividad"),
+  { ssr: false },
+);
+
+const Selector = dynamic(
+  () => import("@/components/selectores/selectorHistorico"),
+  { ssr: false },
+);
+
+const DatePicker = dynamic(() => import("@/ui/datePicker"), { ssr: false });
+
+const BotonInforme = dynamic(
+  () => import("@/components/botones/botonInforme"),
+  { ssr: false },
+);
+
+const BotonAplicar = dynamic(
+  () => import("@/components/botones/botonAplicar"),
+  { ssr: false },
+);
 
 function getEquipmentDisplayName(id: number, type: "cocina" | "enfriador") {
   // Determinar el sufijo L1/L2 correctamente

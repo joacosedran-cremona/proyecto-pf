@@ -195,7 +195,12 @@ const Tabla: React.FC = () => {
   };
 
   // Configuración del WebSocket
-  const wsUrl = `ws://${process.env.NEXT_PUBLIC_WS_HOST || "localhost"}:${process.env.NEXT_PUBLIC_WS_PORT || "8001"}/ws/datos`;
+  // Ajustar protocolo/hospedaje en producción
+  const isSecure = window.location.protocol === "https:";
+  const wsProtocol = isSecure ? "wss:" : "ws:";
+  const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost";
+  const port = process.env.NEXT_PUBLIC_WS_PORT || "8001";
+  const wsUrl = `${wsProtocol}//${host}:${port}/ws`;
 
   const connectWebSocket = () => {
     setIsLoading(true);
