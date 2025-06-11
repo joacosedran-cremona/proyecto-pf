@@ -1244,7 +1244,7 @@
           "tiempo": 1,
           "temp_agua": 2,
           "temp_ingreso": 7,
-          "estado": "OPERATIVO"
+          "estado": ""
         },
         {
           "id": 32,
